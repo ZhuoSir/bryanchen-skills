@@ -15,7 +15,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from mail_lib import imap_conn, load_config, fail
+from mail_lib import imap_conn, load_config, imap_utf7_decode, imap_utf7_encode, fail
 
 ACTIONS = ("mark-read", "mark-unread", "flag", "unflag", "move", "delete", "mkdir")
 TRASH_CANDIDATES = ("Trash", "Deleted Messages", "Deleted", "已删除", "垃圾邮件")
@@ -29,7 +29,7 @@ def find_trash(conn):
             if not line:
                 continue
             s = line.decode("utf-8", errors="replace") if isinstance(line, bytes) else line
-            names.append(s.rsplit(' "', 1)[-1].strip('"'))
+            names.append(imap_utf7_decode(s.rsplit(' "', 1)[-1].strip('"')))
         low = {n.lower(): n for n in names}
         for cand in TRASH_CANDIDATES:
             if cand.lower() in low:
@@ -51,7 +51,7 @@ def main():
         if not args.target:
             fail("mkdir 需要 --target 指定文件夹名")
         conn = imap_conn(cfg)
-        typ, resp = conn.create(args.target)
+        typ, resp = conn.create(f'"{imap_utf7_encode(args.target)}"')
         conn.logout()
         if typ != "OK":
             fail(f"创建文件夹失败: {resp}")
@@ -84,7 +84,7 @@ def main():
         if not args.target:
             conn.logout()
             fail("move 需要 --target 指定目标文件夹")
-        typ, resp = conn.uid("COPY", uid_set, args.target)
+        typ, resp = conn.uid("COPY", uid_set, f'"{imap_utf7_encode(args.target)}"')
         if typ != "OK":
             conn.logout()
             fail(f"复制到 {args.target} 失败: {resp}（文件夹不存在？可先用 --action mkdir 创建）")
@@ -93,7 +93,7 @@ def main():
     elif args.action == "delete":
         trash = find_trash(conn)
         if trash and trash != args.folder:
-            typ, _ = conn.uid("COPY", uid_set, trash)
+            typ, _ = conn.uid("COPY", uid_set, f'"{imap_utf7_encode(trash)}"')
             if typ != "OK":
                 trash = None  # 复制失败则退回直接删除
         store("+FLAGS", "(\\Deleted)")

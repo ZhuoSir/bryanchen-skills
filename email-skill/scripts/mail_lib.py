@@ -18,6 +18,7 @@
   "smtp_starttls": false        // 可选，587 端口通常需要 true
 }
 """
+import base64
 import imaplib
 import json
 import os
@@ -99,6 +100,64 @@ def load_config():
     return cfg
 
 
+def imap_utf7_decode(s):
+    """解码 RFC 3501 修改版 UTF-7（IMAP 文件夹名，如 &g0l6P3ux- → 草稿箱）。"""
+    out = []
+    i = 0
+    while i < len(s):
+        if s[i] == "&":
+            j = s.find("-", i)
+            if j == -1:
+                out.append(s[i:])
+                break
+            chunk = s[i + 1:j]
+            if chunk == "":
+                out.append("&")
+            else:
+                b64 = chunk.replace(",", "/")
+                b64 += "=" * ((-len(b64)) % 4)
+                try:
+                    out.append(base64.b64decode(b64).decode("utf-16-be", errors="replace"))
+                except Exception:
+                    out.append(s[i:j + 1])
+            i = j + 1
+        else:
+            out.append(s[i])
+            i += 1
+    return "".join(out)
+
+
+def imap_utf7_encode(s):
+    """编码为 RFC 3501 修改版 UTF-7（中文文件夹名 → IMAP 形式）。"""
+    out, buf = [], []
+
+    def flush():
+        if buf:
+            b = base64.b64encode("".join(buf).encode("utf-16-be")).decode()
+            out.append("&" + b.rstrip("=").replace("/", ",") + "-")
+            buf.clear()
+
+    for ch in s:
+        o = ord(ch)
+        if 0x20 <= o <= 0x7E:
+            flush()
+            out.append("&-" if ch == "&" else ch)
+        else:
+            buf.append(ch)
+    flush()
+    return "".join(out)
+
+
+def _send_id(conn):
+    """发送 IMAP ID 命令（163/QQ 等国内邮箱要求，否则 SELECT 会被拒绝）。"""
+    try:
+        if "ID" not in imaplib.Commands:
+            imaplib.Commands["ID"] = ("AUTH", "SELECTED")
+        conn._simple_command("ID", '("name" "email-skill" "version" "1.0" "vendor" "bryanchen-skills")')
+    except Exception:
+        pass  # 不支持 ID 的服务器忽略
+
+
 def imap_conn(cfg, folder=None, readonly=True):
     """建立 IMAP 连接并登录；folder 非空时选中该文件夹。"""
     try:
@@ -108,11 +167,14 @@ def imap_conn(cfg, folder=None, readonly=True):
         fail(f"IMAP 登录失败：{e}（QQ/163 等需开启 IMAP 服务并使用授权码）")
     except OSError as e:
         fail(f"IMAP 连接失败 {cfg['imap_host']}:{cfg['imap_port']}: {e}")
+    _send_id(conn)
     if folder:
-        typ, _ = conn.select(folder, readonly=readonly)
+        quoted = f'"{imap_utf7_encode(folder)}"'
+        typ, resp = conn.select(quoted, readonly=readonly)
         if typ != "OK":
             conn.logout()
-            fail(f"无法打开文件夹: {folder}", hint="用 list_mail.py --folders 查看可用文件夹")
+            fail(f"无法打开文件夹: {folder}（{resp}）",
+                 hint="用 list_mail.py --folders 查看可用文件夹")
     return conn
 
 
@@ -191,10 +253,14 @@ def extract_body(msg):
         text = payload(html)
         text = re.sub(r"(?is)<(script|style).*?>.*?</\1>", " ", text)
         text = re.sub(r"(?is)<br\s*/?>", "\n", text)
-        text = re.sub(r"(?is)</p>", "\n\n", text)
+        text = re.sub(r"(?is)</(p|div|tr|table|h[1-6]|li)>", "\n", text)
         text = re.sub(r"(?s)<[^>]+>", "", text)
         import html as html_mod
-        return html_mod.unescape(text).strip(), "html"
+        text = html_mod.unescape(text)
+        # 折叠表格套表格留下的大量空白：清理每行尾部空白、压缩连续空行
+        lines = [ln.strip() for ln in text.splitlines()]
+        text = re.sub(r"\n{3,}", "\n\n", "\n".join(lines)).strip()
+        return text, "html"
     return "", "empty"
 
 

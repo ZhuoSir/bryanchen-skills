@@ -16,7 +16,8 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from mail_lib import imap_conn, load_config, decode_str, addr_display, fail
+from mail_lib import (imap_conn, load_config, decode_str, addr_display,
+                      imap_utf7_decode, fail)
 
 
 def list_folders(conn):
@@ -30,12 +31,16 @@ def list_folders(conn):
             # 形如: (\HasNoChildren) "/" "INBOX"
             parts = s.rsplit(' "', 1)
             name = parts[-1].strip('"') if parts else s
-            folders.append(name)
+            folders.append(imap_utf7_decode(name))
     return folders
 
 
 def search_uids(conn, keyword, unread_only):
-    """返回匹配的 uid 列表（新→旧）。关键词搜索失败时回退为全部，交由客户端过滤。"""
+    """返回 (uid 列表新→旧, 是否需客户端过滤)。
+
+    部分服务器（如 163）SEARCH 支持差：中文 CHARSET 报错、或 TEXT 匹配不到
+    头字段。凡服务器搜索报错或结果为空，统一回退为拉取全部后客户端过滤。
+    """
     criteria = "UNSEEN" if unread_only else "ALL"
     if keyword:
         for charset in ("UTF-8", None):
@@ -46,12 +51,11 @@ def search_uids(conn, keyword, unread_only):
                 else:
                     typ, data = conn.uid("SEARCH", "TEXT", keyword,
                                          *(["UNSEEN"] if unread_only else []))
-                if typ == "OK":
-                    uids = data[0].split()
-                    return [u.decode() for u in uids][::-1], False
+                if typ == "OK" and data[0] and data[0].split():
+                    return [u.decode() for u in data[0].split()][::-1], False
             except imaplib.IMAP4.error:
                 continue
-        # 服务器不支持中文搜索，回退客户端过滤
+        # 服务器搜索不可用或无结果 → 客户端过滤兜底
         typ, data = conn.uid("SEARCH", None, criteria)
         if typ != "OK":
             fail("IMAP 搜索失败")
@@ -107,15 +111,14 @@ def main():
     args = ap.parse_args()
 
     cfg = load_config()
-    conn = imap_conn(cfg)
-
     if args.folders:
+        conn = imap_conn(cfg)
         folders = list_folders(conn)
         conn.logout()
         print(json.dumps({"ok": True, "folders": folders}, ensure_ascii=False, indent=2))
         return
 
-    conn.select(args.folder, readonly=True)
+    conn = imap_conn(cfg, folder=args.folder, readonly=True)
     uids, client_filter = search_uids(conn, args.search, args.unread)
 
     # 先取头（数量放宽以便客户端过滤后仍有足够条目）
@@ -140,7 +143,7 @@ def main():
         "ok": True,
         "folder": args.folder,
         "count": len(messages),
-        "note": "服务器不支持中文搜索，已改客户端过滤" if client_filter else None,
+        "note": "服务器搜索不可用或无结果，已改客户端过滤（仅匹配主题/发件人）" if client_filter else None,
         "messages": messages,
     }, ensure_ascii=False, indent=2))
 
