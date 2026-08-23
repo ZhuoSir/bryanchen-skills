@@ -6,7 +6,9 @@
 2. ~/.config/email-skill/config.json
 3. ~/.email-skill.json
 
-配置格式（imap/smtp 主机可省略，按邮箱域名自动推断）：
+配置格式（imap/smtp 主机可省略，按邮箱域名自动推断）。
+
+单账号（旧格式，仍兼容）：
 {
   "email": "you@qq.com",
   "password": "授权码或密码",
@@ -17,6 +19,18 @@
   "smtp_port": 465,             // 可选
   "smtp_starttls": false        // 可选，587 端口通常需要 true
 }
+
+多账号（accounts 列表 + primary 主账号）：
+{
+  "primary": "qq",              // 主账号标签：发送新邮件默认用它
+  "accounts": [
+    {"account": "qq",   "email": "a@qq.com",  "password": "...", "name": "张三"},
+    {"account": "work", "email": "b@163.com", "password": "...", "name": "张三"}
+  ]
+}
+- 每个账号条目字段与单账号格式相同，额外的 "account" 为账号标签（缺省用 email）
+- 收取：list_mail.py 默认聚合所有账号；read/reply/organize 用 --account 指定
+- 发送新邮件默认主账号；回复邮件用 --account 指定收到该邮件的账号
 """
 import base64
 import imaplib
@@ -55,9 +69,8 @@ def fail(msg, **extra):
     sys.exit(1)
 
 
-def load_config():
-    path_used = None
-    cfg = None
+def _load_raw():
+    """读取配置文件原始 JSON，返回 (cfg_dict, path)。"""
     candidates = [
         os.environ.get("EMAIL_SKILL_CONFIG"),
         os.path.expanduser("~/.config/email-skill/config.json"),
@@ -67,37 +80,100 @@ def load_config():
         if p and os.path.exists(p):
             try:
                 with open(p, encoding="utf-8") as f:
-                    cfg = json.load(f)
-                path_used = p
-                break
+                    return json.load(f), p
             except Exception as e:
                 fail(f"配置文件解析失败: {p}: {e}")
-    if cfg is None:
-        fail("未找到配置文件。请创建 ~/.config/email-skill/config.json"
-             "（参考 skill 目录下 config.example.json），或设置 EMAIL_SKILL_CONFIG 环境变量。")
+    fail("未找到配置文件。请创建 ~/.config/email-skill/config.json"
+         "（参考 skill 目录下 config.example.json），或设置 EMAIL_SKILL_CONFIG 环境变量。")
 
-    email_addr = cfg.get("email", "")
+
+def _normalize_account(acc, path):
+    """校验单个账号配置并按域名补全预设，返回补全后的 dict。"""
+    acc = dict(acc)
+    email_addr = acc.get("email", "")
     if "@" not in email_addr:
-        fail("配置缺少有效 email 字段", config=path_used)
-    if not cfg.get("password"):
-        fail("配置缺少 password 字段（QQ/163 等需用授权码而非登录密码）", config=path_used)
+        fail("配置缺少有效 email 字段", config=path)
+    if not acc.get("password"):
+        fail(f"账号 {email_addr} 缺少 password 字段（QQ/163 等需用授权码而非登录密码）",
+             config=path)
 
     domain = email_addr.split("@")[-1].lower()
     preset = PRESETS.get(domain)
     if preset:
-        cfg.setdefault("imap_host", preset[0])
-        cfg.setdefault("imap_port", preset[1])
-        cfg.setdefault("smtp_host", preset[2])
-        cfg.setdefault("smtp_port", preset[3])
-        cfg.setdefault("smtp_starttls", preset[4])
+        acc.setdefault("imap_host", preset[0])
+        acc.setdefault("imap_port", preset[1])
+        acc.setdefault("smtp_host", preset[2])
+        acc.setdefault("smtp_port", preset[3])
+        acc.setdefault("smtp_starttls", preset[4])
     for k in ("imap_host", "smtp_host"):
-        if not cfg.get(k):
-            fail(f"配置缺少 {k}，且域名 {domain} 无内置预设，请在配置中显式填写", config=path_used)
-    cfg.setdefault("imap_port", 993)
-    cfg.setdefault("smtp_port", 465)
-    cfg.setdefault("smtp_starttls", False)
-    cfg["_path"] = path_used
-    return cfg
+        if not acc.get(k):
+            fail(f"账号 {email_addr} 缺少 {k}，且域名 {domain} 无内置预设，请在配置中显式填写",
+                 config=path)
+    acc.setdefault("imap_port", 993)
+    acc.setdefault("smtp_port", 465)
+    acc.setdefault("smtp_starttls", False)
+    acc["_path"] = path
+    return acc
+
+
+def load_accounts():
+    """加载全部账号，返回 (accounts, primary_label)。
+
+    accounts 为规范化后的账号 dict 列表，每个含 "_account" 标签与 "_path"。
+    兼容旧单账号格式（无 accounts 字段时整个配置即唯一账号）。
+    """
+    raw, path = _load_raw()
+    if isinstance(raw, dict) and isinstance(raw.get("accounts"), list) and raw["accounts"]:
+        accounts = []
+        for i, entry in enumerate(raw["accounts"]):
+            if not isinstance(entry, dict):
+                fail(f"accounts[{i}] 不是对象", config=path)
+            label = entry.get("account") or entry.get("email", f"account-{i}")
+            acc = _normalize_account(entry, path)
+            acc["_account"] = label
+            accounts.append(acc)
+        labels = [a["_account"] for a in accounts]
+        if len(set(labels)) != len(labels):
+            fail(f"账号标签重复：{labels}（请为每个账号设置不同的 account 字段）", config=path)
+        primary = raw.get("primary") or labels[0]
+        if primary not in labels:
+            fail(f"primary 账号 '{primary}' 不在 accounts 中（可选：{', '.join(labels)}）",
+                 config=path)
+        return accounts, primary
+    # 旧单账号格式
+    if not isinstance(raw, dict):
+        fail("配置文件格式错误：顶层必须是 JSON 对象", config=path)
+    acc = _normalize_account(raw, path)
+    acc["_account"] = raw.get("account") or raw.get("email", "default")
+    return [acc], acc["_account"]
+
+
+def load_config(account=None):
+    """加载指定账号配置；account=None 时用主账号（发送新邮件的默认账号）。"""
+    accounts, primary = load_accounts()
+    if account is None:
+        account = primary
+    for acc in accounts:
+        if acc["_account"] == account:
+            return acc
+    fail(f"未知账号 '{account}'"
+         f"（可选：{', '.join(a['_account'] for a in accounts)}；主账号：{primary}）")
+
+
+def require_account(account, purpose="该操作"):
+    """read/reply/organize 等按 UID 操作的账号解析。
+
+    多账号配置下必须显式 --account（UID 只在单账号内有意义，跨账号会撞号），
+    单账号配置直接返回唯一账号，保持旧行为。
+    """
+    accounts, primary = load_accounts()
+    if account:
+        return load_config(account)
+    if len(accounts) > 1:
+        fail(f"{purpose}在多账号配置下必须用 --account 指定邮件所属账号"
+             f"（可选：{', '.join(a['_account'] for a in accounts)}；主账号：{primary}）。"
+             "邮件所属账号见 list_mail.py 输出中每封邮件的 account 字段。")
+    return accounts[0]
 
 
 def imap_utf7_decode(s):

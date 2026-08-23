@@ -7,6 +7,8 @@ HTML 版 + 自动生成的纯文本兜底，老客户端也能读）。
   python3 send_mail.py --to a@b.com,b@c.com --cc d@e.com --subject "..." --body-file /tmp/body.txt
   python3 send_mail.py --to a@b.com --subject "..." --markdown-file report.md   # md 渲染为 HTML
   python3 send_mail.py --to a@b.com --subject "..." --html-file report.html     # 直接发 HTML
+  python3 send_mail.py --to a@b.com --subject "..." --body "..." --account work # 指定发件账号
+多账号配置下缺省用主账号（配置中的 primary）发送。
 输出 JSON：{"ok": true, "to": [...], "subject": "...", "format": "plain|markdown|html"}
 """
 import argparse
@@ -51,6 +53,8 @@ def main():
     ap.add_argument("--markdown-file", default="", help="Markdown 文件，渲染为 HTML 邮件")
     ap.add_argument("--html-file", default="", help="HTML 文件，直接作为 HTML 邮件")
     ap.add_argument("--cc", default="", help="抄送，多个用英文逗号分隔")
+    ap.add_argument("--account", default="",
+                    help="发件账号标签；缺省用主账号（primary）")
     args = ap.parse_args()
 
     fmt = "plain"
@@ -69,7 +73,7 @@ def main():
     elif args.body_file:
         plain = read_file(args.body_file)
 
-    cfg = load_config()
+    cfg = load_config(args.account or None)
     to_list = [a.strip() for a in args.to.split(",") if a.strip()]
     cc_list = [a.strip() for a in args.cc.split(",") if a.strip()]
     if not to_list:
@@ -94,6 +98,7 @@ def main():
     smtp_send(cfg, msg, to_list + cc_list)
     print(json.dumps({
         "ok": True,
+        "account": cfg["_account"],
         "from": cfg["email"],
         "to": to_list,
         "cc": cc_list,

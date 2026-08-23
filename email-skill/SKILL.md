@@ -1,6 +1,6 @@
 ---
 name: email-skill
-description: "收发与管理个人邮箱：查看收件箱/未读邮件、搜索邮件、阅读全文、发送新邮件、回复邮件（带引用与线程头）、整理邮件（已读/星标/移动文件夹/删除/新建文件夹）。基于 IMAP/SMTP，支持 QQ/163/Gmail/Outlook 等常见邮箱。触发词：查邮件、发邮件、回复邮件、整理邮件、未读邮件、email、inbox。NOT for: 批量营销邮件群发、邮件营销自动化、访问他人邮箱。"
+description: "收发与管理个人邮箱：查看收件箱/未读邮件（支持多账号聚合收取）、搜索邮件、阅读全文、发送新邮件（默认主账号）、回复邮件（从收件账号发出，带引用与线程头）、整理邮件（已读/星标/移动文件夹/删除/新建文件夹）。基于 IMAP/SMTP，支持 QQ/163/Gmail/Outlook 等常见邮箱。触发词：查邮件、发邮件、回复邮件、整理邮件、未读邮件、email、inbox。NOT for: 批量营销邮件群发、邮件营销自动化、访问他人邮箱。"
 ---
 
 # 邮件 Skill（email-skill）
@@ -14,8 +14,34 @@ description: "收发与管理个人邮箱：查看收件箱/未读邮件、搜�
 ```bash
 mkdir -p ~/.config/email-skill
 cp config.example.json ~/.config/email-skill/config.json
-# 然后编辑填入 email 和 password
+# 然后编辑填入各账号的 email 和 password
 ```
+
+**多账号配置（推荐）**：
+
+```json
+{
+  "primary": "qq",
+  "accounts": [
+    {"account": "qq",   "email": "a@qq.com",  "password": "授权码", "name": "张三"},
+    {"account": "work", "email": "b@163.com", "password": "授权码", "name": "张三"}
+  ]
+}
+```
+
+- `primary`：**主账号**标签，发送新邮件默认从它发出
+- `accounts`：每个账号一条，`account` 是账号标签（后续 `--account` 参数用它）；`imap_host`/`smtp_host` 可省略，按邮箱域名自动推断
+- 也兼容**旧单账号格式**（顶层直接写 `email`/`password`，无 `accounts`），行为与多账号完全一致（唯一账号即主账号）
+
+**多账号行为约定**：
+
+| 操作 | 默认账号 |
+|---|---|
+| `list_mail.py` 收取/搜索 | **聚合所有账号**，每条邮件带 `account` 字段，按日期排序；`--account xx` 只看单个 |
+| `send_mail.py` 发新邮件 | **主账号**（可用 `--account` 覆盖） |
+| `reply_mail.py` 回复 | **必须 `--account` 指定收到该邮件的账号**（回复从该账号发出；UID 跨账号会撞号，故不猜） |
+| `read_mail.py` 读全文 | 主账号，找不到时按提示加 `--account` |
+| `organize_mail.py` 整理 | **必须 `--account`**；不同账号分批整理 |
 
 - **QQ/163/126 邮箱**：`password` 填**授权码**（网页邮箱 设置 → 账户 → 开启 IMAP/SMTP 服务时生成），不是登录密码
 - **Gmail**：需开启两步验证后使用「应用专用密码」
@@ -34,19 +60,20 @@ cp config.example.json ~/.config/email-skill/config.json
 ### 1. 列出文件夹 / 邮件列表 / 搜索
 
 ```bash
-python3 scripts/list_mail.py --folders                 # 列出所有文件夹
-python3 scripts/list_mail.py --limit 20                # INBOX 最近 20 封
-python3 scripts/list_mail.py --unread                  # 仅未读
+python3 scripts/list_mail.py --folders                 # 列出所有账号的文件夹
+python3 scripts/list_mail.py --limit 20                # 聚合所有账号 INBOX 最近 20 封
+python3 scripts/list_mail.py --account work --limit 10 # 只看指定账号
+python3 scripts/list_mail.py --unread                  # 仅未读（所有账号）
 python3 scripts/list_mail.py --search 发票             # 关键词搜索
 python3 scripts/list_mail.py --folder Sent --limit 10  # 指定文件夹
 ```
 
-输出每封：`uid`、`date`、`from`、`subject`、`unread`。**后续所有操作都靠 uid**。
+输出每封：`account`（所属账号）、`uid`、`date`、`from`、`subject`、`unread`。**后续所有操作都靠 account + uid**。单个账号连接失败不阻塞其他账号，错误在输出 `errors` 字段。
 
 ### 2. 阅读邮件全文
 
 ```bash
-python3 scripts/read_mail.py --uid 123
+python3 scripts/read_mail.py --uid 123 --account work   # --account 为邮件所属账号（多账号时按 list 输出填写）
 ```
 
 - 输出正文（优先纯文本，HTML 自动转文本）、附件文件名列表、`message_id`
@@ -59,8 +86,10 @@ python3 scripts/send_mail.py --to a@b.com --subject "主题" --body "正文"
 python3 scripts/send_mail.py --to a@b.com,b@c.com --cc d@e.com --subject "..." --body-file /tmp/body.txt
 python3 scripts/send_mail.py --to a@b.com --subject "..." --markdown-file report.md   # Markdown 渲染为 HTML 邮件
 python3 scripts/send_mail.py --to a@b.com --subject "..." --html-file report.html     # 直接发 HTML
+python3 scripts/send_mail.py --to a@b.com --subject "..." --body "..." --account qq   # 指定发件账号
 ```
 
+- **默认从主账号（配置中的 `primary`）发出**，`--account` 可指定其他账号
 - 默认纯文本。**正文含链接/排版时用 `--markdown-file`**：`[来源](url)` 渲染成超链接，长 URL 不会裸露刷屏
 - Markdown/HTML 模式自动带纯文本兜底（multipart/alternative），老客户端也能读
 - Markdown 支持：`#` 标题、`**粗体**`、`[链接](url)`、裸 URL 自动链接、`-`/`1.` 列表、`>` 引用、`---` 分隔线
@@ -68,31 +97,34 @@ python3 scripts/send_mail.py --to a@b.com --subject "..." --html-file report.htm
 ### 4. 回复邮件
 
 ```bash
-python3 scripts/reply_mail.py --uid 123 --body "回复内容"
-python3 scripts/reply_mail.py --uid 123 --body "..." --all   # 回复全部
+python3 scripts/reply_mail.py --uid 123 --account work --body "回复内容"   # --account = 收到该邮件的账号
+python3 scripts/reply_mail.py --uid 123 --account work --body "..." --all  # 回复全部
 ```
 
 - 自动加 `Re:` 前缀、原文引用（`>` 前缀）、`In-Reply-To`/`References` 线程头
-- 回复完成后建议顺手标记已读：`organize_mail.py --uid 123 --action mark-read`
+- **回复从收到该邮件的账号发出**（多账号配置下 `--account` 必填，取 list 输出的 `account` 字段）
+- 回复完成后建议顺手标记已读：`organize_mail.py --account work --uid 123 --action mark-read`
 
 ### 5. 整理邮件
 
 ```bash
-python3 scripts/organize_mail.py --uid 1,2,3 --action mark-read     # 标已读
-python3 scripts/organize_mail.py --uid 1 --action mark-unread       # 标未读
-python3 scripts/organize_mail.py --uid 1 --action flag              # 加星标
-python3 scripts/organize_mail.py --uid 1 --action move --target Archive  # 移动
-python3 scripts/organize_mail.py --uid 1 --action delete            # 删除（优先移入 Trash）
-python3 scripts/organize_mail.py --action mkdir --target "归档/2026"     # 新建文件夹
+python3 scripts/organize_mail.py --account work --uid 1,2,3 --action mark-read     # 标已读
+python3 scripts/organize_mail.py --account work --uid 1 --action mark-unread       # 标未读
+python3 scripts/organize_mail.py --account work --uid 1 --action flag              # 加星标
+python3 scripts/organize_mail.py --account work --uid 1 --action move --target Archive  # 移动
+python3 scripts/organize_mail.py --account work --uid 1 --action delete            # 删除（优先移入 Trash）
+python3 scripts/organize_mail.py --account work --action mkdir --target "归档/2026"     # 新建文件夹
 ```
+
+多账号配置下 `--account` 必填；要同时整理多个账号的邮件，按账号分批执行。
 
 ## 典型工作流
 
-**查未读并汇报**：`list_mail.py --unread` → 逐封 `read_mail.py --uid`（按需）→ 用中文向用户汇总发件人/主题/要点
+**查未读并汇报**：`list_mail.py --unread`（自动聚合所有账号）→ 逐封 `read_mail.py --account <账号> --uid <uid>`（按需）→ 用中文向用户汇总发件人/主题/要点（注明来自哪个账号）
 
-**回复邮件**：`list_mail.py --search 关键词` 找到邮件 → `read_mail.py` 读全文 → **把拟好的回复内容给用户确认** → `reply_mail.py --body-file` 发送 → `organize_mail.py --action mark-read`
+**回复邮件**：`list_mail.py --search 关键词` 找到邮件（记下其 `account` 字段）→ `read_mail.py --account ...` 读全文 → **把拟好的回复内容给用户确认** → `reply_mail.py --account ... --body-file` 发送 → `organize_mail.py --account ... --action mark-read`
 
-**整理收件箱**：`list_mail.py --limit 50` → 按用户规则分类 → 批量 `organize_mail.py --uid ... --action move --target ...`
+**整理收件箱**：`list_mail.py --limit 50` → 按用户规则分类 → 按账号分批 `organize_mail.py --account ... --uid ... --action move --target ...`
 
 ## 铁律
 
@@ -110,4 +142,4 @@ python3 scripts/organize_mail.py --action mkdir --target "归档/2026"     # 新
 
 ## 验证
 
-配置完成后自检：`list_mail.py --folders` 能列出文件夹、`list_mail.py --limit 1` 能取到邮件，即配置正确。
+配置完成后自检：`list_mail.py --folders` 能列出各账号文件夹、`list_mail.py --limit 1` 能取到邮件，即配置正确（多账号时确认输出含所有账号，失败账号会出现在 `errors` 字段）。

@@ -6,6 +6,9 @@
   python3 organize_mail.py --uid 4 --action move --target Archive
   python3 organize_mail.py --uid 5 --action delete             # 移入 Trash（无 Trash 则直接删除）
   python3 organize_mail.py --action mkdir --target "账单/2026"  # 新建文件夹
+  python3 organize_mail.py --account work --uid 1 --action mark-read   # 多账号：指定账号
+多账号配置下必须 --account 指定邮件所属账号（见 list_mail.py 输出的 account 字段）；
+不同账号需分批整理（UID 只在单账号内有意义）。
 动作：mark-read | mark-unread | flag | unflag | move | delete | mkdir
 输出 JSON：{"ok": true, "action": ..., "affected": n}
 """
@@ -15,7 +18,8 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from mail_lib import imap_conn, load_config, imap_utf7_decode, imap_utf7_encode, fail
+from mail_lib import (imap_conn, require_account, imap_utf7_decode,
+                      imap_utf7_encode, fail)
 
 ACTIONS = ("mark-read", "mark-unread", "flag", "unflag", "move", "delete", "mkdir")
 TRASH_CANDIDATES = ("Trash", "Deleted Messages", "Deleted", "已删除", "垃圾邮件")
@@ -43,9 +47,11 @@ def main():
     ap.add_argument("--action", required=True, choices=ACTIONS)
     ap.add_argument("--folder", default="INBOX", help="源文件夹（默认 INBOX）")
     ap.add_argument("--target", default="", help="目标文件夹（move/mkdir 必填）")
+    ap.add_argument("--account", default="",
+                    help="邮件所属账号标签；多账号配置下必填")
     args = ap.parse_args()
 
-    cfg = load_config()
+    cfg = require_account(args.account, purpose="整理邮件")
 
     if args.action == "mkdir":
         if not args.target:
@@ -55,7 +61,8 @@ def main():
         conn.logout()
         if typ != "OK":
             fail(f"创建文件夹失败: {resp}")
-        print(json.dumps({"ok": True, "action": "mkdir", "folder": args.target},
+        print(json.dumps({"ok": True, "account": cfg["_account"],
+                          "action": "mkdir", "folder": args.target},
                          ensure_ascii=False, indent=2))
         return
 
@@ -99,7 +106,7 @@ def main():
         store("+FLAGS", "(\\Deleted)")
         conn.expunge()
         print(json.dumps({
-            "ok": True, "action": "delete",
+            "ok": True, "account": cfg["_account"], "action": "delete",
             "moved_to": trash or "(直接永久删除)",
             "affected": len(uids), "uids": uids,
         }, ensure_ascii=False, indent=2))
@@ -107,7 +114,8 @@ def main():
         return
 
     conn.logout()
-    out = {"ok": True, "action": args.action, "affected": len(uids), "uids": uids}
+    out = {"ok": True, "account": cfg["_account"],
+           "action": args.action, "affected": len(uids), "uids": uids}
     if args.action == "move":
         out["moved_to"] = args.target
     print(json.dumps(out, ensure_ascii=False, indent=2))

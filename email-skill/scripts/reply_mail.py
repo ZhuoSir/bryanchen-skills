@@ -5,6 +5,9 @@
   python3 reply_mail.py --uid 123 --body "回复内容"
   python3 reply_mail.py --uid 123 --body-file /tmp/reply.txt --all   # 回复全部（含原收件人/抄送）
   python3 reply_mail.py --uid 123 --body "..." --folder INBOX
+  python3 reply_mail.py --uid 123 --account work --body "..."        # 多账号：指定收到该邮件的账号
+多账号配置下必须 --account 指定收到该邮件的账号（回复即从该账号发出），
+账号见 list_mail.py 输出中每封邮件的 account 字段。
 正文后自动附带原文引用（> 前缀）。
 """
 import argparse
@@ -17,7 +20,7 @@ from email.mime.text import MIMEText
 from email.utils import formataddr, parseaddr
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from mail_lib import (imap_conn, load_config, smtp_send, decode_str,
+from mail_lib import (imap_conn, require_account, smtp_send, decode_str,
                       addr_display, extract_body, fail)
 
 
@@ -28,6 +31,8 @@ def main():
     ap.add_argument("--body", default="")
     ap.add_argument("--body-file", default="")
     ap.add_argument("--all", action="store_true", help="回复全部（原发件人 + 原 To/Cc 中除自己外的地址）")
+    ap.add_argument("--account", default="",
+                    help="收到该邮件的账号标签（回复即从该账号发出）；多账号配置下必填")
     args = ap.parse_args()
 
     body = args.body
@@ -40,12 +45,13 @@ def main():
     if not body.strip():
         fail("回复正文为空")
 
-    cfg = load_config()
+    cfg = require_account(args.account, purpose="回复邮件")
     conn = imap_conn(cfg, folder=args.folder, readonly=True)
     typ, data = conn.uid("FETCH", args.uid, "(BODY.PEEK[])")
     conn.logout()
     if typ != "OK" or not data or not isinstance(data[0], tuple):
-        fail(f"未找到 UID={args.uid} 的邮件")
+        fail(f"未找到 UID={args.uid} 的邮件（account={cfg['_account']}，"
+             "确认 --account 与 list_mail.py 输出一致、--folder 正确）")
 
     orig = email.message_from_bytes(data[0][1])
     orig_subject = decode_str(orig.get("Subject", "")) or "(无主题)"
@@ -89,6 +95,8 @@ def main():
     smtp_send(cfg, msg, to_list + cc_list)
     print(json.dumps({
         "ok": True,
+        "account": cfg["_account"],
+        "from": cfg["email"],
         "replied_to_uid": args.uid,
         "to": to_list,
         "cc": cc_list,
