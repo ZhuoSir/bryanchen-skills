@@ -99,6 +99,21 @@ python3 scripts/hupu.py --per-section 5
 > —— 爱你的悠悠
 ```
 
+### 第 6 步（可选）：邮件投递
+
+用户要求"把晨报发到邮箱"时，用 `email-skill` 发送。**必须用 Markdown 文件方式投递**，
+链接才会渲染成超链接（纯文本会把长 URL 裸露刷屏）：
+
+```bash
+# 1. 把上面模板的晨报原样写入临时 md 文件（[来源](url) 格式保持不动）
+# 2. 发送
+python3 <email-skill>/scripts/send_mail.py --to <收件人> \
+  --subject "☀️ 晨报 · <YYYY-MM-DD 周X>" --markdown-file /tmp/morning_report.md
+```
+
+- 发送为 multipart/alternative：HTML 版（链接可点、有排版）+ 纯文本兜底
+- 发送后清理临时 md 文件；发送前向用户确认收件人
+
 ## 降级策略
 
 1. `news_api.py` 内置降级链（60s API ×2 → yyxw → Google News RSS），全部失败时在对应板块注明"今日综合新闻暂无法获取"
