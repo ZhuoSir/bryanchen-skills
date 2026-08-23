@@ -57,7 +57,13 @@ python3 scripts/read_mail.py --uid 123
 ```bash
 python3 scripts/send_mail.py --to a@b.com --subject "主题" --body "正文"
 python3 scripts/send_mail.py --to a@b.com,b@c.com --cc d@e.com --subject "..." --body-file /tmp/body.txt
+python3 scripts/send_mail.py --to a@b.com --subject "..." --markdown-file report.md   # Markdown 渲染为 HTML 邮件
+python3 scripts/send_mail.py --to a@b.com --subject "..." --html-file report.html     # 直接发 HTML
 ```
+
+- 默认纯文本。**正文含链接/排版时用 `--markdown-file`**：`[来源](url)` 渲染成超链接，长 URL 不会裸露刷屏
+- Markdown/HTML 模式自动带纯文本兜底（multipart/alternative），老客户端也能读
+- Markdown 支持：`#` 标题、`**粗体**`、`[链接](url)`、裸 URL 自动链接、`-`/`1.` 列表、`>` 引用、`---` 分隔线
 
 ### 4. 回复邮件
 

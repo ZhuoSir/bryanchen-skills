@@ -50,15 +50,17 @@ python3 scripts/fetch_rss.py --days 2 --per-source 3
 - 源：量子位、TechCrunch AI、InfoQ 中文（RSS，按发布时间过滤最近 N 天）
 - 从合并结果中选 **约 5 条**，中英文源都要兼顾；某源 `ok: false` 时降低该源配额即可，不必重试超过 1 次
 
-### 第 4 步：体育新闻（虎扑）
+### 第 4 步：体育新闻 + 当日赛程（虎扑）
 
 ```bash
 python3 scripts/hupu.py --per-section 5
 ```
 
-- 源：虎扑移动端频道页 `m.hupu.com/nba`（篮球）、`m.hupu.com/soccer`（足球），静态 HTML 免 Key
-- 输出 `sections.basketball` / `sections.football`：**置顶帖全量保留在前并标注 `"pinned": true`，普通帖取前 5–10 条**（`--per-section` 控制）
-- **页面不含发布时间**（`date` 为 null），条目按最新活跃排序；在晨报体育板块注明"虎扑实时热帖"，置顶条目用 📌 标出
+- 新闻源：虎扑移动端频道页 `m.hupu.com/nba`（篮球）、`m.hupu.com/soccer`（足球），静态 HTML 免 Key
+- 赛程源：`m.hupu.com/nba/schedule`、`m.hupu.com/soccer/schedule`（页面内嵌 JSON，按当天日期过滤）
+- 输出 `sections.basketball` / `sections.football`（新闻）：**置顶帖全量保留在前并标注 `"pinned": true`，普通帖取前 5–10 条**（`--per-section` 控制）
+- 输出 `matches.basketball` / `matches.football`（当日比赛）：每条含时间、赛事、主客队、比分、状态（未开始/已结束）；**空列表表示今日无比赛，晨报中如实写"今日无 NBA 比赛"等，不要省略**
+- 新闻页**不含发布时间**，按最新活跃排序；在晨报体育板块注明"虎扑实时热帖"，置顶条目用 📌 标出
 
 ### 第 5 步：组装输出
 
@@ -81,10 +83,15 @@ python3 scripts/hupu.py --per-section 5
 （同上，标注来源媒体名）
 
 ## ⚽ 足球
-（同上）
+**今日赛程**（来自 matches.football，无比赛则写"今日无焦点赛事"）
+- 19:35 中超第24轮 上海海港 vs 青岛海牛（未开始）/ 国际米兰 4-1 蒙扎（已结束）
+**热帖**（虎扑实时热帖，置顶用 📌）
+1. **标题** — 一句话摘要 [来源](url)
 
 ## 🏀 篮球
-（同上）
+**今日赛程**（同上；NBA 休赛期为"今日无 NBA 比赛"）
+**热帖**
+1. **标题** — 一句话摘要 [来源](url)
 
 ---
 > 💌 **今日寄语**：<一句温暖的激励话语；若 news_api.py 输出了 tip 字段（60s API 每日一句）优先采用，否则自己写一句原创的>

@@ -280,3 +280,96 @@ def truncate(text, limit=MAX_BODY_CHARS):
     if len(text) > limit:
         return text[:limit] + f"\n... [正文过长已截断，共 {len(text)} 字符]"
     return text
+
+
+def md_to_html(md_text):
+    """极简 Markdown → HTML 转换器（用于 HTML 邮件）。
+
+    支持：# 标题、**粗体**、`代码`、[链接](url)、裸 URL 自动链接、
+    - / · 无序列表、1. 有序列表、> 引用、--- / ─── 分隔线、普通段落。
+    """
+    import html as html_mod
+
+    def inline(t):
+        t = html_mod.escape(t)
+        t = re.sub(r"\[([^\]]+)\]\((https?://[^)\s]+)\)",
+                   r'<a href="\2" style="color:#1a73e8">\1</a>', t)
+        t = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", t)
+        t = re.sub(r"`([^`]+)`", r"<code>\1</code>", t)
+        # 裸 URL 自动链接（排除已进入 href 属性的）
+        t = re.sub(r'(?<!["=])(https?://[^\s<"]+)',
+                   r'<a href="\1" style="color:#1a73e8">\1</a>', t)
+        return t
+
+    out = []
+    list_type = None      # 当前打开的列表：ul / ol
+    in_quote = False
+
+    def close_blocks():
+        nonlocal list_type, in_quote
+        if list_type:
+            out.append(f"</{list_type}>")
+            list_type = None
+        if in_quote:
+            out.append("</blockquote>")
+            in_quote = False
+
+    for raw in md_text.splitlines():
+        line = raw.rstrip()
+        stripped = line.strip()
+
+        m = re.match(r"^(#{1,4})\s+(.*)", stripped)
+        if m:
+            close_blocks()
+            level = len(m.group(1))
+            out.append(f"<h{level}>{inline(m.group(2))}</h{level}>")
+            continue
+
+        if re.match(r"^(-{3,}|─{3,}|—{3,}|\*{3,})$", stripped):
+            close_blocks()
+            out.append('<hr style="border:none;border-top:1px solid #ddd">')
+            continue
+
+        m = re.match(r"^[-*·]\s+(.*)", stripped)
+        if m:
+            if in_quote:
+                out.append("</blockquote>"); in_quote = False
+            if list_type != "ul":
+                if list_type:
+                    out.append(f"</{list_type}>")
+                out.append("<ul>"); list_type = "ul"
+            out.append(f"<li>{inline(m.group(1))}</li>")
+            continue
+
+        m = re.match(r"^(\d+)[.、]\s+(.*)", stripped)
+        if m:
+            if in_quote:
+                out.append("</blockquote>"); in_quote = False
+            if list_type != "ol":
+                if list_type:
+                    out.append(f"</{list_type}>")
+                out.append("<ol>"); list_type = "ol"
+            out.append(f"<li>{inline(m.group(2))}</li>")
+            continue
+
+        if stripped.startswith(">"):
+            if list_type:
+                out.append(f"</{list_type}>"); list_type = None
+            if not in_quote:
+                out.append('<blockquote style="border-left:3px solid #ccc;'
+                           'margin:8px 0;padding-left:12px;color:#555">')
+                in_quote = True
+            content = stripped.lstrip(">").strip()
+            if content:
+                out.append(f"<div>{inline(content)}</div>")
+            continue
+
+        close_blocks()
+        if stripped:
+            out.append(f"<p>{inline(stripped)}</p>")
+
+    close_blocks()
+    body = "\n".join(out)
+    return ('<div style="font-family:-apple-system,PingFang SC,Microsoft YaHei,'
+            'sans-serif;font-size:15px;line-height:1.7;color:#222">'
+            f"{body}</div>")
