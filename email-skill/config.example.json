@@ -1,0 +1,10 @@
+{
+  "email": "you@qq.com",
+  "password": "授权码（QQ/163 邮箱需在网页设置中开启 IMAP/SMTP 并获取，不是登录密码）",
+  "name": "你的名字",
+  "imap_host": "",
+  "imap_port": 993,
+  "smtp_host": "",
+  "smtp_port": 465,
+  "smtp_starttls": false
+}

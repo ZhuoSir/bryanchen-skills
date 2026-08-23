@@ -1,0 +1,5 @@
+# 防止误提交真实邮箱配置（含授权码/密码）
+**/config.json
+!.example.json
+__pycache__/
+*.pyc
