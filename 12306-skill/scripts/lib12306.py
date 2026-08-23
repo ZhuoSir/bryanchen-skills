@@ -51,6 +51,9 @@ IDX = {
     "lishi": 10,            # 历时，如 4:29
     "can_buy": 11,          # Y / N / IS_TIME_NOT_BUY
     "start_date": 13,       # 出发日期 YYYYMMDD
+    "from_station_no": 16,  # 出发站在全程中的序号（查票价需要）
+    "to_station_no": 17,    # 到达站在全程中的序号（查票价需要）
+    "seat_types": 35,       # 席别代码串（查票价需要）
 }
 
 # 座位字段下标（下标, 座位名）；空串和 "--" 会在解析时丢弃
@@ -197,12 +200,49 @@ def parse_row(row, station_map=None):
                                       at(IDX["to_telecode"])),
         "from_telecode": at(IDX["from_telecode"]),
         "to_telecode": at(IDX["to_telecode"]),
+        "from_station_no": at(IDX["from_station_no"]),
+        "to_station_no": at(IDX["to_station_no"]),
+        "seat_types": at(IDX["seat_types"]),
         "start_time": at(IDX["start_time"]),
         "arrive_time": at(IDX["arrive_time"]),
         "duration": at(IDX["lishi"]),
         "can_buy": at(IDX["can_buy"]) == "Y",
         "seats": seats,
     }
+
+
+# ---------------------------------------------------------------- 票价查询
+
+# queryTicketPrice 返回的席别代码 → 中文名
+PRICE_SEAT_NAMES = {
+    "A9": "商务座", "P": "特等座", "M": "一等座", "O": "二等座",
+    "A6": "高级软卧", "A4": "软卧", "F": "动卧", "A3": "硬卧",
+    "A2": "软座", "A1": "硬座", "WZ": "无座",
+}
+
+
+def query_price(opener, train_no, from_station_no, to_station_no,
+                seat_types, date):
+    """
+    查询某趟车指定区间的各席别票价（leftTicket/queryTicketPrice）。
+    参数均来自余票解析结果。date 为 YYYY-MM-DD。
+    返回 {席别中文名: "¥xxx"}，按票价从高到低排序。
+    """
+    params = urllib.parse.urlencode({
+        "train_no": train_no,
+        "from_station_no": from_station_no,
+        "to_station_no": to_station_no,
+        "seat_types": seat_types,
+        "train_date": date,
+    })
+    data = _get_json(opener, f"{BASE}/otn/leftTicket/queryTicketPrice?{params}")
+    raw = data.get("data") or {}
+    prices = {}
+    for code, name in PRICE_SEAT_NAMES.items():
+        v = raw.get(code)
+        if v:
+            prices[name] = v if str(v).startswith("¥") else f"¥{v}"
+    return prices
 
 
 # ---------------------------------------------------------------- 经停站时刻
