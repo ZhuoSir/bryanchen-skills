@@ -5,17 +5,19 @@
 WMO weather_code 已映射为中文描述 + emoji。
 
 用法:
-    python3 weather.py
+    python3 weather.py              # 今日天气（晨报）
+    python3 weather.py --tomorrow   # 明日天气（晚报）
 输出:
     stdout JSON: {"date": "...", "source": "...",
-                  "cities": [{"city","now":{...},"today":{...}}, ...]}
+                  "cities": [{"city","now":{...},"today"|"tomorrow":{...}}, ...]}
 """
+import argparse
 import json
 import sys
 import time
 import urllib.parse
 import urllib.request
-from datetime import date
+from datetime import date, timedelta
 
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
       "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36")
@@ -64,7 +66,7 @@ def fetch(url, tries=2, timeout=10):
     raise last
 
 
-def from_open_meteo():
+def from_open_meteo(tomorrow=False):
     lats = ",".join(str(c[1]) for c in CITIES)
     lons = ",".join(str(c[2]) for c in CITIES)
     url = ("https://api.open-meteo.com/v1/forecast?"
@@ -73,15 +75,17 @@ def from_open_meteo():
            "relative_humidity_2m,apparent_temperature"
            "&daily=weather_code,temperature_2m_max,temperature_2m_min,"
            "precipitation_probability_max"
-           "&timezone=Asia%2FShanghai&forecast_days=1")
+           "&timezone=Asia%2FShanghai&forecast_days=2")
     blocks = json.loads(fetch(url))
     if isinstance(blocks, dict):  # 单城市时返回对象而非数组
         blocks = [blocks]
+    idx = 1 if tomorrow else 0  # daily 数组 [今天, 明天]
+    day_key = "tomorrow" if tomorrow else "today"
     cities = []
     for (name, _, _), b in zip(CITIES, blocks):
         cur, day = b["current"], b["daily"]
         c_text, c_emoji = wmo(cur.get("weather_code"))
-        d_text, d_emoji = wmo(day["weather_code"][0])
+        d_text, d_emoji = wmo(day["weather_code"][idx])
         cities.append({
             "city": name,
             "now": {
@@ -91,18 +95,19 @@ def from_open_meteo():
                 "humidity": cur.get("relative_humidity_2m"),
                 "wind_kmh": cur.get("wind_speed_10m"),
             },
-            "today": {
-                "max": day["temperature_2m_max"][0],
-                "min": day["temperature_2m_min"][0],
+            day_key: {
+                "max": day["temperature_2m_max"][idx],
+                "min": day["temperature_2m_min"][idx],
                 "text": d_text, "emoji": d_emoji,
-                "rain_prob": day.get("precipitation_probability_max", [None])[0],
+                "rain_prob": day.get("precipitation_probability_max", [None])[idx],
             },
         })
     return {"source": "Open-Meteo", "cities": cities}
 
 
-def from_wttr():
-    """兜底：wttr.in 逐城一行格式（只有当前天气，无当日高低温）。"""
+def from_wttr(tomorrow=False):
+    """兜底：wttr.in 逐城一行格式（只有当前天气，无当日/明日高低温）。"""
+    day_key = "tomorrow" if tomorrow else "today"
     cities = []
     for name, lat, lon in CITIES:
         loc = urllib.parse.quote(f"{lat},{lon}")
@@ -117,7 +122,7 @@ def from_wttr():
             "now": {"temp": temp.lstrip("+"), "feels_like": feels.lstrip("+"),
                     "text": "", "emoji": emoji,
                     "humidity": hum.rstrip("%"), "wind_kmh": wind},
-            "today": None,
+            day_key: None,
         })
     return {"source": "wttr.in（仅当前天气）", "cities": cities}
 
@@ -126,11 +131,17 @@ CHAIN = [("open-meteo", from_open_meteo), ("wttr.in", from_wttr)]
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tomorrow", action="store_true",
+                    help="输出明日天气预报（晚报用），默认为今日")
+    args = ap.parse_args()
+
+    target_date = date.today() + (timedelta(days=1) if args.tomorrow else timedelta())
     errors = []
     for name, fn in CHAIN:
         try:
-            out = fn()
-            out["date"] = date.today().isoformat()
+            out = fn(tomorrow=args.tomorrow)
+            out["date"] = target_date.isoformat()
             out["chain_source"] = name
             if errors:
                 out["note"] = "fallback used: " + "; ".join(errors)
