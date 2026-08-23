@@ -43,6 +43,19 @@
 
 **触发词**：查邮件、发邮件、回复邮件、整理邮件、未读邮件、email、inbox
 
+### 🚄 12306-skill — 火车票余票与时刻查询
+
+零依赖（Python 3 标准库）、免登录免 Key，数据源为 12306 官网网页版公开查询接口。**只查询，不订票**（12306 无官方开放 API，下单必须官方 App/网站手动操作）。
+
+| 能力 | 脚本 | 说明 |
+|---|---|---|
+| 余票查询 | `tickets.py` | 指定日期/区间查全部车次余票，支持按 G/D/C/K/T/Z 过滤或指定车次 |
+| 时刻表 | `schedule.py` | 某趟车全程经停站到发时刻、停留时长 |
+
+**特点**：自动管理会话 Cookie；余票端点不定期迁移时按 `c_url` 自动跟随；车站代码表自动缓存；座位余票如实转述（有/数字/无/候补）。
+
+**触发词**：查火车票、查余票、高铁票、还有票吗、车次时刻、经停站、12306
+
 ## 目录结构
 
 ```
@@ -64,6 +77,13 @@ email-skill/
     ├── send_mail.py    # 发送新邮件
     ├── reply_mail.py   # 回复（引用 + 线程头）
     └── organize_mail.py# 已读/星标/移动/删除/建文件夹
+
+12306-skill/
+├── SKILL.md            # skill 说明与查询流程
+└── scripts/
+    ├── lib12306.py     # 共享库：会话 Cookie/车站代码/端点跟随/行解析
+    ├── tickets.py      # 余票查询（日期/区间/类型过滤/指定车次）
+    └── schedule.py     # 经停站时刻表
 ```
 
 ## 安装
@@ -73,6 +93,7 @@ email-skill/
 ```bash
 cp -R morning-report ~/.agents/skills/
 cp -R email-skill ~/.agents/skills/
+cp -R 12306-skill ~/.agents/skills/
 ```
 
 email-skill 首次使用需配置邮箱凭据：
