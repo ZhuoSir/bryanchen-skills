@@ -58,6 +58,20 @@
 
 **触发词**：查火车票、查余票、高铁票、还有票吗、车次时刻、经停站、12306
 
+### 🔍 web-search — 自带代码的联网搜索
+
+与纯提示词型搜索 skill 不同：**自带完整搜索脚本**，不依赖宿主环境是否提供搜索工具，任何 agent 环境都能真实联网检索。
+
+| 能力 | 说明 |
+|---|---|
+| 网页搜索 | `search.py` 直接抓取搜索引擎 HTML 并解析（Bing → DuckDuckGo Lite 降级链） |
+| 时间过滤 | `--time day/week/month`（24 小时/一周/一月内） |
+| 输出 | 统一 JSON：title / url / snippet，降级时带 note |
+
+**特点**：零依赖免 Key；关键词控制在 2–6 个词防分词跑偏；禁止编造结果。
+
+**触发词**：搜索、搜一下、查一下、检索、search the web
+
 ## 目录结构
 
 ```
@@ -88,6 +102,11 @@ email-skill/
     ├── tickets.py      # 余票查询（日期/区间/类型过滤/指定车次）
     ├── price.py        # 票价查询（车次+区间 → 各席别价格）
     └── schedule.py     # 经停站时刻表
+
+web-search/
+├── SKILL.md            # skill 说明与输出格式
+└── scripts/
+    └── search.py       # 搜索引擎抓取（Bing → DDG Lite 降级链）
 ```
 
 ## 安装
