@@ -60,15 +60,16 @@
 
 ### 🔍 web-search — 自带代码的联网搜索
 
-与纯提示词型搜索 skill 不同：**自带完整搜索脚本**，不依赖宿主环境是否提供搜索工具，任何 agent 环境都能真实联网检索。
+与纯提示词型搜索 skill 不同：**自带完整搜索脚本**，引擎链与降级逻辑完整复刻 DSH free-search 插件，不依赖宿主环境是否提供搜索工具。
 
 | 能力 | 说明 |
 |---|---|
-| 网页搜索 | `search.py` 直接抓取搜索引擎 HTML 并解析（Bing → DuckDuckGo Lite 降级链） |
-| 时间过滤 | `--time day/week/month`（24 小时/一周/一月内） |
-| 输出 | 统一 JSON：title / url / snippet，降级时带 note |
+| 10 引擎降级链 | 首选引擎 → 付费引擎 → 免费引擎；bing/anysearch/ddg/ddg-lite/searxng/tavily/exa/keenable 全部**免 Key 可用** |
+| 时间过滤 | `--time day/week/month/year/12h/3d/2mo/YYYY-MM-DD`，不支持的引擎自动跳过并在 Note 说明 |
+| 降级透明 | 输出 Note 严格区分"首选不支持时间过滤被跳过"与"首选失败（含原因）" |
+| API Key（可选） | 配 `EXA/TAVILY/KEENABLE/PERPLEXITY/DEEPSEEK_API_KEY` 走账号档；perplexity/deepseek-official 需 Key |
 
-**特点**：零依赖免 Key；关键词控制在 2–6 个词防分词跑偏；禁止编造结果。
+**特点**：零依赖；30s 总预算防超时累积；snippet 自动清洗登录/付费墙噪音。
 
 **触发词**：搜索、搜一下、查一下、检索、search the web
 
