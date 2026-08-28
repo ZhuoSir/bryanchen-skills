@@ -1,0 +1,8 @@
+{
+  "base_url": "http://127.0.0.1:4000",
+  "db_path": "/tmp/rss-skill/articles.db",
+  "feeds": [
+    {"name": "量子位", "url": "https://www.qbitai.com/feed"},
+    {"name": "InfoQ中文", "url": "https://www.infoq.cn/feed"}
+  ]
+}

@@ -73,6 +73,37 @@
 
 **触发词**：搜索、搜一下、查一下、检索、search the web
 
+### 📰 rss-skill — RSS 订阅整理与全文搜索
+
+对接自部署 **WeWe RSS（wewe-rss）** 服务，把公众号订阅文章同步到本地 SQLite 全文索引库（FTS5），离线可搜索、浏览、阅读；也可挂任意通用 RSS/Atom 源。零依赖（Python 3 标准库），`/feeds` 接口免 AUTH_CODE。
+
+| 能力 | 脚本 | 说明 |
+|---|---|---|
+| 订阅源管理 | `feeds.py` | 列出全部订阅源 + 本地入库条数；`--update` 触发源立即更新（服务端异步） |
+| 同步 | `sync.py` | 增量同步（按 source+guid 去重），默认全文模式；`--deep` 翻页回溯历史，`--no-fulltext` 快速只同步标题 |
+| 全文搜索 | `search.py` | SQLite FTS5 + BM25；中文 bigram 预切分（二字词也能精确命中），带【】高亮片段；支持 `--feed` / `--days` 过滤 |
+| 浏览阅读 | `articles.py` | `--recent` 按时间浏览、`--read <id>` 读全文（纯文本/HTML）、`--stats` 库统计 |
+| 导出 | `export.py` | JSON / JSONL / Markdown / 纯文本四种格式，可按源/时间过滤、可只导元数据 |
+
+**特点**：中文全文搜索做了 bigram 切分（内置 unicode61 分词器不会切中文）；全文模式下大 limit 响应慢属正常（服务端逐篇抓正文）；FTS5 不可用时自动降级 LIKE。
+
+**触发词**：RSS、订阅、公众号文章、同步文章、全文搜索、rss、wewe-rss、订阅源、最近有什么文章
+
+### 📄 pdf-recognition — 本地 PDF 理解
+
+理解任意 PDF（合同、论文、财报、报告、扫描件），全程本地运行，**无需 OCR 服务器**。
+
+| 能力 | 脚本 | 说明 |
+|---|---|---|
+| 探测 | `probe.py` | 判断 PDF 类型（文字层/扫描件/混合）、页数、元数据 |
+| 文本提取 | `extract_text.py` | 有文字层的 PDF 直接提取（最快路径） |
+| 页面渲染 | `render_pages.py` | 扫描件渲染为图片，交给多模态模型读图 |
+| 本地 OCR | `ocr_pages.py` | 兜底：RapidOCR 离线识别（pip 库，零服务器） |
+
+**特点**：三级降级链（文字层直取 → 多模态读图 → 本地 OCR），对模型能力自适应；OCR 依赖见 `scripts/requirements.txt`。
+
+**触发词**：理解PDF、读PDF、解析PDF、PDF总结、PDF转文字、扫描件识别、这份PDF讲了什么
+
 ## 目录结构
 
 ```
@@ -107,7 +138,27 @@ email-skill/
 web-search/
 ├── SKILL.md            # skill 说明与输出格式
 └── scripts/
-    └── search.py       # 搜索引擎抓取（Bing → DDG Lite 降级链）
+    └── search.py       # 多引擎搜索（复刻 DSH free-search 降级链，10 引擎）
+
+rss-skill/
+├── SKILL.md            # skill 说明与典型工作流
+├── config.example.json # 配置模板（真实配置放 ~/.config/rss-skill/config.json）
+└── scripts/
+    ├── rss_lib.py      # 共享库：配置/Feed 解析（JSON Feed/RSS/Atom）/SQLite+FTS5/中文 bigram 切分
+    ├── feeds.py        # 订阅源列表 / 触发更新
+    ├── sync.py         # 增量同步（全文/快速模式，--deep 历史回溯）
+    ├── search.py       # 全文搜索（FTS5 BM25 + 命中片段）
+    ├── articles.py     # 浏览 / 读全文 / 库统计
+    └── export.py       # 导出（JSON/JSONL/Markdown/纯文本）
+
+pdf-recognition/
+├── SKILL.md            # skill 说明与三级降级链
+└── scripts/
+    ├── probe.py          # PDF 探测（类型/页数/元数据）
+    ├── extract_text.py   # 文字层直接提取
+    ├── render_pages.py   # 页面渲染为图片（多模态读图用）
+    ├── ocr_pages.py      # 本地离线 OCR（RapidOCR）
+    └── requirements.txt  # OCR 依赖清单
 ```
 
 ## 安装
@@ -118,6 +169,9 @@ web-search/
 cp -R morning-report ~/.agents/skills/
 cp -R email-skill ~/.agents/skills/
 cp -R 12306-skill ~/.agents/skills/
+cp -R rss-skill ~/.agents/skills/
+cp -R web-search ~/.agents/skills/        # 可选：宿主无搜索工具的环境用
+cp -R pdf-recognition ~/.agents/skills/   # 需 OCR 时先 pip install -r pdf-recognition/scripts/requirements.txt
 ```
 
 email-skill 首次使用需配置邮箱凭据：
@@ -126,6 +180,14 @@ email-skill 首次使用需配置邮箱凭据：
 mkdir -p ~/.config/email-skill
 cp ~/.agents/skills/email-skill/config.example.json ~/.config/email-skill/config.json
 # 编辑填入 email 和授权码（QQ/163 在网页设置中开启 IMAP/SMTP 时生成）
+```
+
+rss-skill 首次使用需配置 wewe-rss 服务地址：
+
+```bash
+mkdir -p ~/.config/rss-skill
+cp ~/.agents/skills/rss-skill/config.example.json ~/.config/rss-skill/config.json
+# 编辑填入 base_url（你的 wewe-rss 服务地址，如 http://127.0.0.1:4000）
 ```
 
 之后在会话中说"给我一份今天的晨报"即可触发。
