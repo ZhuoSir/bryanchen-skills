@@ -1,0 +1,6 @@
+pymupdf>=1.24
+rapidocr_onnxruntime>=1.2
+# 服务器/低内存环境提示：rapidocr 默认拉的是带 GUI 的 opencv-python，
+# 装完后执行下面两行换成 headless 版，可省 100MB+ 内存并避免 libGL 依赖：
+#   pip uninstall -y opencv-python
+#   pip install opencv-python-headless
