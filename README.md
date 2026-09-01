@@ -104,6 +104,22 @@
 
 **触发词**：理解PDF、读PDF、解析PDF、PDF总结、PDF转文字、扫描件识别、这份PDF讲了什么
 
+### 📐 diagram-skill — 编辑级中文图表
+
+借鉴 [diagram-design](https://github.com/cathrynlavery/diagram-design) 架构的自研中文版：**无渲染代码**，LLM 按规则手写 SVG，脚本只做质检。输出自包含 HTML + 内联 SVG，浏览器直接打开。
+
+| 能力 | 说明 |
+|---|---|
+| 10 种图表类型 | 架构图 / 流程图 / 时序图 / ER 图 / 甘特图 / 状态机 / 泳道图 / 树状图 / 象限图 / 时间线 |
+| 按需加载 | 主 SKILL.md 只做路由；布局语法在 `references/type-*.md`，选中才读 |
+| 中文排版 | 系统字体栈（苹方/雅黑/Noto Sans SC）；中文按 1em/字估算宽度，最小 12px |
+| 设计系统 | 语义令牌（paper/ink/accent…）可换肤；焦点色 ≤2、4px 网格、正交圆角连线、标签遮罩 |
+| 质量门 | `scripts/self_check.py` 交付前必过：a11y 契约（role/title/desc slug 前缀）、单文件安全、网格纪律 |
+
+**与 mermaid-skill 的分工**：mermaid 快速出草图；本 skill 出"能放进正式文档/汇报"的精美图。
+
+**触发词**：画图、架构图、流程图、时序图、ER图、甘特图、泳道图、状态机、树状图、象限图、时间线
+
 ## 目录结构
 
 ```
@@ -159,6 +175,16 @@ pdf-recognition/
     ├── render_pages.py   # 页面渲染为图片（多模态读图用）
     ├── ocr_pages.py      # 本地离线 OCR（RapidOCR）
     └── requirements.txt  # OCR 依赖清单
+
+diagram-skill/
+├── SKILL.md            # 路由表 + 设计系统摘要 + 通用规则 + 自检清单
+├── assets/
+│   └── template.html   # 中文优化模板（系统字体栈 + SVG 骨架）
+├── references/
+│   ├── style-guide.md  # 设计令牌 + 中文排版规则 + 换肤
+│   └── type-*.md       # 10 种图表类型的布局语法（按需加载）
+└── scripts/
+    └── self_check.py   # 交付前自检（a11y 契约/单文件安全/网格纪律）
 ```
 
 ## 安装
@@ -172,6 +198,7 @@ cp -R 12306-skill ~/.agents/skills/
 cp -R rss-skill ~/.agents/skills/
 cp -R web-search ~/.agents/skills/        # 可选：宿主无搜索工具的环境用
 cp -R pdf-recognition ~/.agents/skills/   # 需 OCR 时先 pip install -r pdf-recognition/scripts/requirements.txt
+cp -R diagram-skill ~/.agents/skills/
 ```
 
 email-skill 首次使用需配置邮箱凭据：

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图表</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    /* 设计令牌：语义角色。换肤只改这里（见 references/style-guide.md） */
+    --color-paper:   #f7f5f2;   /* 米白纸面 */
+    --color-paper-2: #ffffff;   /* 容器底 */
+    --color-ink:     #23272e;   /* 主文本/主描边 */
+    --color-muted:   #5c6470;   /* 次要文本/默认箭头 */
+    --color-soft:    #8a919c;   /* 弱文本/辅助线 */
+    --color-accent:  #c2451e;   /* 砖红焦点色：每张图最多 1-2 个元素 */
+    --color-accent-tint: rgba(194,69,30,0.08);
+    --color-link:    #1d4ed8;   /* HTTP/外部调用 */
+    --color-rule:    rgba(35,39,46,0.12);  /* 细分隔线 */
+    --font-sans:  "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+    --font-serif: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    --font-mono:  ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 32px;
+  }
+  .frame { max-width: 1200px; width: 100%; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;            /* 基线 12px 的 0.9 倍，保持 4 的倍数则用 12px 也可 */
+    letter-spacing: 0.18em;
+    color: var(--color-muted);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  svg { width: 100%; min-width: 900px; display: block; }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <p class="eyebrow">[图表类型] · DIAGRAM</p>
+    <h1>[图表标题]</h1>
+
+    <!-- 使用前：把 [slug] 替换为本图唯一标识（如 order-flow），title/desc 必须填写 -->
+    <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-labelledby="[slug]-title [slug]-desc">
+      <title id="[slug]-title">[图表标题]</title>
+      <desc id="[slug]-desc">[一句话说明这张图展示了什么]</desc>
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#5c6470"/>
+        </marker>
+        <marker id="arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#c2451e"/>
+        </marker>
+        <marker id="arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#1d4ed8"/>
+        </marker>
+      </defs>
+
+      <rect width="100%" height="100%" fill="#f7f5f2"/>
+
+      <!-- 先画箭头，再画节点（z 序：线在节点下）。在此替换为你的内容 -->
+
+    </svg>
+  </div>
+</body>
+</html>
