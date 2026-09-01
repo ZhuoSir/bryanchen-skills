@@ -1,6 +1,6 @@
 ---
 name: diagram-skill
-description: "绘制编辑级中文图表：架构图、流程图、时序图、ER 图、甘特图、状态机、泳道图、树状图、象限图、时间线，输出自包含 HTML+内联 SVG（可浏览器直接打开）。中文字体优化（苹方/微软雅黑/Noto Sans SC）、4px 网格、正交连线、焦点色克制。触发词：画图、画个图、架构图、流程图、时序图、ER图、甘特图、泳道图、状态机、树状图、象限图、时间线、diagram。NOT for: 快速草图/纯文本图（用 mermaid-skill 或文字）、海报/视觉设计（用 canvas-design）、PPT 文件（用 bez-ppt-skill）。"
+description: "绘制编辑级中文图表：架构图、流程图、时序图、ER 图、甘特图、状态机、泳道图、树状图、象限图、时间线、柱状图、折线图、饼图/环形图，输出自包含 HTML+内联 SVG（可浏览器直接打开，可导出 PNG/透明底）。中文字体优化（苹方/微软雅黑/Noto Sans SC）、4px 网格、正交连线、焦点色克制、数据图按公式换算坐标。触发词：画图、画个图、架构图、流程图、时序图、ER图、甘特图、泳道图、状态机、树状图、象限图、时间线、柱状图、折线图、饼图、数据图表、diagram、bar chart、line chart、pie chart。NOT for: 快速草图/纯文本图（用 mermaid-skill 或文字）、海报/视觉设计（用 canvas-design）、PPT 文件（用 bez-ppt-skill）。"
 ---
 
 # Diagram Skill（diagram-skill）
@@ -44,6 +44,11 @@ description: "绘制编辑级中文图表：架构图、流程图、时序图、
 | 父子层级关系 | **树状图** | [references/type-tree.md](references/type-tree.md) |
 | 双轴定位/优先级 | **象限图** | [references/type-quadrant.md](references/type-quadrant.md) |
 | 事件在时间轴上 | **时间线** | [references/type-timeline.md](references/type-timeline.md) |
+| 跨类别数值比较 | **柱状图** | [references/type-bar.md](references/type-bar.md) |
+| 连续趋势/时间序列 | **折线图** | [references/type-line.md](references/type-line.md) |
+| 部分占整体比例 | **饼图/环形图** | [references/type-pie.md](references/type-pie.md) |
+
+- 数据图表（柱状/折线/饼）的**数值→像素换算必须严格按类型参考里的公式**逐步计算，禁止目测估算
 
 - 两种类型都沾边 → 选主导轴的那个；超预算 → 拆"总览 + 细节"两张
 - **画之前用一句话说明计划**：类型 + 画布尺寸 + 因预算要砍掉什么。用户在场就让他先确认
@@ -100,6 +105,9 @@ description: "绘制编辑级中文图表：架构图、流程图、时序图、
 | 甘特任务 | ≤12 |
 | 树深度 | ≤4 |
 | 象限条目 | ≤12 |
+| 柱状图 | 单系列柱 ≤8；多系列类目 ≤6 × 系列 ≤3 |
+| 折线图 | 每系列点 ≤12、系列 ≤3、关键点标注 ≤4 |
+| 饼图/环形图 | 切片 ≤6（超出合并"其他"），标签右排列表 |
 
 超出 → 拆图。4px 网格：所有坐标/尺寸/字号必须被 4 整除（描边宽 0.8/1/1.2 和透明度豁免）。
 
