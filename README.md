@@ -115,6 +115,7 @@
 | 中文排版 | 系统字体栈（苹方/雅黑/Noto Sans SC）；中文按 1em/字估算宽度，最小 12px |
 | 设计系统 | 语义令牌（paper/ink/accent…）可换肤；焦点色 ≤2、4px 网格、正交圆角连线、标签遮罩 |
 | 质量门 | `scripts/self_check.py` 交付前必过：a11y 契约（role/title/desc slug 前缀）、单文件安全、网格纪律 |
+| 导出 PNG | `scripts/export_png.py`：`--bare` 纯图 / `--transparent` 透明底 / `--scale` 高清；透明适配规则见 `references/export.md` |
 
 **与 mermaid-skill 的分工**：mermaid 快速出草图；本 skill 出"能放进正式文档/汇报"的精美图。
 
@@ -182,9 +183,11 @@ diagram-skill/
 │   └── template.html   # 中文优化模板（系统字体栈 + SVG 骨架）
 ├── references/
 │   ├── style-guide.md  # 设计令牌 + 中文排版规则 + 换肤
-│   └── type-*.md       # 10 种图表类型的布局语法（按需加载）
+│   ├── type-*.md       # 10 种图表类型的布局语法（按需加载）
+│   └── export.md       # 导出规则（PNG/纯图/透明底适配）
 └── scripts/
-    └── self_check.py   # 交付前自检（a11y 契约/单文件安全/网格纪律）
+    ├── self_check.py   # 交付前自检（a11y 契约/单文件安全/网格纪律）
+    └── export_png.py   # HTML → PNG（puppeteer，--bare/--transparent/--scale）
 ```
 
 ## 安装

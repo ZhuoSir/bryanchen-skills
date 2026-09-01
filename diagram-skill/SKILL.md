@@ -110,6 +110,17 @@ description: "绘制编辑级中文图表：架构图、流程图、时序图、
 - **可访问性契约**：`<svg role="img" aria-labelledby="<slug>-title <slug>-desc">`；`<title>` 必须是 svg 第一个子元素；id 带 slug 前缀（禁止裸 `title`/`desc`）
 - `<desc>` 写内容不写几何：「展示订单从下单到履约的跨系统流转」，不是「上面一个框下面五个框」
 
+## 6.1 导出 PNG（用户要图片/发微信/贴 PPT 时）
+
+```bash
+python3 scripts/export_png.py <图.html> [-o out.png] [--bare] [--transparent] [--scale 2]
+```
+
+- `--bare`：纯图（只截 svg 区域，去标题/图例）；`--transparent`：透明背景
+- **导出前必读** [references/export.md](references/export.md)：透明底需做可见性补偿（低透明度填充会消失）、bare 模式 viewBox 收紧等规则
+- 发微信/IM：用 `--bare --transparent` 或 `--bare` 出 PNG 后直接发
+- 导出 PNG 是被动行为：用户没要图片就只交付 HTML
+
 ## 7. 交付前自检
 
 1. 过一遍：类型选对了吗？有节点/连线/标签能删吗？焦点色 ≤2？预算内？
