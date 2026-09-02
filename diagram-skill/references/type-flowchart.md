@@ -16,8 +16,8 @@
 
 ```svg
 <polygon points="cx,cy-28 cx+56,cy cx,cy+28 cx-56,cy"
-         fill="rgba(194,69,30,0.08)" stroke="#c2451e" stroke-width="1"/>
-<text x="cx" y="cy+4" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e">条件?</text>
+         fill="rgba(37,99,235,0.10)" stroke="#2563eb" stroke-width="1"/>
+<text x="cx" y="cy+4" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">条件?</text>
 ```
 
 （菱形内文字 ≤8 个汉字；放不下就缩短条件，细节写到正文）

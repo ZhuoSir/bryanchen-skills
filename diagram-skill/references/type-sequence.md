@@ -19,9 +19,9 @@
 
 ```svg
 <line x1="120" y1="80" x2="120" y2="560" stroke="#8a919c" stroke-width="1" stroke-dasharray="4,4"/>
-<line x1="120" y1="160" x2="388" y2="160" stroke="#5c6470" stroke-width="1.2" marker-end="url(#arrow)"/>
-<rect x="180" y="140" width="120" height="12" rx="2" fill="#f7f5f2"/>
-<text x="240" y="149" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5c6470">POST /orders</text>
+<line x1="120" y1="160" x2="388" y2="160" stroke="#5b6b80" stroke-width="1.2" marker-end="url(#arrow)"/>
+<rect x="180" y="140" width="120" height="12" rx="2" fill="#ffffff"/>
+<text x="240" y="149" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5b6b80">POST /orders</text>
 ```
 
 ## 预算

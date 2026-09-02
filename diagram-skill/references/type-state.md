@@ -14,10 +14,10 @@
 ## 画法
 
 ```svg
-<circle cx="60" cy="200" r="6" fill="#23272e"/>
-<path d="M 66,200 L 96,200" stroke="#5c6470" marker-end="url(#arrow)"/>
-<rect x="100" y="184" width="96" height="32" rx="16" fill="#fff" stroke="#23272e"/>
-<text x="148" y="204" text-anchor="middle" font-size="12" fill="#23272e">待支付</text>
+<circle cx="60" cy="200" r="6" fill="#1f2937"/>
+<path d="M 66,200 L 96,200" stroke="#5b6b80" marker-end="url(#arrow)"/>
+<rect x="100" y="184" width="96" height="32" rx="16" fill="#fff" stroke="#1f2937"/>
+<text x="148" y="204" text-anchor="middle" font-size="12" fill="#1f2937">待支付</text>
 ```
 
 ## 预算

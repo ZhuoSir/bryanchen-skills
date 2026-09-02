@@ -14,7 +14,7 @@
 
 ```svg
 <path d="M 200,300 L 232,300 Q 240,300 240,292 L 240,108 Q 240,100 248,100 L 280,100"
-      fill="none" stroke="#5c6470" stroke-width="1.2"/>
+      fill="none" stroke="#5b6b80" stroke-width="1.2"/>
 ```
 
 ## 预算

@@ -28,7 +28,7 @@ description: "绘制编辑级中文图表：架构图、流程图、时序图、
 
 - 每个节点代表一个独立的点子；永远一起出现的两个节点应合并成一个
 - 每条连线必须携带信息；布局已经能说明的关系，删掉那根线
-- 焦点色（砖红）是**编辑手段**：每张图最多 1–2 个焦点元素，到处用等于没用
+- 焦点色（蓝）是**编辑手段**：每张图最多 1–2 个焦点元素，到处用等于没用
 - **目标密度 4/10**：技术上完整，但不需要图例导读。超过 9 个节点，就该拆成两张图
 
 ## 2. 选型路由
@@ -57,7 +57,9 @@ description: "绘制编辑级中文图表：架构图、流程图、时序图、
 ## 3. 设计系统（摘要，全文见 references/style-guide.md）
 
 颜色用语义角色，不写死色值：`paper / paper-2 / ink / muted / soft / accent / accent-tint / link / rule`。
-默认皮肤：米白纸面 + 深灰墨 + 砖红焦点。换肤改 `assets/template.html` 的 `:root` 或按 style-guide.md 定制。
+默认皮肤：**白色纸面 + 蓝白黑灰主调**（白底、蓝黑墨、蓝焦点，无米白）。换肤改 `assets/template.html` 的 `:root` 或按 style-guide.md 定制。
+
+**图标**（可选）：节点内可放图标做语义锚点——模板 `<defs>` 自带 35 枚内联 16×16 线性 `<symbol>`（`icon-user / icon-server / icon-database / icon-code / icon-network / icon-search …`），目录与槽位/取色规则见 [references/icons.md](references/icons.md)。每节点 ≤1 枚、颜色随 `currentColor`、仅语义不装饰。
 
 **节点处理**（fill / stroke）：
 

@@ -31,12 +31,12 @@
 ## 画法
 
 ```svg
-<line x1="64" y1="32" x2="64" y2="552" stroke="#23272e" opacity="0.6"/>
-<line x1="64" y1="552" x2="968" y2="552" stroke="#23272e" opacity="0.6"/>
-<line x1="64" y1="162" x2="968" y2="162" stroke="rgba(35,39,46,0.12)" stroke-dasharray="4,4" stroke-width="0.8"/>
-<rect x="160" y="292" width="64" height="260" rx="4" fill="#23272e"/>
-<text x="192" y="284" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5c6470">32.5</text>
-<text x="192" y="572" text-anchor="middle" font-size="12" fill="#23272e">杭州</text>
+<line x1="64" y1="32" x2="64" y2="552" stroke="#1f2937" opacity="0.6"/>
+<line x1="64" y1="552" x2="968" y2="552" stroke="#1f2937" opacity="0.6"/>
+<line x1="64" y1="162" x2="968" y2="162" stroke="rgba(31,41,55,0.14)" stroke-dasharray="4,4" stroke-width="0.8"/>
+<rect x="160" y="292" width="64" height="260" rx="4" fill="#1f2937"/>
+<text x="192" y="284" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5b6b80">32.5</text>
+<text x="192" y="572" text-anchor="middle" font-size="12" fill="#1f2937">杭州</text>
 ```
 
 ## 预算

@@ -25,10 +25,10 @@
 
 ```svg
 <polyline points="64,392 192,340 320,288 448,236 576,184 704,132 832,158 968,96"
-          fill="none" stroke="#23272e" stroke-width="2"/>
-<circle cx="832" cy="132" r="4" fill="#23272e" stroke="#f7f5f2" stroke-width="2"/>
-<text x="832" y="116" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5c6470">33.7°</text>
-<text x="968" y="120" text-anchor="end" font-size="12" fill="#23272e">杭州</text>  <!-- 末端直接标注 -->
+          fill="none" stroke="#1f2937" stroke-width="2"/>
+<circle cx="832" cy="132" r="4" fill="#1f2937" stroke="#ffffff" stroke-width="2"/>
+<text x="832" y="116" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5b6b80">33.7°</text>
+<text x="968" y="120" text-anchor="end" font-size="12" fill="#1f2937">杭州</text>  <!-- 末端直接标注 -->
 ```
 
 ## 预算

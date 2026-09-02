@@ -14,9 +14,9 @@
 
 ```svg
 <!-- 泳道背景与分隔 -->
-<rect x="0" y="96" width="96" height="96" fill="rgba(35,39,46,0.05)"/>
-<text x="48" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e">客服</text>
-<line x1="0" y1="192" x2="1000" y2="192" stroke="rgba(35,39,46,0.12)" stroke-width="0.8"/>
+<rect x="0" y="96" width="96" height="96" fill="rgba(31,41,55,0.05)"/>
+<text x="48" y="148" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">客服</text>
+<line x1="0" y1="192" x2="1000" y2="192" stroke="rgba(31,41,55,0.14)" stroke-width="0.8"/>
 ```
 
 ## 预算

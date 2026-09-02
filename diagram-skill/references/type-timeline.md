@@ -14,11 +14,11 @@
 ## 画法
 
 ```svg
-<line x1="40" y1="300" x2="960" y2="300" stroke="#23272e" stroke-width="1.5" marker-end="url(#arrow)"/>
-<circle cx="320" cy="300" r="6" fill="#f7f5f2" stroke="#23272e"/>
-<line x1="320" y1="294" x2="320" y2="252" stroke="rgba(35,39,46,0.12)"/>
-<rect x="248" y="180" width="144" height="64" rx="6" fill="#fff" stroke="rgba(35,39,46,0.12)"/>
-<text x="320" y="272" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5c6470">2026-03</text>
+<line x1="40" y1="300" x2="960" y2="300" stroke="#1f2937" stroke-width="1.5" marker-end="url(#arrow)"/>
+<circle cx="320" cy="300" r="6" fill="#ffffff" stroke="#1f2937"/>
+<line x1="320" y1="294" x2="320" y2="252" stroke="rgba(31,41,55,0.14)"/>
+<rect x="248" y="180" width="144" height="64" rx="6" fill="#fff" stroke="rgba(31,41,55,0.14)"/>
+<text x="320" y="272" text-anchor="middle" font-size="8" font-family="ui-monospace,Menlo,monospace" fill="#5b6b80">2026-03</text>
 ```
 
 ## 预算

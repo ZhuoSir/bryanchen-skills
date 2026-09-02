@@ -13,10 +13,10 @@
 ## 画法
 
 ```svg
-<line x1="120" y1="520" x2="120" y2="80" stroke="#23272e" opacity="0.6" marker-end="url(#arrow)"/>
-<line x1="120" y1="300" x2="880" y2="300" stroke="#23272e" opacity="0.6"/>
-<circle cx="640" cy="180" r="8" fill="#c2451e"/>
-<text x="656" y="184" font-size="12" font-weight="600" fill="#23272e">自研中台</text>
+<line x1="120" y1="520" x2="120" y2="80" stroke="#1f2937" opacity="0.6" marker-end="url(#arrow)"/>
+<line x1="120" y1="300" x2="880" y2="300" stroke="#1f2937" opacity="0.6"/>
+<circle cx="640" cy="180" r="8" fill="#2563eb"/>
+<text x="656" y="184" font-size="12" font-weight="600" fill="#1f2937">自研中台</text>
 ```
 
 ## 预算

@@ -13,11 +13,11 @@
 ## 实体框画法
 
 ```svg
-<rect x="X" y="Y" width="160" height="H" rx="6" fill="#fff" stroke="#23272e"/>
-<rect x="X" y="Y" width="160" height="24" rx="6" fill="rgba(35,39,46,0.05)"/>
-<text x="X+80" y="Y+16" text-anchor="middle" font-size="12" font-weight="600" fill="#23272e">orders</text>
-<text x="X+12" y="Y+40" font-size="9" font-family="ui-monospace,Menlo,monospace" fill="#5c6470">PK  id: bigint</text>
-<text x="X+12" y="Y+56" font-size="9" font-family="ui-monospace,Menlo,monospace" fill="#5c6470">FK  user_id: bigint</text>
+<rect x="X" y="Y" width="160" height="H" rx="6" fill="#fff" stroke="#1f2937"/>
+<rect x="X" y="Y" width="160" height="24" rx="6" fill="rgba(31,41,55,0.05)"/>
+<text x="X+80" y="Y+16" text-anchor="middle" font-size="12" font-weight="600" fill="#1f2937">orders</text>
+<text x="X+12" y="Y+40" font-size="9" font-family="ui-monospace,Menlo,monospace" fill="#5b6b80">PK  id: bigint</text>
+<text x="X+12" y="Y+56" font-size="9" font-family="ui-monospace,Menlo,monospace" fill="#5b6b80">FK  user_id: bigint</text>
 ```
 
 字段行高 16px，框高 = 24 + 字段数 × 16 + 8，取 4 的倍数。每实体最多展示 8 个字段（多的用 `…` 收尾）。

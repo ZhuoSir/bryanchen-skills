@@ -15,7 +15,7 @@
 
 ```svg
 <path d="M x1,y L mx-8,y Q mx,y mx,y-8 L mx,by+8 Q mx,by mx+8,by L x2,by"
-      fill="none" stroke="#5c6470" stroke-width="1.2" marker-end="url(#arrow)"/>
+      fill="none" stroke="#5b6b80" stroke-width="1.2" marker-end="url(#arrow)"/>
 ```
 
 （方向按实际象限调整正负号；r=8 是四分之一圆弧半径）

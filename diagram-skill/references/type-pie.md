@@ -24,7 +24,7 @@
 - 配色顺序：`ink` → `muted` → `link` → `soft` → `ink 40%`；最大切片或用户关注点可用 `accent`（≤1-2）
 - 标签：右侧竖排列表——8px 色块圆点 + sans 12px 名称 + mono 8px 百分比（`p×100` 保留 1 位小数）
 - 环形中心：总计数（serif 24px）+ 说明（mono 8px muted）
-- 切片间 2px 纸色描边分隔（`stroke="#f7f5f2"` stroke-width=2）
+- 切片间 2px 纸色描边分隔（`stroke="#ffffff"` stroke-width=2）
 
 ## 预算
 

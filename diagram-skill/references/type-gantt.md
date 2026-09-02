@@ -15,8 +15,8 @@
 ## 画法
 
 ```svg
-<rect x="300" y="120" width="240" height="16" rx="4" fill="#23272e" opacity="0.8"/>
-<text x="292" y="132" text-anchor="end" font-size="12" fill="#23272e">需求评审</text>
+<rect x="300" y="120" width="240" height="16" rx="4" fill="#1f2937" opacity="0.8"/>
+<text x="292" y="132" text-anchor="end" font-size="12" fill="#1f2937">需求评审</text>
 ```
 
 条上可写百分比（白字 8px，完成度）；未开始的条用 ink 20% 描边虚线 + 无填充表示计划。
