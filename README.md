@@ -179,6 +179,7 @@ pdf-recognition/
 
 diagram-skill/
 ├── SKILL.md            # 路由表 + 设计系统摘要 + 通用规则 + 自检清单
+├── CHANGELOG.md        # 版本记录
 ├── assets/
 │   └── template.html   # 中文优化模板（系统字体栈 + SVG 骨架）
 ├── references/
@@ -186,8 +187,10 @@ diagram-skill/
 │   ├── type-*.md       # 13 种图表类型的布局语法（按需加载，数据图含换算公式）
 │   └── export.md       # 导出规则（PNG/纯图/透明底适配）
 └── scripts/
-    ├── self_check.py   # 交付前自检（a11y 契约/单文件安全/网格纪律）
-    └── export_png.py   # HTML → PNG（puppeteer，--bare/--transparent/--scale）
+    ├── self_check.py   # 交付前自检（a11y 契约/单文件安全/网格纪律，UTF-8 强制）
+    ├── export_png.py   # HTML → PNG（puppeteer；失败自动降级 resvg）
+    ├── render_svg.js   # 降级渲染：resvg-js 进程内光栅化（无浏览器/沙箱环境）
+    └── package.json    # resvg 依赖声明（按需 npm install）
 ```
 
 ## 安装

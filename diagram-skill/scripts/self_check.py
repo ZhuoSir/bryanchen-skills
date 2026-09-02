@@ -116,6 +116,11 @@ class Checker(HTMLParser):
 
 
 def main():
+    # Windows 中文控制台（GBK）下打印 ✅/❌/⚠️ 会 UnicodeEncodeError，强制 UTF-8
+    _rc = getattr(sys.stdout, "reconfigure", None)
+    if _rc:
+        _rc(encoding="utf-8", errors="replace")
+
     if len(sys.argv) != 2:
         print(__doc__)
         sys.exit(2)

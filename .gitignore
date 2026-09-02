@@ -6,3 +6,6 @@ __pycache__/
 .DS_Store
 .tmp_*
 stock-intraday-demo.*
+agent-loop.*
+node_modules/
+diagram-skill.zip

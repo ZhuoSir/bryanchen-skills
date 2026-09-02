@@ -48,3 +48,27 @@ puppeteer 的 headless-shell 是为无头场景设计的，稳定。脚本自动
 | 微信/聊天 | `--bare`（纸面底） |
 | 贴 PPT/深色页/任意底色 | `--bare --transparent` |
 | 二次编辑 | 交付 HTML 源文件 |
+
+## 无浏览器/沙箱环境降级：resvg 渲染
+
+puppeteer 需要启动浏览器进程；沙箱环境（禁止命名管道/进程创建）或精简系统里会 EPERM 失败。
+此时用**进程内光栅化**降级路径：
+
+```bash
+cd <skill>/scripts && npm install        # 首次安装 @resvg/resvg-js（原生库，无需浏览器）
+node scripts/render_svg.js <图.html> [-o out.png] [--scale 2]
+```
+
+- 行为等价于 `--bare --transparent`：只渲染 svg 本体、透明底
+- `export_png.py` 在 puppeteer 缺失或启动失败时会**自动降级**到该路径（输出 JSON 带 `engine: "resvg"` 与 note）
+- 限制：resvg 无 CSS 布局，svg 根必须有数值 width/height（render_svg.js 会从 viewBox 自动补齐）；不支持 HTML 页面包装（标题/图例属于页面层，bare 模式本就不含）
+- 位图细节（滤镜、特殊字体连字）与浏览器渲染可能有细微差异，导出后目检
+
+## 文件名可移植性
+
+交付物（要发给他人/导入其他工具的 PNG、HTML）**使用 ASCII 文件名**：中文文件名在部分查看器、
+在线编辑器、导入工具中会出现破图或无法识别（实测复现）。
+
+- 工作副本可以用中文命名（如 `订单流程图.html`）
+- **交付/发布前**复制一份 ASCII 文件名副本：`order-flow.png`
+- 图内部的 `<title>`/`<desc>`/slug 不受影响，保持中文可读

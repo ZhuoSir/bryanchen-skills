@@ -1,5 +1,6 @@
 ---
 name: diagram-skill
+version: "1.1.0"
 description: "绘制编辑级中文图表：架构图、流程图、时序图、ER 图、甘特图、状态机、泳道图、树状图、象限图、时间线、柱状图、折线图、饼图/环形图，输出自包含 HTML+内联 SVG（可浏览器直接打开，可导出 PNG/透明底）。中文字体优化（苹方/微软雅黑/Noto Sans SC）、4px 网格、正交连线、焦点色克制、数据图按公式换算坐标。触发词：画图、画个图、架构图、流程图、时序图、ER图、甘特图、泳道图、状态机、树状图、象限图、时间线、柱状图、折线图、饼图、数据图表、diagram、bar chart、line chart、pie chart。NOT for: 快速草图/纯文本图（用 mermaid-skill 或文字）、海报/视觉设计（用 canvas-design）、PPT 文件（用 bez-ppt-skill）。"
 ---
 
