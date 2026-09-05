@@ -6,6 +6,7 @@
 
 - **新增 17 枚高频图标**：`icon-users / mobile / monitor / cpu / network / cart / building / bank / lock / key / search / bell / calendar / flag / target / box / download`，沿用既有规范（16×16、全 path、currentColor、无 self_check 告警）
 - **文档**：`references/icons.md` 目录补 17 行、体量上限 24 → 40；SKILL.md / style-guide.md 数量与示例 slug 同步
+- **版本号对齐**：SKILL.md frontmatter 与 `scripts/package(-lock).json` 从 1.1.0 统一升至 1.3.0（此前与 CHANGELOG 不一致）
 - 模板 `assets/template.html` 图标库扩至 35 枚，新增图标风格与几何图标集一致（锐角矩形、圆环/圆弧 path 构造）
 
 ## 1.2.0（2026-09-02）
