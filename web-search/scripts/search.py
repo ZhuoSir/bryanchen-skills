@@ -7,11 +7,28 @@
   首选引擎不支持时间过滤则直接跳过（Note 说明 "does not support time filtering"，而非"失败"）
 - 整条链共享 30s 总预算；首选引擎失败原因记入 Note
 - API Key 从环境变量读取：EXA_API_KEY / TAVILY_API_KEY / KEENABLE_API_KEY / PERPLEXITY_API_KEY / DEEPSEEK_API_KEY
+- 首选引擎可用环境变量 WEB_SEARCH_ENGINE 覆盖（默认 exa）
+- query 含 site: 时，实测忽略该操作符的引擎（bing）会被跳过并记入 Note，避免静默返回其他站点的结果
 
 用法:
-    python3 search.py --query "关键词" [--max 5] [--engine bing] [--time day|week|month|year|12h|3d|2mo|1y|YYYY-MM-DD]
+    python3 search.py --query "关键词" [--max 5] [--engine exa] [--time day|week|month|year|12h|3d|2mo|1y|YYYY-MM-DD]
+                      [--strict] [--list-engines]
 输出:
-    stdout JSON: {"query", "engine", "note"?, "answer"?, "results": [{title, url, snippet, publishedAt?}]}
+    stdout JSON: {"query", "engine", "note"?, "warning"?, "answer"?, "self_check"?,
+                  "results": [{title, url, snippet, publishedAt?}]}
+
+为什么需要结果自检：
+  降级链只在「失败或 0 结果」时才往后走，因此一个**能返回结果、但结果与查询语义无关**的引擎
+  永远不会被跳过——这是最危险的形态（失败可被发现，静默错配不能）。实测默认引擎 bing 搜
+  「高升控股股份有限公司 首席技术官 CTO」，返回的是足球运动员「高升」的百科页与「高升」的
+  汉语词典释义，而 engine 字段照报成功、无 note、无 error。
+  实测同一检索词下 exa / tavily / keenable 均准确命中；`site:` 定向 Bing 实测完全忽略
+  （0/3 条来自目标域），exa / tavily / keenable 3/3 遵守。
+  为此本版本做三件事：
+    1. 默认引擎 bing → exa（可用环境变量 WEB_SEARCH_ENGINE 覆盖）
+    2. 引入 ENGINE_TRAITS 引擎画像（质量档位 + 是否遵守 site:），按实测维护
+    3. 结果自检 self_check（site: 是否真生效、结果与查询有无词面交集），不通过时输出 warning
+  判定与处理规则见 SKILL.md「引擎画像与结果自检」。
 """
 import argparse
 import json
@@ -54,8 +71,51 @@ FREE_ENGINES = ["bing", "anysearch", "ddg", "ddg-lite", "searxng"]
 TIME_ENGINES = ["tavily", "exa", "keenable", "searxng", "ddg", "ddg-lite"]
 ALL_ENGINES = PAID_ENGINES + FREE_ENGINES
 
+# ---------- 引擎画像（ENGINE_TRAITS） ----------
+# 全部按实测维护，不要凭记忆改。改动前请先按 SKILL.md「引擎画像与结果自检」的方法复测。
+#
+#   tier 质量档位：
+#     precision  语义/精确匹配引擎。适合实体级检索（企业名、人名、site: 定向）。
+#     standard   通用搜索引擎，可用，但不保证对实体名做精确匹配。
+#     broad      关键词抓取式。实测**会把实体名当普通词处理**：搜「高升控股股份有限公司 首席
+#                技术官 CTO」返回足球运动员「高升」的百科页与「高升」的汉语词典释义。
+#                因此它的结果不能直接作为实体级事实依据。
+#   site: 三态（query 含 site:domain 时该引擎是否真的过滤到该域）：
+#     True   实测遵守（结果落在目标域）
+#     False  实测忽略（结果来自任意站点）
+#     None   未验证 —— 保守处理：只有 --strict 才会要求 site 必须为 True
+ENGINE_TRAITS = {
+    "exa":               {"tier": "precision", "site": True},
+    "tavily":            {"tier": "precision", "site": True},
+    "keenable":          {"tier": "precision", "site": True},
+    "perplexity":        {"tier": "precision", "site": None},
+    "deepseek-official": {"tier": "precision", "site": None},
+    "anysearch":         {"tier": "standard",  "site": True},
+    "searxng":           {"tier": "standard",  "site": None},
+    "ddg":               {"tier": "standard",  "site": None},
+    "ddg-lite":          {"tier": "standard",  "site": None},
+    "bing":              {"tier": "broad",     "site": False},
+}
+
+# 默认引擎：exa。DSH free-search 插件默认 bing，本 skill 有意**偏离**该默认值——
+# bing 的静默错配（见文件头说明）会让"看起来成功"的假结果直接进入下游结论。
+# 国内网络可设 WEB_SEARCH_ENGINE 覆盖为 tavily/keenable 等。
+_ENV_ENGINE = (os.environ.get("WEB_SEARCH_ENGINE") or "").strip().lower()
+DEFAULT_ENGINE = _ENV_ENGINE if _ENV_ENGINE in ALL_ENGINES else "exa"
+
+SITE_RE = re.compile(r"\bsite:\s*([^\s]+)", re.I)
+# 词面自检时不参与判定的通用词（查询里出现它们不构成"命中了查询"的证据）
+QUERY_STOPWORDS = {"the", "a", "an", "of", "and", "or", "for", "in", "on", "to",
+                   "最新", "相关", "消息", "新闻", "情况", "介绍"}
+
 BUDGET_S = 30  # 整条引擎链总预算（与 DSH 一致）
 MIN_RESPONSE = 500
+
+# 抓 HTML 的引擎（内部多实例 / 多重重试）会独自吃满整条链预算，必须单独设硬上限：
+# 实测 ddg 39.5s、searxng 48.4s（都超过 30s 总预算），会把后面的 precision 引擎饿死。
+# 对照：exa 3.4s / tavily 2.2s / keenable 4.8s / anysearch 1.6s / bing 0.8s。
+SCRAPE_ENGINES = {"bing", "ddg", "ddg-lite", "searxng"}
+SCRAPE_BUDGET_S = 8.0
 
 DAYS_BY_RANGE = {"day": 1, "week": 7, "month": 30, "year": 365}
 SEARXNG_TIME = {"day": "day", "week": "week", "month": "month", "year": "year"}
@@ -159,14 +219,29 @@ def format_keenable_relative(days):
     return f"{round(days / 365)}y"
 
 
-def http_request(url, timeout=12, method="GET", body=None, headers=None, tries=1, interval=1.5):
-    """带重试的 HTTP 请求，返回文本。重试仅用于 GET（HTML 抓取）。"""
+def http_request(url, timeout=12, method="GET", body=None, headers=None, tries=1, interval=1.5,
+                 budget=None):
+    """带重试的 HTTP 请求，返回文本。重试仅用于 GET（HTML 抓取）。
+
+    budget：本次调用允许占用的**总**秒数（含全部重试）。不传则只按单次 timeout 计。
+
+    为什么需要 budget：重试各自计时，所以 tries=3 × timeout=12s ≈ 36s。实测 ddg 在不可达
+    网络下耗时 39.5s、searxng 48.4s，**独自吃光整条链的 30s 预算**并把后面的 exa/tavily
+    饿死，最终表现为"全网搜索失败"——而实际只是第一个引擎不可达。
+    """
     hdrs = {"User-Agent": USER_AGENT, "Accept-Language": ACCEPT_LANG}
     if headers:
         hdrs.update(headers)
     data = json.dumps(body).encode() if body is not None else None
     last = None
+    started = time.monotonic()
     for attempt in range(tries):
+        if budget is not None:
+            left = budget - (time.monotonic() - started)
+            if left <= 0.5:
+                raise last or EngineError(
+                    f"budget {budget:.0f}s exhausted ({url.split('/')[2]})")
+            timeout = min(timeout, left)
         try:
             req = urllib.request.Request(url, data=data, headers=hdrs, method=method)
             with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -263,6 +338,83 @@ def parse_title_url_blocks(text, max_results):
     return unique_sources(sources, max_results)
 
 
+# ---------- 结果自检 ----------
+# 目的：识别「引擎成功返回、但结果与查询无关」的静默错配。
+# 设计原则是**保守优先（宁漏不误伤）**：只判定证据无歧义的情形，模糊地带交给人/上层 Agent 判断。
+
+def extract_site_domains(query):
+    """取出 query 里的 site: 目标域（支持 site:a.com、site:https://a.com/x）。"""
+    out = []
+    for m in SITE_RE.finditer(query or ""):
+        d = m.group(1).strip().strip("\"'").lower()
+        d = re.sub(r"^[a-z][a-z0-9+.-]*://", "", d).split("/")[0].split(":")[0].lstrip(".")
+        if d:
+            out.append(d)
+    return out
+
+
+def check_site_filter(query, sources):
+    """query 含 site: 时校验该过滤是否真的生效；不含 site: 返回 None。
+
+    这是确定性判定（比对结果 URL 的 host），因此可作硬门禁：
+    bing 实测忽略 site:，会静默返回任意站点的结果，在这里必然暴露为 honored=False。
+    """
+    domains = extract_site_domains(query)
+    if not domains:
+        return None
+    matched = 0
+    for s in sources:
+        host = (urllib.parse.urlsplit(s.get("url") or "").netloc or "").lower().split(":")[0]
+        if any(host == d or host.endswith("." + d) for d in domains):
+            matched += 1
+    return {"domains": domains, "matched": matched, "total": len(sources),
+            "honored": matched > 0}
+
+
+def _cjk_bigrams(text):
+    out = set()
+    for run in re.findall(r"[\u4e00-\u9fff]{2,}", text or ""):
+        for i in range(len(run) - 1):
+            out.add(run[i:i + 2])
+    return out
+
+
+def query_terms(query):
+    """把 query 拆成用于词面校验的项（去掉 site: 操作符与布尔词）。"""
+    q = SITE_RE.sub(" ", query or "")
+    q = re.sub(r"\b(?:OR|AND|NOT)\b", " ", q)
+    terms, seen = [], set()
+    for t in re.split(r"[\s,，、;；/|\\()（）\[\]【】\"'“”]+", q):
+        t = t.strip(" .,!?:;、。，！？")
+        tl = t.lower()
+        if len(t) < 2 or tl in QUERY_STOPWORDS or tl in seen:
+            continue
+        seen.add(tl)
+        terms.append(t)
+    return terms
+
+
+def check_relevance(query, sources):
+    """词面自检：query 的关键词在结果里到底出现了没有。
+
+    只判「完全无交集」这一个无歧义情形 —— 实测 bing 的错配结果（足球运动员百科 / 汉语词典）
+    与查询 0/3 词面重合，而正确结果至少命中 1 项，判别清晰。
+    CJK 长词按**整词**计，所以「企业全称 vs 简称」这类部分命中不会被误判为失败。
+    coverage（CJK bigram 覆盖率）只作参考、不参与判定：实测错配 ≈0.08、正确 ≈0.25，
+    两者太近，做门禁会误伤，故仅作提示。
+    """
+    terms = query_terms(query)
+    if len(terms) < 2:
+        return None  # 单词查询没有判别力，不判定
+    blob = " ".join(f"{s.get('title', '')} {s.get('snippet', '')}" for s in sources).lower()
+    matched = [t for t in terms if t.lower() in blob]
+    qb, bb = _cjk_bigrams(query), _cjk_bigrams(blob)
+    return {"terms": len(terms), "matched": len(matched),
+            "level": "ok" if matched else "none",
+            "coverage": round(len(qb & bb) / len(qb), 2) if qb else None,
+            "missing": [t for t in terms if t.lower() not in blob][:5]}
+
+
 # ---------- 免费引擎 ----------
 
 def search_ddg_html(query, max_results, tr, deadline):
@@ -270,7 +422,7 @@ def search_ddg_html(query, max_results, tr, deadline):
     if tr and tr.get("days"):
         params["df"] = DDG_DF[approximate_time_range(tr["days"])]
     body = http_request(f"{DDG_HTML_URL}?{urllib.parse.urlencode(params)}",
-                        timeout=min(12, deadline), tries=3)
+                        timeout=min(12, deadline), tries=3, budget=deadline)
     sources = []
     for block in re.findall(r'<div class="result results_links[\s\S]*?</div>\s*</div>\s*</div>', body):
         url_m = re.search(r'<a[^>]*class="result__a"[^>]*href="([^"]*)"', block)
@@ -293,7 +445,7 @@ def search_ddg_lite(query, max_results, tr, deadline):
     if tr and tr.get("days"):
         params["df"] = DDG_DF[approximate_time_range(tr["days"])]
     body = http_request(f"{DDG_LITE_URL}?{urllib.parse.urlencode(params)}",
-                        timeout=min(12, deadline), tries=3)
+                        timeout=min(12, deadline), tries=3, budget=deadline)
     links = re.findall(r"<a[^>]*class=['\"]result-link['\"][^>]*>[\s\S]*?</a>", body)
     snippets = re.findall(r"class=['\"]result-snippet['\"][^>]*>([\s\S]*?)</td>", body)
     sources = []
@@ -317,7 +469,7 @@ def search_ddg_lite(query, max_results, tr, deadline):
 def search_bing(query, max_results, tr, deadline):
     params = {"q": query, "mkt": "zh-CN"}
     body = http_request(f"{BING_URL}?{urllib.parse.urlencode(params)}",
-                        timeout=min(12, deadline), tries=3)
+                        timeout=min(12, deadline), tries=3, budget=deadline)
     sources = []
     for block in re.findall(r'<li class="b_algo"[\s\S]*?</li>', body):
         href_m = re.search(r'<a[^>]*href="(https?://[^"]+)"', block)
@@ -336,13 +488,19 @@ def search_bing(query, max_results, tr, deadline):
 
 def search_searxng(query, max_results, tr, deadline):
     errors = []
+    started = time.monotonic()
     for base in SEARXNG_INSTANCES:
+        # 6 个实例各 8s 上限 = 最多 48s，会把整条链吃光 —— 按总预算截断
+        left = deadline - (time.monotonic() - started)
+        if left <= 0.5:
+            errors.append("实例轮询预算耗尽")
+            break
         try:
             params = {"q": query, "format": "json"}
             if tr and tr.get("days"):
                 params["time_range"] = SEARXNG_TIME[approximate_time_range(tr["days"])]
             text = http_request(f"{base}/search?{urllib.parse.urlencode(params)}",
-                                timeout=min(8, deadline), headers={"Accept": "application/json"})
+                                timeout=min(8, left), headers={"Accept": "application/json"})
             data = json.loads(text)
             results = data.get("results")
             if not isinstance(results, list):
@@ -513,34 +671,91 @@ ENGINE_FUNCS = {
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--query", "-q", required=True)
+    ap.add_argument("--query", "-q", default="",
+                    help="搜索关键词（--list-engines 时可省略）")
     ap.add_argument("--max", type=int, default=5)
-    ap.add_argument("--engine", "-e", default="bing", choices=ALL_ENGINES,
-                    help="首选引擎（默认 bing，与 DSH 一致）")
+    ap.add_argument("--engine", "-e", default=DEFAULT_ENGINE, choices=ALL_ENGINES,
+                    help=f"首选引擎（默认 {DEFAULT_ENGINE}；可用环境变量 WEB_SEARCH_ENGINE 覆盖）")
     ap.add_argument("--time", default="",
                     help="时间过滤：day/week/month/year、12h/3d/2mo/1y、YYYY-MM-DD")
+    ap.add_argument("--strict", action="store_true",
+                    help="精度优先：排除 broad 档引擎（bing）；query 含 site: 时只用实测遵守 site: 的引擎；"
+                         "自检不通过（site: 未生效 / 与查询无词面交集）视为该引擎失败并继续降级")
+    ap.add_argument("--list-engines", action="store_true",
+                    help="打印引擎画像（质量档位 / site: 支持）后退出")
     args = ap.parse_args()
+
+    if args.list_engines:
+        json.dump({"default": DEFAULT_ENGINE, "traits": ENGINE_TRAITS,
+                   "tiers": {t: [e for e in ALL_ENGINES
+                                 if (ENGINE_TRAITS.get(e) or {}).get("tier") == t]
+                             for t in ("precision", "standard", "broad")},
+                   "time_engines": TIME_ENGINES},
+                  sys.stdout, ensure_ascii=False, indent=2)
+        print()
+        return
 
     try:
         tr = parse_time_range(args.time)
     except EngineError as e:
         json.dump({"error": str(e)}, sys.stdout, ensure_ascii=False)
         sys.exit(1)
+
+    if not args.query.strip():
+        json.dump({"error": "--query/-q is required"}, sys.stdout, ensure_ascii=False)
+        print()
+        sys.exit(1)
     preferred = args.engine
 
-    # 构建降级链（与 DSH free-search 一致）
-    preferred_skipped_reason = None
+    # ---- 构建降级链 ----
+    site_domains = extract_site_domains(args.query)
+
+    def eligible(engine):
+        """按引擎画像决定是否允许该引擎进入本次降级链。"""
+        traits = ENGINE_TRAITS.get(engine)
+        if traits is None:
+            # 画像缺失 = 质量未知：--strict 下按"失败关闭"处理，别让不明档位的引擎混进结果
+            return not args.strict
+        if site_domains:
+            if traits.get("site") is False:
+                return False   # 实测忽略 site: —— 会静默返回别站结果，任何模式都不用
+            if args.strict and traits.get("site") is not True:
+                return False   # 未验证是否遵守 site: —— 只在 --strict 下排除
+        if args.strict and traits.get("tier") == "broad":
+            return False
+        return True
+
+    skip_reasons = []
+    if not eligible(preferred):
+        pt = ENGINE_TRAITS.get(preferred) or {}
+        if not pt:
+            skip_reasons.append("no engine traits (unknown quality), excluded by --strict")
+        if site_domains and pt.get("site") is False:
+            skip_reasons.append(f"ignores site: operator (query asks for {','.join(site_domains)})")
+        elif site_domains and args.strict and pt.get("site") is not True:
+            skip_reasons.append("site: support unverified, excluded by --strict")
+        if pt and args.strict and pt.get("tier") == "broad":
+            skip_reasons.append("broad-tier engine excluded by --strict")
+
+    cand = [preferred] + [e for e in PAID_ENGINES + FREE_ENGINES if e != preferred]
+    cand = [e for e in cand if eligible(e)]
+
     if tr:
-        preferred_first = [preferred] if preferred in TIME_ENGINES else []
-        other_time = [e for e in TIME_ENGINES if e != preferred]
-        no_time = [e for e in PAID_ENGINES + FREE_ENGINES
-                   if e not in TIME_ENGINES and e != preferred]
-        chain = preferred_first + other_time + no_time
-        if preferred not in TIME_ENGINES:
-            preferred_skipped_reason = "time-filter"
+        # 支持时间过滤的引擎排前面；首选不支持则整体跳过（Note 说明是"跳过"而非"失败"）
+        chain = ([e for e in cand if e in TIME_ENGINES]
+                 + [e for e in cand if e not in TIME_ENGINES])
+        if preferred in cand and preferred not in TIME_ENGINES:
+            chain = [e for e in chain if e != preferred]
+            skip_reasons.append(f"does not support time filtering (timeRange={args.time})")
     else:
-        chain = ([preferred] + [e for e in PAID_ENGINES if e != preferred]
-                 + [e for e in FREE_ENGINES if e != preferred])
+        chain = cand
+
+    if not chain:
+        json.dump({"query": args.query, "engine": None, "results": [],
+                   "error": "no eligible engine: " + "; ".join(skip_reasons or ["engine pool empty"])},
+                  sys.stdout, ensure_ascii=False)
+        print()
+        sys.exit(1)
 
     deadline_at = time.monotonic() + BUDGET_S
     last_error, preferred_failure = None, None
@@ -551,7 +766,9 @@ def main():
             last_error = EngineError(f"search timed out after {BUDGET_S}s")
             break
         try:
-            result = ENGINE_FUNCS[engine](args.query, args.max, tr, remaining)
+            # 抓 HTML 的引擎单独限时：否则一个不可达引擎会吃光整条链，把后面的引擎饿死
+            slice_s = min(remaining, SCRAPE_BUDGET_S) if engine in SCRAPE_ENGINES else remaining
+            result = ENGINE_FUNCS[engine](args.query, args.max, tr, slice_s)
             answer = None
             if isinstance(result, tuple):  # perplexity / deepseek-official 带 answer
                 sources, answer = result
@@ -565,16 +782,54 @@ def main():
                 if s.get("snippet"):
                     s["snippet"] = clean_snippet(s["snippet"])
 
+            # ---- 结果自检（见文件头"为什么需要结果自检"）----
+            check = {}
+            site_info = check_site_filter(args.query, sources)
+            if site_info:
+                check["site_filter"] = site_info
+            rel_info = check_relevance(args.query, sources)
+            if rel_info:
+                check["relevance"] = rel_info
+
+            # --strict：自检不通过 = 该引擎结果不可用，继续降级（宁可无结果，不用错结果）
+            if args.strict:
+                if site_info and not site_info["honored"]:
+                    raise EngineError(
+                        f'engine "{engine}" ignored the site: operator '
+                        f'(0/{site_info["total"]} results from {",".join(site_info["domains"])})')
+                if rel_info and rel_info["level"] == "none":
+                    raise EngineError(
+                        f'engine "{engine}" returned results with no query-term overlap '
+                        f'(0/{rel_info["terms"]})')
+
             out = {"query": args.query, "engine": engine, "results": sources}
             if args.time:
                 out["time_filter"] = args.time
             if answer:
                 out["answer"] = answer
-            # Note：区分"首选不支持时间过滤被跳过"与"首选真实失败"
+            if check:
+                out["self_check"] = check
+
+            # warning：结果可用但不该无条件采信，供上层 Agent / SKILL.md 铁律处置
+            warns = []
+            if ENGINE_TRAITS.get(engine, {}).get("tier") == "broad":
+                warns.append(f'引擎 "{engine}" 为 broad 档（实测会把实体名当普通词处理），'
+                             f"实体级结论不可直接采信；建议 --strict 或 --engine exa/tavily")
+            if site_info and not site_info["honored"]:
+                warns.append(f'引擎 "{engine}" 未遵守 site: 过滤'
+                             f'（{site_info["matched"]}/{site_info["total"]} 条来自 '
+                             f'{",".join(site_info["domains"])}），结果可能来自其他站点')
+            if rel_info and rel_info["level"] == "none":
+                warns.append(f"结果与查询无词面交集（0/{rel_info['terms']}："
+                             f"{'、'.join(rel_info['missing'])}），疑似语义错配，不得作为事实依据")
+            if warns:
+                out["warning"] = " | ".join(warns)
+
+            # Note：区分"首选被画像/时间过滤规则跳过"与"首选真实失败"
             if engine != preferred:
-                if preferred_skipped_reason == "time-filter":
-                    out["note"] = (f"Note: {preferred} does not support time filtering "
-                                   f"(timeRange={args.time}), using {engine}.")
+                if skip_reasons:
+                    out["note"] = (f"Note: {preferred} skipped ({'; '.join(skip_reasons)}), "
+                                   f"using {engine}.")
                 elif preferred_failure:
                     out["note"] = (f"Note: {preferred} unavailable or failed "
                                    f"({preferred_failure}), using {engine}.")

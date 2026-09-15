@@ -64,12 +64,24 @@
 
 | 能力 | 说明 |
 |---|---|
-| 10 引擎降级链 | 首选引擎 → 付费引擎 → 免费引擎；bing/anysearch/ddg/ddg-lite/searxng/tavily/exa/keenable 全部**免 Key 可用** |
+| 10 引擎降级链 | 首选引擎 → 付费引擎 → 免费引擎；bing/anysearch/ddg/ddg-lite/searxng/tavily/exa/keenable 共 8 个**免 Key 可用** |
 | 时间过滤 | `--time day/week/month/year/12h/3d/2mo/YYYY-MM-DD`，不支持的引擎自动跳过并在 Note 说明 |
-| 降级透明 | 输出 Note 严格区分"首选不支持时间过滤被跳过"与"首选失败（含原因）" |
+| 降级透明 | Note 严格区分"不支持时间过滤被跳过""被引擎画像规则跳过"与"失败（含原因）" |
+| 引擎画像 | 按**实测**维护每引擎的质量档位（precision/standard/broad）与 `site:` 支持；`--list-engines` 可查 |
+| 结果自检 | 校验 `site:` 是否真生效 + 结果与查询有无词面交集；不通过时输出 `warning`，`--strict` 下换引擎 |
 | API Key（可选） | 配 `EXA/TAVILY/KEENABLE/PERPLEXITY/DEEPSEEK_API_KEY` 走账号档；perplexity/deepseek-official 需 Key |
 
-**特点**：零依赖；30s 总预算防超时累积；snippet 自动清洗登录/付费墙噪音。
+**特点**：零依赖；30s 总预算，且抓 HTML 的引擎（ddg/searxng 等）单独限时 8s；snippet 自动清洗登录/付费墙噪音。
+
+**默认引擎为 exa（有意偏离 DSH 的 bing）**：降级链只在「失败或 0 结果」时才往后走，因此一个
+**能返回结果、但结果与查询无关**的引擎永远不会被跳过——这是最危险的形态。实测 bing 搜
+「高升控股股份有限公司 首席技术官 CTO」返回的是足球运动员「高升」的百科页与「高升」的汉语词典
+释义，而 `engine` 字段照报成功、无 error、无 note；`site:` 定向也实测被它忽略（`site:pedaily.cn`
+下 0/3 条来自目标域）。同一检索词下 exa 准确命中真实 CTO。另实测 ddg/searxng 不可达时耗时
+39.5s/48.4s，会独自吃光整条链把后面的引擎饿死（报"全网搜索失败"），限时后降到约 10s 并成功降级。
+
+用环境变量 `WEB_SEARCH_ENGINE` 可覆盖默认引擎（国内网络建议 `tavily`）。
+**实体级检索（企业名 / 人名 / `site:` 定向）请加 `--strict`**——自检不通过即换引擎，宁可无结果不用错结果。
 
 **触发词**：搜索、搜一下、查一下、检索、search the web
 
