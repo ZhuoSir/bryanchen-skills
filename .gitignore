@@ -14,3 +14,9 @@ icons-gallery.*
 org-chart-*.png
 公司组织架构样例.html
 diagram-skill-*.zip
+
+# morning-report 预览截图（本地核对用，不入库）
+morning-report/preview*.png
+mail_mobile_top.png
+sent_morning.png
+sent_evening.png

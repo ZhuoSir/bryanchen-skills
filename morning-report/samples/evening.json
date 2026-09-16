@@ -1,0 +1,780 @@
+{
+ "mode": "evening",
+ "date": "2026-09-16",
+ "weekday": "周三",
+ "weather_cond": "阴",
+ "quote": "生活不会主动优待谁，你想要的底气与选择权，只能靠一步一步亲手挣来",
+ "blocks": [
+  {
+   "type": "weather",
+   "label": "明日天气",
+   "en": "WEATHER",
+   "nav": "天气",
+   "rows": [
+    {
+     "city": "北京",
+     "cond": "阴",
+     "text": "21~31°",
+     "note": "降水 6%"
+    },
+    {
+     "city": "深圳",
+     "cond": "多云",
+     "text": "24~31°",
+     "note": "降水 0%"
+    },
+    {
+     "city": "上海",
+     "cond": "毛毛雨",
+     "text": "22~30°",
+     "note": "降水 52%",
+     "alert": "建议带伞"
+    },
+    {
+     "city": "杭州",
+     "cond": "阴",
+     "text": "21~31°",
+     "note": "降水 6%"
+    },
+    {
+     "city": "通辽",
+     "cond": "大致晴",
+     "text": "18~31°",
+     "note": "降水 0%"
+    },
+    {
+     "city": "崇礼",
+     "cond": "毛毛雨",
+     "text": "14~23°",
+     "note": "降水 12%"
+    }
+   ]
+  },
+  {
+   "type": "news",
+   "label": "天气新闻",
+   "en": "WEATHER NEWS",
+   "nav": "天气",
+   "items": [
+    {
+     "title": "超长待机！主要城市降雨日历看哪里雨水天天见",
+     "url": "http://news.weather.com.cn/2026/09/4793542.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "主雨带滞留，多个主要城市未来一周雨水频繁。"
+    },
+    {
+     "title": "全国玉露生凉地图看哪里秋凉渐起",
+     "url": "http://news.weather.com.cn/2026/09/4780847.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "白露过后秋凉渐起，北方昼夜温差拉大。"
+    },
+    {
+     "title": "白露观鸟地图带你打卡10个宝藏观测点",
+     "url": "http://news.weather.com.cn/2026/09/4782301.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "十大候鸟观测点推荐，适合周末出行。"
+    },
+    {
+     "title": "法国西南部超40℃ 突破9月历史同期高温纪录",
+     "url": "http://news.weather.com.cn/2026/09/4787314.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "法国西南部刷新 9 月历史同期高温纪录。"
+    },
+    {
+     "title": "美国 | 大峡谷国家公园突发山洪 至少15人失联",
+     "url": "http://news.weather.com.cn/2026/08/4777698.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "至少 15 人失联，搜救仍在进行。"
+    },
+    {
+     "title": "菲律宾 | 布拉干省持续洪涝 巴拉索因教堂遭水淹",
+     "url": "http://news.weather.com.cn/2026/08/4777704.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "教堂遭水淹，当地进入救灾状态。"
+    },
+    {
+     "title": "日本 | 遭遇强降雨 超两千户居民停电",
+     "url": "http://news.weather.com.cn/2026/08/4773942.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "强降雨导致超两千户居民停电。"
+    },
+    {
+     "title": "哈萨克斯坦 | 7月多地刷新高温纪录",
+     "url": "http://news.weather.com.cn/2026/08/4767294.shtml",
+     "source": "中国天气网 · 全国",
+     "summary": "哈萨克斯坦 7 月多地高温纪录被刷新。"
+    }
+   ]
+  },
+  {
+   "type": "news",
+   "label": "国际新闻",
+   "en": "WORLD",
+   "nav": "国际新闻",
+   "items": [
+    {
+     "title": "埃及总统塞西会见沙特王储 支持政治解决也门危机",
+     "url": "https://news.china.com/international/1000/20260916/49744243.html",
+     "source": "央视新闻",
+     "summary": "双方支持以政治途径解决也门危机。"
+    },
+    {
+     "title": "美国10年期国债收益率一度升至2007年以来高点",
+     "url": "https://news.china.com/international/1000/20260916/49744227.html",
+     "source": "央视新闻",
+     "summary": "通胀与财政担忧升温，全球风险资产承压。"
+    },
+    {
+     "title": "美国会预算办公室：美对伊战争耗资已超380亿美元",
+     "url": "https://news.china.com/international/1000/20260916/49744215.html",
+     "source": "央视新闻",
+     "summary": "国会预算办公室给出最新估算。"
+    },
+    {
+     "title": "武契奇：将于 9 月 27 日辞去塞尔维亚总统职务，之后将以普通公民身份参加竞选活动",
+     "url": "https://www.baidu.com/s?wd=%E6%AD%A6%E5%A5%91%E5%A5%87%EF%BC%9A%E5%B0%86%E4%BA%8E%209%20%E6%9C%88%2027%20%E6%97%A5%E8%BE%9E%E5%8E%BB%E5%A1%9E%E5%B0%94%E7%BB%B4%E4%BA%9A%E6%80%BB%E7%BB%9F%E8%81%8C%E5%8A%A1%EF%BC%8C%E4%B9%8B%E5%90%8E%E5%B0%86%E4%BB%A5%E6%99%AE%E9%80%9A%E5%85%AC%E6%B0%91%E8%BA%AB%E4%BB%BD%E5%8F%82%E5%8A%A0%E7%AB%9E%E9%80%89%E6%B4%BB%E5%8A%A8",
+     "summary": "将于 9 月 27 日辞职，之后以普通公民身份参加竞选。"
+    },
+    {
+     "title": "美最新民调显示：美共和党支持率落后民主党 7 个百分点，中期选举不容乐观",
+     "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E6%9C%80%E6%96%B0%E6%B0%91%E8%B0%83%E6%98%BE%E7%A4%BA%EF%BC%9A%E7%BE%8E%E5%85%B1%E5%92%8C%E5%85%9A%E6%94%AF%E6%8C%81%E7%8E%87%E8%90%BD%E5%90%8E%E6%B0%91%E4%B8%BB%E5%85%9A%207%20%E4%B8%AA%E7%99%BE%E5%88%86%E7%82%B9%EF%BC%8C%E4%B8%AD%E6%9C%9F%E9%80%89%E4%B8%BE%E4%B8%8D%E5%AE%B9%E4%B9%90%E8%A7%82",
+     "summary": "中期选举选情不容乐观。"
+    },
+    {
+     "title": "俄罗斯远东里科尔德岛掠影",
+     "url": "https://news.china.com/international/1000/20260915/49741664.html",
+     "source": "新华社",
+     "summary": "远东岛屿风貌掠影。"
+    },
+    {
+     "title": "韩国民众对美好感度为何急转直下？",
+     "url": "https://news.china.com/international/1000/20260915/49741610.html",
+     "source": "人民日报客户端",
+     "summary": "民调变化引发对同盟关系的讨论。"
+    },
+    {
+     "title": "英国女子化疗11年被告知未患癌 医疗丑闻浮出水面",
+     "url": "https://news.china.com/socialgd/10000169/20260916/49746597.html",
+     "source": "百家号",
+     "summary": "医疗丑闻浮出水面，涉事医院被调查。"
+    }
+   ]
+  },
+  {
+   "type": "news",
+   "label": "国内新闻",
+   "en": "CHINA",
+   "nav": "国内新闻",
+   "items": [
+    {
+     "title": "习近平会见印度总理莫迪",
+     "url": "http://pic.people.com.cn/n1/2026/0912/c426981-40797580.html",
+     "source": "",
+     "summary": "双方就双边关系与地区问题交换意见。"
+    },
+    {
+     "title": "外交部回应二战受害劳工后代起诉日企 敦促日方正视历史",
+     "url": "https://news.china.com/socialgd/10000169/20260916/49746629.html",
+     "source": "观察者网",
+     "summary": "外交部敦促日方正视历史、妥善处理。"
+    },
+    {
+     "title": "平陆运河释放多重红利 经济新版图开启",
+     "url": "https://news.china.com/socialgd/10000169/20260916/49746626.html",
+     "source": "央视新闻",
+     "summary": "世纪工程通航，西南出海通道打开。"
+    },
+    {
+     "title": "此次美联储议息会议为什么这么重要 市场企稳反弹信号",
+     "url": "https://news.china.com/socialgd/10000169/20260916/49746627.html",
+     "source": "杨德龙说财经",
+     "summary": "市场关注议息结果与流动性信号。"
+    },
+    {
+     "title": "市场消息刺激纽约油价上涨超4%",
+     "url": "https://news.china.com/international/1000/20260916/49745940.html",
+     "source": "新华社",
+     "summary": "国际油价单日大涨超 4%。"
+    },
+    {
+     "title": "25岁小伙确诊全球罕见变异白血病 命运重击下的坚强求生",
+     "url": "https://news.china.com/socialgd/10000169/20260916/49746625.html",
+     "source": "红星新闻",
+     "summary": "罕见分型下患者坚持求生，引发关注。"
+    }
+   ]
+  },
+  {
+   "type": "market",
+   "label": "A股大盘",
+   "en": "MARKET",
+   "nav": "财经新闻",
+   "half": true,
+   "indices": [
+    {
+     "name": "上证指数",
+     "point": 3891.6,
+     "chg": 27.32,
+     "pct": 0.71
+    },
+    {
+     "name": "深证成指",
+     "point": 13454.74,
+     "chg": 166.77,
+     "pct": 1.26
+    },
+    {
+     "name": "创业板指",
+     "point": 3311.47,
+     "chg": 63.55,
+     "pct": 1.96
+    },
+    {
+     "name": "科创50",
+     "point": 1616.19,
+     "chg": 64.23,
+     "pct": 4.14
+    },
+    {
+     "name": "北证50",
+     "point": 1040.29,
+     "chg": 11.78,
+     "pct": 1.15
+    },
+    {
+     "name": "沪深300",
+     "point": 4480.27,
+     "chg": 30.23,
+     "pct": 0.68
+    }
+   ],
+   "footnote": "两市成交额 18,391 亿元 · 数据 2026-09-16 21:27 · 今日收盘",
+   "up": [
+    {
+     "name": "运动服装",
+     "pct": 7.34
+    },
+    {
+     "name": "炭黑",
+     "pct": 6.75
+    },
+    {
+     "name": "半导体材料",
+     "pct": 6.14
+    },
+    {
+     "name": "林业Ⅲ",
+     "pct": 5.97
+    },
+    {
+     "name": "林业Ⅱ",
+     "pct": 5.97
+    },
+    {
+     "name": "光学元件",
+     "pct": 5.37
+    },
+    {
+     "name": "激光设备",
+     "pct": 5.15
+    },
+    {
+     "name": "跨境电商",
+     "pct": 5.09
+    }
+   ],
+   "down": [
+    {
+     "name": "商用载客车",
+     "pct": -2.62
+    },
+    {
+     "name": "生猪养殖",
+     "pct": -2.38
+    },
+    {
+     "name": "涂料",
+     "pct": -1.96
+    },
+    {
+     "name": "风电整机",
+     "pct": -1.84
+    },
+    {
+     "name": "商用车",
+     "pct": -1.72
+    },
+    {
+     "name": "养殖业",
+     "pct": -1.47
+    },
+    {
+     "name": "钨",
+     "pct": -1.4
+    },
+    {
+     "name": "教育出版",
+     "pct": -1.36
+    }
+   ]
+  },
+  {
+   "type": "lhb",
+   "label": "龙虎榜",
+   "en": "LHB",
+   "nav": "财经新闻",
+   "half": true,
+   "items": [
+    {
+     "rank": 1,
+     "code": "002281",
+     "name": "光迅科技",
+     "pct": 10.0018,
+     "net": 1014858445.79,
+     "explain": "2家机构买入，成功率39.66%"
+    },
+    {
+     "rank": 2,
+     "code": "002491",
+     "name": "通鼎互联",
+     "pct": 9.9865,
+     "net": 914138161.16,
+     "explain": "2家机构买入，成功率42.07%"
+    },
+    {
+     "rank": 3,
+     "code": "688432",
+     "name": "有研硅",
+     "pct": 20,
+     "net": 706125518.63,
+     "explain": "买一主买，成功率44.36%"
+    },
+    {
+     "rank": 4,
+     "code": "000592",
+     "name": "平潭发展",
+     "pct": 9.9747,
+     "net": 456626115.65,
+     "explain": "普通席位买入，成功率46.90%"
+    },
+    {
+     "rank": 5,
+     "code": "000823",
+     "name": "超声电子",
+     "pct": 5.1046,
+     "net": 332692738.59,
+     "explain": "2家机构买入，成功率41.23%"
+    },
+    {
+     "rank": 6,
+     "code": "301486",
+     "name": "致尚科技",
+     "pct": 19.9978,
+     "net": 260123610.41,
+     "explain": "3家机构买入，成功率39.51%"
+    },
+    {
+     "rank": 7,
+     "code": "301251",
+     "name": "威尔高",
+     "pct": 20,
+     "net": 178113123.12,
+     "explain": "2家机构买入，成功率41.94%"
+    },
+    {
+     "rank": 8,
+     "code": "600103",
+     "name": "青山纸业",
+     "pct": 10.1493,
+     "net": 142307391.98,
+     "explain": "普通席位买入，成功率44.57%"
+    }
+   ],
+   "footnote": "按净买入额排序 · 2026-09-16 · 来源 东方财富龙虎榜"
+  },
+  {
+   "type": "news",
+   "label": "财经要闻",
+   "en": "FINANCE",
+   "nav": "财经新闻",
+   "items": [
+    {
+     "title": "美国8月份零售销售较前月上升1.2% 预估为0.8%",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9872660.shtml",
+     "source": "环球市场播报",
+     "summary": "美国 8 月零售销售环比 +1.2%，强于预期。"
+    },
+    {
+     "title": "盘前：纳指期货涨0.51% 美债油价喘息",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshv4706910.shtml",
+     "source": "环球市场播报",
+     "summary": "纳指期货涨 0.51%，美债与油价喘息。"
+    },
+    {
+     "title": "太乙救哪吒？宁波80后富豪掏30亿图什么？",
+     "url": "https://finance.sina.com.cn/stock/s/2026-09-16/doc-inirzshz0487426.shtml",
+     "source": "市场资讯",
+     "summary": "宁波 80 后富豪出资 30 亿元，市场关注意图。"
+    },
+    {
+     "title": "诺贝尔经济学奖得主Michael Kremer获任世界银行首席经济学家",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3713243.shtml",
+     "source": "环球市场播报",
+     "summary": "发展经济学背景，主抓研究与政策评估。"
+    },
+    {
+     "title": "油价与利率双重冲击美国消费者，每户家庭预估多支出1700美元",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshz0477815.shtml",
+     "source": "环球市场播报",
+     "summary": "油价与利率同时上行，家庭支出压力上升。"
+    },
+    {
+     "title": "301293，控股股东、实际控制人拟无偿捐赠1亿元股份",
+     "url": "https://finance.sina.com.cn/stock/s/2026-09-16/doc-inirzshz0481326.shtml",
+     "source": "市场资讯",
+     "summary": "拟无偿捐赠 1 亿元股份。"
+    },
+    {
+     "title": "利率骤然飙升，购房者抵押贷款需求同比下降19%",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshv4696680.shtml",
+     "source": "环球市场播报",
+     "summary": "高利率压制购房需求，按揭申请明显减少。"
+    },
+    {
+     "title": "胡塞武装声称袭击沙特阿美在延布的设施及空军基地",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3693423.shtml",
+     "source": "环球市场播报",
+     "summary": "袭击目标含一处空军基地，油价短线波动。"
+    },
+    {
+     "title": "豆包手机量产上市，要和头部厂商抢市场了",
+     "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzmyz3806998.shtml",
+     "source": "界面",
+     "summary": "以 AI 助手为主打切入手机市场。"
+    },
+    {
+     "title": "零跑汽车67亿定增获批复：难题给到一汽 37亿投资要浮亏15亿",
+     "url": "https://finance.sina.com.cn/stock/s/2026-09-16/doc-inirzshz0460381.shtml",
+     "source": "市场资讯",
+     "summary": "一汽 37 亿投资面临浮亏压力。"
+    },
+    {
+     "title": "报道称英特尔与SK海力士正洽谈在美国生产存储芯片，两家公司股价应声上涨",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3681891.shtml",
+     "source": "环球市场播报",
+     "summary": "消息推动英特尔与 SK 海力士股价上涨。"
+    },
+    {
+     "title": "普华永道瑞士据悉拟将奖金减半 部分归因于AI应用增加",
+     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3677783.shtml",
+     "source": "环球市场播报",
+     "summary": "奖金减半，部分归因于 AI 应用提升人效。"
+    }
+   ]
+  },
+  {
+   "type": "news",
+   "label": "AI 动态",
+   "en": "AI",
+   "nav": "AI 动态",
+   "items": [
+    {
+     "title": "Amazon launches Alexa+ in India with Hindi support",
+     "url": "https://techcrunch.com/2026/09/16/amazon-launches-alexa-in-india-with-hindi-support/",
+     "source": "TechCrunch AI",
+     "summary": "支持印地语，订阅制助理继续扩张。"
+    },
+    {
+     "title": "We don’t need AI regulation — leave safety to us, Nvidia’s Jensen Huang says",
+     "url": "https://techcrunch.com/2026/09/15/we-dont-need-ai-regulation-leave-safety-to-us-nvidias-jensen-huang-says/",
+     "source": "TechCrunch AI",
+     "summary": "黄仁勋主张以企业自律替代事前审批。"
+    },
+    {
+     "title": "The AI data center boom is colliding with cities scarred by big industry",
+     "url": "https://techcrunch.com/2026/09/15/the-ai-data-center-boom-is-colliding-with-cities-scarred-by-big-industry/",
+     "source": "TechCrunch AI",
+     "summary": "数据中心扩张遭遇地方能耗与土地约束。"
+    },
+    {
+     "title": "Meta now lets AI agents handle the boring parts of WhatsApp Business setup",
+     "url": "https://techcrunch.com/2026/09/15/meta-now-lets-ai-agents-handle-the-boring-parts-of-whatsapp-business-setup/",
+     "source": "TechCrunch AI",
+     "summary": "中小商户接入门槛进一步降低。"
+    },
+    {
+     "title": "The AI graveyard: a running list of projects and startups that didn’t make it",
+     "url": "https://techcrunch.com/2026/09/15/the-ai-graveyard-a-running-list-of-projects-and-startups-that-didnt-make-it/",
+     "source": "TechCrunch AI",
+     "summary": "TechCrunch 记录未能跑通的 AI 项目清单。"
+    },
+    {
+     "title": "US data centers could consume more natural gas than Germany and Japan combined by 2035",
+     "url": "https://techcrunch.com/2026/09/15/us-data-centers-could-consume-more-natural-gas-than-germany-and-japan-combined-by-2035/",
+     "source": "TechCrunch AI",
+     "summary": "算力扩张推高天然气需求。"
+    },
+    {
+     "title": "AI agents now have a place to snitch",
+     "url": "https://techcrunch.com/2026/09/15/ai-agents-now-have-a-place-to-snitch/",
+     "source": "TechCrunch AI",
+     "summary": "出现面向智能体的举报与监督渠道。"
+    },
+    {
+     "title": "亚马逊 CTO 要来中国了，说实话，这比泛滥的 AI 发布会值得关注",
+     "url": "https://www.infoq.cn/article/5PVJPjNlo2g1XKl90u1F?utm_source=rss&utm_medium=article",
+     "source": "InfoQ中文",
+     "summary": "业内更关注其技术路线而非发布会。"
+    },
+    {
+     "title": "实测 Vibe Key：开口使唤 AI，真有当甲方的感觉",
+     "url": "https://www.infoq.cn/article/joXcPA6XF1QWgik9OALj?utm_source=rss&utm_medium=article",
+     "source": "InfoQ中文",
+     "summary": "语音驱动 AI 完成操作，交互雏形出现。"
+    }
+   ]
+  },
+  {
+   "type": "schedule",
+   "label": "足球",
+   "en": "FOOTBALL",
+   "nav": "体育新闻",
+   "note": "虎扑实时热帖",
+   "schedule_label": "今晚赛程",
+   "schedule": [
+    {
+     "time": "00:00",
+     "text": "亚精英赛第1轮 · 艾因 4-0 利雅得胜利",
+     "state": "已结束"
+    },
+    {
+     "time": "03:00",
+     "text": "英联杯第三轮 · 伊普斯维奇 2-4 阿森纳",
+     "state": "已结束"
+    },
+    {
+     "time": "03:00",
+     "text": "英联杯第三轮 · 利物浦 3-1 托特纳姆热刺",
+     "state": "已结束"
+    },
+    {
+     "time": "03:30",
+     "text": "西甲第6轮 · 埃尔切 2-3 皇家马德里",
+     "state": "已结束"
+    },
+    {
+     "time": "18:00",
+     "text": "亚运男足第1轮 · 中国U23 2-1 朝鲜U23",
+     "state": "已结束"
+    }
+   ],
+   "items": [
+    {
+     "title": "丁克奇为了方便妻子治白血病重返不莱梅，首个疗程状态良好",
+     "url": "https://m.hupu.com/bbs/642437107.html",
+     "summary": "为妻子治疗白血病重返不莱梅，首个疗程状态良好。"
+    },
+    {
+     "title": "戈森斯：我还没有和克洛普有过联系，我会先努力表现",
+     "url": "https://m.hupu.com/bbs/642437150.html",
+     "summary": "称尚未与克洛普联系，会先努力表现。"
+    },
+    {
+     "title": "纽伦堡赢球也不会放假，克洛泽表示“一小时假都不会多给”",
+     "url": "https://m.hupu.com/bbs/642437236.html",
+     "summary": "克洛泽表态赢球也不多放假。"
+    },
+    {
+     "title": "马丁内斯：弗莱肯仍是勒沃库森一门，失误不代表要丢位置",
+     "url": "https://m.hupu.com/bbs/642437647.html",
+     "summary": "力挺弗莱肯继续担任一门。"
+    },
+    {
+     "title": "韩联社：韩国足坛曝花钱进职业队丑闻，多名教练及高层获刑",
+     "url": "https://m.hupu.com/bbs/642448498.html",
+     "summary": "韩国足坛曝花钱进职业队丑闻，多名教练与高层获刑。"
+    },
+    {
+     "title": "因未完整展示支持休达标语，姆巴佩、维尼修斯遭西政界炮轰",
+     "url": "https://m.hupu.com/bbs/642448444.html",
+     "summary": "因未完整展示支持休达标语遭西政界炮轰。"
+    }
+   ]
+  },
+  {
+   "type": "schedule",
+   "label": "篮球",
+   "en": "BASKETBALL",
+   "nav": "体育新闻",
+   "note": "虎扑实时热帖",
+   "schedule_label": "今晚赛程",
+   "schedule": [
+    {
+     "time": "",
+     "text": "今晚无 NBA 比赛（休赛期）",
+     "state": ""
+    }
+   ],
+   "items": [
+    {
+     "title": "华为39年：鸿蒙如何从“元气”走向万物生长？",
+     "url": "https://m.hupu.com/bbs/642435806",
+     "summary": "（虎扑转载）鸿蒙生态与终端协同的复盘。"
+    },
+    {
+     "title": "Fischer：伦纳德放弃了全部15％交易触发奖金，约750万美元",
+     "url": "https://m.hupu.com/bbs/642448325",
+     "summary": "放弃约 750 万美元奖金，为交易扫清障碍。"
+    },
+    {
+     "title": "哈迪：和卢卡再次并肩作战我超级激动，他也很欢迎我",
+     "url": "https://m.hupu.com/bbs/642448298",
+     "summary": "他称卢卡也很欢迎自己。"
+    },
+    {
+     "title": "前队友：科比新秀赛季就不惧怕任何人，他一点都不怵乔丹",
+     "url": "https://m.hupu.com/bbs/642448236",
+     "summary": "回忆科比对位乔丹毫无怯意。"
+    },
+    {
+     "title": "盖饭哥时隔两年回归，来分享一下你们这两年的变化>>>",
+     "url": "https://m.hupu.com/bbs/642437276",
+     "summary": "与球迷分享这两年的变化。"
+    },
+    {
+     "title": "Bailey：火箭阵容深度好得吓人，替补席有谢泼德斯马特等人",
+     "url": "https://m.hupu.com/bbs/642448119",
+     "summary": "替补席有谢泼德、斯马特等人，深度突出。"
+    }
+   ]
+  },
+  {
+   "type": "hot",
+   "label": "全网热榜",
+   "en": "TRENDING",
+   "nav": "热榜",
+   "boards": [
+    {
+     "board": "微博热搜",
+     "items": [
+      {
+       "title": "兰香如故",
+       "url": "https://s.weibo.com/weibo?q=%E5%85%B0%E9%A6%99%E5%A6%82%E6%95%85",
+       "hot": "36万"
+      },
+      {
+       "title": "坠亡医学生家属发声",
+       "url": "https://s.weibo.com/weibo?q=%E5%9D%A0%E4%BA%A1%E5%8C%BB%E5%AD%A6%E7%94%9F%E5%AE%B6%E5%B1%9E%E5%8F%91%E5%A3%B0",
+       "hot": "35万"
+      },
+      {
+       "title": "性格决定命运这句话太残忍了",
+       "url": "https://s.weibo.com/weibo?q=%E6%80%A7%E6%A0%BC%E5%86%B3%E5%AE%9A%E5%91%BD%E8%BF%90%E8%BF%99%E5%8F%A5%E8%AF%9D%E5%A4%AA%E6%AE%8B%E5%BF%8D%E4%BA%86",
+       "hot": "33万"
+      },
+      {
+       "title": "井柏然给栾念做的PPT",
+       "url": "https://s.weibo.com/weibo?q=%E4%BA%95%E6%9F%8F%E7%84%B6%E7%BB%99%E6%A0%BE%E5%BF%B5%E5%81%9A%E7%9A%84PPT",
+       "hot": "29万"
+      },
+      {
+       "title": "女子怀孕5次均流产妇科检查却正常",
+       "url": "https://s.weibo.com/weibo?q=%E5%A5%B3%E5%AD%90%E6%80%80%E5%AD%955%E6%AC%A1%E5%9D%87%E6%B5%81%E4%BA%A7%E5%A6%87%E7%A7%91%E6%A3%80%E6%9F%A5%E5%8D%B4%E6%AD%A3%E5%B8%B8",
+       "hot": "28万"
+      }
+     ]
+    },
+    {
+     "board": "知乎热榜",
+     "items": [
+      {
+       "title": "啄木鸟维修更换开关收费 2800 元，投诉后仅退款 1000 元，这合理吗？家庭维修为啥难明码标价？",
+       "url": "https://www.zhihu.com/question/2083551350592483827",
+       "hot": "163 万热度"
+      },
+      {
+       "title": "港中大（深圳）实行 9 个月工资制，并期望年轻教授 5 年内获诺奖，这会如何影响学术生态？",
+       "url": "https://www.zhihu.com/question/2082839178635757054",
+       "hot": "142 万热度"
+      },
+      {
+       "title": "《雍正王朝》中为什么康熙总是不急不慢、智珠在握的感觉，而雍正却动不动就发火大喊大叫？",
+       "url": "https://www.zhihu.com/question/1918778248533345743",
+       "hot": "142 万热度"
+      },
+      {
+       "title": "南京一高校学生晚上排长队洗澡，学生反映「每天排队都是一个小时起步」，真是这样吗？有哪些解决办法？",
+       "url": "https://www.zhihu.com/question/2083311751991399936",
+       "hot": "134 万热度"
+      },
+      {
+       "title": "宁德时代上半年营收利润双增股价却大跌，车企「去宁德化」如何影响其未来？",
+       "url": "https://www.zhihu.com/question/2083239196697876066",
+       "hot": "122 万热度"
+      }
+     ]
+    },
+    {
+     "board": "抖音热点",
+     "items": [
+      {
+       "title": "中国男篮淘汰沙特晋级亚运4强",
+       "url": "https://www.douyin.com/search/%E4%B8%AD%E5%9B%BD%E7%94%B7%E7%AF%AE%E6%B7%98%E6%B1%B0%E6%B2%99%E7%89%B9%E6%99%8B%E7%BA%A7%E4%BA%9A%E8%BF%904%E5%BC%BA",
+       "hot": "1035万"
+      },
+      {
+       "title": "世界越野跑冠军赵家驹是谁",
+       "url": "https://www.douyin.com/search/%E4%B8%96%E7%95%8C%E8%B6%8A%E9%87%8E%E8%B7%91%E5%86%A0%E5%86%9B%E8%B5%B5%E5%AE%B6%E9%A9%B9%E6%98%AF%E8%B0%81",
+       "hot": "924万"
+      },
+      {
+       "title": "平陆运河建成通航",
+       "url": "https://www.douyin.com/search/%E5%B9%B3%E9%99%86%E8%BF%90%E6%B2%B3%E5%BB%BA%E6%88%90%E9%80%9A%E8%88%AA",
+       "hot": "921万"
+      },
+      {
+       "title": "非遗花好月圆灯的浪漫",
+       "url": "https://www.douyin.com/search/%E9%9D%9E%E9%81%97%E8%8A%B1%E5%A5%BD%E6%9C%88%E5%9C%86%E7%81%AF%E7%9A%84%E6%B5%AA%E6%BC%AB",
+       "hot": "921万"
+      },
+      {
+       "title": "不管了我先加入可可系",
+       "url": "https://www.douyin.com/search/%E4%B8%8D%E7%AE%A1%E4%BA%86%E6%88%91%E5%85%88%E5%8A%A0%E5%85%A5%E5%8F%AF%E5%8F%AF%E7%B3%BB",
+       "hot": "920万"
+      }
+     ]
+    },
+    {
+     "board": "头条热榜",
+     "items": [
+      {
+       "title": "董军：对霸权主义军国主义保持警惕",
+       "url": "https://www.toutiao.com/trending/7685538058195701284",
+       "hot": "939万"
+      },
+      {
+       "title": "韩企用死者皮肤提取物美容引争议",
+       "url": "https://www.toutiao.com/trending/7685947905517092900",
+       "hot": "769万"
+      },
+      {
+       "title": "近百国代表齐聚北京香山论坛",
+       "url": "https://www.toutiao.com/trending/7686104082540432942",
+       "hot": "696万"
+      },
+      {
+       "title": "父母送独女入伍临行前久久相拥",
+       "url": "https://www.toutiao.com/trending/7685781942495641638",
+       "hot": "630万"
+      },
+      {
+       "title": "铜价站上历史高位废铜也成“香饽饽”",
+       "url": "https://www.toutiao.com/trending/7685688261062787135",
+       "hot": "570万"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
