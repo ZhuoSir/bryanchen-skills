@@ -61,6 +61,7 @@ CATEGORY_ICONS = {
     "ai":       {"icons": ["cpu"], "light": "#7048E8", "dark": "#B197FC", "name": "AI"},
     "sports":   {"icons": ["ball-football", "ball-basketball"], "light": "#0E8A4F", "dark": "#4ADE80", "name": "体育"},
     "hot":      {"icons": ["flame"], "light": "#E8590C", "dark": "#FF9F45", "name": "热榜"},
+    "watch":    {"icons": ["star"], "light": "#DB2777", "dark": "#F472B6", "name": "特别关注"},
 }
 
 

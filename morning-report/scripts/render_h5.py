@@ -54,13 +54,13 @@ COND_RULES = [
 ]
 CAT_COLORS = {
     "light": {"weather": "#0E7C86", "world": "#3B5BDB", "china": "#C2255C",
-              "finance": "#B7791F", "ai": "#7048E8", "sports": "#0E8A4F", "hot": "#E8590C"},
+              "finance": "#B7791F", "ai": "#7048E8", "sports": "#0E8A4F", "hot": "#E8590C", "watch": "#DB2777"},
     "dark": {"weather": "#4DD0E1", "world": "#8FA2FF", "china": "#FF7AA2",
-             "finance": "#FFC13B", "ai": "#B197FC", "sports": "#4ADE80", "hot": "#FF9F45"},
+             "finance": "#FFC13B", "ai": "#B197FC", "sports": "#4ADE80", "hot": "#FF9F45", "watch": "#F472B6"},
 }
 CAT_RULES = [("天气", "weather"), ("国际", "world"), ("国内", "china"), ("大盘", "finance"),
              ("财经", "finance"), ("AI", "ai"), ("人工智能", "ai"), ("足球", "sports"),
-             ("篮球", "sports"), ("体育", "sports"), ("热榜", "hot"), ("热搜", "hot")]
+             ("篮球", "sports"), ("体育", "sports"), ("热榜", "hot"), ("热搜", "hot"), ("关注", "watch"), ("WATCH", "watch")]
 COND_COLORS = {
     "light": {"clear": "#D97706", "cloudy": "#8A8A8E", "overcast": "#8A8A8E",
               "rain": "#2563EB", "thunder": "#7C3AED", "snow": "#0891B2", "fog": "#94A3B8"},
@@ -70,7 +70,7 @@ COND_COLORS = {
 
 SECTION_ICON = [("天气", "w-auto"), ("国际", "world"), ("国内", "flag"), ("大盘", "chart-candle"),
                 ("财经", "chart-candle"), ("AI", "cpu"), ("人工智能", "cpu"), ("足球", "ball-football"),
-                ("篮球", "ball-basketball"), ("体育", "ball-football"), ("热榜", "flame"), ("热搜", "flame")]
+                ("篮球", "ball-basketball"), ("体育", "ball-football"), ("热榜", "flame"), ("热搜", "flame"), ("关注", "star"), ("特别", "star")]
 MODE_META = {"morning": {"name": "晨报", "kicker": "MORNING REPORT"},
              "evening": {"name": "晚报", "kicker": "EVENING REPORT"}}
 EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF\U00002600-\U000027BF\U0001F1E6-\U0001F1FF"
@@ -126,7 +126,7 @@ def cat_icon(block, theme):
     if c == "finance" and "龙虎榜" in zh:
         return "cat-finance-coin"
     return {"world": "cat-world-world", "china": "cat-china-flag", "finance": "cat-finance-chart-candle",
-            "ai": "cat-ai-cpu", "hot": "cat-hot-flame",
+            "ai": "cat-ai-cpu", "hot": "cat-hot-flame", "watch": "cat-watch-star",
             "sports": "cat-sports-ball-basketball" if "篮球" in zh else "cat-sports-ball-football",
             }.get(c, "")
 

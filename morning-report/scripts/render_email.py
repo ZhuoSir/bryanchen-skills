@@ -97,9 +97,9 @@ COND_RULES = [
 # 栏目点缀色（与 build_icons.py 的 CATEGORY_ICONS 对应；任何天气下都有颜色）
 CAT_COLORS = {
     "light": {"weather": "#0E7C86", "world": "#3B5BDB", "china": "#C2255C",
-              "finance": "#B7791F", "ai": "#7048E8", "sports": "#0E8A4F", "hot": "#E8590C"},
+              "finance": "#B7791F", "ai": "#7048E8", "sports": "#0E8A4F", "hot": "#E8590C", "watch": "#DB2777"},
     "dark": {"weather": "#4DD0E1", "world": "#8FA2FF", "china": "#FF7AA2",
-             "finance": "#FFC13B", "ai": "#B197FC", "sports": "#4ADE80", "hot": "#FF9F45"},
+             "finance": "#FFC13B", "ai": "#B197FC", "sports": "#4ADE80", "hot": "#FF9F45", "watch": "#F472B6"},
 }
 # 天气现象点缀色（晴暖 / 雨蓝 / 云灰 / 雷紫 / 雪青）
 COND_COLORS = {
@@ -110,7 +110,7 @@ COND_COLORS = {
 }
 CAT_RULES = [("天气", "weather"), ("国际", "world"), ("国内", "china"), ("大盘", "finance"),
              ("财经", "finance"), ("AI", "ai"), ("人工智能", "ai"), ("足球", "sports"),
-             ("篮球", "sports"), ("体育", "sports"), ("热榜", "hot"), ("热搜", "hot")]
+             ("篮球", "sports"), ("体育", "sports"), ("热榜", "hot"), ("热搜", "hot"), ("关注", "watch"), ("WATCH", "watch")]
 
 SECTION_META = [
     (("天气",), "WEATHER", "w-auto"),
@@ -120,6 +120,7 @@ SECTION_META = [
     (("足球",), "FOOTBALL", "ball-football"),
     (("篮球",), "BASKETBALL", "ball-basketball"),
     (("热榜", "热搜", "热点"), "TRENDING", "flame"),
+    (("特别关注", "关注"), "WATCH", "star"),
     (("龙虎榜", "席位"), "LHB", "coin"),
     (("大盘", "行情", "财经", "A股", "股市"), "MARKET", "chart-candle"),
 ]

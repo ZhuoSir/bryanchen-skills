@@ -454,6 +454,31 @@ python3 scripts/weather.py --tomorrow
 > —— 爱你的悠悠
 ```
 
+### 第 10 步：特别关注（词条全网检索）
+
+**观察名单**：`data/watchlist.json` → `{"keywords": ["电子城高科", "知鱼智联"]}`。
+改名单就改这个文件，晨报/晚报自动带上，不用改任何任务。
+
+**机制**（装配器自动做）：
+- `build_report.py` 自动读名单（也可用 `--watch "A,B"` 覆盖），每个词条跑 `watch_news.py`
+- `watch_news.py`：Google News RSS 搜索 → Bing News RSS 降级；**标题必须含词条片段**
+  （全称 → 去公司后缀 → 前 2 字），清掉蹭词垃圾；按发布时间排序，只保留近 3 天（`--watch-days`）
+- 板块名「特别关注 · <词条>」（`nav` = `特别关注`，玫红星标 Tab），紧跟天气板块之后；
+  条目来源字段带 `来源 · MM-DD HH:MM`（一眼看出新不新）
+- 同样进去重台账，晚报不会重发晨报已发的关注条目
+- **没搜到就是 0 条**（板块整块省略），绝不允许编造
+
+**临时单查**（不改名单）：
+
+```bash
+python3 scripts/watch_news.py --kw "某公司" --limit 10 --days 7          # 临时查一家
+python3 scripts/watch_news.py --kw "某公司" --no-strict                  # 词条很短/易歧义时关相关性过滤
+python3 scripts/watch_news.py --list                                     # 看当前名单
+```
+
+**可选增强**：若运行环境有企业信息类工具（如企查查 MCP），可顺带补一段该公司工商/舆情摘要，
+以 `source: "企查查"` 写入同一板块 items —— 只作补充，不能替代搜索源输出。
+
 ## 降级策略
 
 1. `news_api.py` 内置降级链（60s API ×2 → yyxw → Google News RSS），全部失败时在对应板块注明"今日综合新闻暂无法获取"；**池子不够（去重后不够条数）时用 `news_web.py` 抓频道页补充**（见 8.6）

@@ -70,6 +70,10 @@ def main():
     ap.add_argument("--web", type=int, default=0, help="news_web 补充条数（0=不用）")
     ap.add_argument("--dedup", action="store_true", help="装配后过 sent_log 去重")
     ap.add_argument("--date", default="", help="台账日期，缺省今天")
+    ap.add_argument("--watch", default="",
+                    help="特别关注词条，逗号分隔；缺省读 data/watchlist.json 的 keywords")
+    ap.add_argument("--watch-limit", type=int, default=8, help="每个词条最多几条")
+    ap.add_argument("--watch-days", type=int, default=3, help="只保留近 N 天（0=不限）")
     ap.add_argument("--raw-dir", default="", help="原始输出落盘目录")
     args = ap.parse_args()
 
@@ -81,8 +85,21 @@ def main():
     def fetch_n(target, mult=2, cap=40):
         return min(max(target * mult, target + 8), cap)
 
+    # 特别关注：--watch 优先，缺省读 data/watchlist.json
+    watch_kws = [k.strip() for k in args.watch.split(",") if k.strip()]
+    if not watch_kws:
+        wl_path = os.path.join(ROOT, "data", "watchlist.json")
+        if os.path.exists(wl_path):
+            try:
+                watch_kws = [k.strip() for k in json.load(open(wl_path, encoding="utf-8")).get("keywords", []) if str(k).strip()]
+            except (OSError, json.JSONDecodeError):
+                watch_kws = []
+
     jobs = {
         "weather": ("weather.py", (["--tomorrow"] if ev else [])),
+        **({"watch": ("watch_news.py", ["--kw", ",".join(watch_kws),
+                                        "--limit", str(args.watch_limit), "--days", str(args.watch_days)])}
+           if watch_kws else {}),
         "weather_news": ("weather_news.py", ["--limit", str(fetch_n(args.weather_news, 3, 30)), "--cities", CITIES]),
         "news": ("news_api.py", ["--max", "15"]),
         "finance": ("finance.py", ["--news-limit", str(fetch_n(args.finance, 3, 40)), "--sectors", str(args.sectors),
@@ -150,7 +167,23 @@ def main():
         blocks.append({"type": "weather", "label": "明日天气" if ev else "今日天气",
                        "en": "WEATHER", "nav": "天气", "rows": rows})
 
-    # 2) 天气新闻
+    # 2) 特别关注（观察名单，紧跟天气之后）
+    for w in (data.get("watch") or {}).get("watches", []):
+        if not w.get("items"):
+            continue
+        watch_items = []
+        for i in w["items"]:
+            src = i.get("source", "")
+            pub = (i.get("published") or "")[5:]        # 'MM-DD HH:MM'
+            if pub:
+                src = f"{src} · {pub}" if src else pub
+            watch_items.append({"title": i["title"], "url": i["url"],
+                                "source": src, "published": i.get("published", "")})
+        blocks.append({"type": "news",
+                       "label": f"特别关注 · {w['kw']}", "en": "WATCH", "nav": "特别关注",
+                       "items": fresh(watch_items)[:args.watch_limit]})
+
+    # 3) 天气新闻
     wn = (data.get("weather_news") or {}).get("items", [])
     if wn:
         blocks.append({"type": "news", "label": "天气新闻", "en": "WEATHER NEWS", "nav": "天气",
@@ -158,7 +191,7 @@ def main():
                                         "source": f"中国天气网 · {i.get('tag', '全国')}"}
                                        for i in wn])[:args.weather_news]})
 
-    # 3) 国际 / 国内
+    # 4) 国际 / 国内
     news = (data.get("news") or {}).get("items", [])
     web = ((data.get("web") or {}).get("items") or []) if args.web else []
     pool = [{"title": i["title"], "url": i["url"]} for i in news] + \
