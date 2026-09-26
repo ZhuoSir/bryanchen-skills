@@ -35,15 +35,15 @@ THEMES = {
         "up": "#D93025", "down": "#0E8A4F", "shadow": "0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05)",
     },
     "dark": {
-        "bg": "#0a0a0c", "card": "#141417", "card2": "#1c1c21", "text": "#ededf0",
-        "muted": "#8d8d96", "body": "#a3a3ac", "line": "#26262c",
-        "up": "#FF6B60", "down": "#34D399", "shadow": "0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35)",
+        "bg": "#15171c", "card": "#1c1f26", "card2": "#242833", "text": "#d2d5db",
+        "muted": "#878c97", "body": "#9ba0aa", "line": "#2d313c",
+        "up": "#ee8078", "down": "#4ec287", "shadow": "0 1px 2px rgba(0,0,0,.32), 0 10px 30px rgba(0,0,0,.25)",
     },
 }
 ACCENTS = {
     "light": {"clear": "#F4511E", "cloudy": "#D97706", "overcast": "#8A8A8E",
               "rain": "#2563EB", "thunder": "#7C3AED", "snow": "#0891B2", "fog": "#94A3B8"},
-    "dark": {"clear": "#FF7A45", "cloudy": "#F0A742", "overcast": "#A1A1AA",
+    "dark": {"clear": "#e89167", "cloudy": "#d9a052", "overcast": "#959aa5",
              "rain": "#6B8CFF", "thunder": "#A78BFA", "snow": "#38BDF8", "fog": "#A8B4C4"},
 }
 COND_RULES = [
@@ -55,8 +55,8 @@ COND_RULES = [
 CAT_COLORS = {
     "light": {"weather": "#0E7C86", "world": "#3B5BDB", "china": "#C2255C",
               "finance": "#B7791F", "ai": "#7048E8", "sports": "#0E8A4F", "hot": "#E8590C", "watch": "#DB2777"},
-    "dark": {"weather": "#4DD0E1", "world": "#8FA2FF", "china": "#FF7AA2",
-             "finance": "#FFC13B", "ai": "#B197FC", "sports": "#4ADE80", "hot": "#FF9F45", "watch": "#F472B6"},
+    "dark": {"weather": "#55bdc9", "world": "#93a5e8", "china": "#ea8cab",
+             "finance": "#dcb05c", "ai": "#a89be6", "sports": "#57c087", "hot": "#e89b5e", "watch": "#e28db6"},
 }
 CAT_RULES = [("天气", "weather"), ("国际", "world"), ("国内", "china"), ("大盘", "finance"),
              ("财经", "finance"), ("AI", "ai"), ("人工智能", "ai"), ("足球", "sports"),
@@ -64,8 +64,8 @@ CAT_RULES = [("天气", "weather"), ("国际", "world"), ("国内", "china"), ("
 COND_COLORS = {
     "light": {"clear": "#D97706", "cloudy": "#8A8A8E", "overcast": "#8A8A8E",
               "rain": "#2563EB", "thunder": "#7C3AED", "snow": "#0891B2", "fog": "#94A3B8"},
-    "dark": {"clear": "#FFC13B", "cloudy": "#A1A1AA", "overcast": "#A1A1AA",
-             "rain": "#7AA2FF", "thunder": "#B197FC", "snow": "#5AD1E8", "fog": "#A8B4C4"},
+    "dark": {"clear": "#d9a052", "cloudy": "#959aa5", "overcast": "#959aa5",
+             "rain": "#82a2f0", "thunder": "#a79af0", "snow": "#5cc0da", "fog": "#98a2b3"},
 }
 
 SECTION_ICON = [("天气", "w-auto"), ("国际", "world"), ("国内", "flag"), ("大盘", "chart-candle"),
@@ -398,7 +398,7 @@ h1{{font-size:34px;margin:7px 0 2px;letter-spacing:-.5px}}
 .sec-label{{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;margin:26px 2px 11px}}
 .bar{{display:inline-block;width:3px;height:13px;border-radius:2px;flex:none}}
 .tab .dot{{width:6px;height:6px;border-radius:50%;flex:none}}
-.rank.top{{color:var(--cat-hot,#FF9F45);font-weight:700}}
+.rank.top{{color:var(--cat-hot,#e89b5e);font-weight:700}}
 .sec-label img{{vertical-align:-2px}}
 .sec-label .note{{font-size:10px;letter-spacing:1px;color:var(--muted);font-weight:600}}
 .sec-label.sub{{font-size:12px;margin:16px 2px 8px}}
@@ -423,7 +423,7 @@ nav#tabs::-webkit-scrollbar-track{{background:transparent}}
   box-shadow:var(--shadow);opacity:.72;transition:.18s}}
 .tab img{{opacity:.75}}
 .tab:hover{{opacity:1;transform:translateY(-1px)}}
-.tab.active{{background:var(--cat,var(--accent));color:#fff;opacity:1}}
+.tab.active{{background:var(--cat,var(--accent));color:#f4f5f8;opacity:1}}
 .tab.active .dot{{background:rgba(255,255,255,.9)!important}}
 .tab.active img{{filter:brightness(0) invert(1);opacity:.95}}
 .panel{{display:none}}

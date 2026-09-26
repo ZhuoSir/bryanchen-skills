@@ -1,783 +1,783 @@
 {
- "mode": "morning",
- "date": "2026-09-16",
- "weekday": "周三",
- "weather_cond": "阴",
- "quote": "生活不会主动优待谁，你想要的底气与选择权，只能靠一步一步亲手挣来",
- "blocks": [
-  {
-   "type": "weather",
-   "label": "今日天气",
-   "en": "WEATHER",
-   "nav": "天气",
-   "rows": [
+  "mode": "morning",
+  "date": "2026-09-18",
+  "weekday": "周五",
+  "weather_cond": "阴",
+  "quote": "生活不会主动优待谁，你想要的底气与选择权，只能靠一步一步亲手挣来",
+  "blocks": [
     {
-     "city": "北京",
-     "cond": "阴",
-     "text": "19~32°",
-     "note": "现在 27° · 体感 28° · 降水 0%"
+      "type": "weather",
+      "label": "今日天气",
+      "en": "WEATHER",
+      "nav": "天气",
+      "rows": [
+        {
+          "city": "北京",
+          "cond": "阴",
+          "text": "19~32°",
+          "note": "现在 27° · 体感 28° · 降水 0%"
+        },
+        {
+          "city": "深圳",
+          "cond": "毛毛雨",
+          "text": "25~31°",
+          "note": "现在 25° · 体感 30° · 降水 18%"
+        },
+        {
+          "city": "上海",
+          "cond": "阴",
+          "text": "20~30°",
+          "note": "现在 24° · 体感 24° · 降水 0%"
+        },
+        {
+          "city": "杭州",
+          "cond": "阴",
+          "text": "21~31°",
+          "note": "现在 25° · 体感 26° · 降水 0%"
+        },
+        {
+          "city": "通辽",
+          "cond": "大致晴",
+          "text": "16~26°",
+          "note": "现在 20° · 体感 19° · 降水 0%"
+        },
+        {
+          "city": "崇礼",
+          "cond": "大致晴",
+          "text": "13~25°",
+          "note": "现在 16° · 体感 14° · 降水 0%"
+        }
+      ]
     },
     {
-     "city": "深圳",
-     "cond": "毛毛雨",
-     "text": "25~31°",
-     "note": "现在 25° · 体感 30° · 降水 18%"
+      "type": "news",
+      "label": "天气新闻",
+      "en": "WEATHER NEWS",
+      "nav": "天气",
+      "items": [
+        {
+          "title": "北京 | 最高气温将超30℃昼夜温差较大",
+          "url": "http://news.weather.com.cn/2026/09/4793644.shtml",
+          "source": "中国天气网 · 北京",
+          "summary": "北京白天最高超 30°C，早晚温差拉大，注意增减衣物。"
+        },
+        {
+          "title": "一日两季！全国乱穿衣预警地图来了",
+          "url": "http://news.weather.com.cn/2026/09/4794515.shtml",
+          "source": "中国天气网 · 预警",
+          "summary": "南北温差拉大，多地「一日两季」，穿衣需灵活。"
+        },
+        {
+          "title": "山洪灾害气象预警",
+          "url": "http://news.weather.com.cn/2026/09/4794623.shtml",
+          "source": "中国天气网 · 预警",
+          "summary": "部分地区发布山洪灾害气象预警，山区防范突发来水。"
+        },
+        {
+          "title": "地质灾害气象风险预警",
+          "url": "http://news.weather.com.cn/2026/09/4794624.shtml",
+          "source": "中国天气网 · 预警",
+          "summary": "降雨叠加，地质灾害气象风险升高，山区出行注意避险。"
+        },
+        {
+          "title": "全国入秋进程图出炉 京津冀等地跑步入秋",
+          "url": "http://news.weather.com.cn/2026/09/4794549.shtml",
+          "source": "中国天气网 · 全国",
+          "summary": "秋季前沿南压，京津冀等地入秋进程明显加快。"
+        },
+        {
+          "title": "北方大部晴朗在线 四川至湖北降雨频繁",
+          "url": "http://news.weather.com.cn/2026/09/4793520.shtml",
+          "source": "中国天气网 · 全国",
+          "summary": "北方大部晴好，四川到湖北一带降雨频繁。"
+        },
+        {
+          "title": "贵州 | 大部将迎持续降雨 北部雨势较强局部有暴雨",
+          "url": "http://news.weather.com.cn/2026/09/4794244.shtml",
+          "source": "中国天气网 · 全国",
+          "summary": "贵州大部持续降雨，北部局地有暴雨。"
+        },
+        {
+          "title": "湖北 | 多地雨势较强 大部气温明显下降体感湿凉",
+          "url": "http://news.weather.com.cn/2026/09/4794030.shtml",
+          "source": "中国天气网 · 全国",
+          "summary": "湖北多地雨势较强，气温下滑、体感湿凉。"
+        }
+      ]
     },
     {
-     "city": "上海",
-     "cond": "阴",
-     "text": "20~30°",
-     "note": "现在 24° · 体感 24° · 降水 0%"
+      "type": "news",
+      "label": "国际新闻",
+      "en": "WORLD",
+      "nav": "国际新闻",
+      "items": [
+        {
+          "title": "携程上架 2027 年维珍银河太空旅行船票，售价 510 万元，需自行前往美国，平台显示已售出 681 份",
+          "url": "https://www.baidu.com/s?wd=%E6%90%BA%E7%A8%8B%E4%B8%8A%E6%9E%B6%202027%20%E5%B9%B4%E7%BB%B4%E7%8F%8D%E9%93%B6%E6%B2%B3%E5%A4%AA%E7%A9%BA%E6%97%85%E8%A1%8C%E8%88%B9%E7%A5%A8%EF%BC%8C%E5%94%AE%E4%BB%B7%20510%20%E4%B8%87%E5%85%83%EF%BC%8C%E9%9C%80%E8%87%AA%E8%A1%8C%E5%89%8D%E5%BE%80%E7%BE%8E%E5%9B%BD%EF%BC%8C%E5%B9%B3%E5%8F%B0%E6%98%BE%E7%A4%BA%E5%B7%B2%E5%94%AE%E5%87%BA%20681%20%E4%BB%BD",
+          "summary": "510 万元一张、需自行赴美，平台显示已售 681 份。"
+        },
+        {
+          "title": "中国将 “嫦娥六号” 采集的人类首批月背月壤样品正式赠送联合国，样品将在维也纳联合国总部永久展出",
+          "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%B0%86%20%E2%80%9C%E5%AB%A6%E5%A8%A5%E5%85%AD%E5%8F%B7%E2%80%9D%20%E9%87%87%E9%9B%86%E7%9A%84%E4%BA%BA%E7%B1%BB%E9%A6%96%E6%89%B9%E6%9C%88%E8%83%8C%E6%9C%88%E5%A3%A4%E6%A0%B7%E5%93%81%E6%AD%A3%E5%BC%8F%E8%B5%A0%E9%80%81%E8%81%94%E5%90%88%E5%9B%BD%EF%BC%8C%E6%A0%B7%E5%93%81%E5%B0%86%E5%9C%A8%E7%BB%B4%E4%B9%9F%E7%BA%B3%E8%81%94%E5%90%88%E5%9B%BD%E6%80%BB%E9%83%A8%E6%B0%B8%E4%B9%85%E5%B1%95%E5%87%BA",
+          "summary": "月背样品将在维也纳联合国总部永久展出。"
+        },
+        {
+          "title": "日本一架价值上亿美元 “全球鹰” 无人机失联，已发现疑似机体残骸漂浮海面",
+          "url": "https://www.baidu.com/s?wd=%E6%97%A5%E6%9C%AC%E4%B8%80%E6%9E%B6%E4%BB%B7%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%BE%8E%E5%85%83%20%E2%80%9C%E5%85%A8%E7%90%83%E9%B9%B0%E2%80%9D%20%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%A4%B1%E8%81%94%EF%BC%8C%E5%B7%B2%E5%8F%91%E7%8E%B0%E7%96%91%E4%BC%BC%E6%9C%BA%E4%BD%93%E6%AE%8B%E9%AA%B8%E6%BC%82%E6%B5%AE%E6%B5%B7%E9%9D%A2",
+          "summary": "价值上亿美元的无人机失联，已发现疑似机体残骸。"
+        },
+        {
+          "title": "美国环保署宣布废除发电厂碳排放限制，拟永久取消未来监管权",
+          "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E7%8E%AF%E4%BF%9D%E7%BD%B2%E5%AE%A3%E5%B8%83%E5%BA%9F%E9%99%A4%E5%8F%91%E7%94%B5%E5%8E%82%E7%A2%B3%E6%8E%92%E6%94%BE%E9%99%90%E5%88%B6%EF%BC%8C%E6%8B%9F%E6%B0%B8%E4%B9%85%E5%8F%96%E6%B6%88%E6%9C%AA%E6%9D%A5%E7%9B%91%E7%AE%A1%E6%9D%83",
+          "summary": "拟永久取消未来监管权，环保与能源博弈升级。"
+        },
+        {
+          "title": "美国首次承认在太空具备 “进攻能力”，美空军部长：美国已拥有 “在轨” 太空控制武器",
+          "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E9%A6%96%E6%AC%A1%E6%89%BF%E8%AE%A4%E5%9C%A8%E5%A4%AA%E7%A9%BA%E5%85%B7%E5%A4%87%20%E2%80%9C%E8%BF%9B%E6%94%BB%E8%83%BD%E5%8A%9B%E2%80%9D%EF%BC%8C%E7%BE%8E%E7%A9%BA%E5%86%9B%E9%83%A8%E9%95%BF%EF%BC%9A%E7%BE%8E%E5%9B%BD%E5%B7%B2%E6%8B%A5%E6%9C%89%20%E2%80%9C%E5%9C%A8%E8%BD%A8%E2%80%9D%20%E5%A4%AA%E7%A9%BA%E6%8E%A7%E5%88%B6%E6%AD%A6%E5%99%A8",
+          "summary": "美空军部长称已拥有「在轨」太空控制武器。"
+        },
+        {
+          "title": "委内瑞拉同英国升级外交关系",
+          "url": "https://news.china.com/international/1000/20260916/49745931.html",
+          "source": "新华社",
+          "summary": "双方同意互设更高层级代表机构。"
+        },
+        {
+          "title": "也门胡塞武装：沙特战机一天内发动52次空袭",
+          "url": "https://news.china.com/international/1000/20260916/49745922.html",
+          "source": "新华社",
+          "summary": "空袭集中在北部省份，当地能源与医疗承压。"
+        },
+        {
+          "title": "韩国前总统尹锡悦涉嫌作伪证案二审被判处无罪",
+          "url": "https://news.china.com/international/1000/20260916/49745151.html",
+          "source": "央视新闻",
+          "summary": "首尔高等法院推翻一审判决，检方将研究是否上诉。"
+        }
+      ]
     },
     {
-     "city": "杭州",
-     "cond": "阴",
-     "text": "21~31°",
-     "note": "现在 25° · 体感 26° · 降水 0%"
+      "type": "news",
+      "label": "国内新闻",
+      "en": "CHINA",
+      "nav": "国内新闻",
+      "items": [
+        {
+          "title": "8 月 70 城房价出炉：一线城市环比转涨，二手房同比跌幅收窄，上海新房二手房双双领跑全国",
+          "url": "https://www.baidu.com/s?wd=8%20%E6%9C%88%2070%20%E5%9F%8E%E6%88%BF%E4%BB%B7%E5%87%BA%E7%82%89%EF%BC%9A%E4%B8%80%E7%BA%BF%E5%9F%8E%E5%B8%82%E7%8E%AF%E6%AF%94%E8%BD%AC%E6%B6%A8%EF%BC%8C%E4%BA%8C%E6%89%8B%E6%88%BF%E5%90%8C%E6%AF%94%E8%B7%8C%E5%B9%85%E6%94%B6%E7%AA%84%EF%BC%8C%E4%B8%8A%E6%B5%B7%E6%96%B0%E6%88%BF%E4%BA%8C%E6%89%8B%E6%88%BF%E5%8F%8C%E5%8F%8C%E9%A2%86%E8%B7%91%E5%85%A8%E5%9B%BD",
+          "summary": "一线城市环比转涨，上海新房二手房双双领跑。"
+        },
+        {
+          "title": "8 月全国城镇调查失业率 5.3%，比上月上升 0.1 个百分点，统计局：受季节性影响",
+          "url": "https://www.baidu.com/s?wd=8%20%E6%9C%88%E5%85%A8%E5%9B%BD%E5%9F%8E%E9%95%87%E8%B0%83%E6%9F%A5%E5%A4%B1%E4%B8%9A%E7%8E%87%205.3%25%EF%BC%8C%E6%AF%94%E4%B8%8A%E6%9C%88%E4%B8%8A%E5%8D%87%200.1%20%E4%B8%AA%E7%99%BE%E5%88%86%E7%82%B9%EF%BC%8C%E7%BB%9F%E8%AE%A1%E5%B1%80%EF%BC%9A%E5%8F%97%E5%AD%A3%E8%8A%82%E6%80%A7%E5%BD%B1%E5%93%8D",
+          "summary": "较上月上升 0.1 个百分点，统计局称受季节性影响。"
+        },
+        {
+          "title": "8 月工业增加值增速升至 5.2%，高技术制造业动能强劲；8 月社会消费品零售总额增长 0.4%，低于预期",
+          "url": "https://www.baidu.com/s?wd=8%20%E6%9C%88%E5%B7%A5%E4%B8%9A%E5%A2%9E%E5%8A%A0%E5%80%BC%E5%A2%9E%E9%80%9F%E5%8D%87%E8%87%B3%205.2%25%EF%BC%8C%E9%AB%98%E6%8A%80%E6%9C%AF%E5%88%B6%E9%80%A0%E4%B8%9A%E5%8A%A8%E8%83%BD%E5%BC%BA%E5%8A%B2%EF%BC%9B8%20%E6%9C%88%E7%A4%BE%E4%BC%9A%E6%B6%88%E8%B4%B9%E5%93%81%E9%9B%B6%E5%94%AE%E6%80%BB%E9%A2%9D%E5%A2%9E%E9%95%BF%200.4%25%EF%BC%8C%E4%BD%8E%E4%BA%8E%E9%A2%84%E6%9C%9F",
+          "summary": "工业增速升至 5.2%，社零 0.4% 低于预期。"
+        },
+        {
+          "title": "“平台月付将退出支付选项” 上热搜，支付宝、美团等多平台回应：目前未接到相关通知，月付产品仍可正常使用",
+          "url": "https://www.baidu.com/s?wd=%E2%80%9C%E5%B9%B3%E5%8F%B0%E6%9C%88%E4%BB%98%E5%B0%86%E9%80%80%E5%87%BA%E6%94%AF%E4%BB%98%E9%80%89%E9%A1%B9%E2%80%9D%20%E4%B8%8A%E7%83%AD%E6%90%9C%EF%BC%8C%E6%94%AF%E4%BB%98%E5%AE%9D%E3%80%81%E7%BE%8E%E5%9B%A2%E7%AD%89%E5%A4%9A%E5%B9%B3%E5%8F%B0%E5%9B%9E%E5%BA%94%EF%BC%9A%E7%9B%AE%E5%89%8D%E6%9C%AA%E6%8E%A5%E5%88%B0%E7%9B%B8%E5%85%B3%E9%80%9A%E7%9F%A5%EF%BC%8C%E6%9C%88%E4%BB%98%E4%BA%A7%E5%93%81%E4%BB%8D%E5%8F%AF%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8",
+          "summary": "支付宝、美团等回应未接到通知，月付仍可正常使用。"
+        },
+        {
+          "title": "我国将加快建设托育综合服务中心，提供全日托、半日托、计时托等多种形式服务",
+          "url": "https://www.baidu.com/s?wd=%E6%88%91%E5%9B%BD%E5%B0%86%E5%8A%A0%E5%BF%AB%E5%BB%BA%E8%AE%BE%E6%89%98%E8%82%B2%E7%BB%BC%E5%90%88%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%EF%BC%8C%E6%8F%90%E4%BE%9B%E5%85%A8%E6%97%A5%E6%89%98%E3%80%81%E5%8D%8A%E6%97%A5%E6%89%98%E3%80%81%E8%AE%A1%E6%97%B6%E6%89%98%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%BD%A2%E5%BC%8F%E6%9C%8D%E5%8A%A1",
+          "summary": "将提供全日托、半日托、计时托等多种服务。"
+        },
+        {
+          "title": "共享单车服务规范新国标落地：一车一码，重点整治乱停放，今年 11 月起实施",
+          "url": "https://www.baidu.com/s?wd=%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E6%9C%8D%E5%8A%A1%E8%A7%84%E8%8C%83%E6%96%B0%E5%9B%BD%E6%A0%87%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%B8%80%E8%BD%A6%E4%B8%80%E7%A0%81%EF%BC%8C%E9%87%8D%E7%82%B9%E6%95%B4%E6%B2%BB%E4%B9%B1%E5%81%9C%E6%94%BE%EF%BC%8C%E4%BB%8A%E5%B9%B4%2011%20%E6%9C%88%E8%B5%B7%E5%AE%9E%E6%96%BD",
+          "summary": "一车一码、重点整治乱停放，今年 11 月起实施。"
+        },
+        {
+          "title": "15 日 A 股两市成交额创年内新低；李大霄：A 股牛市已经告一段落，现在处于结构性调整阶段",
+          "url": "https://www.baidu.com/s?wd=15%20%E6%97%A5%20A%20%E8%82%A1%E4%B8%A4%E5%B8%82%E6%88%90%E4%BA%A4%E9%A2%9D%E5%88%9B%E5%B9%B4%E5%86%85%E6%96%B0%E4%BD%8E%EF%BC%9B%E6%9D%8E%E5%A4%A7%E9%9C%84%EF%BC%9AA%20%E8%82%A1%E7%89%9B%E5%B8%82%E5%B7%B2%E7%BB%8F%E5%91%8A%E4%B8%80%E6%AE%B5%E8%90%BD%EF%BC%8C%E7%8E%B0%E5%9C%A8%E5%A4%84%E4%BA%8E%E7%BB%93%E6%9E%84%E6%80%A7%E8%B0%83%E6%95%B4%E9%98%B6%E6%AE%B5",
+          "summary": "李大霄称牛市告一段落，市场处于结构性调整。"
+        },
+        {
+          "title": "2026 软科世界一流学科排名发布：中国内地高校 22 个学科位列世界第一",
+          "url": "https://www.baidu.com/s?wd=2026%20%E8%BD%AF%E7%A7%91%E4%B8%96%E7%95%8C%E4%B8%80%E6%B5%81%E5%AD%A6%E7%A7%91%E6%8E%92%E5%90%8D%E5%8F%91%E5%B8%83%EF%BC%9A%E4%B8%AD%E5%9B%BD%E5%86%85%E5%9C%B0%E9%AB%98%E6%A0%A1%2022%20%E4%B8%AA%E5%AD%A6%E7%A7%91%E4%BD%8D%E5%88%97%E4%B8%96%E7%95%8C%E7%AC%AC%E4%B8%80",
+          "summary": "中国内地高校 22 个学科位列世界第一。"
+        }
+      ]
     },
     {
-     "city": "通辽",
-     "cond": "大致晴",
-     "text": "16~26°",
-     "note": "现在 20° · 体感 19° · 降水 0%"
+      "type": "market",
+      "label": "A股大盘",
+      "en": "MARKET",
+      "nav": "财经新闻",
+      "half": true,
+      "indices": [
+        {
+          "name": "上证指数",
+          "point": 3891.6,
+          "chg": 27.32,
+          "pct": 0.71
+        },
+        {
+          "name": "深证成指",
+          "point": 13454.74,
+          "chg": 166.77,
+          "pct": 1.26
+        },
+        {
+          "name": "创业板指",
+          "point": 3311.47,
+          "chg": 63.55,
+          "pct": 1.96
+        },
+        {
+          "name": "科创50",
+          "point": 1616.19,
+          "chg": 64.23,
+          "pct": 4.14
+        },
+        {
+          "name": "北证50",
+          "point": 1040.29,
+          "chg": 11.78,
+          "pct": 1.15
+        },
+        {
+          "name": "沪深300",
+          "point": 4480.27,
+          "chg": 30.23,
+          "pct": 0.68
+        }
+      ],
+      "footnote": "两市成交额 18,391 亿元 · 数据 2026-09-16 21:26 · 昨日收盘",
+      "up": [
+        {
+          "name": "运动服装",
+          "pct": 7.34
+        },
+        {
+          "name": "炭黑",
+          "pct": 6.75
+        },
+        {
+          "name": "半导体材料",
+          "pct": 6.14
+        },
+        {
+          "name": "林业Ⅲ",
+          "pct": 5.97
+        },
+        {
+          "name": "林业Ⅱ",
+          "pct": 5.97
+        },
+        {
+          "name": "光学元件",
+          "pct": 5.37
+        },
+        {
+          "name": "激光设备",
+          "pct": 5.15
+        },
+        {
+          "name": "跨境电商",
+          "pct": 5.09
+        }
+      ],
+      "down": [
+        {
+          "name": "商用载客车",
+          "pct": -2.62
+        },
+        {
+          "name": "生猪养殖",
+          "pct": -2.38
+        },
+        {
+          "name": "涂料",
+          "pct": -1.96
+        },
+        {
+          "name": "风电整机",
+          "pct": -1.84
+        },
+        {
+          "name": "商用车",
+          "pct": -1.72
+        },
+        {
+          "name": "养殖业",
+          "pct": -1.47
+        },
+        {
+          "name": "钨",
+          "pct": -1.4
+        },
+        {
+          "name": "教育出版",
+          "pct": -1.36
+        }
+      ]
     },
     {
-     "city": "崇礼",
-     "cond": "大致晴",
-     "text": "13~25°",
-     "note": "现在 16° · 体感 14° · 降水 0%"
+      "type": "lhb",
+      "label": "龙虎榜",
+      "en": "LHB",
+      "nav": "财经新闻",
+      "half": true,
+      "items": [
+        {
+          "rank": 1,
+          "code": "002281",
+          "name": "光迅科技",
+          "pct": 10.0018,
+          "net": 1014858445.79,
+          "explain": "2家机构买入，成功率39.66%"
+        },
+        {
+          "rank": 2,
+          "code": "002491",
+          "name": "通鼎互联",
+          "pct": 9.9865,
+          "net": 914138161.16,
+          "explain": "2家机构买入，成功率42.07%"
+        },
+        {
+          "rank": 3,
+          "code": "688432",
+          "name": "有研硅",
+          "pct": 20,
+          "net": 706125518.63,
+          "explain": "买一主买，成功率44.36%"
+        },
+        {
+          "rank": 4,
+          "code": "000592",
+          "name": "平潭发展",
+          "pct": 9.9747,
+          "net": 456626115.65,
+          "explain": "普通席位买入，成功率46.90%"
+        },
+        {
+          "rank": 5,
+          "code": "000823",
+          "name": "超声电子",
+          "pct": 5.1046,
+          "net": 332692738.59,
+          "explain": "2家机构买入，成功率41.23%"
+        },
+        {
+          "rank": 6,
+          "code": "301486",
+          "name": "致尚科技",
+          "pct": 19.9978,
+          "net": 260123610.41,
+          "explain": "3家机构买入，成功率39.51%"
+        },
+        {
+          "rank": 7,
+          "code": "301251",
+          "name": "威尔高",
+          "pct": 20,
+          "net": 178113123.12,
+          "explain": "2家机构买入，成功率41.94%"
+        },
+        {
+          "rank": 8,
+          "code": "600103",
+          "name": "青山纸业",
+          "pct": 10.1493,
+          "net": 142307391.98,
+          "explain": "普通席位买入，成功率44.57%"
+        }
+      ],
+      "footnote": "按净买入额排序 · 2026-09-16 · 来源 东方财富龙虎榜"
+    },
+    {
+      "type": "news",
+      "label": "财经要闻",
+      "en": "FINANCE",
+      "nav": "财经新闻",
+      "items": [
+        {
+          "title": "外资加速抛售三星、海力士，韩股AI板块面临重估",
+          "url": "https://finance.sina.com.cn/chanjing/gsnews/2026-09-16/doc-inirzshz0536360.shtml",
+          "source": "21世纪经济报道",
+          "summary": "外资抛售三星与海力士，韩股 AI 板块面临重估。"
+        },
+        {
+          "title": "江苏省委书记信长星到江苏银行和华泰证券调研",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzsia9889301.shtml",
+          "source": "证券时报网",
+          "summary": "省委书记调研江苏银行与华泰证券。"
+        },
+        {
+          "title": "来伊份致歉！三款零食被检出“缺斤短两”",
+          "url": "https://finance.sina.com.cn/chanjing/gsnews/2026-09-16/doc-inirzshz0507936.shtml",
+          "source": "市场资讯",
+          "summary": "三款零食被检出「缺斤短两」，公司公开致歉。"
+        },
+        {
+          "title": "海南省委书记冯飞会见高通公司全球副总裁夏权一行",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzsia9887258.shtml",
+          "source": "证券时报网",
+          "summary": "高通全球副总裁与海南方面会谈。"
+        },
+        {
+          "title": "全球表现最佳主权财富基金警示：美国股市或将迎来回调",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9888022.shtml",
+          "source": "环球市场播报",
+          "summary": "全球表现最佳主权基金警示美股或迎回调。"
+        },
+        {
+          "title": "苹果考虑重返服务器市场，已与英伟达洽谈采用其网络技术",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9887986.shtml",
+          "source": "环球市场播报",
+          "summary": "苹果考虑重返服务器市场，洽谈采用英伟达网络技术。"
+        },
+        {
+          "title": "计划新增3000家门店，热带冰沙咖啡馆开启品牌升级",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshv4723253.shtml",
+          "source": "环球市场播报",
+          "summary": "连锁饮品加速下沉，门店目标 3000 家。"
+        },
+        {
+          "title": "美联储利率决议前夕，期权市场出现离奇波动率押注，令市场费解",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3747751.shtml",
+          "source": "环球市场播报",
+          "summary": "议息前夜期权异动，市场分歧加大。"
+        },
+        {
+          "title": "美国8月进口价格环比上涨0.7% 预期上涨0.5%",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9880799.shtml",
+          "source": "环球市场播报",
+          "summary": "美国 8 月进口价格环比 +0.7%，高于预期。"
+        },
+        {
+          "title": "58集团董事长姚劲波违规减持，“地板价”清仓套现逾2亿港元",
+          "url": "https://finance.sina.com.cn/stock/s/2026-09-16/doc-inirzshx3740335.shtml",
+          "summary": "姚劲波「地板价」清仓，套现逾 2 亿港元。"
+        },
+        {
+          "title": "降价复出的钟薛高，出路在小卖部",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzshu2743412.shtml",
+          "source": "界面",
+          "summary": "渠道下沉到小卖部，高端定位继续收敛。"
+        },
+        {
+          "title": "美国零售销售普遍回升 增幅超过预期",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshv4709953.shtml",
+          "source": "环球市场播报",
+          "summary": "零售销售普遍回升，增幅超预期。"
+        }
+      ]
+    },
+    {
+      "type": "news",
+      "label": "AI 动态",
+      "en": "AI",
+      "nav": "AI 动态",
+      "items": [
+        {
+          "title": "AI大模型工场2026 AI产业生态大会今日举办，大咖同台共探智能生长与产业共生",
+          "url": "https://www.qbitai.com/2026/09/490760.html",
+          "source": "量子位",
+          "summary": "讨论智能生长与产业共生，国内厂商集中亮相。"
+        },
+        {
+          "title": "高通技术公司携手中兴努比亚和豆包手机助手，共同推动智能手机迈入个人AI新时代",
+          "url": "https://www.qbitai.com/2026/09/490756.html",
+          "source": "量子位",
+          "summary": "端侧算力叠加助手生态，手机厂商争夺 AI 入口。"
+        },
+        {
+          "title": "基元律动与无问芯穹达成战略合作，推进高质量Token供给与应用",
+          "url": "https://www.qbitai.com/2026/09/490750.html",
+          "source": "量子位",
+          "summary": "推进高质量 Token 供给与应用落地。"
+        },
+        {
+          "title": "协同办公进入Agent时代，飞书+豆包工作跑在了最前面",
+          "url": "https://www.qbitai.com/2026/09/490686.html",
+          "source": "量子位",
+          "summary": "文档、会议、审批被串成可执行流程。"
+        },
+        {
+          "title": "西门子不造机器人，为什么机器人进厂的故事里总有它？",
+          "url": "https://www.qbitai.com/2026/09/490416.html",
+          "source": "量子位",
+          "summary": "靠工业软件与仿真，做产线自动化的底座。"
+        },
+        {
+          "title": "清华稳准智能联合发布LimiX-2，结构化数据基础模型登顶国际评测榜单",
+          "url": "https://www.qbitai.com/2026/09/490400.html",
+          "source": "量子位",
+          "summary": "结构化数据基础模型登顶国际评测榜单。"
+        },
+        {
+          "title": "B站AI无限竞技场今日上线！全球百大AI模型同场竞技，GPT-6高居榜首",
+          "url": "https://www.qbitai.com/2026/09/490396.html",
+          "source": "量子位",
+          "summary": "全球百大模型同场竞技，GPT-6 排名居首。"
+        },
+        {
+          "title": "量子位2026人工智能年度榜单，正式启动！",
+          "url": "https://www.qbitai.com/2026/09/490329.html",
+          "source": "量子位",
+          "summary": "面向国内 AI 产品与团队的年度评选启动。"
+        },
+        {
+          "title": "SK Hynix reportedly in talks with Intel to build memory chips in US",
+          "url": "https://techcrunch.com/2026/09/16/sk-hynix-reportedly-in-talks-with-intel-to-build-memory-chips-in-us/",
+          "source": "TechCrunch AI",
+          "summary": "SK 海力士据报与英特尔洽谈存储芯片合作。"
+        }
+      ]
+    },
+    {
+      "type": "schedule",
+      "label": "足球",
+      "en": "FOOTBALL",
+      "nav": "体育新闻",
+      "note": "虎扑实时热帖",
+      "schedule_label": "今日赛程",
+      "schedule": [
+        {
+          "time": "00:00",
+          "text": "亚精英赛第1轮 · 艾因 4-0 利雅得胜利",
+          "state": "已结束"
+        },
+        {
+          "time": "03:00",
+          "text": "英联杯第三轮 · 伊普斯维奇 2-4 阿森纳",
+          "state": "已结束"
+        },
+        {
+          "time": "03:00",
+          "text": "英联杯第三轮 · 利物浦 3-1 托特纳姆热刺",
+          "state": "已结束"
+        },
+        {
+          "time": "03:30",
+          "text": "西甲第6轮 · 埃尔切 2-3 皇家马德里",
+          "state": "已结束"
+        },
+        {
+          "time": "18:00",
+          "text": "亚运男足第1轮 · 中国U23 2-1 朝鲜U23",
+          "state": "已结束"
+        }
+      ],
+      "items": [
+        {
+          "title": "亚运男足：中国2-1朝鲜，吴曦、张玉宁互相传射",
+          "url": "https://m.hupu.com/bbs/642447464.html",
+          "pinned": true,
+          "summary": "吴曦与张玉宁互相传射，中国队 2-1 逆转朝鲜。"
+        },
+        {
+          "title": "亚运神评：听说莫德里奇又叫小吴曦",
+          "url": "https://m.hupu.com/bbs/642447987.html",
+          "pinned": true,
+          "summary": "球迷玩梗，把吴曦与莫德里奇放在一起比较。"
+        },
+        {
+          "title": "老兵不死！昨晚武磊张稀哲闪耀亚冠，今日吴曦拯救亚运男足",
+          "url": "https://m.hupu.com/bbs/642447469.html",
+          "pinned": true,
+          "summary": "老将状态回升，吴曦同日救主。"
+        },
+        {
+          "title": "英超第三轮KMI事件判罚：5-0全票通过加布不应该被红牌罚下",
+          "url": "https://m.hupu.com/bbs/642445540.html",
+          "pinned": true,
+          "summary": "5-0 全票通过，判罚认定为误判。"
+        },
+        {
+          "title": "克罗斯嘲讽：维尔茨、穆西亚拉等三人在世界杯上没出现过",
+          "url": "https://m.hupu.com/bbs/642448579.html",
+          "summary": "克罗斯嘲讽三人在世界杯上「没出现过」。"
+        },
+        {
+          "title": "FC27游戏中，新增了曼联前锋库尼亚的冲浪庆祝",
+          "url": "https://m.hupu.com/bbs/642448538.html",
+          "summary": "FC27 新增库尼亚的冲浪庆祝动画。"
+        }
+      ]
+    },
+    {
+      "type": "schedule",
+      "label": "篮球",
+      "en": "BASKETBALL",
+      "nav": "体育新闻",
+      "note": "虎扑实时热帖",
+      "schedule_label": "今日赛程",
+      "schedule": [
+        {
+          "time": "",
+          "text": "今日无 NBA 比赛（休赛期）",
+          "state": ""
+        }
+      ],
+      "items": [
+        {
+          "title": "弗拉格和欧文合作的第一个赛季，会是最后一个吗？",
+          "url": "https://m.hupu.com/bbs/642438413",
+          "summary": "弗拉格与欧文合作的首季，是否就是最后一季。"
+        },
+        {
+          "title": "A-史密斯：文班亚马目前就是NBA门面，属于他的时代已经开启",
+          "url": "https://m.hupu.com/bbs/642448560",
+          "summary": "A-史密斯称文班亚马已是 NBA 门面。"
+        },
+        {
+          "title": "Santos：争冠队仍可能追求杜兰特，他有望成为争冠最后拼图",
+          "url": "https://m.hupu.com/bbs/642448532",
+          "summary": "争冠队仍可能追求杜兰特，补最后拼图。"
+        },
+        {
+          "title": "历史罕见！掘金曾打出1950年以来唯一无人得分上双的比赛",
+          "url": "https://m.hupu.com/bbs/642448484",
+          "summary": "1950 年以来唯一一场无人得分上双的比赛。"
+        },
+        {
+          "title": "美记：尼克斯还有3个双向空缺，正在接触杜普-里斯和怀斯曼",
+          "url": "https://m.hupu.com/bbs/642448442",
+          "summary": "尼克斯补强内线，接触杜普-里斯与怀斯曼。"
+        },
+        {
+          "title": "CP：吉布森如今有机会培养公牛新一代内线球员",
+          "url": "https://m.hupu.com/bbs/642448402",
+          "summary": "公牛重建期给年轻内线更多机会。"
+        }
+      ]
+    },
+    {
+      "type": "hot",
+      "label": "全网热榜",
+      "en": "TRENDING",
+      "nav": "热榜",
+      "boards": [
+        {
+          "board": "微博热搜",
+          "items": [
+            {
+              "title": "第一批穿德训鞋的受害者出现了",
+              "url": "https://s.weibo.com/weibo?q=%E7%AC%AC%E4%B8%80%E6%89%B9%E7%A9%BF%E5%BE%B7%E8%AE%AD%E9%9E%8B%E7%9A%84%E5%8F%97%E5%AE%B3%E8%80%85%E5%87%BA%E7%8E%B0%E4%BA%86",
+              "hot": "127万"
+            },
+            {
+              "title": "硕士考试第一名因专升本被取消资格",
+              "url": "https://s.weibo.com/weibo?q=%E7%A1%95%E5%A3%AB%E8%80%83%E8%AF%95%E7%AC%AC%E4%B8%80%E5%90%8D%E5%9B%A0%E4%B8%93%E5%8D%87%E6%9C%AC%E8%A2%AB%E5%8F%96%E6%B6%88%E8%B5%84%E6%A0%BC",
+              "hot": "84万"
+            },
+            {
+              "title": "一组关键词看平陆运河硬核实力",
+              "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E7%BB%84%E5%85%B3%E9%94%AE%E8%AF%8D%E7%9C%8B%E5%B9%B3%E9%99%86%E8%BF%90%E6%B2%B3%E7%A1%AC%E6%A0%B8%E5%AE%9E%E5%8A%9B",
+              "hot": "70万"
+            },
+            {
+              "title": "小伙记录母亲最后14天的视频火了",
+              "url": "https://s.weibo.com/weibo?q=%E5%B0%8F%E4%BC%99%E8%AE%B0%E5%BD%95%E6%AF%8D%E4%BA%B2%E6%9C%80%E5%90%8E14%E5%A4%A9%E7%9A%84%E8%A7%86%E9%A2%91%E7%81%AB%E4%BA%86",
+              "hot": "54万"
+            },
+            {
+              "title": "大学毕业生举报资助人是间谍",
+              "url": "https://s.weibo.com/weibo?q=%E5%A4%A7%E5%AD%A6%E6%AF%95%E4%B8%9A%E7%94%9F%E4%B8%BE%E6%8A%A5%E8%B5%84%E5%8A%A9%E4%BA%BA%E6%98%AF%E9%97%B4%E8%B0%8D",
+              "hot": "36万"
+            }
+          ]
+        },
+        {
+          "board": "知乎热榜",
+          "items": [
+            {
+              "title": "平陆运河正式通航，广西从此江海直连，这条设想了近百年的运河建设难度有多大？它能「带飞」中国西南吗？",
+              "url": "https://www.zhihu.com/question/2082841016533632412",
+              "hot": "3617 万热度"
+            },
+            {
+              "title": "中国男子涉嫌在印尼渔猎玳瑁并烹饪，离境时被拦接受调查，玳瑁是什么动物？若属实他将承担什么责任？",
+              "url": "https://www.zhihu.com/question/2083156467859956956",
+              "hot": "696 万热度"
+            },
+            {
+              "title": "钟薛高宣布重启，推出三种口味，零售价最低跌到 6.9 元一支，你看好钟薛高这次「复活」吗？",
+              "url": "https://www.zhihu.com/question/2083299849705714867",
+              "hot": "464 万热度"
+            },
+            {
+              "title": "为什么QQ邮箱这么好用大家还是觉得它「档次不够高」？",
+              "url": "https://www.zhihu.com/question/22891817",
+              "hot": "328 万热度"
+            },
+            {
+              "title": "野人先生在沉默数日后首度发声，「感谢大家长期以来对野人先生的关心和支持」，你觉得这波公关处理怎么样？",
+              "url": "https://www.zhihu.com/question/2083566699115299351",
+              "hot": "197 万热度"
+            }
+          ]
+        },
+        {
+          "board": "抖音热点",
+          "items": [
+            {
+              "title": "U23国足2:1战胜朝鲜U23",
+              "url": "https://www.douyin.com/search/U23%E5%9B%BD%E8%B6%B32%3A1%E6%88%98%E8%83%9C%E6%9C%9D%E9%B2%9CU23",
+              "hot": "1199万"
+            },
+            {
+              "title": "原相机的风吹到了创大",
+              "url": "https://www.douyin.com/search/%E5%8E%9F%E7%9B%B8%E6%9C%BA%E7%9A%84%E9%A3%8E%E5%90%B9%E5%88%B0%E4%BA%86%E5%88%9B%E5%A4%A7",
+              "hot": "1150万"
+            },
+            {
+              "title": "全国铁路完成固定资产投资5118亿",
+              "url": "https://www.douyin.com/search/%E5%85%A8%E5%9B%BD%E9%93%81%E8%B7%AF%E5%AE%8C%E6%88%90%E5%9B%BA%E5%AE%9A%E8%B5%84%E4%BA%A7%E6%8A%95%E8%B5%845118%E4%BA%BF",
+              "hot": "1110万"
+            },
+            {
+              "title": "各地已进入秋季最佳赏味期",
+              "url": "https://www.douyin.com/search/%E5%90%84%E5%9C%B0%E5%B7%B2%E8%BF%9B%E5%85%A5%E7%A7%8B%E5%AD%A3%E6%9C%80%E4%BD%B3%E8%B5%8F%E5%91%B3%E6%9C%9F",
+              "hot": "1110万"
+            },
+            {
+              "title": "赵家驹夺冠后第一条抖音",
+              "url": "https://www.douyin.com/search/%E8%B5%B5%E5%AE%B6%E9%A9%B9%E5%A4%BA%E5%86%A0%E5%90%8E%E7%AC%AC%E4%B8%80%E6%9D%A1%E6%8A%96%E9%9F%B3",
+              "hot": "1041万"
+            }
+          ]
+        },
+        {
+          "board": "头条热榜",
+          "items": [
+            {
+              "title": "父母离世后小伙3次应征终入伍",
+              "url": "https://www.toutiao.com/trending/7685332470573481990",
+              "hot": "1399万"
+            },
+            {
+              "title": "女子称买海螺意外开出粉色“海螺珠”",
+              "url": "https://www.toutiao.com/trending/7685986278470402089",
+              "hot": "1266万"
+            },
+            {
+              "title": "夏粮收购总量超1亿吨",
+              "url": "https://www.toutiao.com/article/7686037458551390783",
+              "hot": "1145万"
+            },
+            {
+              "title": "亚运会U23国足2-1逆转朝鲜",
+              "url": "https://www.toutiao.com/trending/7686100621266521606",
+              "hot": "1036万"
+            },
+            {
+              "title": "马来西亚总理强硬回应扣押以色列货物",
+              "url": "https://www.toutiao.com/trending/7685680588866830379",
+              "hot": "938万"
+            }
+          ]
+        }
+      ]
     }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "天气新闻",
-   "en": "WEATHER NEWS",
-   "nav": "天气",
-   "items": [
-    {
-     "title": "北京 | 最高气温将超30℃昼夜温差较大",
-     "url": "http://news.weather.com.cn/2026/09/4793644.shtml",
-     "source": "中国天气网 · 北京",
-     "summary": "北京白天最高超 30°C，早晚温差拉大，注意增减衣物。"
-    },
-    {
-     "title": "一日两季！全国乱穿衣预警地图来了",
-     "url": "http://news.weather.com.cn/2026/09/4794515.shtml",
-     "source": "中国天气网 · 预警",
-     "summary": "南北温差拉大，多地「一日两季」，穿衣需灵活。"
-    },
-    {
-     "title": "山洪灾害气象预警",
-     "url": "http://news.weather.com.cn/2026/09/4794623.shtml",
-     "source": "中国天气网 · 预警",
-     "summary": "部分地区发布山洪灾害气象预警，山区防范突发来水。"
-    },
-    {
-     "title": "地质灾害气象风险预警",
-     "url": "http://news.weather.com.cn/2026/09/4794624.shtml",
-     "source": "中国天气网 · 预警",
-     "summary": "降雨叠加，地质灾害气象风险升高，山区出行注意避险。"
-    },
-    {
-     "title": "全国入秋进程图出炉 京津冀等地跑步入秋",
-     "url": "http://news.weather.com.cn/2026/09/4794549.shtml",
-     "source": "中国天气网 · 全国",
-     "summary": "秋季前沿南压，京津冀等地入秋进程明显加快。"
-    },
-    {
-     "title": "北方大部晴朗在线 四川至湖北降雨频繁",
-     "url": "http://news.weather.com.cn/2026/09/4793520.shtml",
-     "source": "中国天气网 · 全国",
-     "summary": "北方大部晴好，四川到湖北一带降雨频繁。"
-    },
-    {
-     "title": "贵州 | 大部将迎持续降雨 北部雨势较强局部有暴雨",
-     "url": "http://news.weather.com.cn/2026/09/4794244.shtml",
-     "source": "中国天气网 · 全国",
-     "summary": "贵州大部持续降雨，北部局地有暴雨。"
-    },
-    {
-     "title": "湖北 | 多地雨势较强 大部气温明显下降体感湿凉",
-     "url": "http://news.weather.com.cn/2026/09/4794030.shtml",
-     "source": "中国天气网 · 全国",
-     "summary": "湖北多地雨势较强，气温下滑、体感湿凉。"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "国际新闻",
-   "en": "WORLD",
-   "nav": "国际新闻",
-   "items": [
-    {
-     "title": "携程上架 2027 年维珍银河太空旅行船票，售价 510 万元，需自行前往美国，平台显示已售出 681 份",
-     "url": "https://www.baidu.com/s?wd=%E6%90%BA%E7%A8%8B%E4%B8%8A%E6%9E%B6%202027%20%E5%B9%B4%E7%BB%B4%E7%8F%8D%E9%93%B6%E6%B2%B3%E5%A4%AA%E7%A9%BA%E6%97%85%E8%A1%8C%E8%88%B9%E7%A5%A8%EF%BC%8C%E5%94%AE%E4%BB%B7%20510%20%E4%B8%87%E5%85%83%EF%BC%8C%E9%9C%80%E8%87%AA%E8%A1%8C%E5%89%8D%E5%BE%80%E7%BE%8E%E5%9B%BD%EF%BC%8C%E5%B9%B3%E5%8F%B0%E6%98%BE%E7%A4%BA%E5%B7%B2%E5%94%AE%E5%87%BA%20681%20%E4%BB%BD",
-     "summary": "510 万元一张、需自行赴美，平台显示已售 681 份。"
-    },
-    {
-     "title": "中国将 “嫦娥六号” 采集的人类首批月背月壤样品正式赠送联合国，样品将在维也纳联合国总部永久展出",
-     "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%B0%86%20%E2%80%9C%E5%AB%A6%E5%A8%A5%E5%85%AD%E5%8F%B7%E2%80%9D%20%E9%87%87%E9%9B%86%E7%9A%84%E4%BA%BA%E7%B1%BB%E9%A6%96%E6%89%B9%E6%9C%88%E8%83%8C%E6%9C%88%E5%A3%A4%E6%A0%B7%E5%93%81%E6%AD%A3%E5%BC%8F%E8%B5%A0%E9%80%81%E8%81%94%E5%90%88%E5%9B%BD%EF%BC%8C%E6%A0%B7%E5%93%81%E5%B0%86%E5%9C%A8%E7%BB%B4%E4%B9%9F%E7%BA%B3%E8%81%94%E5%90%88%E5%9B%BD%E6%80%BB%E9%83%A8%E6%B0%B8%E4%B9%85%E5%B1%95%E5%87%BA",
-     "summary": "月背样品将在维也纳联合国总部永久展出。"
-    },
-    {
-     "title": "日本一架价值上亿美元 “全球鹰” 无人机失联，已发现疑似机体残骸漂浮海面",
-     "url": "https://www.baidu.com/s?wd=%E6%97%A5%E6%9C%AC%E4%B8%80%E6%9E%B6%E4%BB%B7%E5%80%BC%E4%B8%8A%E4%BA%BF%E7%BE%8E%E5%85%83%20%E2%80%9C%E5%85%A8%E7%90%83%E9%B9%B0%E2%80%9D%20%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%A4%B1%E8%81%94%EF%BC%8C%E5%B7%B2%E5%8F%91%E7%8E%B0%E7%96%91%E4%BC%BC%E6%9C%BA%E4%BD%93%E6%AE%8B%E9%AA%B8%E6%BC%82%E6%B5%AE%E6%B5%B7%E9%9D%A2",
-     "summary": "价值上亿美元的无人机失联，已发现疑似机体残骸。"
-    },
-    {
-     "title": "美国环保署宣布废除发电厂碳排放限制，拟永久取消未来监管权",
-     "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E7%8E%AF%E4%BF%9D%E7%BD%B2%E5%AE%A3%E5%B8%83%E5%BA%9F%E9%99%A4%E5%8F%91%E7%94%B5%E5%8E%82%E7%A2%B3%E6%8E%92%E6%94%BE%E9%99%90%E5%88%B6%EF%BC%8C%E6%8B%9F%E6%B0%B8%E4%B9%85%E5%8F%96%E6%B6%88%E6%9C%AA%E6%9D%A5%E7%9B%91%E7%AE%A1%E6%9D%83",
-     "summary": "拟永久取消未来监管权，环保与能源博弈升级。"
-    },
-    {
-     "title": "美国首次承认在太空具备 “进攻能力”，美空军部长：美国已拥有 “在轨” 太空控制武器",
-     "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E9%A6%96%E6%AC%A1%E6%89%BF%E8%AE%A4%E5%9C%A8%E5%A4%AA%E7%A9%BA%E5%85%B7%E5%A4%87%20%E2%80%9C%E8%BF%9B%E6%94%BB%E8%83%BD%E5%8A%9B%E2%80%9D%EF%BC%8C%E7%BE%8E%E7%A9%BA%E5%86%9B%E9%83%A8%E9%95%BF%EF%BC%9A%E7%BE%8E%E5%9B%BD%E5%B7%B2%E6%8B%A5%E6%9C%89%20%E2%80%9C%E5%9C%A8%E8%BD%A8%E2%80%9D%20%E5%A4%AA%E7%A9%BA%E6%8E%A7%E5%88%B6%E6%AD%A6%E5%99%A8",
-     "summary": "美空军部长称已拥有「在轨」太空控制武器。"
-    },
-    {
-     "title": "委内瑞拉同英国升级外交关系",
-     "url": "https://news.china.com/international/1000/20260916/49745931.html",
-     "source": "新华社",
-     "summary": "双方同意互设更高层级代表机构。"
-    },
-    {
-     "title": "也门胡塞武装：沙特战机一天内发动52次空袭",
-     "url": "https://news.china.com/international/1000/20260916/49745922.html",
-     "source": "新华社",
-     "summary": "空袭集中在北部省份，当地能源与医疗承压。"
-    },
-    {
-     "title": "韩国前总统尹锡悦涉嫌作伪证案二审被判处无罪",
-     "url": "https://news.china.com/international/1000/20260916/49745151.html",
-     "source": "央视新闻",
-     "summary": "首尔高等法院推翻一审判决，检方将研究是否上诉。"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "国内新闻",
-   "en": "CHINA",
-   "nav": "国内新闻",
-   "items": [
-    {
-     "title": "8 月 70 城房价出炉：一线城市环比转涨，二手房同比跌幅收窄，上海新房二手房双双领跑全国",
-     "url": "https://www.baidu.com/s?wd=8%20%E6%9C%88%2070%20%E5%9F%8E%E6%88%BF%E4%BB%B7%E5%87%BA%E7%82%89%EF%BC%9A%E4%B8%80%E7%BA%BF%E5%9F%8E%E5%B8%82%E7%8E%AF%E6%AF%94%E8%BD%AC%E6%B6%A8%EF%BC%8C%E4%BA%8C%E6%89%8B%E6%88%BF%E5%90%8C%E6%AF%94%E8%B7%8C%E5%B9%85%E6%94%B6%E7%AA%84%EF%BC%8C%E4%B8%8A%E6%B5%B7%E6%96%B0%E6%88%BF%E4%BA%8C%E6%89%8B%E6%88%BF%E5%8F%8C%E5%8F%8C%E9%A2%86%E8%B7%91%E5%85%A8%E5%9B%BD",
-     "summary": "一线城市环比转涨，上海新房二手房双双领跑。"
-    },
-    {
-     "title": "8 月全国城镇调查失业率 5.3%，比上月上升 0.1 个百分点，统计局：受季节性影响",
-     "url": "https://www.baidu.com/s?wd=8%20%E6%9C%88%E5%85%A8%E5%9B%BD%E5%9F%8E%E9%95%87%E8%B0%83%E6%9F%A5%E5%A4%B1%E4%B8%9A%E7%8E%87%205.3%25%EF%BC%8C%E6%AF%94%E4%B8%8A%E6%9C%88%E4%B8%8A%E5%8D%87%200.1%20%E4%B8%AA%E7%99%BE%E5%88%86%E7%82%B9%EF%BC%8C%E7%BB%9F%E8%AE%A1%E5%B1%80%EF%BC%9A%E5%8F%97%E5%AD%A3%E8%8A%82%E6%80%A7%E5%BD%B1%E5%93%8D",
-     "summary": "较上月上升 0.1 个百分点，统计局称受季节性影响。"
-    },
-    {
-     "title": "8 月工业增加值增速升至 5.2%，高技术制造业动能强劲；8 月社会消费品零售总额增长 0.4%，低于预期",
-     "url": "https://www.baidu.com/s?wd=8%20%E6%9C%88%E5%B7%A5%E4%B8%9A%E5%A2%9E%E5%8A%A0%E5%80%BC%E5%A2%9E%E9%80%9F%E5%8D%87%E8%87%B3%205.2%25%EF%BC%8C%E9%AB%98%E6%8A%80%E6%9C%AF%E5%88%B6%E9%80%A0%E4%B8%9A%E5%8A%A8%E8%83%BD%E5%BC%BA%E5%8A%B2%EF%BC%9B8%20%E6%9C%88%E7%A4%BE%E4%BC%9A%E6%B6%88%E8%B4%B9%E5%93%81%E9%9B%B6%E5%94%AE%E6%80%BB%E9%A2%9D%E5%A2%9E%E9%95%BF%200.4%25%EF%BC%8C%E4%BD%8E%E4%BA%8E%E9%A2%84%E6%9C%9F",
-     "summary": "工业增速升至 5.2%，社零 0.4% 低于预期。"
-    },
-    {
-     "title": "“平台月付将退出支付选项” 上热搜，支付宝、美团等多平台回应：目前未接到相关通知，月付产品仍可正常使用",
-     "url": "https://www.baidu.com/s?wd=%E2%80%9C%E5%B9%B3%E5%8F%B0%E6%9C%88%E4%BB%98%E5%B0%86%E9%80%80%E5%87%BA%E6%94%AF%E4%BB%98%E9%80%89%E9%A1%B9%E2%80%9D%20%E4%B8%8A%E7%83%AD%E6%90%9C%EF%BC%8C%E6%94%AF%E4%BB%98%E5%AE%9D%E3%80%81%E7%BE%8E%E5%9B%A2%E7%AD%89%E5%A4%9A%E5%B9%B3%E5%8F%B0%E5%9B%9E%E5%BA%94%EF%BC%9A%E7%9B%AE%E5%89%8D%E6%9C%AA%E6%8E%A5%E5%88%B0%E7%9B%B8%E5%85%B3%E9%80%9A%E7%9F%A5%EF%BC%8C%E6%9C%88%E4%BB%98%E4%BA%A7%E5%93%81%E4%BB%8D%E5%8F%AF%E6%AD%A3%E5%B8%B8%E4%BD%BF%E7%94%A8",
-     "summary": "支付宝、美团等回应未接到通知，月付仍可正常使用。"
-    },
-    {
-     "title": "我国将加快建设托育综合服务中心，提供全日托、半日托、计时托等多种形式服务",
-     "url": "https://www.baidu.com/s?wd=%E6%88%91%E5%9B%BD%E5%B0%86%E5%8A%A0%E5%BF%AB%E5%BB%BA%E8%AE%BE%E6%89%98%E8%82%B2%E7%BB%BC%E5%90%88%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83%EF%BC%8C%E6%8F%90%E4%BE%9B%E5%85%A8%E6%97%A5%E6%89%98%E3%80%81%E5%8D%8A%E6%97%A5%E6%89%98%E3%80%81%E8%AE%A1%E6%97%B6%E6%89%98%E7%AD%89%E5%A4%9A%E7%A7%8D%E5%BD%A2%E5%BC%8F%E6%9C%8D%E5%8A%A1",
-     "summary": "将提供全日托、半日托、计时托等多种服务。"
-    },
-    {
-     "title": "共享单车服务规范新国标落地：一车一码，重点整治乱停放，今年 11 月起实施",
-     "url": "https://www.baidu.com/s?wd=%E5%85%B1%E4%BA%AB%E5%8D%95%E8%BD%A6%E6%9C%8D%E5%8A%A1%E8%A7%84%E8%8C%83%E6%96%B0%E5%9B%BD%E6%A0%87%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%B8%80%E8%BD%A6%E4%B8%80%E7%A0%81%EF%BC%8C%E9%87%8D%E7%82%B9%E6%95%B4%E6%B2%BB%E4%B9%B1%E5%81%9C%E6%94%BE%EF%BC%8C%E4%BB%8A%E5%B9%B4%2011%20%E6%9C%88%E8%B5%B7%E5%AE%9E%E6%96%BD",
-     "summary": "一车一码、重点整治乱停放，今年 11 月起实施。"
-    },
-    {
-     "title": "15 日 A 股两市成交额创年内新低；李大霄：A 股牛市已经告一段落，现在处于结构性调整阶段",
-     "url": "https://www.baidu.com/s?wd=15%20%E6%97%A5%20A%20%E8%82%A1%E4%B8%A4%E5%B8%82%E6%88%90%E4%BA%A4%E9%A2%9D%E5%88%9B%E5%B9%B4%E5%86%85%E6%96%B0%E4%BD%8E%EF%BC%9B%E6%9D%8E%E5%A4%A7%E9%9C%84%EF%BC%9AA%20%E8%82%A1%E7%89%9B%E5%B8%82%E5%B7%B2%E7%BB%8F%E5%91%8A%E4%B8%80%E6%AE%B5%E8%90%BD%EF%BC%8C%E7%8E%B0%E5%9C%A8%E5%A4%84%E4%BA%8E%E7%BB%93%E6%9E%84%E6%80%A7%E8%B0%83%E6%95%B4%E9%98%B6%E6%AE%B5",
-     "summary": "李大霄称牛市告一段落，市场处于结构性调整。"
-    },
-    {
-     "title": "2026 软科世界一流学科排名发布：中国内地高校 22 个学科位列世界第一",
-     "url": "https://www.baidu.com/s?wd=2026%20%E8%BD%AF%E7%A7%91%E4%B8%96%E7%95%8C%E4%B8%80%E6%B5%81%E5%AD%A6%E7%A7%91%E6%8E%92%E5%90%8D%E5%8F%91%E5%B8%83%EF%BC%9A%E4%B8%AD%E5%9B%BD%E5%86%85%E5%9C%B0%E9%AB%98%E6%A0%A1%2022%20%E4%B8%AA%E5%AD%A6%E7%A7%91%E4%BD%8D%E5%88%97%E4%B8%96%E7%95%8C%E7%AC%AC%E4%B8%80",
-     "summary": "中国内地高校 22 个学科位列世界第一。"
-    }
-   ]
-  },
-  {
-   "type": "market",
-   "label": "A股大盘",
-   "en": "MARKET",
-   "nav": "财经新闻",
-   "half": true,
-   "indices": [
-    {
-     "name": "上证指数",
-     "point": 3891.6,
-     "chg": 27.32,
-     "pct": 0.71
-    },
-    {
-     "name": "深证成指",
-     "point": 13454.74,
-     "chg": 166.77,
-     "pct": 1.26
-    },
-    {
-     "name": "创业板指",
-     "point": 3311.47,
-     "chg": 63.55,
-     "pct": 1.96
-    },
-    {
-     "name": "科创50",
-     "point": 1616.19,
-     "chg": 64.23,
-     "pct": 4.14
-    },
-    {
-     "name": "北证50",
-     "point": 1040.29,
-     "chg": 11.78,
-     "pct": 1.15
-    },
-    {
-     "name": "沪深300",
-     "point": 4480.27,
-     "chg": 30.23,
-     "pct": 0.68
-    }
-   ],
-   "footnote": "两市成交额 18,391 亿元 · 数据 2026-09-16 21:26 · 昨日收盘",
-   "up": [
-    {
-     "name": "运动服装",
-     "pct": 7.34
-    },
-    {
-     "name": "炭黑",
-     "pct": 6.75
-    },
-    {
-     "name": "半导体材料",
-     "pct": 6.14
-    },
-    {
-     "name": "林业Ⅲ",
-     "pct": 5.97
-    },
-    {
-     "name": "林业Ⅱ",
-     "pct": 5.97
-    },
-    {
-     "name": "光学元件",
-     "pct": 5.37
-    },
-    {
-     "name": "激光设备",
-     "pct": 5.15
-    },
-    {
-     "name": "跨境电商",
-     "pct": 5.09
-    }
-   ],
-   "down": [
-    {
-     "name": "商用载客车",
-     "pct": -2.62
-    },
-    {
-     "name": "生猪养殖",
-     "pct": -2.38
-    },
-    {
-     "name": "涂料",
-     "pct": -1.96
-    },
-    {
-     "name": "风电整机",
-     "pct": -1.84
-    },
-    {
-     "name": "商用车",
-     "pct": -1.72
-    },
-    {
-     "name": "养殖业",
-     "pct": -1.47
-    },
-    {
-     "name": "钨",
-     "pct": -1.4
-    },
-    {
-     "name": "教育出版",
-     "pct": -1.36
-    }
-   ]
-  },
-  {
-   "type": "lhb",
-   "label": "龙虎榜",
-   "en": "LHB",
-   "nav": "财经新闻",
-   "half": true,
-   "items": [
-    {
-     "rank": 1,
-     "code": "002281",
-     "name": "光迅科技",
-     "pct": 10.0018,
-     "net": 1014858445.79,
-     "explain": "2家机构买入，成功率39.66%"
-    },
-    {
-     "rank": 2,
-     "code": "002491",
-     "name": "通鼎互联",
-     "pct": 9.9865,
-     "net": 914138161.16,
-     "explain": "2家机构买入，成功率42.07%"
-    },
-    {
-     "rank": 3,
-     "code": "688432",
-     "name": "有研硅",
-     "pct": 20,
-     "net": 706125518.63,
-     "explain": "买一主买，成功率44.36%"
-    },
-    {
-     "rank": 4,
-     "code": "000592",
-     "name": "平潭发展",
-     "pct": 9.9747,
-     "net": 456626115.65,
-     "explain": "普通席位买入，成功率46.90%"
-    },
-    {
-     "rank": 5,
-     "code": "000823",
-     "name": "超声电子",
-     "pct": 5.1046,
-     "net": 332692738.59,
-     "explain": "2家机构买入，成功率41.23%"
-    },
-    {
-     "rank": 6,
-     "code": "301486",
-     "name": "致尚科技",
-     "pct": 19.9978,
-     "net": 260123610.41,
-     "explain": "3家机构买入，成功率39.51%"
-    },
-    {
-     "rank": 7,
-     "code": "301251",
-     "name": "威尔高",
-     "pct": 20,
-     "net": 178113123.12,
-     "explain": "2家机构买入，成功率41.94%"
-    },
-    {
-     "rank": 8,
-     "code": "600103",
-     "name": "青山纸业",
-     "pct": 10.1493,
-     "net": 142307391.98,
-     "explain": "普通席位买入，成功率44.57%"
-    }
-   ],
-   "footnote": "按净买入额排序 · 2026-09-16 · 来源 东方财富龙虎榜"
-  },
-  {
-   "type": "news",
-   "label": "财经要闻",
-   "en": "FINANCE",
-   "nav": "财经新闻",
-   "items": [
-    {
-     "title": "外资加速抛售三星、海力士，韩股AI板块面临重估",
-     "url": "https://finance.sina.com.cn/chanjing/gsnews/2026-09-16/doc-inirzshz0536360.shtml",
-     "source": "21世纪经济报道",
-     "summary": "外资抛售三星与海力士，韩股 AI 板块面临重估。"
-    },
-    {
-     "title": "江苏省委书记信长星到江苏银行和华泰证券调研",
-     "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzsia9889301.shtml",
-     "source": "证券时报网",
-     "summary": "省委书记调研江苏银行与华泰证券。"
-    },
-    {
-     "title": "来伊份致歉！三款零食被检出“缺斤短两”",
-     "url": "https://finance.sina.com.cn/chanjing/gsnews/2026-09-16/doc-inirzshz0507936.shtml",
-     "source": "市场资讯",
-     "summary": "三款零食被检出「缺斤短两」，公司公开致歉。"
-    },
-    {
-     "title": "海南省委书记冯飞会见高通公司全球副总裁夏权一行",
-     "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzsia9887258.shtml",
-     "source": "证券时报网",
-     "summary": "高通全球副总裁与海南方面会谈。"
-    },
-    {
-     "title": "全球表现最佳主权财富基金警示：美国股市或将迎来回调",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9888022.shtml",
-     "source": "环球市场播报",
-     "summary": "全球表现最佳主权基金警示美股或迎回调。"
-    },
-    {
-     "title": "苹果考虑重返服务器市场，已与英伟达洽谈采用其网络技术",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9887986.shtml",
-     "source": "环球市场播报",
-     "summary": "苹果考虑重返服务器市场，洽谈采用英伟达网络技术。"
-    },
-    {
-     "title": "计划新增3000家门店，热带冰沙咖啡馆开启品牌升级",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshv4723253.shtml",
-     "source": "环球市场播报",
-     "summary": "连锁饮品加速下沉，门店目标 3000 家。"
-    },
-    {
-     "title": "美联储利率决议前夕，期权市场出现离奇波动率押注，令市场费解",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3747751.shtml",
-     "source": "环球市场播报",
-     "summary": "议息前夜期权异动，市场分歧加大。"
-    },
-    {
-     "title": "美国8月进口价格环比上涨0.7% 预期上涨0.5%",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzsia9880799.shtml",
-     "source": "环球市场播报",
-     "summary": "美国 8 月进口价格环比 +0.7%，高于预期。"
-    },
-    {
-     "title": "58集团董事长姚劲波违规减持，“地板价”清仓套现逾2亿港元",
-     "url": "https://finance.sina.com.cn/stock/s/2026-09-16/doc-inirzshx3740335.shtml",
-     "summary": "姚劲波「地板价」清仓，套现逾 2 亿港元。"
-    },
-    {
-     "title": "降价复出的钟薛高，出路在小卖部",
-     "url": "https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzshu2743412.shtml",
-     "source": "界面",
-     "summary": "渠道下沉到小卖部，高端定位继续收敛。"
-    },
-    {
-     "title": "美国零售销售普遍回升 增幅超过预期",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshv4709953.shtml",
-     "source": "环球市场播报",
-     "summary": "零售销售普遍回升，增幅超预期。"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "AI 动态",
-   "en": "AI",
-   "nav": "AI 动态",
-   "items": [
-    {
-     "title": "AI大模型工场2026 AI产业生态大会今日举办，大咖同台共探智能生长与产业共生",
-     "url": "https://www.qbitai.com/2026/09/490760.html",
-     "source": "量子位",
-     "summary": "讨论智能生长与产业共生，国内厂商集中亮相。"
-    },
-    {
-     "title": "高通技术公司携手中兴努比亚和豆包手机助手，共同推动智能手机迈入个人AI新时代",
-     "url": "https://www.qbitai.com/2026/09/490756.html",
-     "source": "量子位",
-     "summary": "端侧算力叠加助手生态，手机厂商争夺 AI 入口。"
-    },
-    {
-     "title": "基元律动与无问芯穹达成战略合作，推进高质量Token供给与应用",
-     "url": "https://www.qbitai.com/2026/09/490750.html",
-     "source": "量子位",
-     "summary": "推进高质量 Token 供给与应用落地。"
-    },
-    {
-     "title": "协同办公进入Agent时代，飞书+豆包工作跑在了最前面",
-     "url": "https://www.qbitai.com/2026/09/490686.html",
-     "source": "量子位",
-     "summary": "文档、会议、审批被串成可执行流程。"
-    },
-    {
-     "title": "西门子不造机器人，为什么机器人进厂的故事里总有它？",
-     "url": "https://www.qbitai.com/2026/09/490416.html",
-     "source": "量子位",
-     "summary": "靠工业软件与仿真，做产线自动化的底座。"
-    },
-    {
-     "title": "清华稳准智能联合发布LimiX-2，结构化数据基础模型登顶国际评测榜单",
-     "url": "https://www.qbitai.com/2026/09/490400.html",
-     "source": "量子位",
-     "summary": "结构化数据基础模型登顶国际评测榜单。"
-    },
-    {
-     "title": "B站AI无限竞技场今日上线！全球百大AI模型同场竞技，GPT-6高居榜首",
-     "url": "https://www.qbitai.com/2026/09/490396.html",
-     "source": "量子位",
-     "summary": "全球百大模型同场竞技，GPT-6 排名居首。"
-    },
-    {
-     "title": "量子位2026人工智能年度榜单，正式启动！",
-     "url": "https://www.qbitai.com/2026/09/490329.html",
-     "source": "量子位",
-     "summary": "面向国内 AI 产品与团队的年度评选启动。"
-    },
-    {
-     "title": "SK Hynix reportedly in talks with Intel to build memory chips in US",
-     "url": "https://techcrunch.com/2026/09/16/sk-hynix-reportedly-in-talks-with-intel-to-build-memory-chips-in-us/",
-     "source": "TechCrunch AI",
-     "summary": "SK 海力士据报与英特尔洽谈存储芯片合作。"
-    }
-   ]
-  },
-  {
-   "type": "schedule",
-   "label": "足球",
-   "en": "FOOTBALL",
-   "nav": "体育新闻",
-   "note": "虎扑实时热帖",
-   "schedule_label": "今日赛程",
-   "schedule": [
-    {
-     "time": "00:00",
-     "text": "亚精英赛第1轮 · 艾因 4-0 利雅得胜利",
-     "state": "已结束"
-    },
-    {
-     "time": "03:00",
-     "text": "英联杯第三轮 · 伊普斯维奇 2-4 阿森纳",
-     "state": "已结束"
-    },
-    {
-     "time": "03:00",
-     "text": "英联杯第三轮 · 利物浦 3-1 托特纳姆热刺",
-     "state": "已结束"
-    },
-    {
-     "time": "03:30",
-     "text": "西甲第6轮 · 埃尔切 2-3 皇家马德里",
-     "state": "已结束"
-    },
-    {
-     "time": "18:00",
-     "text": "亚运男足第1轮 · 中国U23 2-1 朝鲜U23",
-     "state": "已结束"
-    }
-   ],
-   "items": [
-    {
-     "title": "亚运男足：中国2-1朝鲜，吴曦、张玉宁互相传射",
-     "url": "https://m.hupu.com/bbs/642447464.html",
-     "pinned": true,
-     "summary": "吴曦与张玉宁互相传射，中国队 2-1 逆转朝鲜。"
-    },
-    {
-     "title": "亚运神评：听说莫德里奇又叫小吴曦",
-     "url": "https://m.hupu.com/bbs/642447987.html",
-     "pinned": true,
-     "summary": "球迷玩梗，把吴曦与莫德里奇放在一起比较。"
-    },
-    {
-     "title": "老兵不死！昨晚武磊张稀哲闪耀亚冠，今日吴曦拯救亚运男足",
-     "url": "https://m.hupu.com/bbs/642447469.html",
-     "pinned": true,
-     "summary": "老将状态回升，吴曦同日救主。"
-    },
-    {
-     "title": "英超第三轮KMI事件判罚：5-0全票通过加布不应该被红牌罚下",
-     "url": "https://m.hupu.com/bbs/642445540.html",
-     "pinned": true,
-     "summary": "5-0 全票通过，判罚认定为误判。"
-    },
-    {
-     "title": "克罗斯嘲讽：维尔茨、穆西亚拉等三人在世界杯上没出现过",
-     "url": "https://m.hupu.com/bbs/642448579.html",
-     "summary": "克罗斯嘲讽三人在世界杯上「没出现过」。"
-    },
-    {
-     "title": "FC27游戏中，新增了曼联前锋库尼亚的冲浪庆祝",
-     "url": "https://m.hupu.com/bbs/642448538.html",
-     "summary": "FC27 新增库尼亚的冲浪庆祝动画。"
-    }
-   ]
-  },
-  {
-   "type": "schedule",
-   "label": "篮球",
-   "en": "BASKETBALL",
-   "nav": "体育新闻",
-   "note": "虎扑实时热帖",
-   "schedule_label": "今日赛程",
-   "schedule": [
-    {
-     "time": "",
-     "text": "今日无 NBA 比赛（休赛期）",
-     "state": ""
-    }
-   ],
-   "items": [
-    {
-     "title": "弗拉格和欧文合作的第一个赛季，会是最后一个吗？",
-     "url": "https://m.hupu.com/bbs/642438413",
-     "summary": "弗拉格与欧文合作的首季，是否就是最后一季。"
-    },
-    {
-     "title": "A-史密斯：文班亚马目前就是NBA门面，属于他的时代已经开启",
-     "url": "https://m.hupu.com/bbs/642448560",
-     "summary": "A-史密斯称文班亚马已是 NBA 门面。"
-    },
-    {
-     "title": "Santos：争冠队仍可能追求杜兰特，他有望成为争冠最后拼图",
-     "url": "https://m.hupu.com/bbs/642448532",
-     "summary": "争冠队仍可能追求杜兰特，补最后拼图。"
-    },
-    {
-     "title": "历史罕见！掘金曾打出1950年以来唯一无人得分上双的比赛",
-     "url": "https://m.hupu.com/bbs/642448484",
-     "summary": "1950 年以来唯一一场无人得分上双的比赛。"
-    },
-    {
-     "title": "美记：尼克斯还有3个双向空缺，正在接触杜普-里斯和怀斯曼",
-     "url": "https://m.hupu.com/bbs/642448442",
-     "summary": "尼克斯补强内线，接触杜普-里斯与怀斯曼。"
-    },
-    {
-     "title": "CP：吉布森如今有机会培养公牛新一代内线球员",
-     "url": "https://m.hupu.com/bbs/642448402",
-     "summary": "公牛重建期给年轻内线更多机会。"
-    }
-   ]
-  },
-  {
-   "type": "hot",
-   "label": "全网热榜",
-   "en": "TRENDING",
-   "nav": "热榜",
-   "boards": [
-    {
-     "board": "微博热搜",
-     "items": [
-      {
-       "title": "第一批穿德训鞋的受害者出现了",
-       "url": "https://s.weibo.com/weibo?q=%E7%AC%AC%E4%B8%80%E6%89%B9%E7%A9%BF%E5%BE%B7%E8%AE%AD%E9%9E%8B%E7%9A%84%E5%8F%97%E5%AE%B3%E8%80%85%E5%87%BA%E7%8E%B0%E4%BA%86",
-       "hot": "127万"
-      },
-      {
-       "title": "硕士考试第一名因专升本被取消资格",
-       "url": "https://s.weibo.com/weibo?q=%E7%A1%95%E5%A3%AB%E8%80%83%E8%AF%95%E7%AC%AC%E4%B8%80%E5%90%8D%E5%9B%A0%E4%B8%93%E5%8D%87%E6%9C%AC%E8%A2%AB%E5%8F%96%E6%B6%88%E8%B5%84%E6%A0%BC",
-       "hot": "84万"
-      },
-      {
-       "title": "一组关键词看平陆运河硬核实力",
-       "url": "https://s.weibo.com/weibo?q=%E4%B8%80%E7%BB%84%E5%85%B3%E9%94%AE%E8%AF%8D%E7%9C%8B%E5%B9%B3%E9%99%86%E8%BF%90%E6%B2%B3%E7%A1%AC%E6%A0%B8%E5%AE%9E%E5%8A%9B",
-       "hot": "70万"
-      },
-      {
-       "title": "小伙记录母亲最后14天的视频火了",
-       "url": "https://s.weibo.com/weibo?q=%E5%B0%8F%E4%BC%99%E8%AE%B0%E5%BD%95%E6%AF%8D%E4%BA%B2%E6%9C%80%E5%90%8E14%E5%A4%A9%E7%9A%84%E8%A7%86%E9%A2%91%E7%81%AB%E4%BA%86",
-       "hot": "54万"
-      },
-      {
-       "title": "大学毕业生举报资助人是间谍",
-       "url": "https://s.weibo.com/weibo?q=%E5%A4%A7%E5%AD%A6%E6%AF%95%E4%B8%9A%E7%94%9F%E4%B8%BE%E6%8A%A5%E8%B5%84%E5%8A%A9%E4%BA%BA%E6%98%AF%E9%97%B4%E8%B0%8D",
-       "hot": "36万"
-      }
-     ]
-    },
-    {
-     "board": "知乎热榜",
-     "items": [
-      {
-       "title": "平陆运河正式通航，广西从此江海直连，这条设想了近百年的运河建设难度有多大？它能「带飞」中国西南吗？",
-       "url": "https://www.zhihu.com/question/2082841016533632412",
-       "hot": "3617 万热度"
-      },
-      {
-       "title": "中国男子涉嫌在印尼渔猎玳瑁并烹饪，离境时被拦接受调查，玳瑁是什么动物？若属实他将承担什么责任？",
-       "url": "https://www.zhihu.com/question/2083156467859956956",
-       "hot": "696 万热度"
-      },
-      {
-       "title": "钟薛高宣布重启，推出三种口味，零售价最低跌到 6.9 元一支，你看好钟薛高这次「复活」吗？",
-       "url": "https://www.zhihu.com/question/2083299849705714867",
-       "hot": "464 万热度"
-      },
-      {
-       "title": "为什么QQ邮箱这么好用大家还是觉得它「档次不够高」？",
-       "url": "https://www.zhihu.com/question/22891817",
-       "hot": "328 万热度"
-      },
-      {
-       "title": "野人先生在沉默数日后首度发声，「感谢大家长期以来对野人先生的关心和支持」，你觉得这波公关处理怎么样？",
-       "url": "https://www.zhihu.com/question/2083566699115299351",
-       "hot": "197 万热度"
-      }
-     ]
-    },
-    {
-     "board": "抖音热点",
-     "items": [
-      {
-       "title": "U23国足2:1战胜朝鲜U23",
-       "url": "https://www.douyin.com/search/U23%E5%9B%BD%E8%B6%B32%3A1%E6%88%98%E8%83%9C%E6%9C%9D%E9%B2%9CU23",
-       "hot": "1199万"
-      },
-      {
-       "title": "原相机的风吹到了创大",
-       "url": "https://www.douyin.com/search/%E5%8E%9F%E7%9B%B8%E6%9C%BA%E7%9A%84%E9%A3%8E%E5%90%B9%E5%88%B0%E4%BA%86%E5%88%9B%E5%A4%A7",
-       "hot": "1150万"
-      },
-      {
-       "title": "全国铁路完成固定资产投资5118亿",
-       "url": "https://www.douyin.com/search/%E5%85%A8%E5%9B%BD%E9%93%81%E8%B7%AF%E5%AE%8C%E6%88%90%E5%9B%BA%E5%AE%9A%E8%B5%84%E4%BA%A7%E6%8A%95%E8%B5%845118%E4%BA%BF",
-       "hot": "1110万"
-      },
-      {
-       "title": "各地已进入秋季最佳赏味期",
-       "url": "https://www.douyin.com/search/%E5%90%84%E5%9C%B0%E5%B7%B2%E8%BF%9B%E5%85%A5%E7%A7%8B%E5%AD%A3%E6%9C%80%E4%BD%B3%E8%B5%8F%E5%91%B3%E6%9C%9F",
-       "hot": "1110万"
-      },
-      {
-       "title": "赵家驹夺冠后第一条抖音",
-       "url": "https://www.douyin.com/search/%E8%B5%B5%E5%AE%B6%E9%A9%B9%E5%A4%BA%E5%86%A0%E5%90%8E%E7%AC%AC%E4%B8%80%E6%9D%A1%E6%8A%96%E9%9F%B3",
-       "hot": "1041万"
-      }
-     ]
-    },
-    {
-     "board": "头条热榜",
-     "items": [
-      {
-       "title": "父母离世后小伙3次应征终入伍",
-       "url": "https://www.toutiao.com/trending/7685332470573481990",
-       "hot": "1399万"
-      },
-      {
-       "title": "女子称买海螺意外开出粉色“海螺珠”",
-       "url": "https://www.toutiao.com/trending/7685986278470402089",
-       "hot": "1266万"
-      },
-      {
-       "title": "夏粮收购总量超1亿吨",
-       "url": "https://www.toutiao.com/article/7686037458551390783",
-       "hot": "1145万"
-      },
-      {
-       "title": "亚运会U23国足2-1逆转朝鲜",
-       "url": "https://www.toutiao.com/trending/7686100621266521606",
-       "hot": "1036万"
-      },
-      {
-       "title": "马来西亚总理强硬回应扣押以色列货物",
-       "url": "https://www.toutiao.com/trending/7685680588866830379",
-       "hot": "938万"
-      }
-     ]
-    }
-   ]
-  }
- ]
+  ]
 }

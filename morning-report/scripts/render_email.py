@@ -64,9 +64,9 @@ THEMES = {
         "UP": "#D93025", "DOWN": "#0E8A4F",
     },
     "dark": {
-        "BG": "#0a0a0c", "SHEET": "#141417", "TEXT": "#ededf0", "MUTED": "#8d8d96",
-        "BODY_MUTED": "#a3a3ac", "LINE": "#26262c", "CARD": "#1c1c21", "QUOTE_TEXT": "#cfcfd6",
-        "UP": "#FF6B60", "DOWN": "#34D399",
+        "BG": "#15171c", "SHEET": "#1c1f26", "TEXT": "#d2d5db", "MUTED": "#878c97",
+        "BODY_MUTED": "#9ba0aa", "LINE": "#2d313c", "CARD": "#242833", "QUOTE_TEXT": "#c5c9d1",
+        "UP": "#ee8078", "DOWN": "#4ec287",
     },
 }
 
@@ -77,8 +77,8 @@ ACCENTS = {
         "rain": "#2563EB", "thunder": "#7C3AED", "snow": "#0891B2", "fog": "#94A3B8",
     },
     "dark": {
-        "clear": "#FF7A45", "cloudy": "#F0A742", "overcast": "#A1A1AA",
-        "rain": "#6B8CFF", "thunder": "#A78BFA", "snow": "#38BDF8", "fog": "#A8B4C4",
+        "clear": "#e89167", "cloudy": "#d9a052", "overcast": "#959aa5",
+        "rain": "#82a2f0", "thunder": "#a79af0", "snow": "#5cc0da", "fog": "#98a2b3",
     },
 }
 
@@ -98,15 +98,15 @@ COND_RULES = [
 CAT_COLORS = {
     "light": {"weather": "#0E7C86", "world": "#3B5BDB", "china": "#C2255C",
               "finance": "#B7791F", "ai": "#7048E8", "sports": "#0E8A4F", "hot": "#E8590C", "watch": "#DB2777"},
-    "dark": {"weather": "#4DD0E1", "world": "#8FA2FF", "china": "#FF7AA2",
-             "finance": "#FFC13B", "ai": "#B197FC", "sports": "#4ADE80", "hot": "#FF9F45", "watch": "#F472B6"},
+    "dark": {"weather": "#55bdc9", "world": "#93a5e8", "china": "#ea8cab",
+             "finance": "#dcb05c", "ai": "#a89be6", "sports": "#57c087", "hot": "#e89b5e", "watch": "#e28db6"},
 }
 # 天气现象点缀色（晴暖 / 雨蓝 / 云灰 / 雷紫 / 雪青）
 COND_COLORS = {
     "light": {"clear": "#D97706", "cloudy": "#8A8A8E", "overcast": "#8A8A8E",
               "rain": "#2563EB", "thunder": "#7C3AED", "snow": "#0891B2", "fog": "#94A3B8"},
-    "dark": {"clear": "#FFC13B", "cloudy": "#A1A1AA", "overcast": "#A1A1AA",
-             "rain": "#7AA2FF", "thunder": "#B197FC", "snow": "#5AD1E8", "fog": "#A8B4C4"},
+    "dark": {"clear": "#d9a052", "cloudy": "#959aa5", "overcast": "#959aa5",
+             "rain": "#82a2f0", "thunder": "#a79af0", "snow": "#5cc0da", "fog": "#98a2b3"},
 }
 CAT_RULES = [("天气", "weather"), ("国际", "world"), ("国内", "china"), ("大盘", "finance"),
              ("财经", "finance"), ("AI", "ai"), ("人工智能", "ai"), ("足球", "sports"),

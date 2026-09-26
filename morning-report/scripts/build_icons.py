@@ -34,7 +34,7 @@ NEUTRAL = {
     "chart-candle": "#8a8a8e", "coin": "#8a8a8e",
     "sunrise": "#8a8a8e", "moon-stars": "#8a8a8e",
 }
-NEUTRAL_DARK = {k: "#8d8d96" for k in NEUTRAL}
+NEUTRAL_DARK = {k: "#878c97" for k in NEUTRAL}
 
 # 天气图标：族 → Tabler 名（按当日强调色着色，随天气变色）
 WEATHER = {
@@ -47,21 +47,21 @@ WEATHER = {
 ACCENTS = {
     "light": {"clear": "#F4511E", "cloudy": "#D97706", "overcast": "#8A8A8E",
               "rain": "#2563EB", "thunder": "#7C3AED", "snow": "#0891B2", "fog": "#94A3B8"},
-    "dark": {"clear": "#FF7A45", "cloudy": "#F0A742", "overcast": "#A1A1AA",
-             "rain": "#6B8CFF", "thunder": "#A78BFA", "snow": "#38BDF8", "fog": "#A8B4C4"},
+    "dark": {"clear": "#e89167", "cloudy": "#d9a052", "overcast": "#959aa5",
+             "rain": "#82a2f0", "thunder": "#a79af0", "snow": "#5cc0da", "fog": "#98a2b3"},
 }
 
 
 # 分类点缀色（导航/板块图标按栏目固定配色，任何天气下都有颜色）
 CATEGORY_ICONS = {
-    "weather":  {"icons": [], "light": "#0E7C86", "dark": "#4DD0E1", "name": "天气"},
-    "world":    {"icons": ["world"], "light": "#3B5BDB", "dark": "#8FA2FF", "name": "国际"},
-    "china":    {"icons": ["flag"], "light": "#C2255C", "dark": "#FF7AA2", "name": "国内"},
-    "finance":  {"icons": ["chart-candle", "coin"], "light": "#B7791F", "dark": "#FFC13B", "name": "财经"},
-    "ai":       {"icons": ["cpu"], "light": "#7048E8", "dark": "#B197FC", "name": "AI"},
-    "sports":   {"icons": ["ball-football", "ball-basketball"], "light": "#0E8A4F", "dark": "#4ADE80", "name": "体育"},
-    "hot":      {"icons": ["flame"], "light": "#E8590C", "dark": "#FF9F45", "name": "热榜"},
-    "watch":    {"icons": ["star"], "light": "#DB2777", "dark": "#F472B6", "name": "特别关注"},
+    "weather":  {"icons": [], "light": "#0E7C86", "dark": "#55bdc9", "name": "天气"},
+    "world":    {"icons": ["world"], "light": "#3B5BDB", "dark": "#93a5e8", "name": "国际"},
+    "china":    {"icons": ["flag"], "light": "#C2255C", "dark": "#ea8cab", "name": "国内"},
+    "finance":  {"icons": ["chart-candle", "coin"], "light": "#B7791F", "dark": "#dcb05c", "name": "财经"},
+    "ai":       {"icons": ["cpu"], "light": "#7048E8", "dark": "#a89be6", "name": "AI"},
+    "sports":   {"icons": ["ball-football", "ball-basketball"], "light": "#0E8A4F", "dark": "#57c087", "name": "体育"},
+    "hot":      {"icons": ["flame"], "light": "#E8590C", "dark": "#e89b5e", "name": "热榜"},
+    "watch":    {"icons": ["star"], "light": "#DB2777", "dark": "#e28db6", "name": "特别关注"},
 }
 
 

@@ -108,10 +108,12 @@ def fragments(kw):
     用于清掉「标题根本没提公司」的蹭词垃圾（搜索源偶尔返回）。"""
     parts = [kw]
     for s in SUFFIXES:
-        if kw.endswith(s) and len(kw) > len(s) + 1:
-            parts.append(kw[:-len(s)])
-    if len(kw) >= 4:
-        parts.append(kw[:2])
+        stem = kw[: -len(s)] if kw.endswith(s) else ""
+        if len(stem) >= 3:            # 剥出的词干太短（如"高升"）会误命中，丢掉
+            parts.append(stem)
+    # 长词条再加 3 字前缀兜简称；太短的前缀容易误命中（如"高升"撞上"限高升至"）
+    if len(kw) >= 5:
+        parts.append(kw[:3])
     return parts
 
 

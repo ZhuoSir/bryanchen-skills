@@ -1,776 +1,776 @@
 {
- "mode": "evening",
- "date": "2026-09-17",
- "weekday": "周四",
- "weather_cond": "毛毛雨",
- "quote": "与其抱怨环境不公，不如沉下心提升自己，强大才是最可靠的避风港湾",
- "blocks": [
-  {
-   "type": "weather",
-   "label": "明日天气",
-   "en": "WEATHER",
-   "nav": "天气",
-   "rows": [
+  "mode": "evening",
+  "date": "2026-09-18",
+  "weekday": "周五",
+  "weather_cond": "毛毛雨",
+  "quote": "与其抱怨环境不公，不如沉下心提升自己，强大才是最可靠的避风港湾",
+  "blocks": [
     {
-     "city": "北京",
-     "cond": "毛毛雨",
-     "text": "21~30°",
-     "note": "降水 33%"
+      "type": "weather",
+      "label": "明日天气",
+      "en": "WEATHER",
+      "nav": "天气",
+      "rows": [
+        {
+          "city": "北京",
+          "cond": "毛毛雨",
+          "text": "21~30°",
+          "note": "降水 33%"
+        },
+        {
+          "city": "深圳",
+          "cond": "晴",
+          "text": "24~31°",
+          "note": "降水 0%"
+        },
+        {
+          "city": "上海",
+          "cond": "毛毛雨",
+          "text": "24~31°",
+          "note": "降水 47%"
+        },
+        {
+          "city": "杭州",
+          "cond": "阴",
+          "text": "23~32°",
+          "note": "降水 2%"
+        },
+        {
+          "city": "通辽",
+          "cond": "大致晴",
+          "text": "18~29°",
+          "note": "降水 0%"
+        },
+        {
+          "city": "崇礼",
+          "cond": "阵雨",
+          "text": "13~21°",
+          "note": "降水 86%",
+          "alert": "建议带伞"
+        }
+      ]
     },
     {
-     "city": "深圳",
-     "cond": "晴",
-     "text": "24~31°",
-     "note": "降水 0%"
+      "type": "news",
+      "label": "特别关注 · 电子城高科",
+      "en": "WATCH",
+      "nav": "特别关注",
+      "items": [
+        {
+          "title": "BEZ人文 | 应急竞赛拓场景 联防共建筑生态 电子城高科“安全·生态共建趣味运动会”活力开赛 - 新浪财经",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9BUndSZnY2WkNXLUVnYmkxSmRsYkRXTVhoZTY4OWVXSjNHZnVKYVg2U25qZHRWMU5NZjdsX3A0VmNzTVZ0MlRBNG1EYnV1NnVsR20zeU5pUjdjY3cwOF9mM0RqT2NYWHpfME9fMnM0RXJ2cktaTHFhUQ?oc=5",
+          "source": "新浪财经 · 09-17 17:38",
+          "published": "2026-09-17 17:38"
+        },
+        {
+          "title": "BEZ资讯丨电子城IC/PIC创新中心亮相中国光博会 - 新浪财经",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQYXliOFh2SW1KbS1BN1lNV2Q1dWNlaDFMUjlzV2Q3TG4zVDYyX05xU2VncXhubFNhb0ExbHFtMnhtTEhHUUFMMDIycGRWQ1EwYlQ5Nm94MmZFajlTZEhmSkVOQUlZY3Z6ZU5NV0tXTzY4UGtaZ3A3WU5rRWlGcG5aaVh2MUk3QUk?oc=5",
+          "source": "新浪财经 · 09-15 17:00",
+          "published": "2026-09-15 17:00"
+        }
+      ]
     },
     {
-     "city": "上海",
-     "cond": "毛毛雨",
-     "text": "24~31°",
-     "note": "降水 47%"
+      "type": "news",
+      "label": "天气新闻",
+      "en": "WEATHER NEWS",
+      "nav": "天气",
+      "items": [
+        {
+          "title": "北京 | 今晨有雾 明天或迎入秋后首场降雨",
+          "url": "http://news.weather.com.cn/2026/09/4794666.shtml",
+          "source": "中国天气网 · 北京"
+        },
+        {
+          "title": "一日两季！全国乱穿衣预警地图来了",
+          "url": "http://news.weather.com.cn/2026/09/4794515.shtml",
+          "source": "中国天气网 · 预警"
+        },
+        {
+          "title": "山洪灾害气象预警",
+          "url": "http://news.weather.com.cn/2026/09/4795592.shtml",
+          "source": "中国天气网 · 预警"
+        },
+        {
+          "title": "地质灾害气象风险预警",
+          "url": "http://news.weather.com.cn/2026/09/4795593.shtml",
+          "source": "中国天气网 · 预警"
+        },
+        {
+          "title": "全国入秋进程图出炉 京津冀等地跑步入秋",
+          "url": "http://news.weather.com.cn/2026/09/4794549.shtml",
+          "source": "中国天气网 · 全国"
+        },
+        {
+          "title": "重庆湖北等地有大到暴雨 中东部多地超30℃",
+          "url": "http://news.weather.com.cn/2026/09/4794551.shtml",
+          "source": "中国天气网 · 全国"
+        },
+        {
+          "title": "安徽 | 雨势增强凉意显现 明后天降雨逐渐停歇",
+          "url": "http://news.weather.com.cn/2026/09/4795294.shtml",
+          "source": "中国天气网 · 全国"
+        },
+        {
+          "title": "湖北 | 武汉等地最高温将创新低 明后天雨减弱",
+          "url": "http://news.weather.com.cn/2026/09/4795198.shtml",
+          "source": "中国天气网 · 全国"
+        }
+      ]
     },
     {
-     "city": "杭州",
-     "cond": "阴",
-     "text": "23~32°",
-     "note": "降水 2%"
+      "type": "news",
+      "label": "国际新闻",
+      "en": "WORLD",
+      "nav": "国际新闻",
+      "items": [
+        {
+          "title": "43 岁张一鸣首次成为亚洲首富：财富达 1050 亿美元，7 年增长约 7 倍，超越印度首富阿达尼，全球排名第 18",
+          "url": "https://www.baidu.com/s?wd=43%20%E5%B2%81%E5%BC%A0%E4%B8%80%E9%B8%A3%E9%A6%96%E6%AC%A1%E6%88%90%E4%B8%BA%E4%BA%9A%E6%B4%B2%E9%A6%96%E5%AF%8C%EF%BC%9A%E8%B4%A2%E5%AF%8C%E8%BE%BE%201050%20%E4%BA%BF%E7%BE%8E%E5%85%83%EF%BC%8C7%20%E5%B9%B4%E5%A2%9E%E9%95%BF%E7%BA%A6%207%20%E5%80%8D%EF%BC%8C%E8%B6%85%E8%B6%8A%E5%8D%B0%E5%BA%A6%E9%A6%96%E5%AF%8C%E9%98%BF%E8%BE%BE%E5%B0%BC%EF%BC%8C%E5%85%A8%E7%90%83%E6%8E%92%E5%90%8D%E7%AC%AC%2018"
+        },
+        {
+          "title": "中国男足 2 比 1 逆转战胜朝鲜队，取得亚运开门红；中国女排 3 比 0 战胜菲律宾队，取得亚运会开门红",
+          "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E7%94%B7%E8%B6%B3%202%20%E6%AF%94%201%20%E9%80%86%E8%BD%AC%E6%88%98%E8%83%9C%E6%9C%9D%E9%B2%9C%E9%98%9F%EF%BC%8C%E5%8F%96%E5%BE%97%E4%BA%9A%E8%BF%90%E5%BC%80%E9%97%A8%E7%BA%A2%EF%BC%9B%E4%B8%AD%E5%9B%BD%E5%A5%B3%E6%8E%92%203%20%E6%AF%94%200%20%E6%88%98%E8%83%9C%E8%8F%B2%E5%BE%8B%E5%AE%BE%E9%98%9F%EF%BC%8C%E5%8F%96%E5%BE%97%E4%BA%9A%E8%BF%90%E4%BC%9A%E5%BC%80%E9%97%A8%E7%BA%A2"
+        },
+        {
+          "title": "韩国法院判决朝鲜就炸毁联络办公室大楼赔偿约 446 亿韩元，系韩首次起诉朝鲜胜诉",
+          "url": "https://www.baidu.com/s?wd=%E9%9F%A9%E5%9B%BD%E6%B3%95%E9%99%A2%E5%88%A4%E5%86%B3%E6%9C%9D%E9%B2%9C%E5%B0%B1%E7%82%B8%E6%AF%81%E8%81%94%E7%BB%9C%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%A4%A7%E6%A5%BC%E8%B5%94%E5%81%BF%E7%BA%A6%20446%20%E4%BA%BF%E9%9F%A9%E5%85%83%EF%BC%8C%E7%B3%BB%E9%9F%A9%E9%A6%96%E6%AC%A1%E8%B5%B7%E8%AF%89%E6%9C%9D%E9%B2%9C%E8%83%9C%E8%AF%89"
+        },
+        {
+          "title": "美国研究显示：AI 兴起后，导致电脑相关专业毕业生初次就业概率下降五个百分点，起薪也下降 13%",
+          "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E7%A0%94%E7%A9%B6%E6%98%BE%E7%A4%BA%EF%BC%9AAI%20%E5%85%B4%E8%B5%B7%E5%90%8E%EF%BC%8C%E5%AF%BC%E8%87%B4%E7%94%B5%E8%84%91%E7%9B%B8%E5%85%B3%E4%B8%93%E4%B8%9A%E6%AF%95%E4%B8%9A%E7%94%9F%E5%88%9D%E6%AC%A1%E5%B0%B1%E4%B8%9A%E6%A6%82%E7%8E%87%E4%B8%8B%E9%99%8D%E4%BA%94%E4%B8%AA%E7%99%BE%E5%88%86%E7%82%B9%EF%BC%8C%E8%B5%B7%E8%96%AA%E4%B9%9F%E4%B8%8B%E9%99%8D%2013%25"
+        },
+        {
+          "title": "美国防部通报美对伊军事行动耗资已超 420 亿美元，多家美媒分析称实际支出或高达 1000 亿美元",
+          "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E9%98%B2%E9%83%A8%E9%80%9A%E6%8A%A5%E7%BE%8E%E5%AF%B9%E4%BC%8A%E5%86%9B%E4%BA%8B%E8%A1%8C%E5%8A%A8%E8%80%97%E8%B5%84%E5%B7%B2%E8%B6%85%20420%20%E4%BA%BF%E7%BE%8E%E5%85%83%EF%BC%8C%E5%A4%9A%E5%AE%B6%E7%BE%8E%E5%AA%92%E5%88%86%E6%9E%90%E7%A7%B0%E5%AE%9E%E9%99%85%E6%94%AF%E5%87%BA%E6%88%96%E9%AB%98%E8%BE%BE%201000%20%E4%BA%BF%E7%BE%8E%E5%85%83"
+        },
+        {
+          "title": "南非对美国以“种族歧视”为由实施签证限制表关切",
+          "url": "https://news.china.com/international/1000/20260917/49748744.html",
+          "source": "新华社"
+        },
+        {
+          "title": "熬过极热夏季后 欧盟要搞气候保险",
+          "url": "https://news.china.com/international/1000/20260917/49748694.html",
+          "source": "新华社"
+        },
+        {
+          "title": "日本高市内阁全体阁僚辞职以进行内阁改组",
+          "url": "https://news.china.com/international/1000/20260917/49748254.html",
+          "source": "央视新闻"
+        }
+      ]
     },
     {
-     "city": "通辽",
-     "cond": "大致晴",
-     "text": "18~29°",
-     "note": "降水 0%"
+      "type": "news",
+      "label": "国内新闻",
+      "en": "CHINA",
+      "nav": "国内新闻",
+      "items": [
+        {
+          "title": "中国十大消费县排行出炉：4 个县域社零总额超千亿元，义乌以 2153.8 亿元居首，昆山、晋江、常熟紧随其后",
+          "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%8D%81%E5%A4%A7%E6%B6%88%E8%B4%B9%E5%8E%BF%E6%8E%92%E8%A1%8C%E5%87%BA%E7%82%89%EF%BC%9A4%20%E4%B8%AA%E5%8E%BF%E5%9F%9F%E7%A4%BE%E9%9B%B6%E6%80%BB%E9%A2%9D%E8%B6%85%E5%8D%83%E4%BA%BF%E5%85%83%EF%BC%8C%E4%B9%89%E4%B9%8C%E4%BB%A5%202153.8%20%E4%BA%BF%E5%85%83%E5%B1%85%E9%A6%96%EF%BC%8C%E6%98%86%E5%B1%B1%E3%80%81%E6%99%8B%E6%B1%9F%E3%80%81%E5%B8%B8%E7%86%9F%E7%B4%A7%E9%9A%8F%E5%85%B6%E5%90%8E"
+        },
+        {
+          "title": "我国已办成世界上规模最大的法学教育体系，每年培养输送 10 万余名法治专门人才",
+          "url": "https://www.baidu.com/s?wd=%E6%88%91%E5%9B%BD%E5%B7%B2%E5%8A%9E%E6%88%90%E4%B8%96%E7%95%8C%E4%B8%8A%E8%A7%84%E6%A8%A1%E6%9C%80%E5%A4%A7%E7%9A%84%E6%B3%95%E5%AD%A6%E6%95%99%E8%82%B2%E4%BD%93%E7%B3%BB%EF%BC%8C%E6%AF%8F%E5%B9%B4%E5%9F%B9%E5%85%BB%E8%BE%93%E9%80%81%2010%20%E4%B8%87%E4%BD%99%E5%90%8D%E6%B3%95%E6%B2%BB%E4%B8%93%E9%97%A8%E4%BA%BA%E6%89%8D"
+        },
+        {
+          "title": "平陆运河 16 日正式通航：西南地区货物出海少走 560 公里，每年可节约运输费用超 50 亿元",
+          "url": "https://www.baidu.com/s?wd=%E5%B9%B3%E9%99%86%E8%BF%90%E6%B2%B3%2016%20%E6%97%A5%E6%AD%A3%E5%BC%8F%E9%80%9A%E8%88%AA%EF%BC%9A%E8%A5%BF%E5%8D%97%E5%9C%B0%E5%8C%BA%E8%B4%A7%E7%89%A9%E5%87%BA%E6%B5%B7%E5%B0%91%E8%B5%B0%20560%20%E5%85%AC%E9%87%8C%EF%BC%8C%E6%AF%8F%E5%B9%B4%E5%8F%AF%E8%8A%82%E7%BA%A6%E8%BF%90%E8%BE%93%E8%B4%B9%E7%94%A8%E8%B6%85%2050%20%E4%BA%BF%E5%85%83"
+        },
+        {
+          "title": "引力一号遥三运载火箭发射成功，一箭九星，刷新海上发射载荷重量纪录",
+          "url": "https://www.baidu.com/s?wd=%E5%BC%95%E5%8A%9B%E4%B8%80%E5%8F%B7%E9%81%A5%E4%B8%89%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%E5%8F%91%E5%B0%84%E6%88%90%E5%8A%9F%EF%BC%8C%E4%B8%80%E7%AE%AD%E4%B9%9D%E6%98%9F%EF%BC%8C%E5%88%B7%E6%96%B0%E6%B5%B7%E4%B8%8A%E5%8F%91%E5%B0%84%E8%BD%BD%E8%8D%B7%E9%87%8D%E9%87%8F%E7%BA%AA%E5%BD%95"
+        },
+        {
+          "title": "我国将首次制定全国统一的医保医疗服务项目目录，首批覆盖心血管、呼吸、眼科、妇科、放疗等 13 个类别",
+          "url": "https://www.baidu.com/s?wd=%E6%88%91%E5%9B%BD%E5%B0%86%E9%A6%96%E6%AC%A1%E5%88%B6%E5%AE%9A%E5%85%A8%E5%9B%BD%E7%BB%9F%E4%B8%80%E7%9A%84%E5%8C%BB%E4%BF%9D%E5%8C%BB%E7%96%97%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%A6%96%E6%89%B9%E8%A6%86%E7%9B%96%E5%BF%83%E8%A1%80%E7%AE%A1%E3%80%81%E5%91%BC%E5%90%B8%E3%80%81%E7%9C%BC%E7%A7%91%E3%80%81%E5%A6%87%E7%A7%91%E3%80%81%E6%94%BE%E7%96%97%E7%AD%89%2013%20%E4%B8%AA%E7%B1%BB%E5%88%AB"
+        },
+        {
+          "title": "广州拟立法处罚噪声污染：搭乘地铁外放手机声音最高处罚 1000 元",
+          "url": "https://www.baidu.com/s?wd=%E5%B9%BF%E5%B7%9E%E6%8B%9F%E7%AB%8B%E6%B3%95%E5%A4%84%E7%BD%9A%E5%99%AA%E5%A3%B0%E6%B1%A1%E6%9F%93%EF%BC%9A%E6%90%AD%E4%B9%98%E5%9C%B0%E9%93%81%E5%A4%96%E6%94%BE%E6%89%8B%E6%9C%BA%E5%A3%B0%E9%9F%B3%E6%9C%80%E9%AB%98%E5%A4%84%E7%BD%9A%201000%20%E5%85%83"
+        },
+        {
+          "title": "香港特区首个五年规划公布：拟加强上市制度竞争力，吸引内地及海外龙头赴港 IPO",
+          "url": "https://www.baidu.com/s?wd=%E9%A6%99%E6%B8%AF%E7%89%B9%E5%8C%BA%E9%A6%96%E4%B8%AA%E4%BA%94%E5%B9%B4%E8%A7%84%E5%88%92%E5%85%AC%E5%B8%83%EF%BC%9A%E6%8B%9F%E5%8A%A0%E5%BC%BA%E4%B8%8A%E5%B8%82%E5%88%B6%E5%BA%A6%E7%AB%9E%E4%BA%89%E5%8A%9B%EF%BC%8C%E5%90%B8%E5%BC%95%E5%86%85%E5%9C%B0%E5%8F%8A%E6%B5%B7%E5%A4%96%E9%BE%99%E5%A4%B4%E8%B5%B4%E6%B8%AF%20IPO"
+        },
+        {
+          "title": "中国选手赵家驹巨人之旅 330 公里破纪录夺冠：65 小时 55 分 22 秒跑完，只睡了 1 小时，曾当外卖员，跑着送餐",
+          "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E9%80%89%E6%89%8B%E8%B5%B5%E5%AE%B6%E9%A9%B9%E5%B7%A8%E4%BA%BA%E4%B9%8B%E6%97%85%20330%20%E5%85%AC%E9%87%8C%E7%A0%B4%E7%BA%AA%E5%BD%95%E5%A4%BA%E5%86%A0%EF%BC%9A65%20%E5%B0%8F%E6%97%B6%2055%20%E5%88%86%2022%20%E7%A7%92%E8%B7%91%E5%AE%8C%EF%BC%8C%E5%8F%AA%E7%9D%A1%E4%BA%86%201%20%E5%B0%8F%E6%97%B6%EF%BC%8C%E6%9B%BE%E5%BD%93%E5%A4%96%E5%8D%96%E5%91%98%EF%BC%8C%E8%B7%91%E7%9D%80%E9%80%81%E9%A4%90"
+        }
+      ]
     },
     {
-     "city": "崇礼",
-     "cond": "阵雨",
-     "text": "13~21°",
-     "note": "降水 86%",
-     "alert": "建议带伞"
+      "type": "market",
+      "label": "A股大盘",
+      "en": "MARKET",
+      "nav": "财经新闻",
+      "half": true,
+      "indices": [
+        {
+          "name": "上证指数",
+          "point": 3875.6,
+          "chg": -16.0,
+          "pct": -0.41
+        },
+        {
+          "name": "深证成指",
+          "point": 13409.91,
+          "chg": -44.83,
+          "pct": -0.33
+        },
+        {
+          "name": "创业板指",
+          "point": 3298.31,
+          "chg": -13.16,
+          "pct": -0.4
+        },
+        {
+          "name": "科创50",
+          "point": 1606.29,
+          "chg": -9.9,
+          "pct": -0.61
+        },
+        {
+          "name": "北证50",
+          "point": 1026.0,
+          "chg": -14.29,
+          "pct": -1.37
+        },
+        {
+          "name": "沪深300",
+          "point": 4460.16,
+          "chg": -20.11,
+          "pct": -0.45
+        }
+      ],
+      "footnote": "两市成交额 18,231 亿元 · 数据 2026-09-17 22:38 · 今日收盘",
+      "up": [
+        {
+          "name": "种子",
+          "pct": 7.86
+        },
+        {
+          "name": "视频媒体",
+          "pct": 6.58
+        },
+        {
+          "name": "房产租赁经纪",
+          "pct": 5.28
+        },
+        {
+          "name": "其他养殖",
+          "pct": 5.13
+        },
+        {
+          "name": "种植业",
+          "pct": 5.06
+        },
+        {
+          "name": "汽车经销商",
+          "pct": 3.96
+        },
+        {
+          "name": "跨境电商",
+          "pct": 3.47
+        },
+        {
+          "name": "快递",
+          "pct": 3.32
+        }
+      ],
+      "down": [
+        {
+          "name": "白银",
+          "pct": -6.0
+        },
+        {
+          "name": "贵金属",
+          "pct": -5.35
+        },
+        {
+          "name": "黄金",
+          "pct": -5.15
+        },
+        {
+          "name": "电能综合服务",
+          "pct": -2.65
+        },
+        {
+          "name": "稀土",
+          "pct": -2.6
+        },
+        {
+          "name": "铅锌",
+          "pct": -2.49
+        },
+        {
+          "name": "印制电路板",
+          "pct": -2.41
+        },
+        {
+          "name": "铜",
+          "pct": -2.37
+        }
+      ]
+    },
+    {
+      "type": "lhb",
+      "label": "龙虎榜",
+      "en": "LHB",
+      "nav": "财经新闻",
+      "half": true,
+      "items": [
+        {
+          "rank": 1,
+          "code": "000981",
+          "name": "山子高科",
+          "pct": 9.854,
+          "net": 393534209.38,
+          "explain": "1家机构买入，成功率43.82%"
+        },
+        {
+          "rank": 2,
+          "code": "600127",
+          "name": "金健米业",
+          "pct": 9.9662,
+          "net": 215363530.68,
+          "explain": "普通席位买入，成功率38.34%"
+        },
+        {
+          "rank": 3,
+          "code": "002640",
+          "name": "跨境通",
+          "pct": 9.9125,
+          "net": 214461581,
+          "explain": "买一主买，成功率32.63%"
+        },
+        {
+          "rank": 4,
+          "code": "002655",
+          "name": "共达电声",
+          "pct": 10.0108,
+          "net": 182722673,
+          "explain": "2家机构买入，成功率36.54%"
+        },
+        {
+          "rank": 5,
+          "code": "603186",
+          "name": "华正新材",
+          "pct": -9.4453,
+          "net": 171689071.61,
+          "explain": "卖一主卖，成功率42.18%"
+        },
+        {
+          "rank": 6,
+          "code": "300243",
+          "name": "瑞丰高材",
+          "pct": 6.9018,
+          "net": 143890336.98,
+          "explain": "4家机构买入，成功率38.27%"
+        },
+        {
+          "rank": 7,
+          "code": "002824",
+          "name": "和胜股份",
+          "pct": 5.6604,
+          "net": 140903611.03,
+          "explain": "2家机构买入，成功率24.91%"
+        },
+        {
+          "rank": 8,
+          "code": "000572",
+          "name": "海马汽车",
+          "pct": 7.9208,
+          "net": 116952175.78,
+          "explain": "1家机构买入，成功率34.91%"
+        }
+      ],
+      "footnote": "按净买入额排序 · 2026-09-17 · 来源 东方财富龙虎榜"
+    },
+    {
+      "type": "news",
+      "label": "财经要闻",
+      "en": "FINANCE",
+      "nav": "财经新闻",
+      "items": [
+        {
+          "title": "通用汽车力推全新V‑8发动机，重燃与福特、拉姆的“皮卡大战”",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpv3653039.shtml",
+          "source": "环球市场播报"
+        },
+        {
+          "title": "美国首次申领失业救济人数降至19.6万 持续申领人数亦下降",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpv3648472.shtml",
+          "source": "环球市场播报"
+        },
+        {
+          "title": "A股中秋、国庆休市安排，来了！",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisczpv3641340.shtml",
+          "source": "滚动播报"
+        },
+        {
+          "title": "共和党中期选情不妙，马斯克等19位美国富豪纷纷砸钱，支持特朗普！前20大金主中，仅索罗斯一心支持民主党",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-iniscvfx3651379.shtml",
+          "source": "每日经济新闻"
+        },
+        {
+          "title": "AI股抛售已释放风险 城堡证券Rubner看好美股年末走势",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpt3928748.shtml",
+          "source": "环球市场播报"
+        },
+        {
+          "title": "OpenAI有望攻克另一项千禧年大奖数学难题",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpt3920357.shtml",
+          "source": "环球市场播报"
+        },
+        {
+          "title": "暴跌99%，洗发水大王崩了？",
+          "url": "https://finance.sina.com.cn/china/2026-09-17/doc-inisczpv3636857.shtml",
+          "source": "市场资讯"
+        },
+        {
+          "title": "美国8月二手房签约量环比增长0.3% 预估中值为下降0.1%",
+          "url": "https://finance.sina.com.cn/world/2026-09-17/doc-inisczpt3924229.shtml",
+          "source": "环球市场播报"
+        },
+        {
+          "title": "OpenAI披露多起模型对齐偏差事件 推出AI不当行为上报新框架",
+          "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpy9084814.shtml",
+          "source": "环球市场播报"
+        },
+        {
+          "title": "因190条违法广告，拼多多又“栽跟头”",
+          "url": "https://finance.sina.com.cn/china/2026-09-17/doc-inisczpy9083730.shtml",
+          "source": "市场资讯"
+        },
+        {
+          "title": "大唐集团撤销国际业务部、升格数智中心！半年报净利逆势增长20%后，这家电力央企挥刀“砍向”组织架构",
+          "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisczpv3588771.shtml"
+        },
+        {
+          "title": "博迈医疗IPO审核获通过：拟募资12亿元，目前尚存未决诉讼",
+          "url": "https://finance.sina.com.cn/china/2026-09-17/doc-inisczpt3918553.shtml",
+          "source": "市场资讯"
+        }
+      ]
+    },
+    {
+      "type": "news",
+      "label": "AI 动态",
+      "en": "AI",
+      "nav": "AI 动态",
+      "items": [
+        {
+          "title": "从“会回答”到“会办事”，vivo如何解AI手机这道题？",
+          "url": "https://www.qbitai.com/2026/09/491649.html",
+          "source": "量子位"
+        },
+        {
+          "title": "Claude Code团队讲究啊，这都往外说",
+          "url": "https://www.qbitai.com/2026/09/491596.html",
+          "source": "量子位"
+        },
+        {
+          "title": "图形学宗师童欣加盟Meshy，要做“AI for Fun”的头号玩家",
+          "url": "https://www.qbitai.com/2026/09/491522.html",
+          "source": "量子位"
+        },
+        {
+          "title": "央企做了个通用Agent，直接杀进IDC实测前三！",
+          "url": "https://www.qbitai.com/2026/09/491454.html",
+          "source": "量子位"
+        },
+        {
+          "title": "Claude双入口合并，原生Office上线！硅谷AI办公大战也开始了",
+          "url": "https://www.qbitai.com/2026/09/491391.html",
+          "source": "量子位"
+        },
+        {
+          "title": "刚刚，唐杰发布智谱RSI首个成果",
+          "url": "https://www.qbitai.com/2026/09/491357.html",
+          "source": "量子位"
+        },
+        {
+          "title": "马斯克睡进工地！为AI基建拼了",
+          "url": "https://www.qbitai.com/2026/09/491280.html",
+          "source": "量子位"
+        },
+        {
+          "title": "首购积分加赠70%：SkyProduction天工工作台联合火山引擎推出中秋国庆三重福利",
+          "url": "https://www.qbitai.com/2026/09/491147.html",
+          "source": "量子位"
+        },
+        {
+          "title": "Huawei plans Q1 2027 launch of new AI chip as it takes on Nvidia",
+          "url": "https://techcrunch.com/2026/09/17/huawei-plans-q1-2027-launch-of-new-ai-chip-as-it-takes-on-nvidia/",
+          "source": "TechCrunch AI"
+        }
+      ]
+    },
+    {
+      "type": "schedule",
+      "label": "足球",
+      "en": "FOOTBALL",
+      "nav": "体育新闻",
+      "note": "虎扑实时热帖",
+      "schedule_label": "今晚赛程",
+      "schedule": [
+        {
+          "time": "00:30",
+          "text": "U20女世界杯1/8决赛 · 意大利女足U20 1-1 中国女足U20",
+          "state": "已结束"
+        },
+        {
+          "time": "01:00",
+          "text": "西甲第6轮 · 马德里竞技 4-0 奥萨苏纳",
+          "state": "已结束"
+        },
+        {
+          "time": "03:00",
+          "text": "英联杯第三轮 · 曼联 2-3 布莱顿",
+          "state": "已结束"
+        },
+        {
+          "time": "03:00",
+          "text": "欧联第1轮 · AC米兰 0-2 本菲卡",
+          "state": "已结束"
+        },
+        {
+          "time": "03:00",
+          "text": "欧联第1轮 · 勒沃库森 2-0 采列",
+          "state": "已结束"
+        },
+        {
+          "time": "03:00",
+          "text": "欧联第1轮 · 桑德兰 1-0 阿尔克马尔",
+          "state": "已结束"
+        },
+        {
+          "time": "03:30",
+          "text": "西甲第6轮 · 巴塞罗那 7-2 桑坦德竞技",
+          "state": "已结束"
+        },
+        {
+          "time": "08:00",
+          "text": "北冠杯赛事 · 迈阿密国际 2-0 蓝十字",
+          "state": "已结束"
+        },
+        {
+          "time": "13:00",
+          "text": "亚运女足第2轮 · 乌兹别克斯坦女足 1-1 中国女足",
+          "state": "已结束"
+        },
+        {
+          "time": "20:15",
+          "text": "亚冠二级第1轮 · 上海申花 2-1 淡滨尼流浪者",
+          "state": "已结束"
+        }
+      ],
+      "items": [
+        {
+          "title": "亚冠二级：申花2-1淡滨尼，徐皓阳破门，杨帅头槌建功",
+          "url": "https://m.hupu.com/bbs/642463873.html",
+          "pinned": true
+        },
+        {
+          "title": "记者：JJ-加布里埃尔离开曼联首选去皇马，他看重卡斯蒂亚",
+          "url": "https://m.hupu.com/bbs/642463464.html",
+          "pinned": true
+        },
+        {
+          "title": "阿隆索：埃格巴利亲自说服我；拒绝透露佩德罗等人具体伤情",
+          "url": "https://m.hupu.com/bbs/642463156.html",
+          "pinned": true
+        },
+        {
+          "title": "英足总主席要求因凡蒂诺公开卖世界杯文件+巴洛贡事件的文件",
+          "url": "https://m.hupu.com/bbs/642463575.html",
+          "pinned": true
+        },
+        {
+          "title": "莫雷托：连续3场不胜后米兰老板仍支持阿莫林，不会轻易下课",
+          "url": "https://m.hupu.com/bbs/642464187.html"
+        },
+        {
+          "title": "淡滨尼球员：结果没有达到球队预期，失误改变了场上局势",
+          "url": "https://m.hupu.com/bbs/642464049.html"
+        }
+      ]
+    },
+    {
+      "type": "schedule",
+      "label": "篮球",
+      "en": "BASKETBALL",
+      "nav": "体育新闻",
+      "note": "虎扑实时热帖",
+      "schedule_label": "今晚赛程",
+      "schedule": [
+        {
+          "time": "",
+          "text": "今晚无 NBA 比赛（休赛期）",
+          "state": ""
+        }
+      ],
+      "items": [
+        {
+          "title": "欧文炮轰ESPN不敢点名遇难女童：她叫欣德，比你们都勇敢",
+          "url": "https://m.hupu.com/bbs/642463647",
+          "pinned": true
+        },
+        {
+          "title": "富保罗：我认为现在东部比西部更强，这情况我生涯都很少见",
+          "url": "https://m.hupu.com/bbs/642454262",
+          "pinned": true
+        },
+        {
+          "title": "巴恩斯：原本最希望詹姆斯去森林狼，他们还差最后一块拼图",
+          "url": "https://m.hupu.com/bbs/642454190",
+          "pinned": true
+        },
+        {
+          "title": "小尼克-史密斯：东契奇曾告诉我，NBA比欧洲联赛容易得多",
+          "url": "https://m.hupu.com/bbs/642457185",
+          "pinned": true
+        },
+        {
+          "title": "新装的房子要塞进两件红木家具，还真需要点奇才",
+          "url": "https://m.hupu.com/bbs/642452311"
+        },
+        {
+          "title": "美媒晒76人新赛季15人轮换：他们会是东部几号种子？",
+          "url": "https://m.hupu.com/bbs/642464112"
+        }
+      ]
+    },
+    {
+      "type": "hot",
+      "label": "全网热榜",
+      "en": "TRENDING",
+      "nav": "热榜",
+      "boards": [
+        {
+          "board": "微博热搜",
+          "items": [
+            {
+              "title": "如果你出生于1992年至2003年之间",
+              "url": "https://s.weibo.com/weibo?q=%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%87%BA%E7%94%9F%E4%BA%8E1992%E5%B9%B4%E8%87%B32003%E5%B9%B4%E4%B9%8B%E9%97%B4",
+              "hot": "119万"
+            },
+            {
+              "title": "拒绝了十五年前拒绝过我的学校",
+              "url": "https://s.weibo.com/weibo?q=%E6%8B%92%E7%BB%9D%E4%BA%86%E5%8D%81%E4%BA%94%E5%B9%B4%E5%89%8D%E6%8B%92%E7%BB%9D%E8%BF%87%E6%88%91%E7%9A%84%E5%AD%A6%E6%A0%A1",
+              "hot": "93万"
+            },
+            {
+              "title": "第23届东博会峰会",
+              "url": "https://s.weibo.com/weibo?q=%E7%AC%AC23%E5%B1%8A%E4%B8%9C%E5%8D%9A%E4%BC%9A%E5%B3%B0%E4%BC%9A",
+              "hot": "84万"
+            },
+            {
+              "title": "偶像来了 国际大花",
+              "url": "https://s.weibo.com/weibo?q=%E5%81%B6%E5%83%8F%E6%9D%A5%E4%BA%86%20%E5%9B%BD%E9%99%85%E5%A4%A7%E8%8A%B1",
+              "hot": "78万"
+            },
+            {
+              "title": "我们来了阵容配置",
+              "url": "https://s.weibo.com/weibo?q=%E6%88%91%E4%BB%AC%E6%9D%A5%E4%BA%86%E9%98%B5%E5%AE%B9%E9%85%8D%E7%BD%AE",
+              "hot": "53万"
+            }
+          ]
+        },
+        {
+          "board": "知乎热榜",
+          "items": [
+            {
+              "title": "国乒、国羽、中国体操队被困名古屋机场，现场只提供水无食品，为什么会这样？暴露出亚运会组织方的哪些问题？",
+              "url": "https://www.zhihu.com/question/2083719036232324156",
+              "hot": "650 万热度"
+            },
+            {
+              "title": "张一鸣身家突破 1050 亿美元首次成亚洲首富，如何评价其商业成就？",
+              "url": "https://www.zhihu.com/question/2083595578223636976",
+              "hot": "482 万热度"
+            },
+            {
+              "title": "如果存在一个100%深海覆盖的海洋星球，对人类来说会不会非常恐怖？里面会发展出什么生命吗？",
+              "url": "https://www.zhihu.com/question/2083246063851410890",
+              "hot": "190 万热度"
+            },
+            {
+              "title": "一照相馆设体重要求，仅接受 120 斤以下客户预订，因 「部分顾客常要求过度修图」，如何看待这一规定？",
+              "url": "https://www.zhihu.com/question/2083133384671368415",
+              "hot": "157 万热度"
+            },
+            {
+              "title": "亚运女子板球1/4决赛场地积水取消，中国队世界排名低于对手被判负，一场未打结束亚运征程，这规则合理吗？",
+              "url": "https://www.zhihu.com/question/2083894090341377231",
+              "hot": "137 万热度"
+            }
+          ]
+        },
+        {
+          "board": "抖音热点",
+          "items": [
+            {
+              "title": "我们重复型人格遇到美食belike",
+              "url": "https://www.douyin.com/search/%E6%88%91%E4%BB%AC%E9%87%8D%E5%A4%8D%E5%9E%8B%E4%BA%BA%E6%A0%BC%E9%81%87%E5%88%B0%E7%BE%8E%E9%A3%9Fbelike",
+              "hot": "1212万"
+            },
+            {
+              "title": "美联储宣布加息25个基点",
+              "url": "https://www.douyin.com/search/%E7%BE%8E%E8%81%94%E5%82%A8%E5%AE%A3%E5%B8%83%E5%8A%A0%E6%81%AF25%E4%B8%AA%E5%9F%BA%E7%82%B9",
+              "hot": "1104万"
+            },
+            {
+              "title": "我国绿色贸易进出口规模居全球首位",
+              "url": "https://www.douyin.com/search/%E6%88%91%E5%9B%BD%E7%BB%BF%E8%89%B2%E8%B4%B8%E6%98%93%E8%BF%9B%E5%87%BA%E5%8F%A3%E8%A7%84%E6%A8%A1%E5%B1%85%E5%85%A8%E7%90%83%E9%A6%96%E4%BD%8D",
+              "hot": "1094万"
+            },
+            {
+              "title": "汪顺发抖音出征第五次亚运会",
+              "url": "https://www.douyin.com/search/%E6%B1%AA%E9%A1%BA%E5%8F%91%E6%8A%96%E9%9F%B3%E5%87%BA%E5%BE%81%E7%AC%AC%E4%BA%94%E6%AC%A1%E4%BA%9A%E8%BF%90%E4%BC%9A",
+              "hot": "1091万"
+            },
+            {
+              "title": "到四川就要耍起",
+              "url": "https://www.douyin.com/search/%E5%88%B0%E5%9B%9B%E5%B7%9D%E5%B0%B1%E8%A6%81%E8%80%8D%E8%B5%B7",
+              "hot": "1029万"
+            }
+          ]
+        },
+        {
+          "board": "头条热榜",
+          "items": [
+            {
+              "title": "中美外长通电话",
+              "url": "https://www.toutiao.com/trending/7686476800251363371",
+              "hot": "3900万"
+            },
+            {
+              "title": "王毅：中美双方要筹备好下阶段高层交往",
+              "url": "https://www.toutiao.com/trending/7686506613791985198",
+              "hot": "3529万"
+            },
+            {
+              "title": "平陆运河激活西部“新动脉”",
+              "url": "https://www.toutiao.com/trending/7686477486456180270",
+              "hot": "3193万"
+            },
+            {
+              "title": "中医暂不纳入首批医保医疗服务目录",
+              "url": "https://www.toutiao.com/trending/7686040001191133220",
+              "hot": "2889万"
+            },
+            {
+              "title": "猪景房8888元一晚还送一头猪",
+              "url": "https://www.toutiao.com/trending/7686269165757595689",
+              "hot": "2614万"
+            }
+          ]
+        }
+      ]
     }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "特别关注 · 电子城高科",
-   "en": "WATCH",
-   "nav": "特别关注",
-   "items": [
-    {
-     "title": "BEZ人文 | 应急竞赛拓场景 联防共建筑生态 电子城高科“安全·生态共建趣味运动会”活力开赛 - 新浪财经",
-     "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE9BUndSZnY2WkNXLUVnYmkxSmRsYkRXTVhoZTY4OWVXSjNHZnVKYVg2U25qZHRWMU5NZjdsX3A0VmNzTVZ0MlRBNG1EYnV1NnVsR20zeU5pUjdjY3cwOF9mM0RqT2NYWHpfME9fMnM0RXJ2cktaTHFhUQ?oc=5",
-     "source": "新浪财经 · 09-17 17:38",
-     "published": "2026-09-17 17:38"
-    },
-    {
-     "title": "BEZ资讯丨电子城IC/PIC创新中心亮相中国光博会 - 新浪财经",
-     "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQYXliOFh2SW1KbS1BN1lNV2Q1dWNlaDFMUjlzV2Q3TG4zVDYyX05xU2VncXhubFNhb0ExbHFtMnhtTEhHUUFMMDIycGRWQ1EwYlQ5Nm94MmZFajlTZEhmSkVOQUlZY3Z6ZU5NV0tXTzY4UGtaZ3A3WU5rRWlGcG5aaVh2MUk3QUk?oc=5",
-     "source": "新浪财经 · 09-15 17:00",
-     "published": "2026-09-15 17:00"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "天气新闻",
-   "en": "WEATHER NEWS",
-   "nav": "天气",
-   "items": [
-    {
-     "title": "北京 | 今晨有雾 明天或迎入秋后首场降雨",
-     "url": "http://news.weather.com.cn/2026/09/4794666.shtml",
-     "source": "中国天气网 · 北京"
-    },
-    {
-     "title": "一日两季！全国乱穿衣预警地图来了",
-     "url": "http://news.weather.com.cn/2026/09/4794515.shtml",
-     "source": "中国天气网 · 预警"
-    },
-    {
-     "title": "山洪灾害气象预警",
-     "url": "http://news.weather.com.cn/2026/09/4795592.shtml",
-     "source": "中国天气网 · 预警"
-    },
-    {
-     "title": "地质灾害气象风险预警",
-     "url": "http://news.weather.com.cn/2026/09/4795593.shtml",
-     "source": "中国天气网 · 预警"
-    },
-    {
-     "title": "全国入秋进程图出炉 京津冀等地跑步入秋",
-     "url": "http://news.weather.com.cn/2026/09/4794549.shtml",
-     "source": "中国天气网 · 全国"
-    },
-    {
-     "title": "重庆湖北等地有大到暴雨 中东部多地超30℃",
-     "url": "http://news.weather.com.cn/2026/09/4794551.shtml",
-     "source": "中国天气网 · 全国"
-    },
-    {
-     "title": "安徽 | 雨势增强凉意显现 明后天降雨逐渐停歇",
-     "url": "http://news.weather.com.cn/2026/09/4795294.shtml",
-     "source": "中国天气网 · 全国"
-    },
-    {
-     "title": "湖北 | 武汉等地最高温将创新低 明后天雨减弱",
-     "url": "http://news.weather.com.cn/2026/09/4795198.shtml",
-     "source": "中国天气网 · 全国"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "国际新闻",
-   "en": "WORLD",
-   "nav": "国际新闻",
-   "items": [
-    {
-     "title": "43 岁张一鸣首次成为亚洲首富：财富达 1050 亿美元，7 年增长约 7 倍，超越印度首富阿达尼，全球排名第 18",
-     "url": "https://www.baidu.com/s?wd=43%20%E5%B2%81%E5%BC%A0%E4%B8%80%E9%B8%A3%E9%A6%96%E6%AC%A1%E6%88%90%E4%B8%BA%E4%BA%9A%E6%B4%B2%E9%A6%96%E5%AF%8C%EF%BC%9A%E8%B4%A2%E5%AF%8C%E8%BE%BE%201050%20%E4%BA%BF%E7%BE%8E%E5%85%83%EF%BC%8C7%20%E5%B9%B4%E5%A2%9E%E9%95%BF%E7%BA%A6%207%20%E5%80%8D%EF%BC%8C%E8%B6%85%E8%B6%8A%E5%8D%B0%E5%BA%A6%E9%A6%96%E5%AF%8C%E9%98%BF%E8%BE%BE%E5%B0%BC%EF%BC%8C%E5%85%A8%E7%90%83%E6%8E%92%E5%90%8D%E7%AC%AC%2018"
-    },
-    {
-     "title": "中国男足 2 比 1 逆转战胜朝鲜队，取得亚运开门红；中国女排 3 比 0 战胜菲律宾队，取得亚运会开门红",
-     "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E7%94%B7%E8%B6%B3%202%20%E6%AF%94%201%20%E9%80%86%E8%BD%AC%E6%88%98%E8%83%9C%E6%9C%9D%E9%B2%9C%E9%98%9F%EF%BC%8C%E5%8F%96%E5%BE%97%E4%BA%9A%E8%BF%90%E5%BC%80%E9%97%A8%E7%BA%A2%EF%BC%9B%E4%B8%AD%E5%9B%BD%E5%A5%B3%E6%8E%92%203%20%E6%AF%94%200%20%E6%88%98%E8%83%9C%E8%8F%B2%E5%BE%8B%E5%AE%BE%E9%98%9F%EF%BC%8C%E5%8F%96%E5%BE%97%E4%BA%9A%E8%BF%90%E4%BC%9A%E5%BC%80%E9%97%A8%E7%BA%A2"
-    },
-    {
-     "title": "韩国法院判决朝鲜就炸毁联络办公室大楼赔偿约 446 亿韩元，系韩首次起诉朝鲜胜诉",
-     "url": "https://www.baidu.com/s?wd=%E9%9F%A9%E5%9B%BD%E6%B3%95%E9%99%A2%E5%88%A4%E5%86%B3%E6%9C%9D%E9%B2%9C%E5%B0%B1%E7%82%B8%E6%AF%81%E8%81%94%E7%BB%9C%E5%8A%9E%E5%85%AC%E5%AE%A4%E5%A4%A7%E6%A5%BC%E8%B5%94%E5%81%BF%E7%BA%A6%20446%20%E4%BA%BF%E9%9F%A9%E5%85%83%EF%BC%8C%E7%B3%BB%E9%9F%A9%E9%A6%96%E6%AC%A1%E8%B5%B7%E8%AF%89%E6%9C%9D%E9%B2%9C%E8%83%9C%E8%AF%89"
-    },
-    {
-     "title": "美国研究显示：AI 兴起后，导致电脑相关专业毕业生初次就业概率下降五个百分点，起薪也下降 13%",
-     "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E7%A0%94%E7%A9%B6%E6%98%BE%E7%A4%BA%EF%BC%9AAI%20%E5%85%B4%E8%B5%B7%E5%90%8E%EF%BC%8C%E5%AF%BC%E8%87%B4%E7%94%B5%E8%84%91%E7%9B%B8%E5%85%B3%E4%B8%93%E4%B8%9A%E6%AF%95%E4%B8%9A%E7%94%9F%E5%88%9D%E6%AC%A1%E5%B0%B1%E4%B8%9A%E6%A6%82%E7%8E%87%E4%B8%8B%E9%99%8D%E4%BA%94%E4%B8%AA%E7%99%BE%E5%88%86%E7%82%B9%EF%BC%8C%E8%B5%B7%E8%96%AA%E4%B9%9F%E4%B8%8B%E9%99%8D%2013%25"
-    },
-    {
-     "title": "美国防部通报美对伊军事行动耗资已超 420 亿美元，多家美媒分析称实际支出或高达 1000 亿美元",
-     "url": "https://www.baidu.com/s?wd=%E7%BE%8E%E5%9B%BD%E9%98%B2%E9%83%A8%E9%80%9A%E6%8A%A5%E7%BE%8E%E5%AF%B9%E4%BC%8A%E5%86%9B%E4%BA%8B%E8%A1%8C%E5%8A%A8%E8%80%97%E8%B5%84%E5%B7%B2%E8%B6%85%20420%20%E4%BA%BF%E7%BE%8E%E5%85%83%EF%BC%8C%E5%A4%9A%E5%AE%B6%E7%BE%8E%E5%AA%92%E5%88%86%E6%9E%90%E7%A7%B0%E5%AE%9E%E9%99%85%E6%94%AF%E5%87%BA%E6%88%96%E9%AB%98%E8%BE%BE%201000%20%E4%BA%BF%E7%BE%8E%E5%85%83"
-    },
-    {
-     "title": "南非对美国以“种族歧视”为由实施签证限制表关切",
-     "url": "https://news.china.com/international/1000/20260917/49748744.html",
-     "source": "新华社"
-    },
-    {
-     "title": "熬过极热夏季后 欧盟要搞气候保险",
-     "url": "https://news.china.com/international/1000/20260917/49748694.html",
-     "source": "新华社"
-    },
-    {
-     "title": "日本高市内阁全体阁僚辞职以进行内阁改组",
-     "url": "https://news.china.com/international/1000/20260917/49748254.html",
-     "source": "央视新闻"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "国内新闻",
-   "en": "CHINA",
-   "nav": "国内新闻",
-   "items": [
-    {
-     "title": "中国十大消费县排行出炉：4 个县域社零总额超千亿元，义乌以 2153.8 亿元居首，昆山、晋江、常熟紧随其后",
-     "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%8D%81%E5%A4%A7%E6%B6%88%E8%B4%B9%E5%8E%BF%E6%8E%92%E8%A1%8C%E5%87%BA%E7%82%89%EF%BC%9A4%20%E4%B8%AA%E5%8E%BF%E5%9F%9F%E7%A4%BE%E9%9B%B6%E6%80%BB%E9%A2%9D%E8%B6%85%E5%8D%83%E4%BA%BF%E5%85%83%EF%BC%8C%E4%B9%89%E4%B9%8C%E4%BB%A5%202153.8%20%E4%BA%BF%E5%85%83%E5%B1%85%E9%A6%96%EF%BC%8C%E6%98%86%E5%B1%B1%E3%80%81%E6%99%8B%E6%B1%9F%E3%80%81%E5%B8%B8%E7%86%9F%E7%B4%A7%E9%9A%8F%E5%85%B6%E5%90%8E"
-    },
-    {
-     "title": "我国已办成世界上规模最大的法学教育体系，每年培养输送 10 万余名法治专门人才",
-     "url": "https://www.baidu.com/s?wd=%E6%88%91%E5%9B%BD%E5%B7%B2%E5%8A%9E%E6%88%90%E4%B8%96%E7%95%8C%E4%B8%8A%E8%A7%84%E6%A8%A1%E6%9C%80%E5%A4%A7%E7%9A%84%E6%B3%95%E5%AD%A6%E6%95%99%E8%82%B2%E4%BD%93%E7%B3%BB%EF%BC%8C%E6%AF%8F%E5%B9%B4%E5%9F%B9%E5%85%BB%E8%BE%93%E9%80%81%2010%20%E4%B8%87%E4%BD%99%E5%90%8D%E6%B3%95%E6%B2%BB%E4%B8%93%E9%97%A8%E4%BA%BA%E6%89%8D"
-    },
-    {
-     "title": "平陆运河 16 日正式通航：西南地区货物出海少走 560 公里，每年可节约运输费用超 50 亿元",
-     "url": "https://www.baidu.com/s?wd=%E5%B9%B3%E9%99%86%E8%BF%90%E6%B2%B3%2016%20%E6%97%A5%E6%AD%A3%E5%BC%8F%E9%80%9A%E8%88%AA%EF%BC%9A%E8%A5%BF%E5%8D%97%E5%9C%B0%E5%8C%BA%E8%B4%A7%E7%89%A9%E5%87%BA%E6%B5%B7%E5%B0%91%E8%B5%B0%20560%20%E5%85%AC%E9%87%8C%EF%BC%8C%E6%AF%8F%E5%B9%B4%E5%8F%AF%E8%8A%82%E7%BA%A6%E8%BF%90%E8%BE%93%E8%B4%B9%E7%94%A8%E8%B6%85%2050%20%E4%BA%BF%E5%85%83"
-    },
-    {
-     "title": "引力一号遥三运载火箭发射成功，一箭九星，刷新海上发射载荷重量纪录",
-     "url": "https://www.baidu.com/s?wd=%E5%BC%95%E5%8A%9B%E4%B8%80%E5%8F%B7%E9%81%A5%E4%B8%89%E8%BF%90%E8%BD%BD%E7%81%AB%E7%AE%AD%E5%8F%91%E5%B0%84%E6%88%90%E5%8A%9F%EF%BC%8C%E4%B8%80%E7%AE%AD%E4%B9%9D%E6%98%9F%EF%BC%8C%E5%88%B7%E6%96%B0%E6%B5%B7%E4%B8%8A%E5%8F%91%E5%B0%84%E8%BD%BD%E8%8D%B7%E9%87%8D%E9%87%8F%E7%BA%AA%E5%BD%95"
-    },
-    {
-     "title": "我国将首次制定全国统一的医保医疗服务项目目录，首批覆盖心血管、呼吸、眼科、妇科、放疗等 13 个类别",
-     "url": "https://www.baidu.com/s?wd=%E6%88%91%E5%9B%BD%E5%B0%86%E9%A6%96%E6%AC%A1%E5%88%B6%E5%AE%9A%E5%85%A8%E5%9B%BD%E7%BB%9F%E4%B8%80%E7%9A%84%E5%8C%BB%E4%BF%9D%E5%8C%BB%E7%96%97%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%EF%BC%8C%E9%A6%96%E6%89%B9%E8%A6%86%E7%9B%96%E5%BF%83%E8%A1%80%E7%AE%A1%E3%80%81%E5%91%BC%E5%90%B8%E3%80%81%E7%9C%BC%E7%A7%91%E3%80%81%E5%A6%87%E7%A7%91%E3%80%81%E6%94%BE%E7%96%97%E7%AD%89%2013%20%E4%B8%AA%E7%B1%BB%E5%88%AB"
-    },
-    {
-     "title": "广州拟立法处罚噪声污染：搭乘地铁外放手机声音最高处罚 1000 元",
-     "url": "https://www.baidu.com/s?wd=%E5%B9%BF%E5%B7%9E%E6%8B%9F%E7%AB%8B%E6%B3%95%E5%A4%84%E7%BD%9A%E5%99%AA%E5%A3%B0%E6%B1%A1%E6%9F%93%EF%BC%9A%E6%90%AD%E4%B9%98%E5%9C%B0%E9%93%81%E5%A4%96%E6%94%BE%E6%89%8B%E6%9C%BA%E5%A3%B0%E9%9F%B3%E6%9C%80%E9%AB%98%E5%A4%84%E7%BD%9A%201000%20%E5%85%83"
-    },
-    {
-     "title": "香港特区首个五年规划公布：拟加强上市制度竞争力，吸引内地及海外龙头赴港 IPO",
-     "url": "https://www.baidu.com/s?wd=%E9%A6%99%E6%B8%AF%E7%89%B9%E5%8C%BA%E9%A6%96%E4%B8%AA%E4%BA%94%E5%B9%B4%E8%A7%84%E5%88%92%E5%85%AC%E5%B8%83%EF%BC%9A%E6%8B%9F%E5%8A%A0%E5%BC%BA%E4%B8%8A%E5%B8%82%E5%88%B6%E5%BA%A6%E7%AB%9E%E4%BA%89%E5%8A%9B%EF%BC%8C%E5%90%B8%E5%BC%95%E5%86%85%E5%9C%B0%E5%8F%8A%E6%B5%B7%E5%A4%96%E9%BE%99%E5%A4%B4%E8%B5%B4%E6%B8%AF%20IPO"
-    },
-    {
-     "title": "中国选手赵家驹巨人之旅 330 公里破纪录夺冠：65 小时 55 分 22 秒跑完，只睡了 1 小时，曾当外卖员，跑着送餐",
-     "url": "https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E9%80%89%E6%89%8B%E8%B5%B5%E5%AE%B6%E9%A9%B9%E5%B7%A8%E4%BA%BA%E4%B9%8B%E6%97%85%20330%20%E5%85%AC%E9%87%8C%E7%A0%B4%E7%BA%AA%E5%BD%95%E5%A4%BA%E5%86%A0%EF%BC%9A65%20%E5%B0%8F%E6%97%B6%2055%20%E5%88%86%2022%20%E7%A7%92%E8%B7%91%E5%AE%8C%EF%BC%8C%E5%8F%AA%E7%9D%A1%E4%BA%86%201%20%E5%B0%8F%E6%97%B6%EF%BC%8C%E6%9B%BE%E5%BD%93%E5%A4%96%E5%8D%96%E5%91%98%EF%BC%8C%E8%B7%91%E7%9D%80%E9%80%81%E9%A4%90"
-    }
-   ]
-  },
-  {
-   "type": "market",
-   "label": "A股大盘",
-   "en": "MARKET",
-   "nav": "财经新闻",
-   "half": true,
-   "indices": [
-    {
-     "name": "上证指数",
-     "point": 3875.6,
-     "chg": -16.0,
-     "pct": -0.41
-    },
-    {
-     "name": "深证成指",
-     "point": 13409.91,
-     "chg": -44.83,
-     "pct": -0.33
-    },
-    {
-     "name": "创业板指",
-     "point": 3298.31,
-     "chg": -13.16,
-     "pct": -0.4
-    },
-    {
-     "name": "科创50",
-     "point": 1606.29,
-     "chg": -9.9,
-     "pct": -0.61
-    },
-    {
-     "name": "北证50",
-     "point": 1026.0,
-     "chg": -14.29,
-     "pct": -1.37
-    },
-    {
-     "name": "沪深300",
-     "point": 4460.16,
-     "chg": -20.11,
-     "pct": -0.45
-    }
-   ],
-   "footnote": "两市成交额 18,231 亿元 · 数据 2026-09-17 22:38 · 今日收盘",
-   "up": [
-    {
-     "name": "种子",
-     "pct": 7.86
-    },
-    {
-     "name": "视频媒体",
-     "pct": 6.58
-    },
-    {
-     "name": "房产租赁经纪",
-     "pct": 5.28
-    },
-    {
-     "name": "其他养殖",
-     "pct": 5.13
-    },
-    {
-     "name": "种植业",
-     "pct": 5.06
-    },
-    {
-     "name": "汽车经销商",
-     "pct": 3.96
-    },
-    {
-     "name": "跨境电商",
-     "pct": 3.47
-    },
-    {
-     "name": "快递",
-     "pct": 3.32
-    }
-   ],
-   "down": [
-    {
-     "name": "白银",
-     "pct": -6.0
-    },
-    {
-     "name": "贵金属",
-     "pct": -5.35
-    },
-    {
-     "name": "黄金",
-     "pct": -5.15
-    },
-    {
-     "name": "电能综合服务",
-     "pct": -2.65
-    },
-    {
-     "name": "稀土",
-     "pct": -2.6
-    },
-    {
-     "name": "铅锌",
-     "pct": -2.49
-    },
-    {
-     "name": "印制电路板",
-     "pct": -2.41
-    },
-    {
-     "name": "铜",
-     "pct": -2.37
-    }
-   ]
-  },
-  {
-   "type": "lhb",
-   "label": "龙虎榜",
-   "en": "LHB",
-   "nav": "财经新闻",
-   "half": true,
-   "items": [
-    {
-     "rank": 1,
-     "code": "000981",
-     "name": "山子高科",
-     "pct": 9.854,
-     "net": 393534209.38,
-     "explain": "1家机构买入，成功率43.82%"
-    },
-    {
-     "rank": 2,
-     "code": "600127",
-     "name": "金健米业",
-     "pct": 9.9662,
-     "net": 215363530.68,
-     "explain": "普通席位买入，成功率38.34%"
-    },
-    {
-     "rank": 3,
-     "code": "002640",
-     "name": "跨境通",
-     "pct": 9.9125,
-     "net": 214461581,
-     "explain": "买一主买，成功率32.63%"
-    },
-    {
-     "rank": 4,
-     "code": "002655",
-     "name": "共达电声",
-     "pct": 10.0108,
-     "net": 182722673,
-     "explain": "2家机构买入，成功率36.54%"
-    },
-    {
-     "rank": 5,
-     "code": "603186",
-     "name": "华正新材",
-     "pct": -9.4453,
-     "net": 171689071.61,
-     "explain": "卖一主卖，成功率42.18%"
-    },
-    {
-     "rank": 6,
-     "code": "300243",
-     "name": "瑞丰高材",
-     "pct": 6.9018,
-     "net": 143890336.98,
-     "explain": "4家机构买入，成功率38.27%"
-    },
-    {
-     "rank": 7,
-     "code": "002824",
-     "name": "和胜股份",
-     "pct": 5.6604,
-     "net": 140903611.03,
-     "explain": "2家机构买入，成功率24.91%"
-    },
-    {
-     "rank": 8,
-     "code": "000572",
-     "name": "海马汽车",
-     "pct": 7.9208,
-     "net": 116952175.78,
-     "explain": "1家机构买入，成功率34.91%"
-    }
-   ],
-   "footnote": "按净买入额排序 · 2026-09-17 · 来源 东方财富龙虎榜"
-  },
-  {
-   "type": "news",
-   "label": "财经要闻",
-   "en": "FINANCE",
-   "nav": "财经新闻",
-   "items": [
-    {
-     "title": "通用汽车力推全新V‑8发动机，重燃与福特、拉姆的“皮卡大战”",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpv3653039.shtml",
-     "source": "环球市场播报"
-    },
-    {
-     "title": "美国首次申领失业救济人数降至19.6万 持续申领人数亦下降",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpv3648472.shtml",
-     "source": "环球市场播报"
-    },
-    {
-     "title": "A股中秋、国庆休市安排，来了！",
-     "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisczpv3641340.shtml",
-     "source": "滚动播报"
-    },
-    {
-     "title": "共和党中期选情不妙，马斯克等19位美国富豪纷纷砸钱，支持特朗普！前20大金主中，仅索罗斯一心支持民主党",
-     "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-iniscvfx3651379.shtml",
-     "source": "每日经济新闻"
-    },
-    {
-     "title": "AI股抛售已释放风险 城堡证券Rubner看好美股年末走势",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpt3928748.shtml",
-     "source": "环球市场播报"
-    },
-    {
-     "title": "OpenAI有望攻克另一项千禧年大奖数学难题",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpt3920357.shtml",
-     "source": "环球市场播报"
-    },
-    {
-     "title": "暴跌99%，洗发水大王崩了？",
-     "url": "https://finance.sina.com.cn/china/2026-09-17/doc-inisczpv3636857.shtml",
-     "source": "市场资讯"
-    },
-    {
-     "title": "美国8月二手房签约量环比增长0.3% 预估中值为下降0.1%",
-     "url": "https://finance.sina.com.cn/world/2026-09-17/doc-inisczpt3924229.shtml",
-     "source": "环球市场播报"
-    },
-    {
-     "title": "OpenAI披露多起模型对齐偏差事件 推出AI不当行为上报新框架",
-     "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-17/doc-inisczpy9084814.shtml",
-     "source": "环球市场播报"
-    },
-    {
-     "title": "因190条违法广告，拼多多又“栽跟头”",
-     "url": "https://finance.sina.com.cn/china/2026-09-17/doc-inisczpy9083730.shtml",
-     "source": "市场资讯"
-    },
-    {
-     "title": "大唐集团撤销国际业务部、升格数智中心！半年报净利逆势增长20%后，这家电力央企挥刀“砍向”组织架构",
-     "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisczpv3588771.shtml"
-    },
-    {
-     "title": "博迈医疗IPO审核获通过：拟募资12亿元，目前尚存未决诉讼",
-     "url": "https://finance.sina.com.cn/china/2026-09-17/doc-inisczpt3918553.shtml",
-     "source": "市场资讯"
-    }
-   ]
-  },
-  {
-   "type": "news",
-   "label": "AI 动态",
-   "en": "AI",
-   "nav": "AI 动态",
-   "items": [
-    {
-     "title": "从“会回答”到“会办事”，vivo如何解AI手机这道题？",
-     "url": "https://www.qbitai.com/2026/09/491649.html",
-     "source": "量子位"
-    },
-    {
-     "title": "Claude Code团队讲究啊，这都往外说",
-     "url": "https://www.qbitai.com/2026/09/491596.html",
-     "source": "量子位"
-    },
-    {
-     "title": "图形学宗师童欣加盟Meshy，要做“AI for Fun”的头号玩家",
-     "url": "https://www.qbitai.com/2026/09/491522.html",
-     "source": "量子位"
-    },
-    {
-     "title": "央企做了个通用Agent，直接杀进IDC实测前三！",
-     "url": "https://www.qbitai.com/2026/09/491454.html",
-     "source": "量子位"
-    },
-    {
-     "title": "Claude双入口合并，原生Office上线！硅谷AI办公大战也开始了",
-     "url": "https://www.qbitai.com/2026/09/491391.html",
-     "source": "量子位"
-    },
-    {
-     "title": "刚刚，唐杰发布智谱RSI首个成果",
-     "url": "https://www.qbitai.com/2026/09/491357.html",
-     "source": "量子位"
-    },
-    {
-     "title": "马斯克睡进工地！为AI基建拼了",
-     "url": "https://www.qbitai.com/2026/09/491280.html",
-     "source": "量子位"
-    },
-    {
-     "title": "首购积分加赠70%：SkyProduction天工工作台联合火山引擎推出中秋国庆三重福利",
-     "url": "https://www.qbitai.com/2026/09/491147.html",
-     "source": "量子位"
-    },
-    {
-     "title": "Huawei plans Q1 2027 launch of new AI chip as it takes on Nvidia",
-     "url": "https://techcrunch.com/2026/09/17/huawei-plans-q1-2027-launch-of-new-ai-chip-as-it-takes-on-nvidia/",
-     "source": "TechCrunch AI"
-    }
-   ]
-  },
-  {
-   "type": "schedule",
-   "label": "足球",
-   "en": "FOOTBALL",
-   "nav": "体育新闻",
-   "note": "虎扑实时热帖",
-   "schedule_label": "今晚赛程",
-   "schedule": [
-    {
-     "time": "00:30",
-     "text": "U20女世界杯1/8决赛 · 意大利女足U20 1-1 中国女足U20",
-     "state": "已结束"
-    },
-    {
-     "time": "01:00",
-     "text": "西甲第6轮 · 马德里竞技 4-0 奥萨苏纳",
-     "state": "已结束"
-    },
-    {
-     "time": "03:00",
-     "text": "英联杯第三轮 · 曼联 2-3 布莱顿",
-     "state": "已结束"
-    },
-    {
-     "time": "03:00",
-     "text": "欧联第1轮 · AC米兰 0-2 本菲卡",
-     "state": "已结束"
-    },
-    {
-     "time": "03:00",
-     "text": "欧联第1轮 · 勒沃库森 2-0 采列",
-     "state": "已结束"
-    },
-    {
-     "time": "03:00",
-     "text": "欧联第1轮 · 桑德兰 1-0 阿尔克马尔",
-     "state": "已结束"
-    },
-    {
-     "time": "03:30",
-     "text": "西甲第6轮 · 巴塞罗那 7-2 桑坦德竞技",
-     "state": "已结束"
-    },
-    {
-     "time": "08:00",
-     "text": "北冠杯赛事 · 迈阿密国际 2-0 蓝十字",
-     "state": "已结束"
-    },
-    {
-     "time": "13:00",
-     "text": "亚运女足第2轮 · 乌兹别克斯坦女足 1-1 中国女足",
-     "state": "已结束"
-    },
-    {
-     "time": "20:15",
-     "text": "亚冠二级第1轮 · 上海申花 2-1 淡滨尼流浪者",
-     "state": "已结束"
-    }
-   ],
-   "items": [
-    {
-     "title": "亚冠二级：申花2-1淡滨尼，徐皓阳破门，杨帅头槌建功",
-     "url": "https://m.hupu.com/bbs/642463873.html",
-     "pinned": true
-    },
-    {
-     "title": "记者：JJ-加布里埃尔离开曼联首选去皇马，他看重卡斯蒂亚",
-     "url": "https://m.hupu.com/bbs/642463464.html",
-     "pinned": true
-    },
-    {
-     "title": "阿隆索：埃格巴利亲自说服我；拒绝透露佩德罗等人具体伤情",
-     "url": "https://m.hupu.com/bbs/642463156.html",
-     "pinned": true
-    },
-    {
-     "title": "英足总主席要求因凡蒂诺公开卖世界杯文件+巴洛贡事件的文件",
-     "url": "https://m.hupu.com/bbs/642463575.html",
-     "pinned": true
-    },
-    {
-     "title": "莫雷托：连续3场不胜后米兰老板仍支持阿莫林，不会轻易下课",
-     "url": "https://m.hupu.com/bbs/642464187.html"
-    },
-    {
-     "title": "淡滨尼球员：结果没有达到球队预期，失误改变了场上局势",
-     "url": "https://m.hupu.com/bbs/642464049.html"
-    }
-   ]
-  },
-  {
-   "type": "schedule",
-   "label": "篮球",
-   "en": "BASKETBALL",
-   "nav": "体育新闻",
-   "note": "虎扑实时热帖",
-   "schedule_label": "今晚赛程",
-   "schedule": [
-    {
-     "time": "",
-     "text": "今晚无 NBA 比赛（休赛期）",
-     "state": ""
-    }
-   ],
-   "items": [
-    {
-     "title": "欧文炮轰ESPN不敢点名遇难女童：她叫欣德，比你们都勇敢",
-     "url": "https://m.hupu.com/bbs/642463647",
-     "pinned": true
-    },
-    {
-     "title": "富保罗：我认为现在东部比西部更强，这情况我生涯都很少见",
-     "url": "https://m.hupu.com/bbs/642454262",
-     "pinned": true
-    },
-    {
-     "title": "巴恩斯：原本最希望詹姆斯去森林狼，他们还差最后一块拼图",
-     "url": "https://m.hupu.com/bbs/642454190",
-     "pinned": true
-    },
-    {
-     "title": "小尼克-史密斯：东契奇曾告诉我，NBA比欧洲联赛容易得多",
-     "url": "https://m.hupu.com/bbs/642457185",
-     "pinned": true
-    },
-    {
-     "title": "新装的房子要塞进两件红木家具，还真需要点奇才",
-     "url": "https://m.hupu.com/bbs/642452311"
-    },
-    {
-     "title": "美媒晒76人新赛季15人轮换：他们会是东部几号种子？",
-     "url": "https://m.hupu.com/bbs/642464112"
-    }
-   ]
-  },
-  {
-   "type": "hot",
-   "label": "全网热榜",
-   "en": "TRENDING",
-   "nav": "热榜",
-   "boards": [
-    {
-     "board": "微博热搜",
-     "items": [
-      {
-       "title": "如果你出生于1992年至2003年之间",
-       "url": "https://s.weibo.com/weibo?q=%E5%A6%82%E6%9E%9C%E4%BD%A0%E5%87%BA%E7%94%9F%E4%BA%8E1992%E5%B9%B4%E8%87%B32003%E5%B9%B4%E4%B9%8B%E9%97%B4",
-       "hot": "119万"
-      },
-      {
-       "title": "拒绝了十五年前拒绝过我的学校",
-       "url": "https://s.weibo.com/weibo?q=%E6%8B%92%E7%BB%9D%E4%BA%86%E5%8D%81%E4%BA%94%E5%B9%B4%E5%89%8D%E6%8B%92%E7%BB%9D%E8%BF%87%E6%88%91%E7%9A%84%E5%AD%A6%E6%A0%A1",
-       "hot": "93万"
-      },
-      {
-       "title": "第23届东博会峰会",
-       "url": "https://s.weibo.com/weibo?q=%E7%AC%AC23%E5%B1%8A%E4%B8%9C%E5%8D%9A%E4%BC%9A%E5%B3%B0%E4%BC%9A",
-       "hot": "84万"
-      },
-      {
-       "title": "偶像来了 国际大花",
-       "url": "https://s.weibo.com/weibo?q=%E5%81%B6%E5%83%8F%E6%9D%A5%E4%BA%86%20%E5%9B%BD%E9%99%85%E5%A4%A7%E8%8A%B1",
-       "hot": "78万"
-      },
-      {
-       "title": "我们来了阵容配置",
-       "url": "https://s.weibo.com/weibo?q=%E6%88%91%E4%BB%AC%E6%9D%A5%E4%BA%86%E9%98%B5%E5%AE%B9%E9%85%8D%E7%BD%AE",
-       "hot": "53万"
-      }
-     ]
-    },
-    {
-     "board": "知乎热榜",
-     "items": [
-      {
-       "title": "国乒、国羽、中国体操队被困名古屋机场，现场只提供水无食品，为什么会这样？暴露出亚运会组织方的哪些问题？",
-       "url": "https://www.zhihu.com/question/2083719036232324156",
-       "hot": "650 万热度"
-      },
-      {
-       "title": "张一鸣身家突破 1050 亿美元首次成亚洲首富，如何评价其商业成就？",
-       "url": "https://www.zhihu.com/question/2083595578223636976",
-       "hot": "482 万热度"
-      },
-      {
-       "title": "如果存在一个100%深海覆盖的海洋星球，对人类来说会不会非常恐怖？里面会发展出什么生命吗？",
-       "url": "https://www.zhihu.com/question/2083246063851410890",
-       "hot": "190 万热度"
-      },
-      {
-       "title": "一照相馆设体重要求，仅接受 120 斤以下客户预订，因 「部分顾客常要求过度修图」，如何看待这一规定？",
-       "url": "https://www.zhihu.com/question/2083133384671368415",
-       "hot": "157 万热度"
-      },
-      {
-       "title": "亚运女子板球1/4决赛场地积水取消，中国队世界排名低于对手被判负，一场未打结束亚运征程，这规则合理吗？",
-       "url": "https://www.zhihu.com/question/2083894090341377231",
-       "hot": "137 万热度"
-      }
-     ]
-    },
-    {
-     "board": "抖音热点",
-     "items": [
-      {
-       "title": "我们重复型人格遇到美食belike",
-       "url": "https://www.douyin.com/search/%E6%88%91%E4%BB%AC%E9%87%8D%E5%A4%8D%E5%9E%8B%E4%BA%BA%E6%A0%BC%E9%81%87%E5%88%B0%E7%BE%8E%E9%A3%9Fbelike",
-       "hot": "1212万"
-      },
-      {
-       "title": "美联储宣布加息25个基点",
-       "url": "https://www.douyin.com/search/%E7%BE%8E%E8%81%94%E5%82%A8%E5%AE%A3%E5%B8%83%E5%8A%A0%E6%81%AF25%E4%B8%AA%E5%9F%BA%E7%82%B9",
-       "hot": "1104万"
-      },
-      {
-       "title": "我国绿色贸易进出口规模居全球首位",
-       "url": "https://www.douyin.com/search/%E6%88%91%E5%9B%BD%E7%BB%BF%E8%89%B2%E8%B4%B8%E6%98%93%E8%BF%9B%E5%87%BA%E5%8F%A3%E8%A7%84%E6%A8%A1%E5%B1%85%E5%85%A8%E7%90%83%E9%A6%96%E4%BD%8D",
-       "hot": "1094万"
-      },
-      {
-       "title": "汪顺发抖音出征第五次亚运会",
-       "url": "https://www.douyin.com/search/%E6%B1%AA%E9%A1%BA%E5%8F%91%E6%8A%96%E9%9F%B3%E5%87%BA%E5%BE%81%E7%AC%AC%E4%BA%94%E6%AC%A1%E4%BA%9A%E8%BF%90%E4%BC%9A",
-       "hot": "1091万"
-      },
-      {
-       "title": "到四川就要耍起",
-       "url": "https://www.douyin.com/search/%E5%88%B0%E5%9B%9B%E5%B7%9D%E5%B0%B1%E8%A6%81%E8%80%8D%E8%B5%B7",
-       "hot": "1029万"
-      }
-     ]
-    },
-    {
-     "board": "头条热榜",
-     "items": [
-      {
-       "title": "中美外长通电话",
-       "url": "https://www.toutiao.com/trending/7686476800251363371",
-       "hot": "3900万"
-      },
-      {
-       "title": "王毅：中美双方要筹备好下阶段高层交往",
-       "url": "https://www.toutiao.com/trending/7686506613791985198",
-       "hot": "3529万"
-      },
-      {
-       "title": "平陆运河激活西部“新动脉”",
-       "url": "https://www.toutiao.com/trending/7686477486456180270",
-       "hot": "3193万"
-      },
-      {
-       "title": "中医暂不纳入首批医保医疗服务目录",
-       "url": "https://www.toutiao.com/trending/7686040001191133220",
-       "hot": "2889万"
-      },
-      {
-       "title": "猪景房8888元一晚还送一头猪",
-       "url": "https://www.toutiao.com/trending/7686269165757595689",
-       "hot": "2614万"
-      }
-     ]
-    }
-   ]
-  }
- ]
+  ]
 }
