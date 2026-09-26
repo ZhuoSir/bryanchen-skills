@@ -1,6 +1,6 @@
 ---
 name: bryanchen-spec
-description: "四阶段规格开发流程编排器：Specify（EARS 需求定义）→ Plan（技术方案）→ Tasks（带验收标准的任务拆解）→ Implement（按规范编码）。三重人工确认后才允许写代码；产物带语义化版本号，需求变更全程可追溯；内置 git 分支/提交规范与双层 changelog（spec 级 + 项目级发版）。全局规范在本 skill 的 standards/ 目录（代码规范分前端/后端、接口、数据库、git、版本）。触发词：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能。NOT for: 明显的单点 bug 修复（直接修）、单文件小改动、纯技术问答。"
+description: "四阶段规格开发流程编排器：Specify（EARS 需求定义）→ Plan（技术方案）→ Tasks（带验收标准的任务拆解）→ Implement（按规范编码）。三重人工确认后才允许写代码；产物带语义化版本号，需求变更全程可追溯；内置 git 分支/提交规范与双层 changelog；支持里程碑发版管理（多需求汇总成大版本，SQL/配置按版本聚合为 Flyway 风格升级件，含升级说明/升级操作/回滚）；支持存量项目 init 接入（项目体检+项目画像 profile+规范路由，只读不回填）。全局规范在本 skill 的 standards/ 目录（代码规范分前端/后端、接口、数据库、git、版本）。触发词：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、初始化spec、spec init、接入spec机制、建基线。NOT for: 明显的单点 bug 修复（直接修）、单文件小改动、纯技术问答。"
 ---
 
 # bryanchen-spec —— 四阶段规格开发流程
@@ -31,7 +31,7 @@ description: "四阶段规格开发流程编排器：Specify（EARS 需求定义
 
 1. 从需求提炼功能名（小写连字符，如 `add-member-discount`）；提炼不出或需求太模糊 → 先追问，不臆测。
 2. 检查 `specs/` 下是否已有同名/同主题目录：
-   - 有 → 问用户是「继续做」（走 §9 续传）还是「新建」（换名或确认覆盖）。
+   - 有 → 问用户是「继续做」（走 §7 续传）还是「新建」（换名或确认覆盖）。
 3. 创建目录与四个文件（模板见 `references/templates.md`）：
 
 ```
@@ -53,7 +53,7 @@ specs/{YYYYMMDD}_{功能名}/
 
 ## 2. Phase 1 — Specify（requirements.md）
 
-写之前先做：读项目 README/AGENTS.md、看相关模块现状，不要求用户重复可查证的事实。
+写之前先做：读 `specs/_project/profile.md`（项目画像，存在时必读——技术栈/命令/既有约定/技术债/测试基线都在里面）、项目 README/AGENTS.md、看相关模块现状，不要求用户重复可查证的事实。profile 与现实不符时顺手更新 profile 并在回复中说明（不算 spec 变更）。
 
 内容要求（完整模板见 references/templates.md）：
 - **背景与目标**：为什么做，成功长什么样
@@ -120,8 +120,13 @@ specs/{YYYYMMDD}_{功能名}/
 全部任务完成后汇报：任务清单勾选状态、各项验证证据、是否满足合并条件
 （合并流程见 standards/git-workflow.md §合并）。
 
-**发版时**（用户要求打 release 时）：按 `standards/versioning.md` 双层 changelog 节，
-汇总 `git log <上个tag>..HEAD --grep "Spec:"` 生成项目根 CHANGELOG.md 条目。
+**Implement 收尾附加两件事**（与汇报同轮完成）：
+1. **升级件登记**：若本 spec 产生了库表变更或配置变更 → 创建/更新 `specs/{目录}/artifacts.md`
+   登记（类型/摘要/来源任务/草案位置，格式见 references/milestone.md §四）。纯代码需求不创建。
+2. **里程碑归属**：问一句「本需求纳入哪个里程碑（releases/vX.Y.Z）？可跳过」。
+   用户指定 → 在对应 MILESTONE.md 表格登记；跳过 → 不阻塞任何事。
+
+**发版时**：走里程碑流程（§9），项目根 CHANGELOG.md 条目从 MILESTONE.md 升级项表生成。
 
 ## 6. 版本号规则（摘要，细则必读 standards/versioning.md）
 
@@ -156,3 +161,49 @@ specs/{YYYYMMDD}_{功能名}/
 | versioning | standards/versioning.md | 建目录/改文档/发版时 |
 
 纪律：**按需加载单个领域的源，禁止一次性全读**；同一领域只读声明的那一个源（整文件替换，不叠加合并）。
+
+## 9. 里程碑与发版（概要，细则必读 references/milestone.md）
+
+多个需求汇总成一个大版本时启用；不启用里程碑的项目对本节零感知。
+
+```
+M0 立项   「新建里程碑 vX.Y.Z」 → releases/vX.Y.Z/ + MILESTONE.md
+M1 挂接   「把 <spec> 纳入 vX.Y.Z」 → MILESTONE.md 表格登记（一个 spec 只属一个里程碑）
+M2 冻结   「冻结 vX.Y.Z」 → 前置检查（所有 spec 已合并、任务全勾、证据齐）；
+          冻结后新需求默认进下一版本，挤入需用户明确同意
+M3 汇总   「汇总 vX.Y.Z」 → 收集各 spec 的 artifacts.md（git log 交叉核对防漏）
+          → SQL 合并重排编号（Flyway 风格 V<版本>_<序号>__<描述>.sql + rollback 配对）
+          → config/changes.md → RELEASE-NOTES.md（升级项从 R 条款聚合）
+          → UPGRADE.md（部署顺序/SQL 顺序/配置/验证/回滚）
+M4 发布   「发版 vX.Y.Z」 → checklist 人工逐项勾选（演练必须真做）→ git tag
+          → 项目根 CHANGELOG.md 从 MILESTONE.md 生成 → releases/ 产物随 tag 进 main
+```
+
+铁律延伸：**M3 未汇总完不得进 M4；checklist 演练项未真做不得打 tag。**
+升级件（SQL/配置）只在 M3 按版本整理，禁止单需求完成时私自往 releases/ 塞散件。
+
+## 10. init —— 存量项目接入（概要，细则必读 references/init.md）
+
+触发：「初始化 spec / spec init / 接入 spec 机制」。一次跑完约 10 分钟。
+
+```
+I1 安全快照    git 状态确认 + 将触碰路径的 sha256 快照
+I2 项目体检    只读扫描 7 类事实（技术栈/模块/既有约定/规范skill/git现状/SQL目录/CI）
+I3 测试基线    ⚠️ 默认不跑——先问用户「是否运行测试基线？」；
+               跑 → 如实记录绿/红与既有失败清单；不跑 → profile 标注「基线未测」
+I4 项目画像    生成 specs/_project/profile.md → 用户核对事实
+I5 规范路由    生成 .specrc.yml 草稿（I2 发现直接喂入）→ 用户逐行确认
+I6 骨架落地    建 specs/；AGENTS.md 无→写入 / 有→备份+追加（展示后确认）
+I7 完成报告    装了什么、profile 在哪、建议的第一个 change、声明未碰任何源码
+```
+
+**init 铁律**：
+1. **只读 + 只新增**——唯一触碰既有文件的是 AGENTS.md（备份+追加，先展示后写）；
+   结束后用 I1 快照复验零破坏。
+2. **不回填**——不把存量代码反推成 specs（官方与实测共识：back-fill 的 spec 会腐烂）。
+   specs 只为将要改动的部分写。
+3. **幂等**——重复跑 init 只刷新 profile 的事实与基线段；`.specrc.yml` 已存在则不动（手工改）。
+4. **releases/ 延迟创建**——首次「新建里程碑」时才建。
+
+**可选子流程 baseline-capture**（「给 <模块> 建 spec 基线」）：对高风险且即将大改的
+单个模块捕获现状规格，一次只做一个，默认不建议——细则见 references/init.md §五。

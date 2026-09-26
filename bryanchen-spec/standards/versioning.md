@@ -1,6 +1,21 @@
 # 版本规范（versioning）
 
-管三件事：spec 文档版本、产品版本、双层 changelog。
+管四件事：spec 文档版本、里程碑版本、产品版本、双层 changelog。
+
+**三层版本模型**（各司其职，互不替代）：
+
+```
+git tag vX.Y.Z           产品版本：代码快照，发版时打
+    ▲
+里程碑 releases/vX.Y.Z    发版批次：多个 spec 的升级件(SQL/配置)聚合单位
+    ▲                     细则见 references/milestone.md
+spec vN.N.N              文档版本：单需求三份文档的演进（本文件 §一）
+```
+
+- spec 版本回答「这份需求文档改过几轮、谁确认的」
+- 里程碑回答「v1.3.0 这批包含哪些需求、SQL/配置按什么顺序执行」
+- tag 回答「线上跑的是哪个代码快照」
+- **不启用里程碑的项目**：spec 直接对 tag，项目级 CHANGELOG 走 git log 兜底路径（§三）
 
 ---
 
@@ -72,7 +87,8 @@
 Tag 规范：
 - 在 main（或 release 分支合回后）打 annotated tag：
   `git tag -a v1.3.0 -m "发版说明（含 spec 清单）"`
-- tag message 里列本次包含的 spec 目录与版本（来源：git log footer 汇总）。
+- tag message 里列本次包含的 spec 目录与版本（启用里程碑时来源 = MILESTONE.md 纳入表；
+  否则 = git log footer 汇总）。
 
 ---
 
@@ -81,7 +97,12 @@ Tag 规范：
 | 层 | 位置 | 回答的问题 | 维护时机 |
 |---|---|---|---|
 | spec 级 | `specs/{目录}/changelog.md` | 这条需求为什么/何时/被谁改过 | 每次 spec 版本变更（流程自动） |
-| 项目级 | 项目根 `CHANGELOG.md` | v1.3.0 发出去包含了什么 | **打 release tag 时**汇总生成 |
+| 项目级 | 项目根 `CHANGELOG.md` | v1.3.0 发出去包含了什么 | **打 release tag 时**生成 |
+
+**项目级条目的生成来源（按优先级）**：
+1. **启用里程碑时**：从 `releases/vX.Y.Z/MILESTONE.md` 的「升级项」表生成
+   （升级项在 M3 已从各 spec 的 R 条款聚合过，不重复劳动；细节可引 RELEASE-NOTES.md）
+2. **不启用里程碑时（兜底）**：用下方汇总命令从 commit footer 拼
 
 ### 项目级 CHANGELOG.md 格式（Keep a Changelog 惯例）
 

@@ -27,6 +27,11 @@ hotfix/*         生产紧急修复，从 main（或线上 tag）切出；
 
 > 不设 develop 分支（trunk-based + release 分支），避免完整 git-flow 的重仪式。
 
+**里程碑产物 `releases/vX.Y.Z/` 的提交规则**：M0~M3 期间（立项/挂接/汇总）在 main 上正常提交
+（`docs(release): vX.Y.Z <进展>`）；M2 冻结后若走 release 分支，发版期间的修订（bugfix 引起的
+SQL/UPGRADE 更新）提交在 release 分支上，随 tag 一起合回 main。**releases/ 目录永远进 git**——
+历史版本的升级件必须永远可查可重放。细则见 references/milestone.md。
+
 ## 二、分支命名
 
 | 分支 | 规则 | 示例 |
