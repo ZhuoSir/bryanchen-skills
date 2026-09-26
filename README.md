@@ -133,6 +133,23 @@
 
 **触发词**：画图、架构图、流程图、时序图、ER图、甘特图、泳道图、状态机、树状图、象限图、时间线、柱状图、折线图、饼图、数据图表
 
+### 📋 bryanchen-spec — 四阶段规格开发流程
+
+自建 spec coding 流程编排器：**Specify（EARS 需求定义）→ Plan（技术方案）→ Tasks（带验收标准的任务拆解）→ Implement（按规范编码）**。核心信条：没有三重确认，不写一行生产代码；没有验证证据，不声称完成。
+
+| 机制 | 说明 |
+|---|---|
+| 三重人工确认门 | requirements / plan / tasks 三份文档逐一展示、逐一等你「确认」并落盘确认人+日期，全确认才允许开分支写代码 |
+| 版本追溯 | 产物带语义化版本头（v1.0.0 已确认…）；`R-xx`（需求）/`T-xx`（任务）编号永久不复用；追溯链 R→T→commit footer→发版 CHANGELOG |
+| 双层 changelog | spec 级 `changelog.md`（需求演进到编号级）+ 项目根 `CHANGELOG.md`（发版汇总，`git log --grep "Spec:"` 零成本聚合） |
+| git 规范 | feature/fix/release/hotfix 两档分支模型、一任务一 commit、Conventional Commits + `Spec:`/`Task:` footer、`--no-ff` 合并 |
+| 规范源路由 | 项目根 `.specrc.yml` 按领域声明规范来源（`global` 内置底线 / `file:` 项目自己的规范 / `skill:` 其他规范 skill / `none`），一次探测落盘、领域级整文件替换；流程铁律不受任何规范源豁免 |
+| 内置全局规范 | `standards/` 七份：代码（前端 Vue / 后端 Java 分册）、接口、数据库、git 工作流、版本规则 |
+| 断点续传 | 说「继续 \<功能名\>」自动定位第一个未确认文档或未完成任务续做 |
+
+**触发词**：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能
+**不适用**：明显单点 bug 修复（直接修）、单文件小改动、纯技术问答。
+
 ## 目录结构
 
 ```
@@ -203,6 +220,20 @@ diagram-skill/
     ├── export_png.py   # HTML → PNG（puppeteer；失败自动降级 resvg）
     ├── render_svg.js   # 降级渲染：resvg-js 进程内光栅化（无浏览器/沙箱环境）
     └── package.json    # resvg 依赖声明（按需 npm install）
+
+bryanchen-spec/
+├── SKILL.md            # 主协议：四阶段 + 三重确认铁律 + .specrc.yml 路由 + 断点续传
+├── references/
+│   ├── templates.md    # requirements/plan/tasks/changelog/.specrc.yml 模板
+│   └── standards-routing.md  # 规范源路由：声明表语法/探测顺序/裁决规则/完整示例
+└── standards/          # 内置全局规范（.specrc.yml 领域声明为 global 时的默认源）
+    ├── README.md       # 规范索引 + 四层裁决规则
+    ├── code-style-backend.md   # 后端代码底线（Java/Spring）
+    ├── code-style-frontend.md  # 前端代码底线（Vue/Element）
+    ├── api-design.md   # RESTful/响应包装/错误码/幂等
+    ├── database-design.md      # 命名/公共字段/索引/迁移回滚
+    ├── git-workflow.md # 分支模型/commit 格式/tag/合并
+    └── versioning.md   # 版本头/SemVer 定制/编号永久制/双层 changelog
 ```
 
 ## 安装
@@ -217,6 +248,7 @@ cp -R rss-skill ~/.agents/skills/
 cp -R web-search ~/.agents/skills/        # 可选：宿主无搜索工具的环境用
 cp -R pdf-recognition ~/.agents/skills/   # 需 OCR 时先 pip install -r pdf-recognition/scripts/requirements.txt
 cp -R diagram-skill ~/.agents/skills/
+cp -R bryanchen-spec ~/.agents/skills/      # 或 ~/.dsh/skills/；项目首次触发会探测并生成 .specrc.yml 规范路由
 ```
 
 email-skill 首次使用需配置邮箱凭据：
