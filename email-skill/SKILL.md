@@ -1,6 +1,6 @@
 ---
 name: email-skill
-description: "收发与管理个人邮箱：查看收件箱/未读邮件（支持多账号聚合收取）、搜索邮件、阅读全文、发送新邮件（默认主账号）、回复邮件（从收件账号发出，带引用与线程头）、整理邮件（已读/星标/移动文件夹/删除/新建文件夹）。基于 IMAP/SMTP，支持 QQ/163/Gmail/Outlook 等常见邮箱。触发词：查邮件、发邮件、回复邮件、整理邮件、未读邮件、email、inbox。NOT for: 批量营销邮件群发、邮件营销自动化、访问他人邮箱。"
+description: "收发与管理个人邮箱：查看收件箱/未读邮件（支持多账号聚合收取）、搜索邮件、阅读全文、下载邮件附件、发送新邮件（默认主账号、支持多附件）、回复邮件（从收件账号发出，带引用与线程头）、整理邮件（已读/星标/移动文件夹/删除/新建文件夹）。基于 IMAP/SMTP，支持 QQ/163/Gmail/Outlook 等常见邮箱。触发词：查邮件、发邮件、回复邮件、整理邮件、未读邮件、下载附件、邮件附件、email、inbox。NOT for: 批量营销邮件群发、邮件营销自动化、访问他人邮箱。"
 ---
 
 # 邮件 Skill（email-skill）
@@ -41,6 +41,7 @@ cp config.example.json ~/.config/email-skill/config.json
 | `send_mail.py` 发新邮件 | **主账号**（可用 `--account` 覆盖） |
 | `reply_mail.py` 回复 | **必须 `--account` 指定收到该邮件的账号**（回复从该账号发出；UID 跨账号会撞号，故不猜） |
 | `read_mail.py` 读全文 | 主账号，找不到时按提示加 `--account` |
+| `download_attachment.py` 下载附件 | **必须 `--account`**（同 UID 定位操作） |
 | `organize_mail.py` 整理 | **必须 `--account`**；不同账号分批整理 |
 
 - **QQ/163/126 邮箱**：`password` 填**授权码**（网页邮箱 设置 → 账户 → 开启 IMAP/SMTP 服务时生成），不是登录密码
@@ -51,7 +52,7 @@ cp config.example.json ~/.config/email-skill/config.json
 
 ## When to Use
 
-✅ 用户说：查一下我的邮件 / 有未读邮件吗 / 发封邮件给 xx / 回复这封邮件 / 把这封邮件移到归档 / 搜索发票相关邮件
+✅ 用户说：查一下我的邮件 / 有未读邮件吗 / 发封邮件给 xx / 回复这封邮件 / 把这封邮件移到归档 / 搜索发票相关邮件 / 下载这封邮件的附件
 
 ❌ 不适用：批量群发营销邮件、定时邮件自动化、没有凭据的邮箱
 
@@ -87,9 +88,15 @@ python3 scripts/send_mail.py --to a@b.com,b@c.com --cc d@e.com --subject "..." -
 python3 scripts/send_mail.py --to a@b.com --subject "..." --markdown-file report.md   # Markdown 渲染为 HTML 邮件
 python3 scripts/send_mail.py --to a@b.com --subject "..." --html-file report.html     # 直接发 HTML
 python3 scripts/send_mail.py --to a@b.com --subject "..." --body "..." --account qq   # 指定发件账号
+python3 scripts/send_mail.py --to a@b.com --subject "..." --body "见附件" --attach 发票.pdf --attach 行程单.pdf
 ```
 
 - **默认从主账号（配置中的 `primary`）发出**，`--account` 可指定其他账号
+- **支持附件**：`--attach` 可重复传多个；中文文件名自动 RFC 2231 编码；总大小上限 45MB（超限报错提示分批）
+- **HTML 本地图片自动 CID 内嵌**：`--html-file` / `--markdown-file` 正文里引用的本地图片
+  （绝对路径或相对 HTML 所在目录）会自动转成 `multipart/related` 内嵌，Gmail/QQ/163 均可见，
+  不依赖外链图床；`http(s)://`、`data:`、`cid:` 开头的 src 保持原样；不想内嵌加 `--no-inline-images`
+  （morning-report 的晨报/晚报图标就靠它，输出 JSON 的 `inlined` 字段是内嵌张数）
 - 默认纯文本。**正文含链接/排版时用 `--markdown-file`**：`[来源](url)` 渲染成超链接，长 URL 不会裸露刷屏
 - Markdown/HTML 模式自动带纯文本兜底（multipart/alternative），老客户端也能读
 - Markdown 支持：`#` 标题、`**粗体**`、`[链接](url)`、裸 URL 自动链接、`-`/`1.` 列表、`>` 引用、`---` 分隔线
@@ -118,6 +125,20 @@ python3 scripts/organize_mail.py --account work --action mkdir --target "归档/
 
 多账号配置下 `--account` 必填；要同时整理多个账号的邮件，按账号分批执行。
 
+### 6. 下载附件
+
+```bash
+python3 scripts/download_attachment.py --account work --uid 123 --list                # 先看有哪些附件（名称/大小）
+python3 scripts/download_attachment.py --account work --uid 123                        # 下载全部附件
+python3 scripts/download_attachment.py --account work --uid 123 --filename 发票         # 只下载名称含关键词的附件
+python3 scripts/download_attachment.py --account work --uid 123 --output-dir /tmp/x     # 指定保存目录
+```
+
+- 默认保存到 `~/Downloads/email-skill/`，重名自动加 `(1)(2)` 后缀，**不覆盖已有文件**
+- 多账号配置下 `--account` 必填（取 list 输出的 `account` 字段）
+- PEEK 模式只读，不改变邮件已读状态
+- 带文件名的内联图片也会列出，`--filename` 可精确挑选
+
 ## 典型工作流
 
 **查未读并汇报**：`list_mail.py --unread`（自动聚合所有账号）→ 逐封 `read_mail.py --account <账号> --uid <uid>`（按需）→ 用中文向用户汇总发件人/主题/要点（注明来自哪个账号）
@@ -126,9 +147,11 @@ python3 scripts/organize_mail.py --account work --action mkdir --target "归档/
 
 **整理收件箱**：`list_mail.py --limit 50` → 按用户规则分类 → 按账号分批 `organize_mail.py --account ... --uid ... --action move --target ...`
 
+**下载附件**：`list_mail.py --search 关键词` 找到邮件 → `download_attachment.py --account ... --uid ... --list` 查看附件 → 按需 `--filename` 或全量下载 → 把保存路径告知用户（文件可用 `pdf-ocr-md`/`docx` 等技能进一步处理）
+
 ## 铁律
 
-- **发送/回复前必须把收件人、主题、正文展示给用户确认**，得到明确同意后再执行（可用 `--body-file` 写长文）
+- **发送/回复前必须把收件人、主题、正文（含附件清单）展示给用户确认**，得到明确同意后再执行（可用 `--body-file` 写长文、`--attach` 带附件）
 - 禁止编造邮件内容或收件人地址；正文、地址必须来自用户或已读到的邮件
 - 删除、移动等不可逆操作前，向用户说明影响范围（几封、哪些主题）再执行
 - 脚本报错（登录失败/连接失败）时如实转述错误，不要假装操作成功
