@@ -148,9 +148,10 @@
 | 断点续传 | 说「继续 \<功能名\>」自动定位第一个未确认文档或未完成任务续做 |
 | 里程碑发版 | 多需求汇总成大版本：`releases/v1.3.0/` 下 MILESTONE 清单 + SQL/配置按版本聚合为 Flyway 风格升级件，含升级说明/升级操作/回滚。三层版本模型：spec 版本管文档演进、里程碑管发版交付、git tag 管代码快照 |
 | 存量项目 init | 「spec init」一次跑完：项目体检 + 机制骨架 + 项目画像（profile，供后续 Specify 直接引用），**只读不回填**——明确不把存量代码反推成 specs（无变更驱动的 spec 会立刻腐烂），specs 只为将改动的部分积累 |
+| Bug 管理 | 项目级唯一清单 `specs/_project/bugs.md`，`BUG-xx` 编号永久不复用、**状态必绑版本**（新建→已规划→已修复→已验证→已发布）；`Bug: BUG-xx` 写进 commit footer；小 bug 直接修、大 bug 升级为 `fix-xxx` spec 走完整四阶段；里程碑冻结时校验 P0/P1 必须达「已验证」，发版后批量翻「已发布」 |
 
-**触发词**：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、初始化spec、spec init、接入spec机制、建基线
-**不适用**：明显单点 bug 修复（直接修）、单文件小改动、纯技术问答。
+**触发词**：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单
+**不适用**：明显单点 bug 修复（直接修，但**完成后强制在 `bugs.md` 补登记一行**）、单文件小改动、纯技术问答。
 
 ## 目录结构
 
@@ -224,12 +225,13 @@ diagram-skill/
     └── package.json    # resvg 依赖声明（按需 npm install）
 
 bryanchen-spec/
-├── SKILL.md            # 主协议：四阶段 + 三重确认铁律 + .specrc.yml 路由 + 断点续传 + 里程碑/init 概要
+├── SKILL.md            # 主协议：四阶段 + 三重确认铁律 + .specrc.yml 路由 + 断点续传 + 里程碑/init/bug 概要
 ├── references/
 │   ├── templates.md    # requirements/plan/tasks/changelog/.specrc.yml + MILESTONE/RELEASE-NOTES/UPGRADE/artifacts 模板
 │   ├── standards-routing.md  # 规范源路由：声明表语法/探测顺序/裁决规则/完整示例
 │   ├── milestone.md    # 里程碑与发版：releases/vX.Y.Z/ 结构、Flyway 风格 SQL 规范、升级件汇总流程
-│   └── init.md         # 存量项目接入：I1~I7 七步（快照/体检/基线/画像/路由/骨架/报告）+ baseline-capture
+│   ├── init.md         # 存量项目接入：I1~I7 七步（快照/体检/基线/画像/路由/骨架/报告）+ baseline-capture
+│   └── bugs.md         # Bug 管理：BUG-xx 编号与字段、状态机（状态绑版本）、修复分级、里程碑联动
 └── standards/          # 内置全局规范（.specrc.yml 领域声明为 global 时的默认源）
     ├── README.md       # 规范索引 + 四层裁决规则
     ├── code-style-backend.md   # 后端代码底线（Java/Spring）
@@ -240,7 +242,7 @@ bryanchen-spec/
     └── versioning.md   # 版本头/SemVer 定制/编号永久制/双层 changelog
 ```
 
-> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档）、`specs/_project/profile.md`（项目画像）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件，首次建里程碑时才有）。
+> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档）、`specs/_project/profile.md`（项目画像）、`specs/_project/bugs.md`（bug 清单）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件，首次建里程碑时才有）。
 
 ## 安装
 

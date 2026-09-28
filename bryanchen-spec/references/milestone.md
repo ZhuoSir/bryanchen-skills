@@ -88,15 +88,20 @@ releases/v1.3.0/
 1. 建 `releases/vX.Y.Z/`，从模板初始化 MILESTONE.md（目标日期、负责人、空表格）
 2. 版本语义按 standards/versioning.md §二（MAJOR/MINOR/PATCH）确定 X.Y.Z 是否合理，不合理提醒用户
 
-### M1 挂接 —— 触发:「把 <spec> 纳入 vX.Y.Z」
+### M1 挂接 —— 触发:「把 <spec> 纳入 vX.Y.Z」/「把 BUG-xx 纳入 vX.Y.Z」
 1. MILESTONE.md 表格加一行（spec 目录、当前 spec 版本、状态、SQL/配置件数暂记 0）
 2. 单个 spec 的 Implement 收尾时主动问一句「纳入哪个里程碑？可跳过」——不强制、不阻塞
 3. 一个 spec 只属于一个里程碑；要移出去需用户明确说，两处 MILESTONE.md 都更新
+4. **bug 挂接**：「把 BUG-xx 纳入 vX.Y.Z」→ bugs.md 该行状态翻「已规划(vX.Y.Z)」+
+   MILESTONE.md 的 bug 表登记（细则 references/bugs.md §五）
+5. spec 有 completion.md 经批准的「延期→本里程碑」项时，登记进表格备注
 
 ### M2 冻结 —— 触发:「冻结 vX.Y.Z」
 前置检查（不满足则列出差距，不冻结）：
 - [ ] 表格内所有 spec 状态 = 已合并（Implement 完成且 merge 进 main）
-- [ ] 各 spec 的 tasks.md 全勾、验证证据齐
+- [ ] 各 spec 的 tasks.md 全勾、验证证据齐；**未勾项必须已出现在 completion.md 中
+      写明原因+处置（延期目标=本里程碑的除外，那属于规划缺陷应回 M1 修）**，且经用户批准
+- [ ] 本里程碑「已规划(vX.Y.Z)」的 **P0/P1 bug 全部达「已验证」**（bugs.md 核对）
 冻结后：MILESTONE.md 状态改「已冻结」；**新需求默认进下一里程碑**，要挤进本版本需用户明确同意
 （挤入 = 解冻重走 M2，changelog 记录）。
 
@@ -105,25 +110,27 @@ releases/v1.3.0/
    `git log --grep "Spec: specs/<目录>"` 扫 commit + 读 plan.md 数据模型/配置节，交叉核对防漏
 2. **整理 SQL**：合并同表变更 → 按依赖重排 → 分配序号 → 写文件头注释块 → 配 rollback
 3. **整理配置**：汇总进 config/changes.md
-4. **生成 RELEASE-NOTES.md**：升级项从各 spec 的 R 条款聚合（对外口径，去掉内部细节）
+4. **生成 RELEASE-NOTES.md**：升级项从各 spec 的 R 条款聚合（对外口径，去掉内部细节）；
+   **「## 修复」节从 bugs.md 过滤「修复版本=本版本」生成**，不靠回忆
 5. **编写 UPGRADE.md**：部署顺序（服务依赖序）、SQL 执行顺序（=序号序）、配置变更步骤、
    每步验证方法、整体回滚步骤（逆序）
 6. **更新 MILESTONE.md** 汇总进度勾选与件数
 
 ### M4 发布 —— 触发:「发版 vX.Y.Z」
 1. `checklist.md` 人工逐项勾选（**演练项必须真做**：在演练/预发环境按 UPGRADE.md 走一遍，
-   SQL 全执行、配置全应用、核心功能验证；演练发现问题回 M3 修）
+   SQL 全执行、配置全应用、核心功能验证；演练发现问题登记 bug 并回 M3 修）
 2. git 操作按 standards/git-workflow.md：release 分支（B 档）或 main 直接打 tag
 3. tag：`git tag -a vX.Y.Z -m "<RELEASE-NOTES 摘要 + spec 清单>"`
 4. 项目根 CHANGELOG.md 追加本版本条目（**来源 = MILESTONE.md 的升级项表**，不再直接从 git log 拼）
-5. releases/vX.Y.Z/ 全部产物随 tag 进 main（历史版本永远可查）
+5. **bugs.md 状态批量翻转**：本版本所有「已验证」→「已发布(vX.Y.Z)+日期」
+6. releases/vX.Y.Z/ 全部产物随 tag 进 main（历史版本永远可查）
 
 ## 六、触发词速查
 
 | 你说 | 动作 |
 |---|---|
 | 新建里程碑 v1.4.0 | M0 |
-| 把 xxx 纳入 v1.4.0 | M1 |
+| 把 xxx 纳入 v1.4.0 | M1（bug 同：把 BUG-02 纳入 v1.4.0） |
 | xxx 从 v1.4.0 移出 | M1 逆操作（两边表都更新） |
 | 冻结 v1.4.0 | M2（前置检查不过会列差距） |
 | 汇总 v1.4.0 / 整理升级件 | M3 |

@@ -49,10 +49,11 @@ SQL/UPGRADE 更新）提交在 release 分支上，随 tag 一起合回 main。*
    方案没定不切分支——分支存在即意味着「要做什么已冻结」。
 2. **Implement 期间**：一个任务一个 commit（见 §四）。
 3. **合并条件**（全部满足才可发起合并）：
-   - [ ] tasks.md 全部勾选
+   - [ ] tasks.md 全部勾选；**或**未勾项全部在 completion.md 中有原因分类+处置去向且经用户批准
    - [ ] 每个任务有验证证据（测试输出/命令结果，记录在任务下或 commit body）
    - [ ] 测试全绿；项目有规范扫描（如 check_standards.py）则红线清零
    - [ ] spec 文档若中途改动过，已重新确认且版本头是「已确认」
+   - [ ] completion.md 已生成、本过程发现的 bug 已登记进 bugs.md
 4. **合并方式**：默认 `git merge --no-ff feature/xxx`
    - 理由：保留 feature 边界与任务级 commit，与「一个 spec 一个工作单元」对齐，
      footer 溯源不被压扁。
@@ -71,11 +72,14 @@ SQL/UPGRADE 更新）提交在 release 分支上，随 tag 一起合回 main。*
 
 Spec: specs/20260926_add-member-discount v1.0.0
 Task: T-03
+Bug: BUG-02
 ```
 
 - **标题**：动词开头、现在时、不加句号；一句话说清做了什么。
-- **body 与 footer 之间空一行**；footer 的 `Spec:`/`Task:` 各占一行（git trailer 可解析）。
-- 无 spec 的改动（fix/hotfix/chore）：省略 Spec/Task footer，body 里写清动机。
+- **body 与 footer 之间空一行**；footer 的 `Spec:`/`Task:`/`Bug:` 各占一行（git trailer 可解析）。
+- **修 bug 的 commit 必带 `Bug: BUG-xx`**（小 bug 直修无 Spec 时仅这一行，也合法且必要——它是
+  bugs.md「已修复」状态的证据来源）。
+- 无 spec 无 bug 的改动（chore/docs 等）：省略这些 footer，body 里写清动机。
 
 ### type 枚举
 
