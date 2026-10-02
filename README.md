@@ -58,6 +58,21 @@
 
 **触发词**：查火车票、查余票、高铁票、还有票吗、车次时刻、经停站、12306
 
+### 🧹 docker-cleanup — Docker 镜像安全清理
+
+先盘点、再保护、后删除、必复验。默认 **dry-run**，用户确认后才 `--apply`；全程不用 `docker system prune -a`、不用 `docker image rm -f`——让 Docker 自己当安全网（被容器引用的镜像会删失败）。
+
+| 能力 | 脚本 | 说明 |
+|---|---|---|
+| 只读盘点 | `docker_inventory.py` | 镜像/容器/卷/缓存账目 + 引用关系六类分类 + macOS Docker.raw 磁盘账目（`--json` 可机读） |
+| 执行清理 | `docker_cleanup.py` | 删悬空镜像/孤儿镜像/构建缓存；默认只打印命令，`--apply` 才真删，删完自动复验保护区与运行中容器 |
+
+**保护判定（优先级从高到低）**：运行中容器引用 → 已停止容器引用（compose 栈 down 了也算在用）→ compose/Dockerfile 引用（含 `${VAR:-default}` 默认值）→ 人工白名单 → 风险提示（镜像站别名、同仓库旧版本/回滚点）。多项目机器必须用 `-s/--scan-dir` 扫全部项目，机器级白名单放 `~/.config/docker-cleanup/protect.txt`。
+
+**特点**：零依赖（Python 3 标准库）；`docker` 不在 PATH 时自动探测 `/usr/local/bin`、Homebrew、Docker.app 内置路径；只动镜像与构建缓存，**不删容器与数据卷**（不可逆，只提示可回收量）；附 macOS「Docker.raw 幽灵空间」诊断与物理回收指引（删镜像其实不会让 macOS 立刻多出空间）。
+
+**触发词**：docker镜像清理、清理docker、删除无用镜像、镜像太多、docker占空间、磁盘满了、悬空镜像、dangling image、释放磁盘空间、Docker.raw
+
 ### 🔍 web-search — 自带代码的联网搜索
 
 与纯提示词型搜索 skill 不同：**自带完整搜索脚本**，引擎链与降级逻辑完整复刻 DSH free-search 插件，不依赖宿主环境是否提供搜索工具。
@@ -187,6 +202,15 @@ email-skill/
     ├── price.py        # 票价查询（车次+区间 → 各席别价格）
     └── schedule.py     # 经停站时刻表
 
+docker-cleanup/
+├── SKILL.md            # 四步流程 + 十条铁律 + 六类语义 + 场景配方 + 实战教训
+├── references/
+│   ├── safety-rules.md # 判定矩阵/禁用命令/典型报错/数据边界/确认话术/检查清单
+│   └── macos-reclaim.md# Docker.raw「幽灵空间」原理与物理回收三条路径
+└── scripts/
+    ├── docker_inventory.py  # 只读盘点（引用关系分类 + 磁盘账目 + JSON 输出）
+    └── docker_cleanup.py    # 按盘点结果删除（默认 dry-run，删后复验）
+
 web-search/
 ├── SKILL.md            # skill 说明与输出格式
 └── scripts/
@@ -259,6 +283,7 @@ cp -R rss-skill ~/.agents/skills/
 cp -R web-search ~/.agents/skills/        # 可选：宿主无搜索工具的环境用
 cp -R pdf-recognition ~/.agents/skills/   # 需 OCR 时先 pip install -r pdf-recognition/scripts/requirements.txt
 cp -R diagram-skill ~/.agents/skills/
+cp -R docker-cleanup ~/.agents/skills/     # 清理镜像前先看候选清单，确认后才 --apply
 cp -R bryanchen-spec ~/.agents/skills/      # 或 ~/.dsh/skills/；项目首次触发会探测并生成 .specrc.yml 规范路由
 ```
 
