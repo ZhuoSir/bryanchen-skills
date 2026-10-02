@@ -43,10 +43,15 @@ description: "四阶段规格开发流程编排器：Specify（EARS 需求定义
    - **无在途版本**（上一版已发版）→ 问：
      「vX.Y.Z 已于 <日期> 发版，本需求起下一个版本，建议 vA.B.C（<理由>）。确认或给号。」
    - 用户选「挂当前」→ 当前版 MILESTONE.md「纳入需求」表加一行（spec 目录/状态=立项中）
-   - 用户选「新开」或给号 → 自动建 `releases/v{号}/` + 写 MILESTONE.md
-     （状态头「进行中」+ 纳入需求表 + 纳入缺陷表两个骨架）并挂上 → 台账翻该版「在途」。
-     **未获用户明确选择不建任何新目录**（铁律）。
-   - 定号规则 v a.b.c（a 大版/b 需求迭代/c 修 bug，升位低位归零）见 standards/versioning.md §二。
+   - 用户选「新开」或给号 → **双建**：`releases/v{号}/` 台账目录（MILESTONE.md 状态头「进行中」
+     + 需求表 + 缺陷表）**并建裸号版本分支 `{号}`** → 挂上 → 台账翻「在途」。
+     **未获用户明确选择不建目录不建分支**（铁律）。
+   - **版本分支基点（防丢代码）**：上一版已合 main → 从 main 切；上一版**悬空**（已 tag 未合
+     main）→ 从该悬空分支 tip 链式切、台账记「基于」；细则 git-workflow §一。
+   - **在途唯一 + 悬空拦截**：台账至多一个在途版；存在悬空账或未收口在途 spec 时，问句第一句
+     先报账，处置（合 main/迁移挂接/留场/放弃）完才建新版——防静默跳版丢内容。
+   - 定号规则 v a.b.c（a 大版/b 需求迭代/c 修 bug，升位低位归零；**c 版=新号=新分支**）
+     见 standards/versioning.md §二。
 
 4. 创建目录与四个文件（模板见 `references/templates.md`）：
 
@@ -128,7 +133,8 @@ specs/{YYYYMMDD}_{功能名}/
 - **自检**：每条 R 都有 T 覆盖吗？有 T 找不到对应 R 吗（超范围）？
 
 **门控**：确认③ → 落盘 → **三重确认自检**（读三份版本头，全部已确认+确认人非空）→
-通过后执行 `git checkout -b feature/<功能名>`（细则见 standards/git-workflow.md）→ 进入 Phase 4。
+通过后执行 `git checkout -b feature/<功能名> <在途版本分支>`（未接入期临时以 main 为基点；
+细则 git-workflow §三）→ 进入 Phase 4。完工后 merge --no-ff 回**版本分支**（不是 main）。
 
 ## 5. Phase 4 — Implement
 
@@ -225,11 +231,13 @@ M3 汇总   「汇总 vX.Y.Z」 → 收集各 spec 的 artifacts.md（git log �
           → SQL 合并重排编号（Flyway 风格 V<版本>_<序号>__<描述>.sql + rollback 配对）
           → config/changes.md → RELEASE-NOTES.md（升级项从 R 条款聚合）
           → UPGRADE.md（部署顺序/SQL 顺序/配置/验证/回滚）
-M4 发布   「发版 vX.Y.Z」 → checklist 人工逐项勾选（演练必须真做）→ git tag
-          → 项目根 CHANGELOG.md 从 MILESTONE.md 生成 → releases/ 产物随 tag 进 main
+M4 发布   「发版 vX.Y.Z」 → checklist 人工逐项勾选（演练必须真做）→ 版本分支上 tag
+          → CHANGELOG.md 从 MILESTONE.md 生成 → 台账翻「悬空」
+          → ★必问「合并到 main 吗？」确认才 merge --no-ff（链序先老后新）→ 问「push？」等口令
 ```
 
-铁律延伸：**M3 未汇总完不得进 M4；checklist 演练项未真做不得打 tag。**
+铁律延伸：**M3 未汇总完不得进 M4；checklist 演练项未真做不得打 tag；
+agent 永不自主合 main、永不自主 push（都只问不做）；悬空期禁止从 main 拉包冒充新版内容。**
 升级件（SQL/配置）只在 M3 按版本整理，禁止单需求完成时私自往 releases/ 塞散件。
 
 ## 10. init —— 存量项目接入（概要，细则必读 references/init.md）

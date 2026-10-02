@@ -4,51 +4,56 @@
 
 ---
 
-## 一、分支模型（两档）
+## 一、分支模型：一版一分支（version-branch model）
 
-### A 档 · 日常默认（单人 / 小团队）
-
-```
-main ──────●─────────●─────────●──────   永远可发布；只进 merge；禁 force-push
-            \       / \       /
-feature/*    ●─────●   \     /           一个 spec 一个分支
-                        \   /
-fix/*                    ●─               非紧急小修（无 spec 的小改动）
-```
-
-### B 档 · 有发布周期 / 多版本并行时启用（在 A 档上加两种）
+**每个版本一条分支，分支名 = 裸版本号（`1.4.0`，无 v 无前缀）；tag 带 v（`v1.4.0`），
+两者差一个字母永不同名。** 不设 develop；原「A/B 档」二分已废除，统一此模型。
 
 ```
-release/v1.3.0   准备发布时从 main 切出；只收 bugfix 不收新功能；
-                 发布后 tag v1.3.0 → 合回 main → 删除分支
-hotfix/*         生产紧急修复，从 main（或线上 tag）切出；
-                 修完合回 main（若有进行中的 release 分支，同时合入它）；打 patch tag
+main ●──────────────────────●─────────────────●      只收用户确认合并的已发布版
+      ╲                    ╱ (M4 问句确认后 merge --no-ff)
+       1.4.0 ●──●───●─────●──                     版本分支：该版全生命的开发线
+             ╲      ╲    ↑tag v1.4.0
+   feature/add-x      fix/zz                      feature/fix 从这里切、合回这里
+                       ╲
+                        （该版发版未合 main 期间若起 v1.4.1：
+                          新分支 1.4.1 从 1.4.0 的 tip 链式切，绝不从落后的 main 切）
 ```
 
-> 不设 develop 分支（trunk-based + release 分支），避免完整 git-flow 的重仪式。
+| 对象 | 命名 | 粒度 | 生命周期 |
+|---|---|---|---|
+| 版本分支 | `1.4.0`（裸 x.y.z） | **一版一号一分支**（c 版也是新号新分支） | 立项创建 → 收 feature/fix 合并 → tag 发布 → 问合 main → **默认永久保留**（承载该版完整开发史），删除永远是用户动作 |
+| 台账目录 | `releases/v1.4.0/` | 一版一目录（MILESTONE/SQL/UPGRADE） | 永久进 git，审计与重放 |
+| 发布锚点 | tag `v1.4.0` | 一版一 tag，打在版本分支上 | 永久 |
 
-**里程碑产物 `releases/vX.Y.Z/` 的提交规则**：M0~M3 期间（立项/挂接/汇总）在 main 上正常提交
-（`docs(release): vX.Y.Z <进展>`）；M2 冻结后若走 release 分支，发版期间的修订（bugfix 引起的
-SQL/UPGRADE 更新）提交在 release 分支上，随 tag 一起合回 main。**releases/ 目录永远进 git**——
-历史版本的升级件必须永远可查可重放。细则见 references/milestone.md。
+**新分支基点规则（防丢代码，最高优先）**：
 
+```
+起 v1.5.0（b 升位，新功能）→ 若上一版已合 main → 从 main 最新切
+起 v1.4.1（c 升位，修复批）→ 若 1.4.0 仍悬空（已 tag 未合 main）→ 从 1.4.0 分支 tip 链式切
+若上一在途版未发版就要跳版 → 先按 SKILL.md §1.3 处置在途残留，不静默开新线
+台账悬空表记「基于」关系；合并 main 按链序（先 1.4.0 再 1.4.1）
 ## 二、分支命名
 
 | 分支 | 规则 | 示例 |
 |---|---|---|
+| **版本分支** | 裸 `x.y.z`（无 v 无前缀，与 tag `v1.4.0` 天然区分） | `1.4.0`、`1.4.1`、`1.5.0` |
 | feature | `feature/<spec目录名去掉日期>`，与 spec 目录一一对应 | `feature/add-member-discount` ↔ `specs/20260926_add-member-discount/` |
 | fix | `fix/<简短描述>` | `fix/login-npe` |
-| hotfix | `hotfix/<简短描述>` | `hotfix/order-dup-pay` |
-| release | `release/v<X.Y.Z>` | `release/v1.3.0` |
+| hotfix | `hotfix/<简短描述>`，从最近线上 tag 切 | `hotfix/order-dup-pay` |
 
-规则：全小写、连字符分词、≤5 个词、见名知意。
-
+规则：全小写、连字符分词、≤5 个词（版本分支除外）、见名知意。
 ## 三、分支生命周期（与四阶段绑定）
 
-1. **开分支时机**：Tasks 确认（三重确认自检通过）之后，从最新 main 切出。
-   方案没定不切分支——分支存在即意味着「要做什么已冻结」。
-2. **Implement 期间**：一个任务一个 commit（见 §四）。
-3. **合并条件**（全部满足才可发起合并）：
+1. **版本分支创建**：spec 启动版本问句中用户选「新开」→ 从台账基点规则所示基线切出，
+   同时建 `releases/vX.Y.Z/` 台账目录（SKILL.md §1.3）。未获用户选择不建（铁律）。
+2. **spec 施工分支**：Tasks 三重确认后，**从当前在途版本分支**切
+   `git checkout -b feature/<功能名> <版本分支>`；完工 `merge --no-ff` **回版本分支**。
+   无在途版本分支时（未接入期/hotfix 场景）临时以 main 为基点，并尽快归位。
+3. **main 前进同步规则（防漂移）**：任何一次合入 main（release merge / hotfix）之后，
+   下一个启动问句/简报固定带一行「main 已更新，是否同步进在途版本分支（git merge main）」——
+   小合宜勤不宜攒。
+4. **合并条件**（全部满足才可发起合并进版本分支）：
    - [ ] tasks.md 全部勾选；**或**未勾项全部在 completion.md 中有原因分类+处置去向且经用户批准
    - [ ] 每个任务有验证证据（测试输出/命令结果，记录在任务下或 commit body）
    - [ ] 测试全绿；项目有规范扫描（如 check_standards.py）则红线清零
@@ -56,13 +61,8 @@ SQL/UPGRADE 更新）提交在 release 分支上，随 tag 一起合回 main。*
    - [ ] completion.md 已生成、本过程发现的 bug 已登记进 bugs.md
    - [ ] **共享面变更**：commit body 已同时贴「改好了」+「没改坏」双面断言实测输出
      （身份矩阵见 plan；只有一面 = 未回归，不得合并）
-4. **合并方式**：默认 `git merge --no-ff feature/xxx`
-   - 理由：保留 feature 边界与任务级 commit，与「一个 spec 一个工作单元」对齐，
-     footer 溯源不被压扁。
-   - 可选 squash（想要 main 历史极简时），代价：丢任务级追溯，需在 squash message
-     里手工带上任务清单。
-5. **合并后**：删除 feature 分支（`git branch -d` + 远端 `--delete`）。
-
+5. **spec 分支合并后**：删除 feature 分支（`git branch -d` + 远端 `--delete`）。
+   **版本分支不删**——发版、合 main 之后都保留（该版开发史与潜在 patch 语境；且若悬空未合，它就是唯一内容载体）。
 ## 四、Commit 规范（Conventional Commits + spec 溯源）
 
 ### 格式
@@ -121,7 +121,7 @@ fix(order): 修复支付回调重复入账
 
 | Tag | 时机 | 形式 |
 |---|---|---|
-| `vX.Y.Z` | 产品发版（main 上） | annotated：`git tag -a v1.3.0 -m "<发版说明+spec清单>"` |
+| `vX.Y.Z` | 产品发版（打在**版本分支**上） | annotated：`git tag -a v1.3.0 -m "<发版说明+spec清单>"`；tag 后按 M4 问句决定是否合 main |
 | `spec/<功能名>-vN.N.N` | 可选，需审计锚点时 | lightweight 即可 |
 
 产品版本语义见 standards/versioning.md §二。
@@ -129,30 +129,37 @@ fix(order): 修复支付回调重复入账
 ## 六、红线（无豁免）
 
 1. **main 禁 force-push、禁直推**（有远端保护就开保护；没有就靠自觉+review）
-2. **不得提交密钥/凭据**（含测试环境的）；进 `.gitignore` 或配置中心
-3. **不得改写已推送的历史**（rebase 只用于未推送的本地分支）
-4. **一个 commit 不混两件事**（重构+新功能拆开；spec 文档确认独立成 commit）
-5. **合并前不 squash 别人的任务级 commit**（除非全员同意改用 squash 策略）
-
+2. **agent 永不自主合 main**：发版后合 main 只在 M4 问句获用户明确确认后执行（`merge --no-ff`，悬空链按序合）
+3. **agent 永不自主 push**：所有推送远端的动作等用户口令；发版/合并完成后只**问**「要 push 吗」
+4. **部署/发版物基线 = tag 或已合并的 main**：版本悬空（已 tag 未合 main）期间，禁止从 main 拉包
+   冒充该版内容（main 是旧基线）；UPGRADE.md 必须写明本包对应 tag
+5. **不得提交密钥/凭据**（含测试环境的）；进 `.gitignore` 或配置中心
+6. **不得改写已推送的历史**（rebase 只用于未推送的本地分支）
+7. **一个 commit 不混两件事**（重构+新功能拆开；spec 文档确认独立成 commit）
+8. **合并前不 squash 别人的任务级 commit**（除非全员同意改用 squash 策略）
+9. **版本分支默认永久保留**：清理/删除永远是用户明示动作
 ## 七、完整旅程示例
 
 ```bash
-# 三重确认后
+# ── 启动版本问句，用户答「新开 v1.5.0」后：──
 git checkout main && git pull
-git checkout -b feature/add-member-discount
+git checkout -b 1.5.0                       # 版本分支（基点按台账规则：main 或链上未合版）
+# releases/v1.5.0/ 台账目录与 MILESTONE.md 同步创建（spec 流程动作）
 
-# 每个任务完成
-git add <相关文件>
-git commit    # feat(discount): ... + Spec/Task footer
+# ── 某 spec 三重确认后：──
+git checkout -b feature/add-member-discount 1.5.0   # 施工分支从版本分支切
+#   每任务一 commit，footer 带 Spec:/Task:
+git checkout 1.5.0 && git merge --no-ff feature/add-member-discount
+git branch -d feature/add-member-discount           # 施工分支合并即删；版本分支不删
 
-# 全部完成、证据齐全
-git checkout main && git pull
-git merge --no-ff feature/add-member-discount
-git branch -d feature/add-member-discount
+# ── M4 发版：──
+git checkout 1.5.0
+git tag -a v1.5.0 -m "<RELEASE-NOTES 摘要 + spec 清单>"
+# CHANGELOG.md / 台账翻「已发版·悬空」 → 问用户：
+#   「v1.5.0 已发版，合并到 main 吗？」
+git checkout main && git merge --no-ff 1.5.0        # ← 仅当用户确认
+# 台账销悬空账；问「push？」等口令
 
-# 发版（B 档）
-git checkout -b release/v1.3.0        # 只收 bugfix
-git tag -a v1.3.0 -m "..."            # 发布后
-git checkout main && git merge release/v1.3.0 && git branch -d release/v1.3.0
-# 同时汇总项目根 CHANGELOG.md（命令见 versioning.md §三）
+# ── 悬空期间起修复版 v1.5.1：──
+git checkout -b 1.5.1 1.5.0              # 链式从 1.5.0 tip 切，绝不从旧 main 切
 ```

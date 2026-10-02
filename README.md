@@ -142,14 +142,15 @@
 | 三重人工确认门 | requirements / plan / tasks 三份文档逐一展示、逐一等你「确认」并落盘确认人+日期，全确认才允许开分支写代码 |
 | 版本追溯 | 产物带语义化版本头（v1.0.0 已确认…）；`R-xx`（需求）/`T-xx`（任务）编号永久不复用；追溯链 R→T→commit footer→发版 CHANGELOG |
 | 双层 changelog | spec 级 `changelog.md`（需求演进到编号级）+ 项目根 `CHANGELOG.md`（发版汇总，`git log --grep "Spec:"` 零成本聚合） |
-| git 规范 | feature/fix/release/hotfix 两档分支模型、一任务一 commit、Conventional Commits + `Spec:`/`Task:` footer、`--no-ff` 合并 |
+| git 规范 | **一版一分支**：版本分支用裸号 `1.4.0`（与 tag `v1.4.0` 差一字母天然区分），feature/fix 从版本分支切、合回版本分支；main 只收用户确认合并的已发布版；一任务一 commit、Conventional Commits + `Spec:`/`Task:`/`Bug:` footer；**版本分支默认永久保留**，**agent 永不自主合 main、永不自主 push**（只问不做） |
 | 规范源路由 | 项目根 `.specrc.yml` 按领域声明规范来源（`global` 内置底线 / `file:` 项目自己的规范 / `skill:` 其他规范 skill / `none`），一次探测落盘、领域级整文件替换；流程铁律不受任何规范源豁免 |
 | 内置全局规范 | `standards/` 七份：代码（前端 Vue / 后端 Java 分册）、接口、数据库、git 工作流、版本规则 |
 | 断点续传 | 说「继续 \<功能名\>」自动定位第一个未确认文档或未完成任务续做 |
 | 里程碑发版 | 多需求汇总成大版本：`releases/v1.3.0/` 下 MILESTONE 清单 + SQL/配置按版本聚合为 Flyway 风格升级件，含升级说明/升级操作/回滚。三层版本模型：spec 版本管文档演进、里程碑管发版交付、git tag 管代码快照 |
-| 版本台账与归属 | 产品版本规则 `v a.b.c`（a 破坏性 / b 需求迭代 / c 纯修复，升位低位归零，初始 v1.0.0）+ 项目级台账 `specs/_project/version.md`；**每个 spec 启动必问一次挂哪个版本**（agent 不得代选、不得静默挂版），选「新开」才建 `releases/v{号}/`，未获明确选择不建任何新目录 |
+| 版本台账与归属 | 产品版本规则 `v a.b.c`（a 破坏性 / b 需求迭代 / c 纯修复，升位低位归零，初始 v1.0.0）+ 项目级台账 `specs/_project/version.md`；**每个 spec 启动必问一次挂哪个版本**（agent 不得代选、不得静默挂版），选「新开」则**双建**（`releases/v{号}/` 目录 + 裸号版本分支）；**在途唯一**，有未合 main 的「悬空」版时先报账处置，未获明确选择不建目录不建分支 |
 | 存量项目 init | 「spec init」一次跑完：项目体检 + 机制骨架 + 项目画像（profile，供后续 Specify 直接引用），**只读不回填**——明确不把存量代码反推成 specs（无变更驱动的 spec 会立刻腐烂），specs 只为将改动的部分积累 |
-| Bug 管理 | 项目级唯一清单 `specs/_project/bugs.md`，`BUG-xx` 编号永久不复用、**状态必绑版本**（新建→已规划→已修复→已验证→已发布）；`Bug: BUG-xx` 写进 commit footer；小 bug 直接修、大 bug 升级为 `fix-xxx` spec 走完整四阶段；里程碑冻结时校验 P0/P1 必须达「已验证」，发版后批量翻「已发布」 |
+| Bug 管理 | 项目级唯一清单 `specs/_project/bugs.md`，`BUG-xx` 编号永久不复用、**状态必绑版本**（新建→已规划→已修复→已验证→已发布）；`Bug: BUG-xx` 写进 commit footer；小 bug 直接修、大 bug 升级为 `fix-xxx` spec 走完整四阶段；冻结时校验 P0/P1 必须达「已验证」 |
+| 发版对账 | M4 强制 **Bug 台账三步对账**：`git log <上一tag>..X.Y.Z --grep "Bug:"` **收网**（治「修了没记」）→ 本版「已验证/已修复」**翻账**为「已发布」（治「记了没翻」）→ `git merge-base --is-ancestor <修复commit> X.Y.Z` **反核**（治「翻了没随版」），footer 是账证勾稽的唯一硬锚 |
 | 共享面回归纪律 | 改 nginx/网关/路由/DB 共享列/依赖版本/全局配置等共享面时，自检「**还有谁依赖这个路径/列/配置？**」→ 在 plan 建**身份矩阵**（对象 × 身份(方法×调用方×端点) × 变更后预期行为），每个既有身份都要有断言；**commit body 必须同时贴「改好了」+「没改坏」双面实测输出**，只有一面不得提交；M4 要求每个共享面变更在回归载体中有配对断言，无配对不发版 |
 
 **触发词**：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单
@@ -244,7 +245,7 @@ bryanchen-spec/
     └── versioning.md   # spec 版本头/产品版本 v a.b.c 与版本台账/编号永久制/双层 changelog
 ```
 
-> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`）、`specs/_project/profile.md`（项目画像）、`specs/_project/version.md`（版本台账）、`specs/_project/bugs.md`（bug 清单）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件，建里程碑时才有）。
+> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`）、`specs/_project/profile.md`（项目画像）、`specs/_project/version.md`（版本台账）、`specs/_project/bugs.md`（bug 清单）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件目录）；git 侧还会长出**裸号版本分支** `X.Y.Z`（与 tag `vX.Y.Z` 配对）、`feature/<功能名>`、`fix/...`、`hotfix/...`。
 
 ## 安装
 

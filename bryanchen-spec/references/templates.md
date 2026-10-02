@@ -289,7 +289,9 @@ project_files:
 - [ ] 演练发现的问题已修复并更新 UPGRADE.md
 
 ## 发布
-- [ ] 全部 spec 已合并 main，CI 绿
+- [ ] **Bug 台账三步对账完成**（bugs.md §五）：本版 `Bug:` footer 与台账互核无差、
+      状态全部翻「已发布(vX.Y.Z)」、merge-base 反核通过、「未随本版清单」已报并确认去向
+- [ ] 全部 spec 已合并版本分支，CI 绿（发版合 main 按 M4 问句另行确认）
 - [ ] git tag -a vX.Y.Z 已打（message 含 spec 清单）
 - [ ] 项目根 CHANGELOG.md 已追加本版本条目
 - [ ] releases/vX.Y.Z/ 已随 tag 进 main
@@ -338,10 +340,16 @@ CI: <工作流文件与触发条件 或「无」>
 ```markdown
 # 版本台账
 > 规则 v a.b.c：a 大版(破坏性) | b 需求迭代 | c 修bug | 升位时低位归零 | 初始 v1.0.0
+> 状态机: 在途 →(tag)→ 悬空(已发未合main) →(用户确认合main)→ 已发版 | 在途至多一个
 
-当前版本: v<X.Y.Z> | 状态: 在途|已发版 | 已挂: <n> 需求 / <m> 缺陷
-最近已发: <vA.B.C>（<YYYY-MM-DD>，tag ✓）
+当前版本: v<X.Y.Z> | 状态: 在途 | **分支: `<X.Y.Z>`（裸号）** | 已挂: <n> 需求 / <m> 缺陷
+最近已发: <vA.B.C>（<YYYY-MM-DD>，tag ✓，已合 main ✓）
 读数来源: <init ①git tag / ②构建物字段(去SNAPSHOT) / ③新工程默认> | init 日期: <YYYY-MM-DD>
+
+## ⚠ 悬空账（已 tag 未合 main——下次起新版前必须处置）
+| 分支 | 版本 | tag 日 | 基于 | 状态 |
+|---|---|---|---|---|
+<!-- 无悬空时表内写「无」；「基于」= 链式继承（悬空之上起新版）；合 main 按链序先老后新 -->
 ```
 
 ---

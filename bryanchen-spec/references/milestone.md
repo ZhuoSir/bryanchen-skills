@@ -86,11 +86,13 @@ releases/v1.3.0/
 
 ### M0 立项 —— 双触发：「新建里程碑 vX.Y.Z」口令，**或** spec 启动版本问询中
 用户选择「新开」（SKILL.md §1 步骤3）
-1. 建 `releases/vX.Y.Z/`，从模板初始化 MILESTONE.md（状态头「进行中」+ 纳入需求表 + 纳入缺陷表）
-2. 定号按 standards/versioning.md §二 决策表（a 大版/b 需求迭代/c 修 bug，升位低位归零）
-   给建议；与台账当前版不连续（跳号）需用户明确，异常时提醒
-3. 更新版本台账 version.md：该版「在途」
-4. 铁律：两条触发路径都必须有用户明确选择；未获选择绝不建目录（含"顺手先建"）
+1. **双建**：`releases/vX.Y.Z/` 台账目录（MILESTONE.md 状态头「进行中」+ 纳入需求表 + 纳入缺陷表）
+   + **裸号版本分支 `X.Y.Z`**（基点：上一版已合 main → main；上一版悬空 → 悬空分支 tip 链式切，
+   台账记「基于」；细则 git-workflow §一）
+2. 定号按 standards/versioning.md §二 决策表给建议；跳号需用户明确
+3. 前置处置：台账有悬空账或未收口在途版 → 先走 SKILL.md §1.3 拦截清单，处置完才建
+4. 更新版本台账 version.md：该版「在途」+ 分支字段
+5. 铁律：两条触发路径都必须有用户明确选择；未获选择**目录与分支都不建**（含"顺手先建"）
 
 ### M1 挂接 —— 触发:「把 <spec> 纳入 vX.Y.Z」/「把 BUG-xx 纳入 vX.Y.Z」
 1. MILESTONE.md 表格加一行（spec 目录、当前 spec 版本、状态、SQL/配置件数暂记 0）
@@ -102,10 +104,12 @@ releases/v1.3.0/
 
 ### M2 冻结 —— 触发:「冻结 vX.Y.Z」
 前置检查（不满足则列出差距，不冻结）：
-- [ ] 表格内所有 spec 状态 = 已合并（Implement 完成且 merge 进 main）
+- [ ] 表格内所有 spec 状态 = 已合并（Implement 完成且 merge 进**版本分支**）
 - [ ] 各 spec 的 tasks.md 全勾、验证证据齐；**未勾项必须已出现在 completion.md 中
       写明原因+处置（延期目标=本里程碑的除外，那属于规划缺陷应回 M1 修）**，且经用户批准
 - [ ] 本里程碑「已规划(vX.Y.Z)」的 **P0/P1 bug 全部达「已验证」**（bugs.md 核对）
+- [ ] **账证初对**：本版分支已合并提交中的 `Bug:` footer 全部能在 bugs.md 找到对应行
+      且状态 ≥ 已修复——把「修了没记」消灭在冻结时，不留到 M4 收网才暴雷
 冻结后：MILESTONE.md 状态改「已冻结」；**新需求默认进下一里程碑**，要挤进本版本需用户明确同意
 （挤入 = 解冻重走 M2，changelog 记录）。
 
@@ -126,11 +130,19 @@ releases/v1.3.0/
 2. **变更↔断言配对核验**：本版每个触碰共享面的变更，在项目回归载体（verify 脚本/
    测试套件）中必须有对应新或改断言并列入 checklist；**无配对 = M4 不过**
    （防「修复引入新规则、旧行为悄悄死掉」——断言要随变更同步长）
-3. git 操作按 standards/git-workflow.md：release 分支（B 档）或 main 直接打 tag
-4. tag：`git tag -a vX.Y.Z -m "<RELEASE-NOTES 摘要 + spec 清单>"`
-5. 项目根 CHANGELOG.md 追加本版本条目（**来源 = MILESTONE.md 的升级项表**，不再直接从 git log 拼）
-6. **bugs.md 状态批量翻转**：本版本所有「已验证」→「已发布(vX.Y.Z)+日期」
-7. releases/vX.Y.Z/ 全部产物随 tag 进 main（历史版本永远可查）
+3. **tag 打在版本分支上**：`git checkout X.Y.Z && git tag -a vX.Y.Z -m "<RELEASE-NOTES 摘要 + spec 清单>"`
+   RELEASE-NOTES/UPGRADE 注明「**部署基线 = tag vX.Y.Z**」（悬空期 main 是旧基线，禁止从 main 拉包冒充新版）
+4. 项目根 CHANGELOG.md 追加本版本条目（**来源 = MILESTONE.md 升级项表**，不再直接从 git log 拼）
+5. **Bug 台账同步（三步对账，强制，细则 bugs.md §五）**：
+   a) **收网**：枚举本版分支提交里全部 `Bug:` footer → 台账缺登的补登，状态如实回填
+   b) **翻账**：本版「已验证/已修复」全部 → 「已发布(vX.Y.Z)+日期」；修码属本版但状态还停在
+      新建/已规划/待挂版的 → 先补状态再翻，不允许静默残留
+   c) **反核 + 报尾**：台账标「修复版本=本版」但提交实际不在本版范围的 → 撤回状态并标注；
+      属后续版的（已规划vNext/待挂版）打印「未随本版」清单，用户确认下一步挂向——报完才算完成
+6. 台账翻「悬空」入悬空表 → **★固定问句「vX.Y.Z 已发版，合并到 main 吗？」**
+   用户确认 → `git checkout main && git merge --no-ff X.Y.Z`（悬空链按序先老后新）→ 销悬空账；
+   未确认 → 挂账，后续任何启动/发版动作先报此账
+7. 问「push？」——口令才推；releases/vX.Y.Z/ 与版本分支历史随合并进 main 永久可查
 
 ## 六、触发词速查
 
@@ -141,7 +153,7 @@ releases/v1.3.0/
 | xxx 从 vX.Y.Z 移出 | M1 逆操作（两边表都更新） |
 | 冻结 vX.Y.Z | M2（前置检查不过会列差距） |
 | 汇总 vX.Y.Z / 整理升级件 | M3 |
-| 发版 vX.Y.Z | M4（checklist 未勾完会停） |
+| 发版 vX.Y.Z | M4（checklist 未勾完会停；tag 后必问「合 main 吗」「push 吗」） |
 | vX.Y.Z 状态 | 读 MILESTONE.md 汇报 |
 
 ## 七、与现有机制的关系
