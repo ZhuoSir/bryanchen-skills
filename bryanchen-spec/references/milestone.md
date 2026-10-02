@@ -119,23 +119,26 @@ releases/v1.3.0/
 ### M4 发布 —— 触发:「发版 vX.Y.Z」
 1. `checklist.md` 人工逐项勾选（**演练项必须真做**：在演练/预发环境按 UPGRADE.md 走一遍，
    SQL 全执行、配置全应用、核心功能验证；演练发现问题登记 bug 并回 M3 修）
-2. git 操作按 standards/git-workflow.md：release 分支（B 档）或 main 直接打 tag
-3. tag：`git tag -a vX.Y.Z -m "<RELEASE-NOTES 摘要 + spec 清单>"`
-4. 项目根 CHANGELOG.md 追加本版本条目（**来源 = MILESTONE.md 的升级项表**，不再直接从 git log 拼）
-5. **bugs.md 状态批量翻转**：本版本所有「已验证」→「已发布(vX.Y.Z)+日期」
-6. releases/vX.Y.Z/ 全部产物随 tag 进 main（历史版本永远可查）
+2. **变更↔断言配对核验**：本版每个触碰共享面的变更，在项目回归载体（verify 脚本/
+   测试套件）中必须有对应新或改断言并列入 checklist；**无配对 = M4 不过**
+   （防「修复引入新规则、旧行为悄悄死掉」——断言要随变更同步长）
+3. git 操作按 standards/git-workflow.md：release 分支（B 档）或 main 直接打 tag
+4. tag：`git tag -a vX.Y.Z -m "<RELEASE-NOTES 摘要 + spec 清单>"`
+5. 项目根 CHANGELOG.md 追加本版本条目（**来源 = MILESTONE.md 的升级项表**，不再直接从 git log 拼）
+6. **bugs.md 状态批量翻转**：本版本所有「已验证」→「已发布(vX.Y.Z)+日期」
+7. releases/vX.Y.Z/ 全部产物随 tag 进 main（历史版本永远可查）
 
 ## 六、触发词速查
 
 | 你说 | 动作 |
 |---|---|
-| 新建里程碑 v1.4.0 | M0 |
-| 把 xxx 纳入 v1.4.0 | M1（bug 同：把 BUG-02 纳入 v1.4.0） |
-| xxx 从 v1.4.0 移出 | M1 逆操作（两边表都更新） |
-| 冻结 v1.4.0 | M2（前置检查不过会列差距） |
-| 汇总 v1.4.0 / 整理升级件 | M3 |
-| 发版 v1.4.0 | M4（checklist 未勾完会停） |
-| v1.4.0 状态 | 读 MILESTONE.md 汇报 |
+| 新建里程碑 vX.Y.Z | M0 |
+| 把 xxx 纳入 vX.Y.Z | M1（bug 同：把 BUG-02 纳入 vX.Y.Z） |
+| xxx 从 vX.Y.Z 移出 | M1 逆操作（两边表都更新） |
+| 冻结 vX.Y.Z | M2（前置检查不过会列差距） |
+| 汇总 vX.Y.Z / 整理升级件 | M3 |
+| 发版 vX.Y.Z | M4（checklist 未勾完会停） |
+| vX.Y.Z 状态 | 读 MILESTONE.md 汇报 |
 
 ## 七、与现有机制的关系
 

@@ -54,6 +54,8 @@ SQL/UPGRADE 更新）提交在 release 分支上，随 tag 一起合回 main。*
    - [ ] 测试全绿；项目有规范扫描（如 check_standards.py）则红线清零
    - [ ] spec 文档若中途改动过，已重新确认且版本头是「已确认」
    - [ ] completion.md 已生成、本过程发现的 bug 已登记进 bugs.md
+   - [ ] **共享面变更**：commit body 已同时贴「改好了」+「没改坏」双面断言实测输出
+     （身份矩阵见 plan；只有一面 = 未回归，不得合并）
 4. **合并方式**：默认 `git merge --no-ff feature/xxx`
    - 理由：保留 feature 边界与任务级 commit，与「一个 spec 一个工作单元」对齐，
      footer 溯源不被压扁。
