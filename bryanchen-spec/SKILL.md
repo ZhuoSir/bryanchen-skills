@@ -32,24 +32,41 @@ description: "四阶段规格开发流程编排器：Specify（EARS 需求定义
 1. 从需求提炼功能名（小写连字符，如 `add-member-discount`）；提炼不出或需求太模糊 → 先追问，不臆测。
 2. 检查 `specs/` 下是否已有同名/同主题目录：
    - 有 → 问用户是「继续做」（走 §7 续传）还是「新建」（换名或确认覆盖）。
-3. 创建目录与四个文件（模板见 `references/templates.md`）：
+
+3. **版本归属问（每个 spec 必问一次；agent 不得代选、不得静默挂版）**：
+   - 读版本台账 `specs/_project/version.md`。没有台账 = 项目未接入 → 先引导跑
+     `spec init`（init 按「git 最高 tag → 构建物版本字段（去 -SNAPSHOT/-dev）→ 新工程 v1.0.0」
+     读数写台账；新工程同时自动建 `releases/v1.0.0/` + MILESTONE.md）。
+   - **有在途版本** → 问（措辞含现状与建议号）：
+     「新需求「<功能名>」挂哪个版本？当前在途 vX.Y.Z（已挂 N 需求/M 缺陷）；
+     要新开的话按内容性质建议 vA.B.C。回「挂 X.Y.Z」/「新开」/任意号。」
+   - **无在途版本**（上一版已发版）→ 问：
+     「vX.Y.Z 已于 <日期> 发版，本需求起下一个版本，建议 vA.B.C（<理由>）。确认或给号。」
+   - 用户选「挂当前」→ 当前版 MILESTONE.md「纳入需求」表加一行（spec 目录/状态=立项中）
+   - 用户选「新开」或给号 → 自动建 `releases/v{号}/` + 写 MILESTONE.md
+     （状态头「进行中」+ 纳入需求表 + 纳入缺陷表两个骨架）并挂上 → 台账翻该版「在途」。
+     **未获用户明确选择不建任何新目录**（铁律）。
+   - 定号规则 v a.b.c（a 大版/b 需求迭代/c 修 bug，升位低位归零）见 standards/versioning.md §二。
+
+4. 创建目录与四个文件（模板见 `references/templates.md`）：
 
 ```
 specs/{YYYYMMDD}_{功能名}/
 ├── requirements.md    版本头 v0.1.0 | 状态: 草稿
 ├── plan.md            版本头 v0.1.0 | 状态: 草稿
 ├── tasks.md           版本头 v0.1.0 | 状态: 草稿
-└── changelog.md       记录 v0.1.0 创建
+├── changelog.md       记录 v0.1.0 创建 + 「挂载: vX.Y.Z（<日期>，用户确认）」
+└──（后续产物）completion.md / artifacts.md 由 §5 收尾生成
 ```
 
-4. **规范源解析（仅项目首次触发时执行一次）**：
+5. **规范源解析（仅项目首次触发时执行一次）**：
    - 项目根已有 `.specrc.yml` → 直接读取使用，**不再探测、不再询问**。
    - 没有 → 按 `references/standards-routing.md` 的探测顺序生成草稿
      （探测项目 AGENTS.md / docs/conventions/ / catalog 里的规范类 skill / 技术栈），
      展示给用户确认（可改任何一行）→ 写入项目根 `.specrc.yml` → 建议提交进 git（团队共享）。
    - 之后所有阶段加载规范时，一律按此表路由，不再自行猜测。
 
-5. 输出启动摘要：功能名、目录路径、规范源（一行概括，如「code/api/db → skill:code-standards，git/版本 → global」）、「进入 Phase 1: Specify」。
+6. 输出启动摘要：功能名、目录路径、**挂载版本（「已挂 v1.3.0（在途）」或「新建 v1.4.0 并挂上」）**、规范源一行、「进入 Phase 1: Specify」。
 
 ## 2. Phase 1 — Specify（requirements.md）
 
@@ -154,8 +171,10 @@ specs/{YYYYMMDD}_{功能名}/
 2. **升级件登记**：若本 spec 产生了库表/配置变更 → 创建/更新 `specs/{目录}/artifacts.md`
    （格式见 references/milestone.md §四）。纯代码需求不创建。
 3. **Bug 核对**：本过程中发现的 bug 是否都已登记；本需求修复的 bug 状态是否已翻「已修复(目标版本)」。
-4. **里程碑归属**：问一句「本需求纳入哪个里程碑（releases/vX.Y.Z）？可跳过」。
-   用户指定 → 在对应 MILESTONE.md 表格登记（含未勾任务经批准延期的去向）；跳过 → 不阻塞。
+4. **挂接一致性核对**：版本已在 §1 步骤 3 的启动问询时定——此处只核对不提问：
+   所挂版本的 MILESTONE.md 需求表确有本 spec 行且状态与实际一致；completion.md 若有
+   「延期→vX.Y.Z」项，同步在该版 MILESTONE 表加行/备注（含未勾任务去向）；
+   发现改挂未同步台账的，当场补。
 
 **发版时**：走里程碑流程（§9），项目根 CHANGELOG.md 条目从 MILESTONE.md 升级项表生成。
 

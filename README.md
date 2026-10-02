@@ -147,6 +147,7 @@
 | 内置全局规范 | `standards/` 七份：代码（前端 Vue / 后端 Java 分册）、接口、数据库、git 工作流、版本规则 |
 | 断点续传 | 说「继续 \<功能名\>」自动定位第一个未确认文档或未完成任务续做 |
 | 里程碑发版 | 多需求汇总成大版本：`releases/v1.3.0/` 下 MILESTONE 清单 + SQL/配置按版本聚合为 Flyway 风格升级件，含升级说明/升级操作/回滚。三层版本模型：spec 版本管文档演进、里程碑管发版交付、git tag 管代码快照 |
+| 版本台账与归属 | 产品版本规则 `v a.b.c`（a 破坏性 / b 需求迭代 / c 纯修复，升位低位归零，初始 v1.0.0）+ 项目级台账 `specs/_project/version.md`；**每个 spec 启动必问一次挂哪个版本**（agent 不得代选、不得静默挂版），选「新开」才建 `releases/v{号}/`，未获明确选择不建任何新目录 |
 | 存量项目 init | 「spec init」一次跑完：项目体检 + 机制骨架 + 项目画像（profile，供后续 Specify 直接引用），**只读不回填**——明确不把存量代码反推成 specs（无变更驱动的 spec 会立刻腐烂），specs 只为将改动的部分积累 |
 | Bug 管理 | 项目级唯一清单 `specs/_project/bugs.md`，`BUG-xx` 编号永久不复用、**状态必绑版本**（新建→已规划→已修复→已验证→已发布）；`Bug: BUG-xx` 写进 commit footer；小 bug 直接修、大 bug 升级为 `fix-xxx` spec 走完整四阶段；里程碑冻结时校验 P0/P1 必须达「已验证」，发版后批量翻「已发布」 |
 | 共享面回归纪律 | 改 nginx/网关/路由/DB 共享列/依赖版本/全局配置等共享面时，自检「**还有谁依赖这个路径/列/配置？**」→ 在 plan 建**身份矩阵**（对象 × 身份(方法×调用方×端点) × 变更后预期行为），每个既有身份都要有断言；**commit body 必须同时贴「改好了」+「没改坏」双面实测输出**，只有一面不得提交；M4 要求每个共享面变更在回归载体中有配对断言，无配对不发版 |
@@ -240,10 +241,10 @@ bryanchen-spec/
     ├── api-design.md   # RESTful/响应包装/错误码/幂等
     ├── database-design.md      # 命名/公共字段/索引/迁移回滚
     ├── git-workflow.md # 分支模型/commit 格式/tag/合并
-    └── versioning.md   # 版本头/SemVer 定制/编号永久制/双层 changelog
+    └── versioning.md   # spec 版本头/产品版本 v a.b.c 与版本台账/编号永久制/双层 changelog
 ```
 
-> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档）、`specs/_project/profile.md`（项目画像）、`specs/_project/bugs.md`（bug 清单）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件，首次建里程碑时才有）。
+> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`）、`specs/_project/profile.md`（项目画像）、`specs/_project/version.md`（版本台账）、`specs/_project/bugs.md`（bug 清单）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件，建里程碑时才有）。
 
 ## 安装
 

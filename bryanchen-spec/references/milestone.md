@@ -84,9 +84,13 @@ releases/v1.3.0/
 
 ## 五、里程碑生命周期（M0~M4）
 
-### M0 立项 —— 触发:「新建里程碑 vX.Y.Z」
-1. 建 `releases/vX.Y.Z/`，从模板初始化 MILESTONE.md（目标日期、负责人、空表格）
-2. 版本语义按 standards/versioning.md §二（MAJOR/MINOR/PATCH）确定 X.Y.Z 是否合理，不合理提醒用户
+### M0 立项 —— 双触发：「新建里程碑 vX.Y.Z」口令，**或** spec 启动版本问询中
+用户选择「新开」（SKILL.md §1 步骤3）
+1. 建 `releases/vX.Y.Z/`，从模板初始化 MILESTONE.md（状态头「进行中」+ 纳入需求表 + 纳入缺陷表）
+2. 定号按 standards/versioning.md §二 决策表（a 大版/b 需求迭代/c 修 bug，升位低位归零）
+   给建议；与台账当前版不连续（跳号）需用户明确，异常时提醒
+3. 更新版本台账 version.md：该版「在途」
+4. 铁律：两条触发路径都必须有用户明确选择；未获选择绝不建目录（含"顺手先建"）
 
 ### M1 挂接 —— 触发:「把 <spec> 纳入 vX.Y.Z」/「把 BUG-xx 纳入 vX.Y.Z」
 1. MILESTONE.md 表格加一行（spec 目录、当前 spec 版本、状态、SQL/配置件数暂记 0）
