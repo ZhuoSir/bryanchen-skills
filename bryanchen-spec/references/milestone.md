@@ -110,11 +110,32 @@ releases/v1.3.0/
 - [ ] 本里程碑「已规划(vX.Y.Z)」的 **P0/P1 bug 全部达「已验证」**（bugs.md 核对）
 - [ ] **账证初对**：本版分支已合并提交中的 `Bug:` footer 全部能在 bugs.md 找到对应行
       且状态 ≥ 已修复——把「修了没记」消灭在冻结时，不留到 M4 收网才暴雷
+- [ ] **无孤儿 spec**：`grep "挂载:" specs/*/changelog.md` 全部指向本里程碑或已明示转挂；
+      存在「已动工/已完结但无挂载归属」的 spec 目录 = 冻结阻断（对账法同 M3 步骤 0）。
+      冻结只查表不查目录，漏挂的 spec 会整版蒸发——这一步就是补那个洞
 冻结后：MILESTONE.md 状态改「已冻结」；**新需求默认进下一里程碑**，要挤进本版本需用户明确同意
 （挤入 = 解冻重走 M2，changelog 记录）。
 
 ### M3 汇总 —— 触发:「汇总 vX.Y.Z」/「整理升级件」
-1. **收集**：逐 spec 读 artifacts.md；无 artifacts.md 的 spec 用
+
+0. **里程碑审计（第一动作，双向：spec 挂接 + 汇总进度；MILESTONE 表不可自证，勾选必须是事实推导出来的函数）**：
+   ```bash
+   # A = 本版分支实际带出的 spec（commit footer 为硬锚）
+   git log <上一版tag>..X.Y.Z --grep "Spec:" \
+     --format="%(trailers:key=Spec,valueonly)" | sort -u
+   # B = 全部 spec 的挂载事实（spec 目录 changelog 的「挂载:」行，§1.3 启动时写入）
+   grep -H "挂载:" specs/*/changelog.md
+   ```
+   对账 A∪B(活跃未完结的) 与 MILESTONE 纳入需求表：
+   - **有实无表 = 漏挂** → 当场问用户处置：纳入本版（若内容确已合入本版分支，必须补表并
+     继续 M3，否则升级件必然缺失）/ 转挂下版（注明原因）
+   - **有表无实 = 空行** → 问：挂起（spec 未开工）还是作废
+   - **B 中归属与 A 冲突**（如 spec 挂 v1.4.0 但提交进了 1.4.1 分支）→ 停，向用户报异常，
+     以提交实际落点为准改表
+   **进度重算**（同一步骤内完成）：对「汇总进度」逐项跑事实判据（见 §五附·审计判据表），
+   有实无勾→补勾并报告；有勾无实→**假勾，红字硬阻断**；结果连同挂接对账一起写入
+   MILESTONE 变更记录——**账不平不进后续步骤**。
+1. **收集升级件**：逐 spec 读 artifacts.md；无 artifacts.md 的 spec 用
    `git log --grep "Spec: specs/<目录>"` 扫 commit + 读 plan.md 数据模型/配置节，交叉核对防漏
 2. **整理 SQL**：合并同表变更 → 按依赖重排 → 分配序号 → 写文件头注释块 → 配 rollback
 3. **整理配置**：汇总进 config/changes.md
@@ -125,24 +146,53 @@ releases/v1.3.0/
 6. **更新 MILESTONE.md** 汇总进度勾选与件数
 
 ### M4 发布 —— 触发:「发版 vX.Y.Z」
-1. `checklist.md` 人工逐项勾选（**演练项必须真做**：在演练/预发环境按 UPGRADE.md 走一遍，
-   SQL 全执行、配置全应用、核心功能验证；演练发现问题登记 bug 并回 M3 修）
-2. **变更↔断言配对核验**：本版每个触碰共享面的变更，在项目回归载体（verify 脚本/
-   测试套件）中必须有对应新或改断言并列入 checklist；**无配对 = M4 不过**
-   （防「修复引入新规则、旧行为悄悄死掉」——断言要随变更同步长）
-3. **tag 打在版本分支上**：`git checkout X.Y.Z && git tag -a vX.Y.Z -m "<RELEASE-NOTES 摘要 + spec 清单>"`
-   RELEASE-NOTES/UPGRADE 注明「**部署基线 = tag vX.Y.Z**」（悬空期 main 是旧基线，禁止从 main 拉包冒充新版）
-4. 项目根 CHANGELOG.md 追加本版本条目（**来源 = MILESTONE.md 升级项表**，不再直接从 git log 拼）
-5. **Bug 台账同步（三步对账，强制，细则 bugs.md §五）**：
-   a) **收网**：枚举本版分支提交里全部 `Bug:` footer → 台账缺登的补登，状态如实回填
-   b) **翻账**：本版「已验证/已修复」全部 → 「已发布(vX.Y.Z)+日期」；修码属本版但状态还停在
-      新建/已规划/待挂版的 → 先补状态再翻，不允许静默残留
-   c) **反核 + 报尾**：台账标「修复版本=本版」但提交实际不在本版范围的 → 撤回状态并标注；
-      属后续版的（已规划vNext/待挂版）打印「未随本版」清单，用户确认下一步挂向——报完才算完成
-6. 台账翻「悬空」入悬空表 → **★固定问句「vX.Y.Z 已发版，合并到 main 吗？」**
-   用户确认 → `git checkout main && git merge --no-ff X.Y.Z`（悬空链按序先老后新）→ 销悬空账；
-   未确认 → 挂账，后续任何启动/发版动作先报此账
-7. 问「push？」——口令才推；releases/vX.Y.Z/ 与版本分支历史随合并进 main 永久可查
+**总原则：所有落账在 tag 之前；tag 后修账 = 事故（证明打点顺序错了），必须记 MILESTONE
+审计节并回炉流程。账不齐，tag 不打。**
+
+0. **自动里程碑审计（基线，发版口令一到即跑）**：挂接+进度双向，假勾/漏挂 = 硬阻断处置完才继续
+1. `checklist.md` 人工逐项勾选（**演练必须真做**；演练踩的过程坑当场记 lessons.md）
+2. **变更↔断言配对核验**：本版每个触碰共享面的变更，回归载体有对应断言并列入 checklist；无配对 = 不过
+3. **发版落账批处理（tag 前！一次写全，不许分批发散写）**：
+   - bugs.md 本版「已验证」→「已发布(vX.Y.Z)+日期」
+   - backlog.md 本版「已立项」spec 对应行翻「已交付(vX.Y.Z)」去向补全
+   - MILESTONE：每个纳入 spec 状态列翻**终态「已发布(vX.Y.Z)」**（生命周期终点，
+     禁止停在「已合并」中间态）＋纳入缺陷表终态＋状态头「已发布」＋汇总进度全勾
+   - version.md 翻「已发版」；项目根 CHANGELOG.md 条目（来源 = MILESTONE 升级项表）
+   - RELEASE-NOTES/UPGRADE 注明「部署基线 = tag vX.Y.Z」
+4. **四步核验（tag 硬门，全过才许打）**：
+   a) **逐条 grep 回验＋表格闸**：步骤 3 每一项落账在文件里 grep 到才算数（治 L-01 静默脱靶——
+      写了 commit message 不等于改了文件，账目以文件为准）；本版全部被改过的 md 跑
+      `scripts/mdtable_check.py` 退出码 0（落账改的多是表格行——错一格整表乱，必须机器过）
+   b) **再跑一遍里程碑审计**：必须全绿（此时"进度"含步骤 3 的新账）
+   c) **工作树干净**：`git status --porcelain` 为空；落账已 commit
+   d) 三条齐绿 → 才进 5；任何一条不过 → 补账重验，**不许"先打了 tag 再修"**
+5. **tag 打在版本分支的落账 tip 上**：`git checkout X.Y.Z && git tag -a vX.Y.Z -m "<摘要+spec清单>"`
+   —— 此刻 tag 内容 = 账实一致的最终态，这是它作为历史凭证的资格
+6. **问「合并到 main？」**（口令才动）→ merge --no-ff 后**即时验证**：
+   `git diff vX.Y.Z main -- releases/vX.Y.Z/ specs/_project/version.md` **应为空**；
+   非空 = 账滞后事故（tag 后还有账改），当场记审计节+回炉
+7. **问「push？」** → 推后远端复核：`git ls-remote` 对齐 + `git show origin/main:<MILESTONE路径>`
+   抽看终态确已在远端
+8. 收口：悬空账（若用户选择不合 main 则挂账）；施工分支按用户示下去留
+
+## 五附、里程碑审计判据表（勾选 = 从事实重算，不靠记忆）
+
+| 勾选项 | 事实判据（可自动核） |
+|---|---|
+| spec 挂接表 | `git log <上一tag>..X.Y.Z --grep "Spec:"` footer 集合 ∪ `specs/*/changelog.md` 挂载行，对照 MILESTONE 纳入表（三态处置见 M3 步骤 0） |
+| SQL 汇总编号 | `releases/vX.Y.Z/sql/V*.sql` 件数 == Σ 已挂 spec 的 artifacts SQL 行数；rollback/ 一一配对 |
+| 配置汇总 | `config/changes.md` 存在且覆盖全部 artifacts 配置行 |
+| RELEASE-NOTES | 文件存在且「包含需求」覆盖纳入表全部 spec |
+| UPGRADE | 文件存在且执行序条数与 sql/ 件数一致、含回滚逆序节 |
+| **演练** | **唯一不可推导项 → 强制留证字段**：MILESTONE「演练: 验证人/日期/结论」，空 = 不通过 |
+| tag / 台账 | `git tag -l vX.Y.Z` 存在；version.md「最近已发」指向本版 |
+| BL 互核 | backlog 三查：①「已立项/已交付」行去向列的 spec 目录与 MILESTONE 互点存在；②「**已交付但 MILESTONE 该 spec 未发布**」或「spec 已合并发布而 BL 仍待办/已立项」= 滞后行 → 报出纠正；③「待办」行意图与在途 spec 撞面 → 提示反查关联（SKILL 待办节锚点①） |
+
+**三向差异处置**：漏挂→问处置（纳入/转挂）；漏勾→自动补勾并报告；**假勾→硬阻断**
+（有勾无实说明账上有假话，比漏勾更严重，必须当面裁决；不允许"提醒后可跳过"）。
+**自修复**：老 spec 缺「挂载:」行 → 以 git footer 为准补写，事实源就此补齐。
+**触发点（全自动，口令仅补充）**：① spec 启动问版前（有在途版必跑）② M3 收尾报告必附
+③ M4 步 0 自动执行 ④ 任意时刻用户喊「审计 vX.Y.Z」。
 
 ## 六、触发词速查
 
@@ -153,7 +203,8 @@ releases/v1.3.0/
 | xxx 从 vX.Y.Z 移出 | M1 逆操作（两边表都更新） |
 | 冻结 vX.Y.Z | M2（前置检查不过会列差距） |
 | 汇总 vX.Y.Z / 整理升级件 | M3 |
-| 发版 vX.Y.Z | M4（checklist 未勾完会停；tag 后必问「合 main 吗」「push 吗」） |
+| 发版 vX.Y.Z | M4（**先自动全量审计，账不平不进 checklist**；tag 后必问「合 main 吗」「push 吗」） |
+| 审计 vX.Y.Z | 随时手动跑（M2/M3/M4 与 spec 启动时其实已自动跑过） |
 | vX.Y.Z 状态 | 读 MILESTONE.md 汇报 |
 
 ## 七、与现有机制的关系

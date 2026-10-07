@@ -106,10 +106,37 @@ v a . b . c          初始版本 v1.0.0
   合并 main 按链序先老后新。**任何启动/发版动作先报悬空账，未处置不建新版。**
 
 Tag 规范：
-- 在 main（或 release 分支合回后）打 annotated tag：
-  `git tag -a v1.3.0 -m "发版说明（含 spec 清单）"`
-- tag message 里列本次包含的 spec 目录与版本（启用里程碑时来源 = MILESTONE.md 纳入表；
-  否则 = git log footer 汇总）。
+- 打在**版本分支**上（v8 起）：`git checkout X.Y.Z && git tag -a vX.Y.Z -m "发版说明（含 spec 清单）"`
+- tag message 列本版包含的 spec 目录与版本（来源 = MILESTONE.md 纳入表，或 git log footer 汇总）。
+
+---
+
+## 二点五、回退纪律（v9-lite；回退不是流程，是记账纪律）
+
+**场景先对口**——多数"想回退"其实不需要回退机制：
+
+| 场景 | 处置 |
+|---|---|
+| 新版未合 main（含悬空） | **不合并即回退**，零操作；悬空账自然拦截 |
+| M4 演练失败 | 不打 tag、不合 main，回 M3 修 |
+| 未打 tag 的立项版作废 | MILESTONE 头注「作废：日期+原因」；**编号不占号**（从未进入公开记录） |
+| 发版已久出缺陷 | **主路径 = 向前修复**：BUG 登记（发现于标「发版后，根因 vX.Y.Z」）→ 修 → c 版 |
+| 数据退回 | 按 `releases/vX.Y.Z/sql/rollback/` 逆序执行（每次发版必备） |
+| spec 文档回退 | git 历史即还原点；恢复到目标版本提交 + changelog 记「回退: v1.2.0→v1.1.0（原因）」+ 按作废规则重走确认 |
+| 整版撤回（发了 main 后大面坏） | 唯一走下面纪律的分支 |
+
+**整版撤回四纪律**：
+
+1. **号不复用、tag 不抹**：打过 tag 的号永久占号；撤回 = 发**新号版**（通常 c+1），
+   其 CHANGELOG 条目 body 必含 `回退 vX.Y.Z：<一句话原因>`
+2. **撤回必记账**：版本台账将被撤版标「已撤回（被 vA.B.C）」+ MILESTONE 头注 + spec changelog
+   记迁挂/回炉去向——漏记 = 幽灵版本，比不回退更糟
+3. **revert 带 footer**：逐提交 revert 且 footer `Rollback: vX.Y.Z`；范围先列
+   `git log <上一版tag>..vX.Y.Z --oneline --no-merges` 给用户过目再动手
+4. **禁止清单**：reset 已 tag 提交 / force-push / 删版本分支 / 手改撤回标注 / agent 主动建议回退
+
+对账联动：发版三步对账之「反核」扩 c2 **回退核**——台账每个「已撤回」版，其提交须全部有
+`Rollback:` footer 覆盖（或已被后续版重新带入）；缺口 = 半回退，阻断发版。
 
 ---
 
