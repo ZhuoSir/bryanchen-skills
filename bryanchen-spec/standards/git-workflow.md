@@ -64,6 +64,8 @@ main ●──────────────────────●─
    - [ ] 测试全绿；项目有规范扫描（如 check_standards.py）则红线清零
    - [ ] spec 文档若中途改动过，已重新确认且版本头是「已确认」
    - [ ] completion.md 已生成、本过程发现的 bug 已登记进 bugs.md
+   - [ ] **本 spec 无未收口 CR**：`changes/` 下每份 CR 状态 ∈ {已合入, 已放弃, 转新 spec, 转 BL}
+     （合入八动作全勾才算「已合入」；判据见 references/change-request.md §六）
    - [ ] **共享面变更**：commit body 已同时贴「改好了」+「没改坏」双面断言实测输出
      （身份矩阵见 plan；只有一面 = 未回归，不得合并）
 6. **spec 分支合并后**：删除 feature 分支（`git branch -d` + 远端 `--delete`）。
@@ -82,12 +84,18 @@ main ●──────────────────────●─
 Spec: specs/20260926_add-member-discount v1.0.0
 Task: T-03
 Bug: BUG-02
+CR: CR-01
 ```
 
 - **标题**：动词开头、现在时、不加句号；一句话说清做了什么。
-- **body 与 footer 之间空一行**；footer 的 `Spec:`/`Task:`/`Bug:` 各占一行（git trailer 可解析）。
+- **body 与 footer 之间空一行**；footer 的 `Spec:`/`Task:`/`Bug:`/`CR:` 各占一行（git trailer 可解析）。
 - **修 bug 的 commit 必带 `Bug: BUG-xx`**（小 bug 直修无 Spec 时仅这一行，也合法且必要——它是
   bugs.md「已修复」状态的证据来源）。
+- **CR 带出的任务 commit 必带 `CR: CR-xx`**——它是 M3/M4 反查「一条需求变更带出哪些代码」的
+  唯一硬锚（与 `Bug:` 同级）；**CR 合入登记为独立 `docs(spec)` commit**（同样带 `Spec:` + `CR:`，
+  绝不与代码混），格式：`docs(spec): CR-01 合入 v1.2.0（增 R-06 改 R-02 废 T-03）`。
+- **CR 的回退处置用 `revert:` 型且单独提交**（不删历史、不与新功能混，见红线 4）；
+  被作废任务的 commit 保留在历史里，作废标记只落在 tasks.md 文本上。
 - 无 spec 无 bug 的改动（chore/docs 等）：省略这些 footer，body 里写清动机。
 
 ### type 枚举

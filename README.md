@@ -171,8 +171,9 @@
 | 待办台账（backlog） | 用户说「以后要做 / 先不做 / 将来考虑 / 记一下」→ 当场在 `specs/_project/backlog.md` 记一行 `BL-xx`（来源写清谁何时）——意向的命比会话上下文长 |
 | 表格闸 | 每次生成或改动 markdown 产物后**回验必跑** `python3 scripts/mdtable_check.py <改过的文件>`，退出码 0 才算写入完成；拦列数不齐 / 行尾缺 `\|` / fence 断块 / 表格紧跟正文段落（无 python3 时人工数列并注明降级） |
 | 账房与分支前置 | 主目录常驻在途版本分支 =「**账房**」：挂接/落账/合并回/M2–M4 只在这里发生；写任何 spec 文档前先验 `git symbolic-ref --short HEAD` 必须是版本分支（停在 feature/fix 上**一票否决**，先处理现场再立项） |
+| 变更请求 CR | spec 进行中要增/改/删需求 → **开 CR 而非顺手改文档**：`changes/CR-xx_<slug>.md` 四步（§S 变更意图 → §P 影响面 + **已实现处置表**（保留/改造/回退/拆分逐条交代）→ §T 增改废任务 → §I 执行），收口走**合入八动作**（R 落父 requirements → 版本 bump → changelog 记到编号级 → 任务并入 → 盖合入戳 → MILESTONE 同步 → BL/BUG/L 联动 → 独立 `docs(spec)` commit）。三档（micro/minor/major）只省确认轮次不减产物；新 R/T **沿用父 spec 编号**；作废任务不删不取消勾选；**已打 tag 版本禁止 CR**；未收口 CR 不得并发第二个、不得合并；bug/CR/BL 三账分诊判据固定 |
 
-**触发词**：记录待办、待办列表、立项待办、新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、坑列表、记录坑、踩坑总结、审计里程碑、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、回退版本、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单
+**触发词**：记录待办、待办列表、立项待办、新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、坑列表、记录坑、踩坑总结、审计里程碑、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、回退版本、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单、需求变更、改需求、加一条需求、砍掉R-xx、变更单、变更列表、CR列表
 **不适用**：明显单点 bug 修复（直接修，但**完成后强制在 `bugs.md` 补登记一行**）、单文件小改动、纯技术问答。
 
 ### 🔀 bryanchen-spec-parallel — 多会话并行版
@@ -275,12 +276,13 @@ diagram-skill/
 bryanchen-spec/
 ├── SKILL.md            # 主协议：四阶段 + 三重确认铁律 + .specrc.yml 路由 + 断点续传 + 里程碑/init/bug/坑/待办概要
 ├── references/
-│   ├── templates.md    # requirements/plan（含共享面身份矩阵）/tasks/changelog/.specrc.yml + MILESTONE/RELEASE-NOTES/UPGRADE/artifacts 模板
+│   ├── templates.md    # requirements/plan（含共享面身份矩阵）/tasks/changelog/.specrc.yml + MILESTONE/RELEASE-NOTES/UPGRADE/artifacts/CR 模板
 │   ├── standards-routing.md  # 规范源路由：声明表语法/探测顺序/裁决规则/完整示例
 │   ├── milestone.md    # 里程碑与发版：releases/vX.Y.Z/ 结构、Flyway 风格 SQL 规范、升级件汇总流程、审计
 │   ├── init.md         # 存量项目接入：I1~I7 七步（快照/体检/基线/画像/路由/骨架/报告）+ baseline-capture
 │   ├── bugs.md         # Bug 管理：BUG-xx 编号与字段、状态机（状态绑版本）、修复分级、发版三步对账
-│   └── lessons.md      # 坑台账：L-xx 编号、记的触发条件、质量闸（防再犯规则）、升格为 standards 条款
+│   ├── lessons.md      # 坑台账：L-xx 编号、记的触发条件、质量闸（防再犯规则）、升格为 standards 条款
+│   └── change-request.md  # 变更请求 CR：分诊判据、三档分级、四步细则、合入八动作、冲突处置、防滥用
 ├── scripts/
 │   └── mdtable_check.py  # markdown 表格闸（零依赖 python3）：列数/行尾 |/fence/表格紧跟段落
 └── standards/          # 内置全局规范（.specrc.yml 领域声明为 global 时的默认源）
@@ -296,7 +298,7 @@ bryanchen-spec-parallel/     # 并行版：目录结构与基础版一致，另�
 └── references/parallel.md  # 并行模型核心：worktree 拓扑、账房锁、台账碎片协议、空间凭证发放、共享面仲裁预检
 ```
 
-> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`）、`specs/_project/`（全局账：`profile.md` 项目画像 / `version.md` 版本台账 / `bugs.md` bug 清单 / `lessons.md` 坑台账 / `backlog.md` 待办 / `fragments/` 并行碎片 / `.ledger.lock` 账房锁）、`.specrc.yml`（规范路由 + `spec_engine` 版本互斥声明）、`releases/vX.Y.Z/`（里程碑升级件目录）；git 侧还会长出**裸号版本分支** `X.Y.Z`（与 tag `vX.Y.Z` 配对）、`feature/<功能名>`、`fix/...`、`hotfix/...` 以及并行用的 `git worktree`。
+> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`，进行中改需求则长出 `changes/CR-xx_<slug>.md`）、`specs/_project/`（全局账：`profile.md` 项目画像 / `version.md` 版本台账 / `bugs.md` bug 清单 / `lessons.md` 坑台账 / `backlog.md` 待办 / `fragments/` 并行碎片 / `.ledger.lock` 账房锁）、`.specrc.yml`（规范路由 + `spec_engine` 版本互斥声明）、`releases/vX.Y.Z/`（里程碑升级件目录）；git 侧还会长出**裸号版本分支** `X.Y.Z`（与 tag `vX.Y.Z` 配对）、`feature/<功能名>`、`fix/...`、`hotfix/...` 以及并行用的 `git worktree`。
 
 ## 安装
 
