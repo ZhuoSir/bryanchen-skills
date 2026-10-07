@@ -161,15 +161,36 @@
 | 规范源路由 | 项目根 `.specrc.yml` 按领域声明规范来源（`global` 内置底线 / `file:` 项目自己的规范 / `skill:` 其他规范 skill / `none`），一次探测落盘、领域级整文件替换；流程铁律不受任何规范源豁免 |
 | 内置全局规范 | `standards/` 七份：代码（前端 Vue / 后端 Java 分册）、接口、数据库、git 工作流、版本规则 |
 | 断点续传 | 说「继续 \<功能名\>」自动定位第一个未确认文档或未完成任务续做 |
-| 里程碑发版 | 多需求汇总成大版本：`releases/v1.3.0/` 下 MILESTONE 清单 + SQL/配置按版本聚合为 Flyway 风格升级件，含升级说明/升级操作/回滚。三层版本模型：spec 版本管文档演进、里程碑管发版交付、git tag 管代码快照 |
+| 里程碑发版 | 多需求汇总成大版本：`releases/v1.3.0/` 下 MILESTONE 清单 + SQL/配置按版本聚合为 Flyway 风格升级件，含升级说明/升级操作/回滚。三层版本模型：spec 版本管文档演进、里程碑管发版交付、git tag 管代码快照。支持「**审计里程碑**」（挂接+进度双向核对，抓假勾/漏挂）与「**回退版本**」（仅用户口令发起，agent 永不自主回退） |
 | 版本台账与归属 | 产品版本规则 `v a.b.c`（a 破坏性 / b 需求迭代 / c 纯修复，升位低位归零，初始 v1.0.0）+ 项目级台账 `specs/_project/version.md`；**每个 spec 启动必问一次挂哪个版本**（agent 不得代选、不得静默挂版），选「新开」则**双建**（`releases/v{号}/` 目录 + 裸号版本分支）；**在途唯一**，有未合 main 的「悬空」版时先报账处置，未获明确选择不建目录不建分支 |
 | 存量项目 init | 「spec init」一次跑完：项目体检 + 机制骨架 + 项目画像（profile，供后续 Specify 直接引用），**只读不回填**——明确不把存量代码反推成 specs（无变更驱动的 spec 会立刻腐烂），specs 只为将改动的部分积累 |
 | Bug 管理 | 项目级唯一清单 `specs/_project/bugs.md`，`BUG-xx` 编号永久不复用、**状态必绑版本**（新建→已规划→已修复→已验证→已发布）；`Bug: BUG-xx` 写进 commit footer；小 bug 直接修、大 bug 升级为 `fix-xxx` spec 走完整四阶段；冻结时校验 P0/P1 必须达「已验证」 |
-| 发版对账 | M4 强制 **Bug 台账三步对账**：`git log <上一tag>..X.Y.Z --grep "Bug:"` **收网**（治「修了没记」）→ 本版「已验证/已修复」**翻账**为「已发布」（治「记了没翻」）→ `git merge-base --is-ancestor <修复commit> X.Y.Z` **反核**（治「翻了没随版」），footer 是账证勾稽的唯一硬锚 |
+| 发版对账 | M4「**账不齐不打 tag**」：先落账批处理（MILESTONE 翻终态 / bugs 翻已发布 / CHANGELOG）→ **四步核验**（逐条 grep 回验 + 审计复跑 + 工作树干净）→ 才打 tag；tag 之后修账 = 事故，必须记 MILESTONE 审计节。Bug 侧另有**三步对账**：`git log <上一tag>..X.Y.Z --grep "Bug:"` **收网**（治修了没记）→ **翻账**（治记了没翻）→ `git merge-base --is-ancestor` **反核**（治翻了没随版） |
 | 共享面回归纪律 | 改 nginx/网关/路由/DB 共享列/依赖版本/全局配置等共享面时，自检「**还有谁依赖这个路径/列/配置？**」→ 在 plan 建**身份矩阵**（对象 × 身份(方法×调用方×端点) × 变更后预期行为），每个既有身份都要有断言；**commit body 必须同时贴「改好了」+「没改坏」双面实测输出**，只有一面不得提交；M4 要求每个共享面变更在回归载体中有配对断言，无配对不发版 |
+| 坑台账（lessons） | `specs/_project/lessons.md`，`L-xx` 永久编号，**触发即记不等收尾**（工具与环境不符预期 / 自诊断错误与假阳性 / 被用户纠正的重复性错误 / 时序并发意外 / 验证盲区）；**写不出可检查的「防再犯规则」就不配进台账**；Phase 2 Plan 强制核对全部 active 坑（沉默=未核对，确认②不放行）；复发 ×2 即回炉重写，普适坑升格为 standards 条款并标「退休」 |
+| 待办台账（backlog） | 用户说「以后要做 / 先不做 / 将来考虑 / 记一下」→ 当场在 `specs/_project/backlog.md` 记一行 `BL-xx`（来源写清谁何时）——意向的命比会话上下文长 |
+| 表格闸 | 每次生成或改动 markdown 产物后**回验必跑** `python3 scripts/mdtable_check.py <改过的文件>`，退出码 0 才算写入完成；拦列数不齐 / 行尾缺 `\|` / fence 断块 / 表格紧跟正文段落（无 python3 时人工数列并注明降级） |
+| 账房与分支前置 | 主目录常驻在途版本分支 =「**账房**」：挂接/落账/合并回/M2–M4 只在这里发生；写任何 spec 文档前先验 `git symbolic-ref --short HEAD` 必须是版本分支（停在 feature/fix 上**一票否决**，先处理现场再立项） |
 
-**触发词**：新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单
+**触发词**：记录待办、待办列表、立项待办、新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、坑列表、记录坑、踩坑总结、审计里程碑、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、回退版本、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单
 **不适用**：明显单点 bug 修复（直接修，但**完成后强制在 `bugs.md` 补登记一行**）、单文件小改动、纯技术问答。
+
+### 🔀 bryanchen-spec-parallel — 多会话并行版
+
+`bryanchen-spec` 的 **superset**（四阶段 + 三重确认 + 里程碑 + init + bug/坑/待办台账全部继承），额外解决**多个会话同时开发**的问题：**分支隔离逻辑，worktree 隔离物理，串行隔离账**。
+
+| 机制 | 说明 |
+|---|---|
+| worktree 并行 | 并行仅限**同一在途版本下互相独立的 spec**（有依赖即串行），跨版本并行禁止，软上限 2 |
+| 账房锁 | 主目录永远检出在途版本分支 =「账房」，全局账唯一写入通道；锁文件 `specs/_project/.ledger.lock`（持有者+时间戳），<2h 排队、>2h 用户裁决接管；账房禁 `git add -A`，只许列路径清单 |
+| 台账碎片 | `specs/_project/fragments/<spec名>.md`，协议**只许 append（`>>`），禁 read-modify-write**；由 owner 在自己的落账批提交，账房不代提交他人碎片（防夹带）；挂接 / 新版意图 / 空间申报（errno/SQL/schema/端口/键段）逐行 append |
+| 空间凭证 | 「空间凭证与编号同点发放」——并行时的 errno/SQL/schema/端口/键段冲突在落账点一次性仲裁；BL/BUG/L 转正号出自串行落账，并行撞号结构性不可能 |
+| 共享面仲裁 | 确认②呈报前跑预检（对象 ∩ / 空间段 ∩ / 枚举 value diff），把并行会话间的共享面冲突摆到台面上 |
+| 引擎互斥 | `.specrc.yml` 声明 `spec_engine` 且 ≠ 本版本 → **拒执**并提示换版（两版互不误触发；缺声明不拒执，兼容存量） |
+
+**触发词**：并行spec、worktree、落账、共享面仲裁、记录待办、待办列表、立项待办、新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、坑列表、记录坑、踩坑总结、审计里程碑、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、回退版本、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单
+
+> 与基础版**互斥**：项目根 `.specrc.yml` 用 `spec_engine: bryanchen-spec` 或 `bryanchen-spec-parallel` 声明走哪套；单人项目用基础版即可（并行版是其退化情形，拓扑无特例）。
 
 ## 目录结构
 
@@ -252,13 +273,16 @@ diagram-skill/
     └── package.json    # resvg 依赖声明（按需 npm install）
 
 bryanchen-spec/
-├── SKILL.md            # 主协议：四阶段 + 三重确认铁律 + .specrc.yml 路由 + 断点续传 + 里程碑/init/bug 概要
+├── SKILL.md            # 主协议：四阶段 + 三重确认铁律 + .specrc.yml 路由 + 断点续传 + 里程碑/init/bug/坑/待办概要
 ├── references/
 │   ├── templates.md    # requirements/plan（含共享面身份矩阵）/tasks/changelog/.specrc.yml + MILESTONE/RELEASE-NOTES/UPGRADE/artifacts 模板
 │   ├── standards-routing.md  # 规范源路由：声明表语法/探测顺序/裁决规则/完整示例
-│   ├── milestone.md    # 里程碑与发版：releases/vX.Y.Z/ 结构、Flyway 风格 SQL 规范、升级件汇总流程
+│   ├── milestone.md    # 里程碑与发版：releases/vX.Y.Z/ 结构、Flyway 风格 SQL 规范、升级件汇总流程、审计
 │   ├── init.md         # 存量项目接入：I1~I7 七步（快照/体检/基线/画像/路由/骨架/报告）+ baseline-capture
-│   └── bugs.md         # Bug 管理：BUG-xx 编号与字段、状态机（状态绑版本）、修复分级、里程碑联动
+│   ├── bugs.md         # Bug 管理：BUG-xx 编号与字段、状态机（状态绑版本）、修复分级、发版三步对账
+│   └── lessons.md      # 坑台账：L-xx 编号、记的触发条件、质量闸（防再犯规则）、升格为 standards 条款
+├── scripts/
+│   └── mdtable_check.py  # markdown 表格闸（零依赖 python3）：列数/行尾 |/fence/表格紧跟段落
 └── standards/          # 内置全局规范（.specrc.yml 领域声明为 global 时的默认源）
     ├── README.md       # 规范索引 + 四层裁决规则
     ├── code-style-backend.md   # 后端代码底线（Java/Spring）
@@ -267,9 +291,12 @@ bryanchen-spec/
     ├── database-design.md      # 命名/公共字段/索引/迁移回滚
     ├── git-workflow.md # 分支模型/commit 格式/tag/合并
     └── versioning.md   # spec 版本头/产品版本 v a.b.c 与版本台账/编号永久制/双层 changelog
+
+bryanchen-spec-parallel/     # 并行版：目录结构与基础版一致，另加 ——
+└── references/parallel.md  # 并行模型核心：worktree 拓扑、账房锁、台账碎片协议、空间凭证发放、共享面仲裁预检
 ```
 
-> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`）、`specs/_project/profile.md`（项目画像）、`specs/_project/version.md`（版本台账）、`specs/_project/bugs.md`（bug 清单）、`.specrc.yml`（规范路由）、`releases/vX.Y.Z/`（里程碑升级件目录）；git 侧还会长出**裸号版本分支** `X.Y.Z`（与 tag `vX.Y.Z` 配对）、`feature/<功能名>`、`fix/...`、`hotfix/...`。
+> 在目标项目运行时会长出（非 skill 包内容）：`specs/{日期}_{功能名}/`（四文档，收尾另有 `completion.md`/`artifacts.md`）、`specs/_project/`（全局账：`profile.md` 项目画像 / `version.md` 版本台账 / `bugs.md` bug 清单 / `lessons.md` 坑台账 / `backlog.md` 待办 / `fragments/` 并行碎片 / `.ledger.lock` 账房锁）、`.specrc.yml`（规范路由 + `spec_engine` 版本互斥声明）、`releases/vX.Y.Z/`（里程碑升级件目录）；git 侧还会长出**裸号版本分支** `X.Y.Z`（与 tag `vX.Y.Z` 配对）、`feature/<功能名>`、`fix/...`、`hotfix/...` 以及并行用的 `git worktree`。
 
 ## 安装
 
@@ -285,6 +312,7 @@ cp -R pdf-recognition ~/.agents/skills/   # 需 OCR 时先 pip install -r pdf-re
 cp -R diagram-skill ~/.agents/skills/
 cp -R docker-cleanup ~/.agents/skills/     # 清理镜像前先看候选清单，确认后才 --apply
 cp -R bryanchen-spec ~/.agents/skills/      # 或 ~/.dsh/skills/；项目首次触发会探测并生成 .specrc.yml 规范路由
+cp -R bryanchen-spec-parallel ~/.agents/skills/  # 可选：多会话并行开发时用（与基础版二选一，由 .specrc.yml 的 spec_engine 声明）
 ```
 
 email-skill 首次使用需配置邮箱凭据：
