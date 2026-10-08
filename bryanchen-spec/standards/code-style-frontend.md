@@ -18,7 +18,11 @@
    禁在组件里直接 `axios.get('/xxx')` 拼 URL。
 8. **不 mutate props**：子组件不改 props；要改 → `$emit` 事件让父组件改，或本地副本（明确命名 `xxxLocal`）。
 9. **提交无调试残留**：`console.log` / `debugger` / 注释掉的大段代码不进仓库（有意保留的 console.error 级日志除外）。
-10. **敏感信息不进前端**：密钥、内网地址、账号不硬编码；环境相关走 `.env.*`。
+   console 分级映射（error/warn 上报，log/debug **生产构建剥离**）、三处全局兜底
+   （`app.config.errorHandler` / `window.onerror` / `onunhandledrejection`）、异步链路带 runId、
+   禁 token 与手机号进上报体——细则见 `standards/logging.md` §五。
+10. **敏感信息不进前端**：密钥、内网地址、账号不硬编码；环境相关走 `.env.*`；
+   日志与上报体同样不得含 token / 手机号 / 身份证（脱敏格式见 `standards/logging.md` §2.4）。
 
 ## 三、状态与数据流
 

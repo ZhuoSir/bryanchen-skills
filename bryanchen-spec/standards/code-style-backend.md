@@ -29,7 +29,9 @@
 12. 不吞异常：catch 后要么处理、要么带上下文重抛；`catch (Exception e) {}` 是事故。
 13. 日志带上下文（谁/对什么/结果如何）：`log.info("订单支付回调完成, orderNo={}, result={}", ...)`。
     禁 `System.out.println`；禁打印密码、完整卡号、身份证等敏感值（脱敏后才可以）。
-14. 日志级别：error=需要人管、warn=可自愈的异常、info=关键业务节点、debug=开发细节。
+    **完整规范见 `standards/logging.md`**（文件与滚动、格式 pattern、脱敏格式、日志量预算）——本节只留底线。
+14. 日志级别：error=需要人管、warn=可自愈的异常、info=关键业务节点、debug=开发细节
+    （**可判定判据表 + 四类强制日志点**见 `standards/logging.md` §三；缺强制点 = 实现不完整）。
 15. 对外错误响应不泄漏内部信息（堆栈、SQL、内部路径）。
 
 ## 四、数据与事务
@@ -42,7 +44,10 @@
 
 ## 五、并发与调度
 
-21. 线程池统一创建与管理（配置化核心参数、命名线程工厂），禁裸 `new Thread` / `Executors.newFixedThreadPool`（无界队列风险）。
+21. 线程池统一创建与管理（配置化核心参数、**命名线程工厂**），禁裸 `new Thread` / `Executors.newFixedThreadPool`（无界队列风险）。
+    命名的理由是**日志可追**（pattern 的 `[%thread]` 槽位，否则全是 `pool-1-thread-3`）；
+    **必须配 MDC 传递器**（`TaskDecorator` 或手工包装 + `finally MDC.clear()`），否则池内日志丢 traceId；
+    提交的 Runnable 必须 `catch Throwable` 落 ERROR，防异常被线程池静默吞掉（细则 `standards/logging.md` §四）。
 22. 分布式环境下的定时任务：统一调度平台（如 Quartz/sys_job），任务必须**幂等可重跑**（状态位 + 唯一索引兜底），禁 `@Scheduled` 裸跑业务、禁 `new Thread` 跑批。
 23. 共享可变状态必须有同步策略；能用不可变对象就别加锁。
 

@@ -12,6 +12,7 @@
 domains:
   code-backend:   <global|file:...|skill:...|none>
   code-frontend:  <...>
+  logging:        <...>   # 文件滚动/格式 pattern/级别判据/线程 MDC；项目级规范只管「一行 log 怎么写」时保持 global，两者互补
   api-design:     <...>
   database:       <...>
   git-workflow:   global
@@ -93,6 +94,18 @@ project_files:
 | 示例：/auth/login 路由 | GET = SPA 页导航 | 返回 index.html | T-0x |
 | 示例：同上 | POST = 登录 API | 返回 JSON 信封 | T-0x |
 
+## 关键日志点清单（涉及后台服务/异步/定时任务/外部调用时必填，判据见 standards/logging.md §三）
+<!-- 四类强制日志点：服务启停 / 外部调用 / 定时批处理 / 安全事件——涉及的必须逐条出现。
+     本表是 Tasks「日志断言」的唯一来源；缺项 = 确认②不放行。
+     敏感字段写脱敏后形态（138****1234）；密码/token 永不出现在本表。 -->
+| 场景 | 级别 | 触发点（类.方法） | 必带字段 | traceId/runId |
+|---|---|---|---|---|
+| 示例：支付回调处理完成 | INFO | PayServiceImpl.handleCallback | orderNo, result, cost | traceId |
+| 示例：回调验签失败（可重试） | WARN | 同上 | orderNo, 失败原因（不含签名原文） | traceId |
+| 示例：对账批处理开始 / 结束 | INFO | ReconJob.execute | 开始: runId, 参数；结束: 处理数, 失败数, 耗时 | runId |
+| 示例：调用风控服务 | DEBUG（失败 WARN） | RiskClient.check | 目标, 耗时, 结果码 | traceId |
+| 示例：异步折扣计算失败 | ERROR | OrderAsyncTask.calc | orderId + 异常栈 | traceId（MDC 已传递） |
+
 ## 关键决策
 ### 决策 1：<标题>
 - 采用：<方案> 理由：<为什么>
@@ -127,14 +140,19 @@ project_files:
 - [ ] T-02 <描述>
   关联: R-01
   依赖: T-01
-  验证方式: <...>
+  验证方式: <单测/接口测试/命令，写明断言什么。lint/build 只能兜底>
+  日志断言: <涉及异步/批处理/外部调用/安全事件时必填——写「跑什么 + 日志必须出现哪几行」，
+            例：跑一次对账批处理，app.log 须出现「批处理开始, runId=…」与
+            「批处理结束, …处理=N, 失败=M, 耗时=Xms」；对应 plan 关键日志点清单第 n 行。
+            不涉及则写「不适用（纯计算无副作用）」——留空 = 确认③不放行>
   验收标准: <...>
 
 ## 3. 验证收尾
 
 - [ ] T-0N 全量回归（验证方式: 项目测试命令全绿，贴输出；规范扫描红线清零）
 
-<!-- 纪律：编号只指向更小编号；每条 R 至少被一个 T 覆盖；禁占位任务；总数 3~20 -->
+<!-- 纪律：编号只指向更小编号；每条 R 至少被一个 T 覆盖；禁占位任务；总数 3~20；
+     涉及副作用/异步/批处理/外部调用的任务必须有「日志断言」，只写「打日志」三个字视为不合格 -->
 ```
 
 ---
@@ -290,6 +308,9 @@ project_files:
 - [ ] **变更↔断言配对表**：本版每个触碰共享面的变更，项目回归载体
       （verify 脚本/测试套件）有对应新或改断言，逐变更列断言编号；
       无配对 = M4 不过（防「新规则没配新断言，旧行为悄悄死掉」）
+- [ ] **日志规范落地**（standards/logging.md）：prod 为异步 appender + ERROR 独立文件；
+      滚动策略含 maxHistory 与 totalSizeCap；shutdownHook 已配且停机宽限期 ≥ hook delay；
+      本版新增线程池均有业务命名 + MDC 传递器；抽查 app.log/error.log 各 200 行**无敏感明文**
 
 ## 演练（必须真做，不许纸面勾选）
 - [ ] 演练环境按 UPGRADE.md 完整走一遍：SQL 全执行、配置全应用

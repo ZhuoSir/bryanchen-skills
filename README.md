@@ -172,6 +172,7 @@
 | 表格闸 | 每次生成或改动 markdown 产物后**回验必跑** `python3 scripts/mdtable_check.py <改过的文件>`，退出码 0 才算写入完成；拦列数不齐 / 行尾缺 `\|` / fence 断块 / 表格紧跟正文段落（无 python3 时人工数列并注明降级） |
 | 账房与分支前置 | 主目录常驻在途版本分支 =「**账房**」：挂接/落账/合并回/M2–M4 只在这里发生；写任何 spec 文档前先验 `git symbolic-ref --short HEAD` 必须是版本分支（停在 feature/fix 上**一票否决**，先处理现场再立项） |
 | 变更请求 CR | spec 进行中要增/改/删需求 → **开 CR 而非顺手改文档**：`changes/CR-xx_<slug>.md` 四步（§S 变更意图 → §P 影响面 + **已实现处置表**（保留/改造/回退/拆分逐条交代）→ §T 增改废任务 → §I 执行），收口走**合入八动作**（R 落父 requirements → 版本 bump → changelog 记到编号级 → 任务并入 → 盖合入戳 → MILESTONE 同步 → BL/BUG/L 联动 → 独立 `docs(spec)` commit）。三档（micro/minor/major）只省确认轮次不减产物；新 R/T **沿用父 spec 编号**；作废任务不删不取消勾选；**已打 tag 版本禁止 CR**；未收口 CR 不得并发第二个、不得合并；bug/CR/BL 三账分诊判据固定 |
+| 日志规范（独立领域） | `standards/logging.md`：**文件与滚动保留**（ERROR 独立文件、压缩归档、`maxHistory` app 30 天/error 180 天、`totalSizeCap` 防磁盘打满、环境分离 prod 禁全量 DEBUG）、**格式 pattern**（`%d [%thread] %-5level [traceId,runId] %logger{36} - %msg%n`，接 ELK/Loki 才用 JSON）、**级别判据表**（ERROR=需人介入 / WARN=已自愈但有隐患 / INFO=可审计节点）+ **四类强制日志点**（服务启停、外部调用、定时批处理、安全事件）、**单独线程日志**（线程池业务命名、MDC 跨线程传递器 + `finally` 清理、异步 appender `discardingThreshold=0`、`shutdownHook` flush 保住最后几行、线程内异常不得被池吞掉、批处理 runId）、脱敏格式（`138****1234`）与 4 条红线。★关键在**接线**：Plan 必写「关键日志点清单」→ Tasks 必含「日志断言」（缺则确认②/③不放行）→ 合并条件与 M4 checklist 逐项核对——**日志从此是验收项，不是可选** |
 
 **触发词**：记录待办、待办列表、立项待办、新需求、新功能、开始做、开发功能、需求开发、做一下xxx功能、spec流程、继续功能、坑列表、记录坑、踩坑总结、审计里程碑、新建里程碑、纳入里程碑、冻结版本、汇总升级件、发版、回退版本、初始化spec、spec init、接入spec机制、建基线、记录bug、修复BUG-xx、bug列表、完成清单、需求变更、改需求、加一条需求、砍掉R-xx、变更单、变更列表、CR列表
 **不适用**：明显单点 bug 修复（直接修，但**完成后强制在 `bugs.md` 补登记一行**）、单文件小改动、纯技术问答。
@@ -289,12 +290,13 @@ bryanchen-spec/
     ├── README.md       # 规范索引 + 四层裁决规则
     ├── code-style-backend.md   # 后端代码底线（Java/Spring）
     ├── code-style-frontend.md  # 前端代码底线（Vue/Element）
+    ├── logging.md      # 日志：文件滚动与保留、格式 pattern、级别判据 + 四类强制点、线程 MDC、脱敏、红线
     ├── api-design.md   # RESTful/响应包装/错误码/幂等
     ├── database-design.md      # 命名/公共字段/索引/迁移回滚
     ├── git-workflow.md # 分支模型/commit 格式/tag/合并
     └── versioning.md   # spec 版本头/产品版本 v a.b.c 与版本台账/编号永久制/双层 changelog
 
-bryanchen-spec-parallel/     # 并行版：目录结构与基础版一致，另加 ——
+bryanchen-spec-parallel/     # 并行版：结构同基础版（**尚未同步 CR 流程与 logging 规范**），另加 ——
 └── references/parallel.md  # 并行模型核心：worktree 拓扑、账房锁、台账碎片协议、空间凭证发放、共享面仲裁预检
 ```
 

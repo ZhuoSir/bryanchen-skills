@@ -16,8 +16,9 @@
 #   none               该领域不设规范，默认行为（新代码跟随所在文件周边风格）
 
 domains:
-  code-backend:   global          # 领域键固定七个，见 SKILL.md §8
+  code-backend:   global          # 领域键固定八个，见 SKILL.md §8
   code-frontend:  global
+  logging:        global          # 日志：文件滚动/格式 pattern/级别判据/线程 MDC（见下方「logging 互补例外」）
   api-design:     global
   database:       global
   git-workflow:   global
@@ -34,6 +35,11 @@ project_files:                    # 永远生效的项目硬约束，优先级�
 - **一个领域只有一个源**。声明了 `skill:` 或 `file:` 后，global 同领域文件**完全不读**
   （整文件替换，不做条款级合并——避免"全局第 6 条 vs 项目第 10 条"的裁决地狱）。
   想要"全局兜底 + 项目补充"，就 `file:` 指向一份自己合并好的文件。
+- **`logging` 的互补例外**：项目级代码规范（如 `skill:code-standards` §1.5）通常只覆盖
+  「一行 log 怎么写」（占位符、异常保栈、审计 info），而**文件滚动与保留、格式 pattern、
+  级别判据、异步线程 MDC 传递**往往是空白。此时保持 `logging: global` 与 `code-backend: skill:...`
+  **并存**——两者管不同层面，不视为「同领域两个源」，冲突时以更具体的一方为准。
+  项目若已自带完整日志规范，则 `logging: file:docs/conventions/logging.md` 整文件替换。
 - **`project_files` 不受路由影响**：AGENTS.md 等永远生效（DSH 本身也会注入），
   其中的具体条目（如「禁改某目录」）优先级高于任何领域源。
 - **流程铁律不在路由范围内**：三重确认、诚实性、生产代码保护等（SKILL.md §0）
@@ -88,12 +94,15 @@ domains:
   api-design:     skill:code-standards   # 它的 02-api-design（AjaxResult/R<T> 双信封等）
   database:       skill:code-standards   # 它的 03-database-design
   cache-redis:    skill:code-standards   # 自定义领域，global 没有 → 项目 skill 补位
+  logging:        global                 # 互补例外：code-standards §1.5 只管「一行 log 怎么写」，
+                                         # 文件滚动/格式 pattern/级别判据/线程 MDC 由 global 补齐
   git-workflow:   global                 # code-standards 不管 git → 用全局
   versioning:     global
 project_files:
   - AGENTS.md
 ```
 加载行为：Implement 后端任务 → skill 工具加载 code-standards、按其索引读 01/02 等；
+涉及异步/定时任务/外部调用 → **同时**读本 skill 的 standards/logging.md（互补，不替换）；
 开分支/commit → 读本 skill 的 standards/git-workflow.md。
 
 ### 示例 B：个人项目 / 新项目（无任何规范沉淀）

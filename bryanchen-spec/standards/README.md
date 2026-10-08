@@ -8,6 +8,7 @@
 |---|---|---|
 | code-style-backend.md | 后端代码 | Java 17 / Spring Boot 语境的通用底线 25 条 |
 | code-style-frontend.md | 前端代码 | Vue 2 / Element UI 语境 + 通用前端底线 20 条 |
+| logging.md | 日志 | 文件与滚动保留、格式 pattern、级别判据与四类强制日志点、脱敏、**异步线程 MDC 与线程池命名**、前端 console 分级、红线 |
 | api-design.md | 接口设计 | RESTful、响应包装、错误码、校验、分页、幂等、版本 |
 | database-design.md | 数据库设计 | 命名、公共字段、主键、索引、类型、SQL、变更迁移 |
 | git-workflow.md | Git | 分支模型两档、命名、生命周期、commit 格式、tag、合并 |

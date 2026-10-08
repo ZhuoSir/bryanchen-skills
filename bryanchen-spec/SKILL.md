@@ -119,7 +119,7 @@ specs/{YYYYMMDD}_{功能名}/
 
 ## 3. Phase 2 — Plan（plan.md）
 
-**先加载三样**：① `specs/_project/lessons.md` 全部 **active 坑**（项目踩坑台账，制定方案强制参考，见下"坑核对"）；② 按 `.specrc.yml` 路由加载规范：涉及接口 → `api-design` 领域声明源，涉及库表 → `database` 领域声明源（§8）；③ profile 技术债节。
+**先加载三样**：① `specs/_project/lessons.md` 全部 **active 坑**（项目踩坑台账，制定方案强制参考，见下"坑核对"）；② 按 `.specrc.yml` 路由加载规范：涉及接口 → `api-design` 领域声明源，涉及库表 → `database` 领域声明源，**涉及后台服务 / 异步线程 / 定时任务 / 外部调用 → `logging` 领域声明源**（§8）；③ profile 技术债节。
 
 内容要求：
 - **坑核对（必备节，置于方案概述前）**：逐条过 active 坑后写——相交的 L-xx 列「本方案如何避开」；
@@ -134,6 +134,10 @@ specs/{YYYYMMDD}_{功能名}/
   逐身份写「变更后预期行为」——**矩阵没列的身份 = 未评估**；
   Tasks 的断言与提交的面证据都以本矩阵为源
   （教训原型：/auth/login 的 GET=SPA 页 × POST=登录 API 双身份，豁免只验 GET 打死 POST）
+- **关键日志点清单（涉及后台服务 / 异步 / 定时任务 / 外部调用时的必备节）**：表格列出
+  场景、级别、触发点、必带字段、是否带 traceId/runId；**四类强制日志点**（服务启停、外部调用、
+  定时批处理、安全事件）涉及的必须逐条出现——**缺则确认②不放行**
+  （级别判据、格式与脱敏见 standards/logging.md §二§三；这是"代码没日志"的设计期堵口）
 - **被拒绝的替代方案 + 拒绝理由**（每个关键决策必须有，防默默选了烂方案）
 - 风险与规避
 - 不复制 requirements 内容，只写 how
@@ -158,6 +162,9 @@ specs/{YYYYMMDD}_{功能名}/
 - **共享面验证规则**：任务触碰共享面（判据见 §3）时，其「验证方式」必须覆盖
   plan 身份矩阵的**每个既有身份各一条断言**——缺矩阵内任一身份的断言
   = 验证方式不合格，确认③不得通过
+- **日志断言规则**：任务涉及副作用 / 异步线程 / 批处理 / 外部调用时，「验证方式」**必须含日志断言**——
+  写明跑什么、日志里必须出现哪几行（如批处理须出现 `开始 runId=…` 与 `结束 处理=N 失败=M 耗时=Xms`）；
+  只写「打日志」三个字 = 不合格，**确认③不得通过**（与 plan 的关键日志点清单逐项对应）
 - 禁止占位任务（「待定」「TODO」「添加适当的错误处理」= 计划缺陷）
 - **自检**：每条 R 都有 T 覆盖吗？有 T 找不到对应 R 吗（超范围）？
 
@@ -167,7 +174,7 @@ specs/{YYYYMMDD}_{功能名}/
 
 ## 5. Phase 4 — Implement
 
-**开工前加载规范**（按 `.specrc.yml` 路由，必然加载）：`code-backend` / `code-frontend` 领域的声明源（按改动内容选一或都选）+ `git-workflow` 领域的 commit 节。
+**开工前加载规范**（按 `.specrc.yml` 路由，必然加载）：`code-backend` / `code-frontend` 领域的声明源（按改动内容选一或都选）+ `git-workflow` 领域的 commit 节 + **`logging` 领域的声明源**（改后端或前端代码都必然加载——「实现完了但没日志」是本流程最常见的缺口，规范必须在写码前进上下文）。
 
 **规范裁决**：`.specrc.yml` 的 `project_files`（AGENTS.md 等）永远最高；其余按各领域声明的源执行；某领域声明为 `global` 时才读本 skill 的 standards/；声明 `none` 则跟随所在文件周边风格。冲突细则见 standards/README.md。
 
@@ -179,6 +186,10 @@ specs/{YYYYMMDD}_{功能名}/
 5. commit：`<type>(<scope>): <中文描述≤50字>` + footer `Spec: specs/<目录> vX.Y.Z` 和 `Task: T-xx`（修 bug 的 commit 加 `Bug: BUG-xx`）
 6. 每完成一组任务向用户简报：完成项、验证输出、下一步
 7. **过程中发现 bug 随手登记**（见下方登记义务表）——不等收尾，发现即写入 `specs/_project/bugs.md`
+8. **提交前日志自查三条**（缺一条即回炉，细则 standards/logging.md §七）：
+   ① 无 `printStackTrace` / `System.out`，异常对象作**最后一个参数**传入（保住堆栈）；
+   ② 新建线程池有**业务命名**且配了 **MDC 传递器**，子线程 `finally` 清理上下文；
+   ③ plan 的**关键日志点清单逐项落地**（或写明豁免理由），四类强制日志点涉及的都有日志。
 
 **共享面提交纪律**（防「修 A 死 B」）：触碰共享面的 commit，**body 必须同时贴两类
 实测输出——「改好了」（目标断言）+「没改坏」（身份矩阵中每个既有身份的对面断言）**；
@@ -260,6 +271,7 @@ specs/{YYYYMMDD}_{功能名}/
 | （索引与裁决规则） | standards/README.md | 首次使用本 skill 时 |
 | code-backend | standards/code-style-backend.md | Implement 改后端代码前 |
 | code-frontend | standards/code-style-frontend.md | Implement 改前端代码前 |
+| logging | standards/logging.md | Plan 涉及后台服务/异步/定时任务/外部调用时（写关键日志点清单）；**Implement 改代码时必然加载** |
 | api-design | standards/api-design.md | Plan/Implement 涉及接口时 |
 | database | standards/database-design.md | Plan/Implement 涉及库表时 |
 | git-workflow | standards/git-workflow.md | 开分支/commit/合并/发版时 |
